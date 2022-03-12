@@ -22,28 +22,46 @@
             </div>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <div id="tg-locationmap" class="tg-locationmap tg-map"></div>
+            <div id="tg-locationmap" class="tg-locationmap tg-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.0227235251605!2d36.11683568478937!3d32.095671525719226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf4bf2b5f648d9aed!2zMzLCsDA1JzQ0LjQiTiAzNsKwMDYnNTIuNyJF!5e0!3m2!1sar!2sjo!4v1647105662601!5m2!1sar!2sjo" height="100%" style="border: 1px solid rgb(52, 209, 60);" allowfullscreen="" loading="lazy"></iframe></div>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <form class="tg-formtheme tg-formcontactus">
+            <form class="tg-formtheme tg-formcontactus" [formGroup]="contactForm">
               <fieldset>
                 <div class="form-group">
-                  <input type="text" name="first-name" class="form-control" placeholder="First Name*">
+                  <input type="text" formControlName="firstname" name="firstname" class="form-control" placeholder="First Name*">
+                  <mat-error class="text-danger" *ngIf="contactForm.controls['firstname'].hasError('required' ) && contactForm.controls['firstname'].touched">
+                    First name is <strong>required</strong>
+                  </mat-error>
                 </div>
                 <div class="form-group">
-                  <input type="text" name="last-name" class="form-control" placeholder="Last Name*">
+                  <input type="text" formControlName="lastname" name="lastname" class="form-control" placeholder="Last Name*">
+                  <mat-error class="text-danger" *ngIf="contactForm.controls['lastname'].hasError('required') && contactForm.controls['lastname'].touched">
+                    Last name is <strong>required</strong>
+                  </mat-error>
                 </div>
                 <div class="form-group">
-                  <input type="email" name="email" class="form-control" placeholder="Last Name*">
+                  <input type="email" formControlName="email" name="email" class="form-control" placeholder="Email*">
+                  <mat-error class="text-danger" *ngIf="contactForm.controls['email'].hasError('email') && !contactForm.controls['email'].hasError('required') && contactForm.controls['email'].touched">
+                    Please enter a valid email address
+                  </mat-error>
+                  <mat-error class="text-danger" *ngIf="contactForm.controls['email'].hasError('required') && contactForm.controls['email'].touched">
+                    Email is <strong>required</strong>
+                  </mat-error>
                 </div>
                 <div class="form-group">
-                  <input type="text" name="subject" class="form-control" placeholder="Subject (optional)">
+                  <input type="text" formControlName="subject" name="subject" class="form-control" placeholder="Subject*">
+                  <mat-error class="text-danger" *ngIf="contactForm.controls['subject'].hasError('required') && contactForm.controls['subject'].touched">
+                    Subject is <strong>required</strong>
+                  </mat-error>
                 </div>
                 <div class="form-group tg-hastextarea">
-                  <textarea placeholder="Comment"></textarea>
+                  <textarea formControlName="message" name="message" placeholder="Comment"></textarea>
+                  <mat-error class="text-danger" *ngIf="contactForm.controls['message'].hasError('required') && contactForm.controls['message'].touched">
+                    Comment is <strong>required</strong>
+                  </mat-error>
                 </div>
                 <div class="form-group">
-                  <button type="submit" class="tg-btn tg-active">Submit</button>
+                  <button type="submit" class="btn tg-btn tg-active" [disabled]="!contactForm.valid" >Submit</button>
                 </div>
               </fieldset>
             </form>
