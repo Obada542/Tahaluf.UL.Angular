@@ -4943,3 +4943,6 @@ padding-bottom:50px;
   height: 35px;
 }
 /* ------testimonial  close-------*/
+.carousel-inner .visually-hidden {
+  display: none;
+}
