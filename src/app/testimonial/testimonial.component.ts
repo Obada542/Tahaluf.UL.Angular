@@ -13,11 +13,9 @@ export class TestimonialComponent implements OnInit {
     email:new FormControl('', [Validators.required, Validators.email]),
     testimonial: new FormControl('',Validators.required),
     rate: new FormControl('',Validators.required)
-
   });
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

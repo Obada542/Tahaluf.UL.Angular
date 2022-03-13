@@ -9,28 +9,24 @@ import { AuthModule } from './auth/auth.module';
 const routes: Routes = [
 
   {
-    path:"home",
-    component:HomeComponent
+    path: "home",
+    component: HomeComponent
   },
   {
-    path:"about",
-    component:AboutComponent
+    path: "about",
+    component: AboutComponent
   },
   {
     path: "testimonial",
-    component:TestimonialComponent
+    component: TestimonialComponent
   },
   {
-    path:"contact",
-    component:ContactComponent
-  },{
-    path:"",
-    component:HomeComponent
-  },{path: '', redirectTo:'/home',pathMatch: 'full'},
-
+    path: "contact",
+    component: ContactComponent
+  }, { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
-    path:"security",
-    loadChildren:()=>AuthModule
+    path: "security",
+    loadChildren: () => AuthModule
   }
 ];
 
