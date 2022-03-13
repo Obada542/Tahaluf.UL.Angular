@@ -19,11 +19,5 @@ export class TestimonialComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  submit(){
-    console.log(this.testimonialForm.controls['firstName'].value),
-    console.log(this.testimonialForm.controls['lastName'].value),
-    console.log(this.testimonialForm.controls['email'].value),
-    console.log(this.testimonialForm.controls['testimonial'].value),
-    console.log(this.testimonialForm.controls['rate'].value)
-  }
+
 }

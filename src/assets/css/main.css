@@ -31,6 +31,7 @@ body,
 html {
   height: 100%;
   position: relative;
+  scroll-behavior: smooth;
 }
 body {
   color: #666;
@@ -114,11 +115,7 @@ iframe {
   float: left;
   border: none;
 }
-.wp-caption,
-.wp-caption-text,
-.gallery-caption,
-.bypostauthor {
-}
+
 .wp-caption.alignleft,
 .wp-caption.alignnone {
   width: 100%;
@@ -1317,7 +1314,6 @@ body.tg-comingsoonpage .tg-wrapper {
 }
 .tg-navigation > ul {
   width: 100%;
-  float: left;
   position: relative;
   display: inline-block;
   vertical-align: top;
@@ -2072,11 +2068,6 @@ li.menu-item-has-mega-menu {
   height: 92%;
   content: "";
   position: absolute;
-  background: url("../images/books/bookpattren.png") no-repeat;
-  -webkit-background-size: 100% 100%;
-  -moz-background-size: 100% 100%;
-  -ms-background-size: 100% 100%;
-  -o-background-size: 100% 100%;
   background-size: 100% 100%;
 }
 .tg-bookimg img {
@@ -2485,8 +2476,7 @@ li.menu-item-has-mega-menu {
   -o-transform: perspective(3000px) rotateY(80deg) rotateZ(3deg);
   transform: perspective(3000px) rotateY(80deg) rotateZ(3deg);
 }
-.tg-pickedbyauthor .tg-postbook:hover .tg-bookimg:before {
-}
+
 .tg-pickedbyauthor .tg-backcover,
 .tg-pickedbyauthor .tg-backcover:after {
   display: none;
@@ -4625,7 +4615,6 @@ body.tg-comingsoonpage {
   height: auto;
   position: static;
   overflow-x: hidden;
-  background: url(../images/comingsoon-bg.jpg) no-repeat center center fixed;
   background-size: cover;
 }
 body.tg-comingsoonpage:before {

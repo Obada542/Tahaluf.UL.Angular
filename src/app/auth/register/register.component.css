@@ -2,3 +2,19 @@ mat-error {
     font-size: 13px;
     color: red;
 }
+.form{
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.548);
+  background-color: #fff;
+}
+.fform{
+  padding-bottom: 90px;
+  margin-top: -80px;
+}
+.page-header{
+  font-size: 3.6rem;
+    padding: 5rem 0;
+    color: #2ecc71;
+}
+.log{
+  text-decoration: underline;
+}

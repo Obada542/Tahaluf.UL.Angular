@@ -12,29 +12,15 @@ export class LoginComponent implements OnInit {
     email : new FormControl('',[Validators.required,Validators.email]),
     password: new FormControl('',[Validators.required,Validators.minLength(8)])
   })
-
   user:any ={};
-  
-
   constructor(private router:Router) { }
-
   ngOnInit(): void {
   }
 
   remember(){
     this.user= Object.assign(this.user,this.formGroup.value);
     localStorage.setItem("user",JSON.stringify(this.user));
-
-  
   }
-
   submit(){
-    
   }
- 
-
-  goToRegister(){
-    this.router.navigate(['security/register']);
-  }
-
 }

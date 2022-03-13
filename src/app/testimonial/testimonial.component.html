@@ -1,120 +1,132 @@
 <app-header></app-header>
-<form class="jotform-form" [formGroup]="testimonialForm">
-
-  <div class="form-all">
-    <ul class="form-section page-section">
-      <li id="cid_14" class="form-input-wide">
-        <div class="form-header-group ">
-          <div class="header-text httal htvam">
-            <h1 id="header_14" class="form-header">
-              Testimonial Form
-            </h1>
-          </div>
+<div class="tg-haslayout" >
+  <div class=" tg-innerbanner tg-bginnerbanner" style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);background-position: top;background-attachment: fixed;">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="tg-innerbannercontent">
+          <h1>Testimonial</h1>
         </div>
-      </li>
-      <li class="form-line jf-required">
-        <label class="form-label form-label-left form-label-auto">
-          Full Name
-          <span class="form-required">
-            *
-          </span>
-        </label>
-        <div id="cid_13" class="form-input jf-required">
-          <div data-wrapper-react="true">
-
-            <mat-form-field class="form-sub-label-container" style="vertical-align:top">
-              <input type="firstName" matInput formControlName="firstName" class="form-textbox " />
-              <mat-label class="form-sub-label" style="min-height:13px"> First Name </mat-label>
+      </div>
+    </div>
+  </div>
+  <form [formGroup]="testimonialForm">
+    <div class="form-all">
+      <ul class="form-section page-section" >
+        <li style="list-style-type: none;">
+          <div class="form-header-group">
+            <div class="header-text">
+              <h1 class="form-header">
+                Testimonial Form
+              </h1>
+            </div>
+          </div>
+        </li>
+        <li class="form-line">
+          <label class="form-label form-label-left form-label-auto">
+            Full Name
+            <span class="form-required">
+              *
+            </span>
+          </label>
+          <div class="form-input">
+            <div>
+              <mat-form-field hideRequiredMarker class="form-sub-label-container"  >
+                <input type="text" matInput formControlName="firstName" class="form-textbox " />
+                <mat-label class="form-sub-label" > First Name </mat-label>
+                <mat-error
+                  *ngIf="testimonialForm.controls['firstName'].touched && testimonialForm.controls['firstName'].hasError('required')"
+                  class="form-required">
+                  First Name is <strong class="form-required">required</strong>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field hideRequiredMarker class="form-sub-label-container" >
+                <input type="text" matInput formControlName="lastName"   class="form-textbox "/>
+                <mat-label class="form-sub-label"> Last Name
+                </mat-label>
+                <mat-error
+                  *ngIf="testimonialForm.controls['lastName'].touched && testimonialForm.controls['lastName'].hasError('required')"
+                  class="form-required">
+                  Last Name is <strong class="form-required">required</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </li>
+        <li class="form-line">
+          <label class="form-label form-label-left">
+            E-mail
+            <span class="form-required">
+              *
+            </span>
+          </label>
+          <div class="form-input ">
+            <mat-form-field hideRequiredMarker class="col-12 form-sub-label-container" style="margin-left: -18px;">
+              <input type="email" matInput formControlName="email" id="email" name="email" class="form-textbox"
+                  />
+              <mat-label class="form-sub-label" for="email" > example@example.com </mat-label>
               <mat-error
-                *ngIf="testimonialForm.controls['firstName'].touched && testimonialForm.controls['firstName'].hasError('required')"
+                *ngIf="testimonialForm.controls['email'].hasError('email') && !testimonialForm.controls['email'].hasError('required') && testimonialForm.controls['email'].touched"
                 class="form-required">
-                First Name is <strong class="form-required">required</strong>
+                Please enter a valid email address
+              </mat-error>
+              <mat-error
+                *ngIf="testimonialForm.controls['email'].hasError('required') && testimonialForm.controls['email'].touched"
+                class="form-required">
+                Email is <strong class="form-required">required</strong>
               </mat-error>
             </mat-form-field>
-
-            <mat-form-field class="form-sub-label-container" style="vertical-align:top">
-              <input type="lastName" matInput formControlName="lastName" id="last_13" class="form-textbox " />
-              <mat-label class="form-sub-label" for="last_13" id="sublabel_13_last" style="min-height:13px"> Last Name
-              </mat-label>
-              <mat-error
-                *ngIf="testimonialForm.controls['lastName'].touched && testimonialForm.controls['lastName'].hasError('required')"
-                class="form-required">
-                Last Name is <strong class="form-required">required</strong>
-              </mat-error>
-            </mat-form-field>
           </div>
-        </div>
-      </li>
-      <li class="form-line jf-required">
-        <label class="form-label form-label-left form-label-auto">
-          E-mail
-          <span class="form-required">
-            *
-          </span>
-        </label>
+        </li>
+        <li class="form-line">
+          <label class="form-label form-label-left">
+            Your Testimonial
+            <span class="form-required">
+              *
+            </span>
+          </label>
+          <mat-form-field hideRequiredMarker class="form-input">
+            <textarea matInput   formControlName="testimonial" class="form-textarea"
+              style="height:163px"></textarea>
+              <mat-label class="form-sub-label" > Your testimonial... </mat-label>
 
-        <div id="cid_15" class="form-input">
-          <mat-form-field class="form-sub-label-container" style="vertical-align:top">
-            <input type="email" matInput formControlName="email" id="input_15" name="q15_email15" class="form-textbox"
-              style="width:310px" placeholder="ex: myname@example.com" />
-            <mat-label class="form-sub-label" for="input_15" id="sublabel_input_15" style="min-height:13px"
-              aria-hidden="false"> example@example.com </mat-label>
             <mat-error
-              *ngIf="testimonialForm.controls['email'].hasError('email') && !testimonialForm.controls['email'].hasError('required') && testimonialForm.controls['email'].touched"
+              *ngIf="testimonialForm.controls['testimonial'].touched && testimonialForm.controls['testimonial'].hasError('required')"
               class="form-required">
-              Please enter a valid email address
-            </mat-error>
-            <mat-error
-              *ngIf="testimonialForm.controls['email'].hasError('required') && testimonialForm.controls['email'].touched"
-              class="form-required">
-              Email is <strong class="form-required">required</strong>
+              Testimonial is <strong class="form-required">required</strong>
             </mat-error>
           </mat-form-field>
-        </div>
-      </li>
-
-
-      <li class="form-line">
-        <label class="form-label form-label-left">
-          Your Testimonial
-          <span class="form-required">
-            *
-          </span>
-        </label>
-        <mat-form-field id="cid_5" class="form-input">
-          <textarea matInput formControlName="testimonial" id="input_5" class="form-textarea"
-            style="width:648px;height:163px"></textarea>
-          <mat-error
-            *ngIf="testimonialForm.controls['testimonial'].touched && testimonialForm.controls['testimonial'].hasError('required')"
-            class="form-required">
-            Testimonial is <strong class="form-required">required</strong>
-          </mat-error>
-        </mat-form-field>
-      </li>
-      <li class="form-line">
-        <label class="form-label form-label-left form-label-auto">
-          Rate Us
-          <span class="form-required">
-            *
-          </span>
-        </label>
-        <div id="cid_17" class="form-input">
-          <br>
-            <span class="tg-stars"><span></span></span>
-        </div>
-      </li>
-      <li class="form-line" id="id_23">
-        <div id="cid_23" class="form-input-wide">
-          <div class="form-buttons-wrapper form-buttons-auto">
-            <button [disabled]="!testimonialForm.valid" (click)="submit()" id="input_23" type="submit"
-              class="form-submit-button submit-button jf-form-buttons jsTest-submitField" data-component="button"
-              data-content="">
-              Submit
-            </button>
+        </li>
+        <li class="form-line">
+          <label class="form-label form-label-left form-label-auto">
+            Rate Us
+            <span class="form-required">
+              *
+            </span>
+          </label>
+          <div class="form-input">
+            <br>
+              <input
+                class="rating"
+                max="5"
+                oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
+                step="0.5"
+                style="--value:5"
+                type="range"
+                value="5">
           </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</form>
+        </li>
+        <li class="form-line">
+          <div class="form-input-wide">
+            <div class="form-buttons-wrapper">
+              <button [disabled]="!testimonialForm.valid" type="submit" class="btn-success btn jf-form-buttons " >
+                Submit
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </form>
+</div>
+
 <app-footer></app-footer>

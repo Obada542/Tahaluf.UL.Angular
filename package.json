@@ -24,7 +24,6 @@
     "@ng-bootstrap/ng-bootstrap": "^12.0.0",
     "@popperjs/core": "^2.11.3",
     "angular-responsive-carousel": "^2.1.2",
-    "bootstrap": "^3.3.7",
     "jquery": "^1.12.4",
     "ng-image-slider": "^2.8.0",
     "ngx-owl-carousel": "^2.0.7",

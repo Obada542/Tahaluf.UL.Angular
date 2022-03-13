@@ -13,26 +13,18 @@ export class RegisterComponent implements OnInit {
     ConfirmPassword: new FormControl('',[Validators.required,Validators.minLength(8)]),
     firstname: new FormControl('',[Validators.required]),
     lastname: new FormControl('',[Validators.required]),
+    phone: new FormControl('',[Validators.required,Validators.minLength(10)]),
     Birthday: new FormControl('',[Validators.required])
-
-
   })
-  
-
-
   constructor() { }
-
   ngOnInit(): void {
   }
 
   onChange(){
     if(this.registerGroup.controls['password'].value==this.registerGroup.controls['ConfirmPassword'].value)
-    this.registerGroup.controls['ConfirmPassword'].setErrors(null);
-
-    else 
-
-this.registerGroup.controls['ConfirmPassword'].setErrors({mismatch:true});
-
+      this.registerGroup.controls['ConfirmPassword'].setErrors(null);
+    else
+      this.registerGroup.controls['ConfirmPassword'].setErrors({mismatch:true});
   }
 
 }

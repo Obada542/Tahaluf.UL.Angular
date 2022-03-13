@@ -1,97 +1,109 @@
 <app-header></app-header>
-<div class="container">
+<div class="tg-haslayout">
+  <div class=" tg-innerbanner tg-bginnerbanner"
+    style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);background-position: top;background-attachment: fixed;">
     <div class="row">
-      <div class="col-sm-8 col-sm-offset-2">
-        <h1 class="page-header text-center">Join in!!</h1>
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="tg-innerbannercontent">
+          <h1>Register</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container fform">
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 form">
+        <h1 class="page-header text-center">Sign up</h1>
         <div class="light-well">
           <div class="panel-body">
             <div class="row">
-                <form [formGroup]="registerGroup">
-              <div class="col-sm-8 col-sm-offset-2">
-                <h4 class="panel-title"> Create account</h4>
-                <br />
+              <form [formGroup]="registerGroup">
+                <div class="col-sm-8 col-sm-offset-2">
+                  <br />
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
-                      <input matInput autofocus="autofocus" placeholder="first name" class="form-control" type="email" name="user[first_name]" id="user_first_name" formControlName="firstname">
-                      <mat-error *ngIf="registerGroup.controls['firstname'].hasError('required') &&registerGroup.controls['firstname'].touched ">
-                        Firstname is required
-                    </mat-error>
+                        <input placeholder="first name" class="form-control" type="text" formControlName="firstname">
+                        <mat-error
+                          *ngIf="registerGroup.controls['firstname'].hasError('required') &&registerGroup.controls['firstname'].touched ">
+                          Firstname is required
+                        </mat-error>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                      <input placeholder="last name" class="form-control" type="email" name="user[last_name]" id="user_last_name" formControlName="lastname">
-                      <mat-error *ngIf="registerGroup.controls['lastname'].hasError('required')&& registerGroup.controls['lastname'].touched ">
-
-                        Lastname is required
-
-                    </mat-error>
+                        <input placeholder="last name" class="form-control" type="text" formControlName="lastname">
+                        <mat-error
+                          *ngIf="registerGroup.controls['lastname'].hasError('required')&& registerGroup.controls['lastname'].touched ">
+                          Lastname is required
+                        </mat-error>
                       </div>
                     </div>
-                </div>
-                <div class="form-group">
-                  <input placeholder="email address" class="form-control" type="email" name="user[email]" id="user_email" formControlName="email">
-                  <mat-error  *ngIf="registerGroup.controls['email'].hasError('email') && !registerGroup.controls['email'].hasError('required')&& registerGroup.controls['email'].touched ">
-
-                    Please enter a valid email address
-                  </mat-error>
-                  <mat-error *ngIf="registerGroup.controls['email'].hasError('required') && registerGroup.controls['email'].touched ">
-
-
-                    Email is required
-
-                </mat-error>
-                </div>
-                <div class="form-group">
-                    <label for="birthday">Birthday</label>
-                    <input class="form-control" type="date" id="birthday" name="birthday" formControlName="Birthday" >
-                    <mat-error *ngIf="registerGroup.controls['Birthday'].hasError('required')&& registerGroup.controls['Birthday'].touched ">
-
-                        Birthday is required
-
+                  </div>
+                  <div class="form-group">
+                    <input placeholder="email address" class="form-control" type="email" formControlName="email">
+                    <mat-error
+                      *ngIf="registerGroup.controls['email'].hasError('email') && !registerGroup.controls['email'].hasError('required')&& registerGroup.controls['email'].touched ">
+                      Please enter a valid email address
                     </mat-error>
-                    </div>
-                <div class="form-group">
-                  <input autocomplete="off" placeholder="password" class="form-control" type="password" name="user[password]" id="user_password" formControlName="password">
-                  <mat-error *ngIf="registerGroup.controls['password'].hasError('minlength') && !registerGroup.controls['password'].hasError('required')&&registerGroup.controls['password'].touched">
-                    Please enter strong password
-                  </mat-error>
+                    <mat-error
+                      *ngIf="registerGroup.controls['email'].hasError('required') && registerGroup.controls['email'].touched ">
+                      Email is required
+                    </mat-error>
+                  </div>
+                  <div class="form-group">
+                    <input placeholder="Phone number" class="form-control" type="tel" formControlName="phone">
+                    <mat-error
+                      *ngIf="registerGroup.controls['phone'].hasError('minlength') && !registerGroup.controls['phone'].hasError('required')&&registerGroup.controls['phone'].touched">
+                      Please enter a valid phone number
+                    </mat-error>
+                    <mat-error
+                      *ngIf="registerGroup.controls['phone'].hasError('required') && registerGroup.controls['phone'].touched">
+                      phone is required
+                    </mat-error>
+                  </div>
 
-                  <mat-error *ngIf="registerGroup.controls['password'].hasError('required')&&registerGroup.controls['password'].touched">
-
-                    password is required
-
-                </mat-error>
+                  <div class="form-group">
+                    <input placeholder="password" class="form-control" type="password" formControlName="password">
+                    <mat-error
+                      *ngIf="registerGroup.controls['password'].hasError('minlength') && !registerGroup.controls['password'].hasError('required')&&registerGroup.controls['password'].touched">
+                      Please enter strong password
+                    </mat-error>
+                    <mat-error
+                      *ngIf="registerGroup.controls['password'].hasError('required') && registerGroup.controls['password'].touched">
+                      password is required
+                    </mat-error>
+                  </div>
+                  <div class="form-group">
+                    <input placeholder="re-type your password" class="form-control" type="password" (click)="onChange()"
+                      id="user_password_confirmation" formControlName="ConfirmPassword">
+                    <mat-error
+                      *ngIf="(registerGroup.controls['ConfirmPassword'].value != registerGroup.controls['password'].value) &&registerGroup.controls['ConfirmPassword'].touched">
+                      confirm password must match with password
+                    </mat-error>
+                  </div>
+                  <div class="form-group">
+                    <label for="birthday">Birthday</label>
+                    <input class="form-control" type="date" formControlName="Birthday">
+                    <mat-error
+                      *ngIf="registerGroup.controls['Birthday'].hasError('required')&& registerGroup.controls['Birthday'].touched ">
+                      Birthday is required
+                    </mat-error>
+                  </div>
+                  <div class="form-group">
+                    <button [disabled]="!registerGroup.valid" type="submit"
+                      class="btn btn-success btn-lg btn-block col-6">Create account</button>
+                  </div>
+                  <div class="form-group" style="font-size: 16px; font-weight: 500;">
+                    Already a member? <a class="log" [routerLink]="['/security/login']">Log in</a>
+                  </div>
                 </div>
-                <div class="form-group">
-                  <input autocomplete="off" placeholder="re-type your password" class="form-control" type="password" name="user[password_confirmation]" (click)="onChange()"  id="user_password_confirmation" formControlName="ConfirmPassword" >
-                  <mat-error *ngIf="registerGroup.controls['ConfirmPassword'].hasError('minlength') && !registerGroup.controls['ConfirmPassword'].hasError('required')&&registerGroup.controls['ConfirmPassword'].touched">
-                    Please enter strong password
-                  </mat-error>
-                  <mat-error *ngIf="registerGroup.controls['ConfirmPassword'].hasError('required')&&registerGroup.controls['ConfirmPassword'].touched">
-
-                    ConfirmPassword is required
-
-                </mat-error>
-                <mat-error *ngIf="registerGroup.controls['ConfirmPassword'].hasError('mismatch')&&registerGroup.controls['ConfirmPassword'].touched">
-
-                    confirm password must match with password
-                  </mat-error>
-
-                </div>
-
-
-                <div class="form-group">
-                  <button name="button" [disabled]="!registerGroup.valid" type="submit" class="btn btn-success btn-lg btn-block" data-disable-with="<i class='fa fa-spinner fa-spin'></i> Signing in...">Sign in</button>
-                </div>
-              </div>
-                </form>
+              </form>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <app-footer></app-footer>
+</div>
+<app-footer></app-footer>
