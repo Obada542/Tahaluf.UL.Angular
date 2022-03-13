@@ -2079,15 +2079,7 @@ li.menu-item-has-mega-menu {
   padding: 9px 13px 9px 0;
 }
 .tg-postbook:hover .tg-bookimg {
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  -ms-transform-style: preserve-3d;
-  -o-transform-style: preserve-3d;
   transform-style: preserve-3d;
-  -webkit-transform: perspective(1000px) rotateY(-30deg) rotateZ(0deg);
-  -moz-transform: perspective(1000px) rotateY(-30deg) rotateZ(0deg);
-  -ms-transform: perspective(1000px) rotateY(-30deg) rotateZ(0deg);
-  -o-transform: perspective(1000px) rotateY(-30deg) rotateZ(0deg);
   transform: perspective(1000px) rotateY(-30deg) rotateZ(0deg);
 }
 .tg-postbook:hover .tg-backcover {

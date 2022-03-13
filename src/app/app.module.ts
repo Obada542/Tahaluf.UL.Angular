@@ -11,7 +11,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
-
+import { NgxSpinnerModule } from "ngx-spinner";
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +29,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
     SharedModule,
     NgbModule,
     IvyCarouselModule,
+    NgxSpinnerModule
   ],
 
   providers: [],
