@@ -11,9 +11,5 @@ export class AppComponent {
   title = 'Tahaluf.UL.Angular';
   constructor(private toastr:ToastrService,private spinner: NgxSpinnerService){
     this.toastr.success("Welcome");
-    this.spinner.show();
-    setTimeout(()=>{
-      this.spinner.hide();
-    },3000)
   }
 }
