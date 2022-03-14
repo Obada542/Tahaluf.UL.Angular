@@ -12,6 +12,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { NgxSpinnerModule } from "ngx-spinner";
+import {ToastrModule,ToastNoAnimationModule} from 'ngx-toastr';
+import {HttpClientModule} from '@angular/common/http';
+import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -19,6 +22,7 @@ import { NgxSpinnerModule } from "ngx-spinner";
     HomeComponent,
     ContactComponent,
     TestimonialComponent,
+    PagenotfoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,16 @@ import { NgxSpinnerModule } from "ngx-spinner";
     SharedModule,
     NgbModule,
     IvyCarouselModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ToastrModule.forRoot(),
+    ToastNoAnimationModule.forRoot(
+      {
+        timeOut:10000,
+        positionClass:'toast-bottom-right',
+        preventDuplicates:true,
+      }
+    ),
+    HttpClientModule
   ],
 
   providers: [],

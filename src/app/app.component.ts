@@ -1,6 +1,6 @@
-import { NavigationEnd, NavigationStart, Router,Event } from '@angular/router';
+import {  NgxSpinnerService } from 'ngx-spinner';
 import { Component } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -9,15 +9,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class AppComponent {
   title = 'Tahaluf.UL.Angular';
-  showSpinner = true;
-  constructor(private router:Router){
-    this.router.events.subscribe((routerEvent: Event)=>{
-      if(routerEvent instanceof NavigationStart){
-        this.showSpinner = true;
-      }
-      if(routerEvent instanceof NavigationEnd){
-        this.showSpinner = false;
-      }
-    });
+  constructor(private toastr:ToastrService,private spinner: NgxSpinnerService){
+    this.toastr.success("Welcome");
+    this.spinner.show();
+    setTimeout(()=>{
+      this.spinner.hide();
+    },3000)
   }
 }

@@ -26,7 +26,7 @@
                         <input placeholder="first name" class="form-control" type="text" formControlName="firstname">
                         <mat-error
                           *ngIf="registerGroup.controls['firstname'].hasError('required') &&registerGroup.controls['firstname'].touched ">
-                          Firstname is required
+                          First name is required
                         </mat-error>
                       </div>
                     </div>
@@ -35,7 +35,7 @@
                         <input placeholder="last name" class="form-control" type="text" formControlName="lastname">
                         <mat-error
                           *ngIf="registerGroup.controls['lastname'].hasError('required')&& registerGroup.controls['lastname'].touched ">
-                          Lastname is required
+                          Last name is required
                         </mat-error>
                       </div>
                     </div>
