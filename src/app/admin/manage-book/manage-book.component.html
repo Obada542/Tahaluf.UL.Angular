@@ -1,0 +1,307 @@
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Manage Books</h4>
+      <button class=" card-description btn btn-primary " (click)="openCreateDialog()" style="color: #fff;"> Add
+        Book</button>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th> User </th>
+            <th> First name </th>
+            <th> Progress </th>
+            <th> Amount </th>
+            <th> Deadline </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="py-1">
+              <img src="../../assets/images/faces-clipart/pic-1.png" alt="image" />
+            </td>
+            <td> Herman Beck </td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </td>
+            <td> $ 77.99 </td>
+            <td> May 15, 2015 </td>
+          </tr>
+          <tr>
+            <td class="py-1">
+              <img src="../../assets/images/faces-clipart/pic-2.png" alt="image" />
+            </td>
+            <td> Messsy Adam </td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </td>
+            <td> $245.30 </td>
+            <td> July 1, 2015 </td>
+          </tr>
+          <tr>
+            <td class="py-1">
+              <img src="../../assets/images/faces-clipart/pic-3.png" alt="image" />
+            </td>
+            <td> John Richards </td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 90%" aria-valuenow="90"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </td>
+            <td> $138.00 </td>
+            <td> Apr 12, 2015 </td>
+          </tr>
+          <tr>
+            <td class="py-1">
+              <img src="../../assets/images/faces-clipart/pic-4.png" alt="image" />
+            </td>
+            <td> Peter Meggik </td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar bg-primary" role="progressbar" style="width: 50%" aria-valuenow="50"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </td>
+            <td> $ 77.99 </td>
+            <td> May 15, 2015 </td>
+          </tr>
+          <tr>
+            <td class="py-1">
+              <img src="../../assets/images/faces-clipart/pic-1.png" alt="image" />
+            </td>
+            <td> Edward </td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar bg-danger" role="progressbar" style="width: 35%" aria-valuenow="35"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </td>
+            <td> $ 160.25 </td>
+            <td> May 03, 2015 </td>
+          </tr>
+          <tr>
+            <td class="py-1">
+              <img src="../../assets/images/faces-clipart/pic-2.png" alt="image" />
+            </td>
+            <td> John Doe </td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar bg-info" role="progressbar" style="width: 65%" aria-valuenow="65"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </td>
+            <td> $ 123.21 </td>
+            <td> April 05, 2015 </td>
+          </tr>
+          <tr>
+            <td class="py-1">
+              <img src="../../assets/images/faces-clipart/pic-3.png" alt="image" />
+            </td>
+            <td> Henry Tom </td>
+            <td>
+              <div class="progress">
+                <div class="progress-bar bg-warning" role="progressbar" style="width: 20%" aria-valuenow="20"
+                  aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </td>
+            <td> $ 150.00 </td>
+            <td> June 16, 2015 </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<ng-template #createNewBook>
+  <!-- <form [formGroup]="createbook">
+    <ul>
+      <li>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Enter the course name </mat-label>
+          <input type="text" matInput formControlName="coursename"
+            placeholder="course name">
+        </mat-form-field>
+      </li>
+      <li>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Enter the course number </mat-label>
+          <input type="number" matInput formControlName="price" placeholder="course price" >
+        </mat-form-field>
+      </li>
+      <li>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Enter the course date </mat-label>
+          <input type="date" matInput formControlName="startdate" placeholder="course date">
+        </mat-form-field>
+      </li>
+      <li>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Enter the course date </mat-label>
+          <input type="date" matInput formControlName="enddate" placeholder="end date">
+        </mat-form-field>
+      </li>
+      <li>
+        <input type="file" #file placeholder="Choose Image" formControlName="imagename"
+          (change)="uploadFile(file.files)" style="display:none;">
+        <button class="btn btn-success" (click)="file.click()">Upload Image</button>
+      </li>
+    </ul>
+    <button mat-button [mat-dialog-close]="true" (click)="createBook()">Update</button>
+
+  </form> -->
+  <div class="col-12 dialog">
+    <div class="card">
+      <div class="card-body" >
+        <h4 class="card-title">Create New Book <button mat-button mat-dialog-close class="btn"
+            style="color: red; float: right; font-size: 25px;">X</button></h4>
+        <form class="form-sample" [formGroup]="createbook">
+          <p class="card-description"> Book info </p>
+          <div class="row" >
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Book Name</label>
+                <div class="col-sm-8">
+                  <input type="text " class="form-control" matInput formControlName="book_name" placeholder="Book name">
+                  <br>
+                  <mat-error class="text-danger"
+                    *ngIf="createbook.controls['book_name'].hasError('required') && createbook.controls['book_name'].touched">
+                    Book name is <strong class="text-danger">required</strong>
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Author Name</label>
+                <div class="col-sm-8">
+                  <input type="text" class="form-control" matInput formControlName="author" placeholder="author name">
+                  <br>
+                  <mat-error class="text-danger"
+                    *ngIf="createbook.controls['author'].hasError('required') && createbook.controls['author'].touched">
+                    Author name is <strong class="text-danger">required</strong>
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Price</label>
+                <div class="col-sm-8">
+                  <input type="number" min="1" class="form-control" matInput formControlName="price" value="1">
+                  <br>
+                  <mat-error class="text-danger"
+                    *ngIf="createbook.controls['price'].hasError('required') && createbook.controls['price'].touched">
+                    Price is <strong class="text-danger">required</strong>
+                  </mat-error>
+                  <mat-error class="text-danger"
+                    *ngIf="createbook.controls['price'].hasError('min') ">
+                    Price must be more than 0
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Quantity</label>
+                <div class="col-sm-8">
+                  <input type="number" min="1" class="form-control" matInput formControlName="quantity" value="1">
+                  <br>
+                  <mat-error class="text-danger"
+                    *ngIf="createbook.controls['quantity'].hasError('required') && createbook.controls['quantity'].touched">
+                    Quantity is <strong class="text-danger">required</strong>
+                  </mat-error>
+                  <mat-error class="text-danger"
+                    *ngIf="createbook.controls['quantity'].hasError('min') ">
+                    Quantity must be more than 0
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Categoryies</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" matInput formControlName="category">
+                  <br>
+                  <mat-error class="text-danger"
+                    *ngIf="createbook.controls['category'].hasError('required') && createbook.controls['category'].touched">
+                    Category is <strong class="text-danger">required</strong>
+                  </mat-error>
+                </div>
+                <small>*For more than one category, please add a comma between the categories :).</small>
+              </div>
+            </div>
+          </div>
+          <p class="card-description"> Address </p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Address 1</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">State</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Address 2</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">Postcode</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">City</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" />
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group row">
+                <div class="col-sm-9">
+                  <input type="file" #file placeholder="Choose Image" formControlName="imagename"
+                    (change)="uploadFile(file.files)" style="display:none;">
+                  <button class="btn btn-primary" (click)="file.click()">Upload Image</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+</ng-template>

@@ -12,9 +12,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { NgxSpinnerModule } from "ngx-spinner";
-import {ToastrModule,ToastNoAnimationModule} from 'ngx-toastr';
-import {HttpClientModule} from '@angular/common/http';
+import { ToastrModule, ToastNoAnimationModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { JwPaginationModule } from 'jw-angular-pagination';
+import { BooksComponent } from './books/books.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,6 +25,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     ContactComponent,
     TestimonialComponent,
     PagenotfoundComponent,
+    BooksComponent
   ],
   imports: [
     BrowserModule,
@@ -37,14 +40,14 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
     ToastrModule.forRoot(),
     ToastNoAnimationModule.forRoot(
       {
-        timeOut:10000,
-        positionClass:'toast-bottom-right',
-        preventDuplicates:true,
+        timeOut: 5000,
+        positionClass: 'toast-bottom-right',
+        preventDuplicates: true,
       }
     ),
-    HttpClientModule
+    HttpClientModule,
+    JwPaginationModule
   ],
-
   providers: [],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

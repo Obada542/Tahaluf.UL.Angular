@@ -1,0 +1,8 @@
+
+.sd .card-body h1,.sd .card-body h2,.sd .card-body h3{
+  color: rgb(255, 230, 230) !important;
+  font-weight: 550;
+}
+.sd .card-body h1{
+  font-size: 28px;
+}

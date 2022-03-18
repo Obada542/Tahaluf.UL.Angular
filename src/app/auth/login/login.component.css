@@ -18,10 +18,7 @@ div.error {
   font-size: 23px;
   color: red;
 }
-form .row {
-  position: relative;
-  left: 170px;
-}
+
 .form {
   width: 50rem;
   margin: 5rem auto;

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -14,8 +15,7 @@ export class ContactComponent implements OnInit {
     subject:new FormControl('',[Validators.required]),
     firstname:new FormControl('',[Validators.required]),
     lastname:new FormControl('',[Validators.required]),
-  })
-
+  });
   constructor() { }
 
   ngOnInit(): void {

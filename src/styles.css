@@ -1,0 +1,22 @@
+
+.pagination{
+  justify-self: center;
+  align-items: center;
+}
+.pagination .page-item .page-link
+{
+  color: #429e00;
+  cursor: pointer;
+}
+.pagination .page-item.active .page-link{
+  background-color: #44a300;
+  border-color: #77b748;
+  color: #fff;
+}
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #fff;
+  border-color: #dee2e6;
+}

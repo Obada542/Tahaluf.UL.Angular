@@ -2001,6 +2001,8 @@ li.menu-item-has-mega-menu {
   float: left;
   overflow: hidden;
   position: relative;
+  height: 240px;
+  overflow: hidden;
 }
 .tg-bookimg {
   width: 100%;
@@ -2077,6 +2079,7 @@ li.menu-item-has-mega-menu {
 }
 .tg-postbook:hover .tg-featureimg {
   padding: 9px 13px 9px 0;
+
 }
 .tg-postbook:hover .tg-bookimg {
   transform-style: preserve-3d;
@@ -2419,8 +2422,10 @@ li.menu-item-has-mega-menu {
   border-bottom: 3px solid #f7f7f7;
 }
 .tg-pickedbyauthor .tg-featureimg {
+
   padding: 30px 50px;
   border-bottom: 1px solid #dbdbdb;
+
 }
 .tg-pickedbyauthor .tg-featureimg .tg-bookimg {
   margin: 0;

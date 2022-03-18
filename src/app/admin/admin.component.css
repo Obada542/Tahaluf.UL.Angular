@@ -1,0 +1,15 @@
+li{
+  list-style: none !important;
+}
+.welcome{
+  font-size: 25px;
+  font-weight: 700;
+  background: -webkit-linear-gradient(45deg,rgb(231, 174, 174) 20%, #922ee4);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+}
+.nav-item{
+  font-size: 16px;
+  font-weight: 600;
+}
