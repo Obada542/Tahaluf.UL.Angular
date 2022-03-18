@@ -8,3 +8,11 @@
 small{
   color: rgb(105, 105, 105);
 }
+td a{
+  cursor: pointer;
+}
+td img{
+  height: 100px;
+  width: auto;
+  border-radius: 0;
+}

@@ -15,6 +15,6 @@ import { AdminComponent } from './admin.component';
     CommonModule,
     SharedModule,
   ],
-  exports:[]
+  exports: []
 })
 export class AdminModule { }

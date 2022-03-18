@@ -1,7 +1,6 @@
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { BooksComponent } from './books/books.component';
-import { AdminModule } from './admin/admin.module';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { ContactComponent } from './contact/contact.component';
@@ -39,18 +38,19 @@ const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent,
-    children:[
+    children: [
       {
-      path: '',
-      redirectTo: 'dashboard',
-      pathMatch: 'full'
-    },
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
       {
-        path:"dashboard",
-        component:DashboardComponent
-      },{
-        path:"manageBook",
-        component:ManageBookComponent
+        path: "dashboard",
+        component: DashboardComponent
+      },
+      {
+        path: "manageBook",
+        component: ManageBookComponent
       }
     ]
   },
@@ -59,7 +59,7 @@ const routes: Routes = [
     component: PagenotfoundComponent
   },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-  {path: '**', redirectTo: '/PageNotFound-404'}
+  { path: '**', redirectTo: '/PageNotFound-404' }
 ];
 
 @NgModule({

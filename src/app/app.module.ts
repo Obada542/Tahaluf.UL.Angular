@@ -17,6 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { BooksComponent } from './books/books.component';
+import {MatSelectModule} from '@angular/material/select';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,7 +48,8 @@ import { BooksComponent } from './books/books.component';
       }
     ),
     HttpClientModule,
-    JwPaginationModule
+    JwPaginationModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent],

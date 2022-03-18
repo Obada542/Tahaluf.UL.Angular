@@ -10,35 +10,74 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 })
 export class ManageBookComponent implements OnInit {
   @ViewChild('createNewBook') createNewBook!: TemplateRef<any>;
+  @ViewChild('updateBook') updateBook!: TemplateRef<any>;
+  @ViewChild('deleteBook') deleteBook!: TemplateRef<any>;
 
+  selectedBook!:any;
+  id:any;
   createbook: FormGroup = new FormGroup({
-    book_name: new FormControl('', [Validators.required]),
+    book_Name: new FormControl('', [Validators.required]),
     author: new FormControl('', [Validators.required]),
     price: new FormControl('', [Validators.required, Validators.min(1)]),
     overview: new FormControl('', [Validators.required]),
     quantity: new FormControl('', [Validators.required, Validators.min(1)]),
     image: new FormControl('', [Validators.required]),
-    library_id: new FormControl('', [Validators.required]),
+    library_Id: new FormControl('', [Validators.required],),
     category: new FormControl('', [Validators.required]),
   });
-  constructor(private dialog: MatDialog, private book: BookService) {
+
+  updatebook: FormGroup = new FormGroup({
+    id: new FormControl(''),
+    book_Name: new FormControl('', [Validators.required]),
+    author: new FormControl('', [Validators.required]),
+    price: new FormControl('', [Validators.required, Validators.min(1)]),
+    overview: new FormControl('', [Validators.required]),
+    quantity: new FormControl('', [Validators.required, Validators.min(1)]),
+    image: new FormControl(),
+    library_Id: new FormControl('', [Validators.required],),
+    category: new FormControl('', [Validators.required]),
+  });
+
+  constructor(private dialog: MatDialog, public book: BookService) {
   }
+
   ngOnInit(): void {
+    this.book.getAllLibraries();
+    this.book.getAllBooks();
   }
-  createBook() {
-    this.book.createBook(this.createbook.value);
-  }
+
   openCreateDialog() {
     this.dialog.open(this.createNewBook)
+  }
+  openUpdateDialog(book:any) {
+    this.selectedBook = book;
+    this.updatebook.controls['id'].setValue(book.id);
+    this.dialog.open(this.updateBook);
+  }
+  openDeleteDialog(id:number) {
+    this.id =id;
+    this.dialog.open(this.deleteBook)
   }
   uploadFile(file: any) {
     if (file.length === 0) {
       return;
     }
     let fileUpload = <File>file[0];
-    // file[0]:'angular.png';
     const fromData = new FormData();
     fromData.append('file', fileUpload, fileUpload.name);
     this.book.uploadAttachment(fromData);
+  }
+
+  submit(){
+    this.book.createBook(this.createbook.value);
+    location.reload();
+  }
+  update(){
+    this.book.updateBook(this.updatebook.value);
+    location.reload();
+  }
+  delete(){
+    this.book.deleteBook(this.id);
+    location.reload();
   }
 }
