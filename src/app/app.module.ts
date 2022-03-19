@@ -7,7 +7,6 @@ import { HomeComponent } from './home/home.component';
 import { TestimonialComponent } from './testimonial/testimonial.component';
 import { SharedModule } from './shared/shared.module';
 import { ContactComponent } from './contact/contact.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
@@ -18,6 +17,9 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { BooksComponent } from './books/books.component';
 import {MatSelectModule} from '@angular/material/select';
+import { DashboardComponent } from './admin/dashboard/dashboard.component';
+import { ManageBookComponent } from './admin/manage-book/manage-book.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -27,13 +29,14 @@ import {MatSelectModule} from '@angular/material/select';
     ContactComponent,
     TestimonialComponent,
     PagenotfoundComponent,
-    BooksComponent
+    BooksComponent,
+    DashboardComponent,
+    ManageBookComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
     BrowserAnimationsModule,
     SharedModule,
     NgbModule,
