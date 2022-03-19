@@ -20,6 +20,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManageBookComponent } from './admin/manage-book/manage-book.component';
 import { AdminComponent } from './admin/admin.component';
+import { ManageLibraryComponent } from './admin/manage-library/manage-library.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { AdminComponent } from './admin/admin.component';
     BooksComponent,
     DashboardComponent,
     ManageBookComponent,
-    AdminComponent
+    AdminComponent,
+    ManageLibraryComponent
   ],
   imports: [
     BrowserModule,
