@@ -11,6 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthModule } from './auth/auth.module';
 import { ManageBookComponent } from './admin/manage-book/manage-book.component';
 import { ManageLibraryComponent } from './admin/manage-library/manage-library.component';
+import { ManageHomeComponent } from './admin/manage-home/manage-home.component';
 const routes: Routes = [
   {
     path: "home",
@@ -56,6 +57,10 @@ const routes: Routes = [
       {
         path: "manageLibrary",
         component: ManageLibraryComponent
+      },
+      {
+        path:"manageHome",
+        component: ManageHomeComponent
       }
     ]
   },

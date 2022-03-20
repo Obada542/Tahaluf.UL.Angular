@@ -1,0 +1,19 @@
+.dialog{
+    height: 450px;
+    overflow-y: scroll;
+  }
+  .col-form-label{
+    font-weight: 600;
+  }
+  small{
+    color: rgb(105, 105, 105);
+  }
+  td a{
+    cursor: pointer;
+  }
+  td img{
+    height: 100px;
+    width: auto;
+    border-radius: 0;
+  }
+  

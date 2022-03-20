@@ -21,6 +21,7 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManageBookComponent } from './admin/manage-book/manage-book.component';
 import { AdminComponent } from './admin/admin.component';
 import { ManageLibraryComponent } from './admin/manage-library/manage-library.component';
+import { ManageHomeComponent } from './admin/manage-home/manage-home.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { ManageLibraryComponent } from './admin/manage-library/manage-library.co
     DashboardComponent,
     ManageBookComponent,
     AdminComponent,
-    ManageLibraryComponent
+    ManageLibraryComponent,
+    ManageHomeComponent
   ],
   imports: [
     BrowserModule,
