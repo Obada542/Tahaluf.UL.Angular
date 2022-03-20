@@ -4,6 +4,7 @@
       <h4 class="card-title">Manage Libraries</h4>
       <button class=" card-description btn btn-primary " (click)="openCreateDialog()" style="color: #fff;"> Add
         Library</button>
+        <input type="text" style="float: right;" #search placeholder="Search Library by name"  (input)="searchLibrary($event)">  
       <table class="table table-striped">
         <thead>
           <tr>
@@ -15,8 +16,8 @@
 
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let library of library.libraries">
+        <tbody [ngStyle]="{'display': searchL.length == 0 && search.value ? 'none' : ''}">
+          <tr *ngFor="let library of searchL.length == 0 ? library.libraries : searchL " >
 
             <td> {{library.library_Name}} </td>
             <td> {{library.location}} </td>
@@ -33,6 +34,9 @@
           </tr>
         </tbody>
       </table>
+      <div *ngIf="searchL.length == 0 && search.value">
+        <p class="nothing">Sorry, no books with this name were found.</p>
+      </div>
     </div>
   </div>
 </div>

@@ -34,6 +34,8 @@ export class ManageLibraryComponent implements OnInit {
   selectedLibrary:any;
   id :any;
 
+  searchL:Array<any>=[];
+
   ngOnInit(): void {
     this.library.getAllLibraries();
   }
@@ -81,6 +83,23 @@ export class ManageLibraryComponent implements OnInit {
   delete(){
     this.library.deleteLibrary(this.id);
     location.reload();
+  }
+
+  searchLibrary(ev:any){
+   var searchlibrary:Array<any>=[];
+   for( let i =0 ;i<this.library.libraries.length;i++ ){
+     const library :string = this.library.libraries[i].library_Name.toLowerCase();
+
+     if(library.includes(ev.target.value.toLowerCase())){
+      searchlibrary.push(this.library.libraries[i]);
+
+     }
+   }
+
+   this.searchL=searchlibrary;
+
+
+
   }
 
 
