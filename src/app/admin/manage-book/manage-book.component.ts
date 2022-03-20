@@ -16,6 +16,7 @@ export class ManageBookComponent implements OnInit {
   selectedBook!: any;
   id: any;
   books: Array<any> = [];
+  filePath!: string;
 
   createbook: FormGroup = new FormGroup({
     book_Name: new FormControl('', [Validators.required]),
@@ -49,16 +50,18 @@ export class ManageBookComponent implements OnInit {
   }
 
   openCreateDialog() {
+    this.book.display_Image ='';
     this.dialog.open(this.createNewBook)
   }
   openUpdateDialog(book: any) {
     this.selectedBook = book;
     this.updatebook.controls['id'].setValue(book.id);
+    this.book.display_Image = this.selectedBook.image;
     this.dialog.open(this.updateBook);
   }
   openDeleteDialog(id: number) {
     this.id = id;
-    this.dialog.open(this.deleteBook)
+    this.dialog.open(this.deleteBook);
   }
   uploadFile(file: any) {
     if (file.length === 0) {
@@ -96,5 +99,9 @@ export class ManageBookComponent implements OnInit {
       }
     }
     this.books = searchbooks;
+  }
+  libraryname(id:number){
+    if(this.book.libraries.length > 0)
+      return this.book.libraries.find((x:any)=>x.id==id).library_Name;
   }
 }

@@ -28,7 +28,7 @@
             <td> {{book.author}} </td>
             <td> {{book.price}} </td>
             <td> {{book.quantity}} </td>
-            <td> {{book.library_Id}} </td>
+            <td> {{libraryname(book.library_Id)}} </td>
             <td> {{book.category}} </td>
             <td> {{book.nosold}} </td>
             <td>
@@ -177,7 +177,13 @@
                 </div>
               </div>
             </div>
+            <div class="col-md-12">
+              <div *ngIf="book.display_Image && book.display_Image !== ''">
+                <img src="../../../assets/Images/{{book.display_Image}}"  style="height: 300px !important;">
+              </div>
+            </div>
           </div>
+          <hr>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
@@ -321,9 +327,9 @@
               <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Library</label>
                 <div class="col-sm-10">
-                  <select class="form-control" matInput formControlName="library_Id">
-                    <option value="0" disabled>Please choose one</option>
-                    <option *ngFor="let library of book.libraries" [selected]="library.id==selectedBook"
+                  <select class="form-control" matInput formControlName="library_Id" [(ngModel)]="selectedBook.library_Id">
+                    <option [ngValue]="0" disabled>Please choose one</option>
+                    <option *ngFor="let library of book.libraries"
                       [ngValue]="library.id">{{library.library_Name}}
                     </option>
                   </select>
@@ -345,8 +351,15 @@
                   <button class="btn btn-primary" (click)="file.click()">Upload Image</button>
                 </div>
               </div>
+
+            </div>
+            <div class="col-md-12">
+              <div *ngIf="book.display_Image && book.display_Image !== ''">
+                <img src="../../../assets/Images/{{book.display_Image}}" style="height: 300px !important;">
+              </div>
             </div>
           </div>
+          <hr>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
