@@ -1,10 +1,11 @@
 <div class="col-lg-12 grid-margin stretch-card">
   <div class="card">
-    <div class="card-body">
+    <div class="card-body table-responsive">
       <h4 class="card-title">Manage Books</h4>
-      <button class=" card-description btn btn-primary " (click)="openCreateDialog()" style="color: #fff;"> Add
+      <button class=" card-description btn btn-primary "  (click)="openCreateDialog()" style="color: #fff;"> Add
         Book</button>
-      <table class="table table-responsive table-striped">
+      <input type="text" style="float: right;" #search placeholder="Search book by name"  (input)="searchBook($event)">
+      <table class="table  table-striped">
         <thead>
           <tr>
             <th> Image </th>
@@ -14,13 +15,12 @@
             <th> Quantity </th>
             <th> Library </th>
             <th> Category </th>
-            <th> Time sold </th>
+            <th> Times sold </th>
             <th> Action </th>
-
           </tr>
         </thead>
-        <tbody>
-          <tr *ngFor="let book of book.books">
+        <tbody [ngStyle]="{'display': books.length == 0 && search.value ? 'none' : ''}">
+          <tr *ngFor="let book of books.length == 0 ? book.books : books">
             <td class="py-1">
               <img src="../../../assets/Images/{{book.image}}" alt="image" />
             </td>
@@ -38,7 +38,11 @@
             </td>
           </tr>
         </tbody>
+
       </table>
+      <div *ngIf="books.length == 0 && search.value">
+        <p class="nothing">Sorry, no books with this name were found.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -197,8 +201,9 @@
         <div class="row">
           <div class="col-md-9 ">
             <button mat-button mat-dialog-close class="btn btn-primary">Close</button>
-            <button mat-button mat-dialog-close class="btn btn-danger" style="float: right;" (click)="delete()">Delete</button>
-        </div>
+            <button mat-button mat-dialog-close class="btn btn-danger" style="float: right;"
+              (click)="delete()">Delete</button>
+          </div>
         </div>
       </div>
     </div>
@@ -217,7 +222,8 @@
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Book Name</label>
                 <div class="col-sm-8">
-                  <input type="text " class="form-control" [(ngModel)]="selectedBook.book_Name" matInput formControlName="book_Name" placeholder="Book name">
+                  <input type="text " class="form-control" [(ngModel)]="selectedBook.book_Name" matInput
+                    formControlName="book_Name" placeholder="Book name">
                   <br>
                   <mat-error class="text-danger"
                     *ngIf="updatebook.controls['book_Name'].hasError('required') && updatebook.controls['book_Name'].touched">
@@ -230,7 +236,8 @@
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Author Name</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" [(ngModel)]="selectedBook.author" matInput formControlName="author" placeholder="author name">
+                  <input type="text" class="form-control" [(ngModel)]="selectedBook.author" matInput
+                    formControlName="author" placeholder="author name">
                   <br>
                   <mat-error class="text-danger"
                     *ngIf="updatebook.controls['author'].hasError('required') && updatebook.controls['author'].touched">
@@ -245,7 +252,8 @@
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Price</label>
                 <div class="col-sm-8">
-                  <input type="number" min="1" class="form-control" [(ngModel)]="selectedBook.price" matInput formControlName="price" value="1">
+                  <input type="number" min="1" class="form-control" [(ngModel)]="selectedBook.price" matInput
+                    formControlName="price" value="1">
                   <br>
                   <mat-error class="text-danger"
                     *ngIf="updatebook.controls['price'].hasError('required') && updatebook.controls['price'].touched">
@@ -261,7 +269,8 @@
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Quantity</label>
                 <div class="col-sm-8">
-                  <input type="number" min="1" class="form-control" [(ngModel)]="selectedBook.quantity" matInput formControlName="quantity" value="1">
+                  <input type="number" min="1" class="form-control" [(ngModel)]="selectedBook.quantity" matInput
+                    formControlName="quantity" value="1">
                   <br>
                   <mat-error class="text-danger"
                     *ngIf="updatebook.controls['quantity'].hasError('required') && updatebook.controls['quantity'].touched">
@@ -279,7 +288,8 @@
               <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Categoryies</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" [(ngModel)]="selectedBook.category" matInput formControlName="category">
+                  <input type="text" class="form-control" [(ngModel)]="selectedBook.category" matInput
+                    formControlName="category">
                   <br>
                   <mat-error class="text-danger"
                     *ngIf="updatebook.controls['category'].hasError('required') && updatebook.controls['category'].touched">
@@ -295,7 +305,8 @@
               <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Overview</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" [(ngModel)]="selectedBook.overview"  matInput formControlName="overview"></textarea>
+                  <textarea class="form-control" [(ngModel)]="selectedBook.overview" matInput
+                    formControlName="overview"></textarea>
                   <br>
                   <mat-error class="text-danger"
                     *ngIf="updatebook.controls['overview'].hasError('required') && updatebook.controls['overview'].touched">
@@ -312,7 +323,8 @@
                 <div class="col-sm-10">
                   <select class="form-control" matInput formControlName="library_Id">
                     <option value="0" disabled>Please choose one</option>
-                    <option *ngFor="let library of book.libraries" [selected]="library.id==selectedBook" [ngValue]="library.id">{{library.library_Name}}
+                    <option *ngFor="let library of book.libraries" [selected]="library.id==selectedBook"
+                      [ngValue]="library.id">{{library.library_Name}}
                     </option>
                   </select>
                   <br>

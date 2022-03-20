@@ -15,7 +15,7 @@
               <th> URL </th>
               <th> Oprations </th>
             </tr>
-               
+
           </thead>
 
           <tbody [ngStyle]="{'display': sliders.length == 0 && search.value ? 'none' : ''}">
@@ -28,12 +28,11 @@
                 <td>{{slider.url}}</td>
 
                 <td>
-                    <button  class="btn btn-danger" (click)="openDeleteDailog(slider.id)">Delete</button>
-
-                <button  class="btn btn-primary" (click)="openUpdateDailog(slider)">Update</button>
-                </td> 
+                    <a  class="click text-danger" (click)="openDeleteDailog(slider.id)">Delete</a> |
+                    <a  class="click" (click)="openUpdateDailog(slider)">Update</a>
+                </td>
             </tr>
-          
+
           </tbody>
         </table>
         <div *ngIf="sliders.length == 0 && search.value">
@@ -41,7 +40,7 @@
         </div>
       </div>
     </div>
-  </div> 
+  </div>
 
   <ng-template #createslider>
     <div class="col-12 dialog">
@@ -61,7 +60,7 @@
                      <mat-error class="text-danger"
                       *ngIf="createHome.controls['title'].hasError('required') && createHome.controls['title'].touched">
                       Title is <strong class="text-danger">required</strong>
-                    </mat-error> 
+                    </mat-error>
                   </div>
                 </div>
 
@@ -76,7 +75,7 @@
                      <mat-error class="text-danger"
                       *ngIf="createHome.controls['sub_Title'].hasError('required') && createHome.controls['sub_Title'].touched">
                       Sub-Title is <strong class="text-danger">required</strong>
-                    </mat-error> 
+                    </mat-error>
                   </div>
                 </div>
               </div>
@@ -91,7 +90,7 @@
                       *ngIf="createHome.controls['url'].hasError('required') && createHome.controls['url'].touched">
                       URL is <strong class="text-danger">required</strong>
                     </mat-error>
-                    
+
                   </div>
                 </div>
               </div>
@@ -121,10 +120,10 @@
         </div>
       </div>
     </div>
-  
-  
+
+
 </ng-template>
-  
+
 <ng-template #callUpdateDailog>
     <div class="col-12 dialog">
         <div class="card">
@@ -161,7 +160,7 @@
                  <mat-error class="text-danger"
                   *ngIf="updateForm.controls['sub_Title'].hasError('required') && updateForm.controls['sub_Title'].touched">
                   Sub Title is <strong class="text-danger">required</strong>
-                </mat-error> 
+                </mat-error>
               </div>
             </div>
         </div>
@@ -183,7 +182,7 @@
         <div class="col-md-12">
             <div class="form-group row">
               <div class="col-sm-9">
-                <input type="file" #file placeholder="Choose Image" formControlName="image"  [(ngModel)]="selectedSlider.image"
+                <input type="file" #file placeholder="Choose Image" formControlName="image"
                   (change)="uploadImage(file.files)" style="display:none;">
                 <button class="btn btn-primary" (click)="file.click()">Upload Image</button>
               </div>
@@ -203,7 +202,7 @@
 </div>
 </div>
 </div>
-     
+
 </ng-template>
 
 

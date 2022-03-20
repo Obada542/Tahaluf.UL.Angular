@@ -2,7 +2,6 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +14,14 @@ export class BookService {
   constructor(private http: HttpClient, private toastr: ToastrService, private spinner: NgxSpinnerService) { }
   getAllBooks() {
     this.spinner.show();
-    this.http.get('https://localhost:44346/api/book/getbestbooks').subscribe((res) => {
+    return this.http.get('https://localhost:44346/api/book/getbestbooks').subscribe((res) => {
       this.books = res;
       this.spinner.hide();
       this.toastr.success('Data Retrieved!!');
     }, err => {
       this.spinner.hide();
       this.toastr.error(err.message,err.status);
-    })
+    });
   }
   getAllLibraries() {
     this.spinner.show();
@@ -50,7 +49,6 @@ export class BookService {
   {
     this.http.post('https://localhost:44346/api/book/uploadImage/',file)
     .subscribe((res:any)=>{
-      if(res)
       this.display_Image=res.image;
     },err=>{
       this.toastr.error(err.message , err.status);
@@ -67,7 +65,7 @@ export class BookService {
       this.toastr.error(err.message , err.status)
     })
   }
-  
+
   deleteBook(id:number){
     this.spinner.show();
     this.http.delete('https://localhost:44346/api/book/DeleteBook/' + id).subscribe((res)=>{

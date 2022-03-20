@@ -14,7 +14,7 @@ export class HomeService {
 
   getAll() {
     this.spinner.show();
-    this.http.get('https://localhost:44345/api/Home/GetSliders/').subscribe((res) => {
+    this.http.get('https://localhost:44346/api/Home/GetSliders/').subscribe((res) => {
       this.data = res;
       this.spinner.hide();
       this.toastr.success('Data Retrieved!!');
@@ -28,7 +28,7 @@ export class HomeService {
   createSliders(body:any){
     this.spinner.show();
     body.image=this.display_Image;
-    this.http.post('https://localhost:44345/api/Home/CreateSlider/',body)
+    this.http.post('https://localhost:44346/api/Home/CreateSlider/',body)
     .subscribe((res:any)=>{
       this.spinner.hide();
       this.toastr.success('Create Slider Successfully :)')
@@ -41,7 +41,7 @@ export class HomeService {
 
   uploadAttachment(file:FormData)
   {
-    this.http.post('https://localhost:44345/api/Home/uploadImage/',file)
+    this.http.post('https://localhost:44346/api/Home/uploadImage/',file)
     .subscribe((res:any)=>{
       this.display_Image=res.image;
     },err=>{
@@ -53,7 +53,7 @@ export class HomeService {
   updateHome(body:any){
     this.spinner.show();
     body.image=this.display_Image;
-    this.http.put('https://localhost:44345/api/Home/UpdateSlider/',body).subscribe((res:any)=>{
+    this.http.put('https://localhost:44346/api/Home/UpdateSlider/',body).subscribe((res:any)=>{
       this.spinner.hide();
       this.toastr.success('Updated Successfully ');
     },err=>{
@@ -64,7 +64,7 @@ export class HomeService {
 
   deleteItem(id:number){
     this.spinner.show();
-    this.http.delete('https://localhost:44345/api/Home/DeleteSlider/'+id).subscribe((res)=>{
+    this.http.delete('https://localhost:44346/api/Home/DeleteSlider/'+id).subscribe((res)=>{
       this.toastr.success('Deleted Successfully :)');
       this.spinner.hide();
     },err=>{

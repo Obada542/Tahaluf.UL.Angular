@@ -13,20 +13,20 @@ export class ManageHomeComponent implements OnInit {
   @ViewChild('createslider') createslider! :TemplateRef<any>
   @ViewChild('callUpdateDailog') callUpdateDailog! :TemplateRef<any>
   @ViewChild('callDeleteDailog') callDeleteDailog! :TemplateRef<any>
-  
+
   createHome: FormGroup = new FormGroup({
     title: new FormControl('', Validators.required),
     sub_Title: new FormControl('', Validators.required),
     image: new FormControl('', Validators.required),
     url: new FormControl('', Validators.required),
-    
+
   })
 
   updateForm:FormGroup=new FormGroup({
     id:new FormControl(''),
     title: new FormControl('', Validators.required),
     sub_Title: new FormControl('', Validators.required),
-    image: new FormControl('', Validators.required),
+    image: new FormControl(''),
     url: new FormControl('', Validators.required),
   })
 
@@ -62,6 +62,10 @@ export class ManageHomeComponent implements OnInit {
 
 
 update(){
+  let image : string = this.updateForm.controls['image'].value;
+    if(!image){
+      this.home.display_Image = this.selectedSlider.image;
+    }
   this.home.updateHome(this.updateForm.value);
   location.reload();
 
@@ -70,7 +74,7 @@ update(){
 openUpdateDailog(home:any)
 {
     this.selectedSlider=home;
-    this.updateForm.controls['id'].setValue(home.id); 
+    this.updateForm.controls['id'].setValue(home.id);
     this.dialog.open(this.callUpdateDailog);
   }
 
@@ -86,7 +90,7 @@ openUpdateDailog(home:any)
           this.home.deleteItem(id);
           else if(result=='no')
           console.log("Thank you ");
-          
+
         }
       })
   }

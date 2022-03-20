@@ -13,8 +13,10 @@ export class ManageBookComponent implements OnInit {
   @ViewChild('updateBook') updateBook!: TemplateRef<any>;
   @ViewChild('deleteBook') deleteBook!: TemplateRef<any>;
 
-  selectedBook!:any;
-  id:any;
+  selectedBook!: any;
+  id: any;
+  books: Array<any> = [];
+
   createbook: FormGroup = new FormGroup({
     book_Name: new FormControl('', [Validators.required]),
     author: new FormControl('', [Validators.required]),
@@ -33,7 +35,7 @@ export class ManageBookComponent implements OnInit {
     price: new FormControl('', [Validators.required, Validators.min(1)]),
     overview: new FormControl('', [Validators.required]),
     quantity: new FormControl('', [Validators.required, Validators.min(1)]),
-    image: new FormControl(),
+    image: new FormControl(''),
     library_Id: new FormControl('', [Validators.required],),
     category: new FormControl('', [Validators.required]),
   });
@@ -49,13 +51,13 @@ export class ManageBookComponent implements OnInit {
   openCreateDialog() {
     this.dialog.open(this.createNewBook)
   }
-  openUpdateDialog(book:any) {
+  openUpdateDialog(book: any) {
     this.selectedBook = book;
     this.updatebook.controls['id'].setValue(book.id);
     this.dialog.open(this.updateBook);
   }
-  openDeleteDialog(id:number) {
-    this.id =id;
+  openDeleteDialog(id: number) {
+    this.id = id;
     this.dialog.open(this.deleteBook)
   }
   uploadFile(file: any) {
@@ -68,16 +70,31 @@ export class ManageBookComponent implements OnInit {
     this.book.uploadAttachment(fromData);
   }
 
-  submit(){
+  submit() {
     this.book.createBook(this.createbook.value);
     location.reload();
   }
-  update(){
+  update() {
+    let image : string = this.updatebook.controls['image'].value;
+
+    if(!image){
+      this.book.display_Image = this.selectedBook.image;
+    }
     this.book.updateBook(this.updatebook.value);
     location.reload();
   }
-  delete(){
+  delete() {
     this.book.deleteBook(this.id);
     location.reload();
+  }
+  searchBook(event: any) {
+    var searchbooks: Array<any> = [];
+    for (let i = 0; i < this.book.books.length; i++) {
+      const book: string = this.book.books[i].book_Name.toLowerCase();
+      if (book.includes(event.target.value.toLowerCase())) {
+        searchbooks.push(this.book.books[i]);
+      }
+    }
+    this.books = searchbooks;
   }
 }

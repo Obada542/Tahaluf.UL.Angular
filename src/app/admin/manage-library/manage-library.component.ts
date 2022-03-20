@@ -26,7 +26,7 @@ export class ManageLibraryComponent implements OnInit {
     Library_Name:new FormControl('',[Validators.required]),
     Location:new FormControl('',[Validators.required]),
     Description:new FormControl('',[Validators.required]),
-    Image:new FormControl('',[Validators.required])
+    Image:new FormControl('')
   });
 
   constructor(private dialog:MatDialog,public library:LibraryService ) { }
@@ -46,7 +46,6 @@ export class ManageLibraryComponent implements OnInit {
     this.selectedLibrary = library;
     this.updatelibrary.controls['id'].setValue(library.id);
     this.dialog.open(this.updateLibrary);
-
   }
 
   openDeleteDialog(id:number) {
@@ -70,6 +69,10 @@ export class ManageLibraryComponent implements OnInit {
   }
 
   update(){
+    let image : string = this.updatelibrary.controls['Image'].value;
+    if(!image){
+      this.library.display_Image = this.selectedLibrary.image;
+    }
     this.library.updateLibrary(this.updatelibrary.value);
     location.reload();
 
