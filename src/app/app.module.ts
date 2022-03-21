@@ -22,6 +22,9 @@ import { ManageBookComponent } from './admin/manage-book/manage-book.component';
 import { AdminComponent } from './admin/admin.component';
 import { ManageLibraryComponent } from './admin/manage-library/manage-library.component';
 import { ManageHomeComponent } from './admin/manage-home/manage-home.component';
+import { ManageLoaningComponent } from './admin/manage-loaning/manage-loaning.component';
+import { ManageEmployeeComponent } from './admin/manage-employee/manage-employee.component';
+import { ManageStudentComponent } from './admin/manage-student/manage-student.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { ManageHomeComponent } from './admin/manage-home/manage-home.component';
     ManageBookComponent,
     AdminComponent,
     ManageLibraryComponent,
-    ManageHomeComponent
+    ManageHomeComponent,
+    ManageLoaningComponent,
+    ManageEmployeeComponent,
+    ManageStudentComponent
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,6 @@
+import { ManageStudentComponent } from './admin/manage-student/manage-student.component';
+import { ManageEmployeeComponent } from './admin/manage-employee/manage-employee.component';
+import { ManageLoaningComponent } from './admin/manage-loaning/manage-loaning.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { BooksComponent } from './books/books.component';
@@ -61,6 +64,18 @@ const routes: Routes = [
       {
         path:"manageHome",
         component: ManageHomeComponent
+      },
+      {
+        path:"manageLoaning",
+        component: ManageLoaningComponent
+      },
+      {
+        path:"manageEmployee",
+        component: ManageEmployeeComponent
+      },
+      {
+        path:"manageStudent",
+        component: ManageStudentComponent
       }
     ]
   },

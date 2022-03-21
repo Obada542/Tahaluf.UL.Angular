@@ -1,0 +1,100 @@
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body table-responsive">
+      <h4 class="card-title ">Manage Borrowings</h4>
+      <div style="float: right;">
+        <input class="card-description" type="text"  #search placeholder="Search by book or student" (input)="searchLoans($event)" >
+         <p class="advance" (click)="openSearchUsingDate()">advanced search...</p>
+      </div>
+      <table class="table  table-striped">
+        <thead>
+          <tr>
+            <th> Book Name </th>
+            <th> Student Name </th>
+            <th> Start Date </th>
+            <th> End Date </th>
+            <th> Fines </th>
+            <th> Status </th>
+            <th> Action </th>
+          </tr>
+        </thead>
+        <tbody [ngStyle]="{'display': loans.length == 0 && search.value ? 'none' : ''}">
+          <tr *ngFor="let borrow of loans.length == 0 ? loanService.loans : loans ">
+            <td> {{getBookName(borrow.book_Id)}} </td>
+            <td> {{borrow.student_Id}} </td>
+            <td> {{borrow.start_Date | date:'dd-MM-yyyy'}} </td>
+            <td> {{borrow.end_Date | date:'dd-MM-yyyy'}} </td>
+            <td> {{borrow.fines}} </td>
+            <td style="font-weight: 500;" [ngStyle]="{'color': borrow.isloaned == 'false'?'gray':'green'}"> {{borrow.isloaned != 'false'? 'Active' : "Closed"}} </td>
+            <td>
+              <a class="link" [ngStyle]="{'display': borrow.isloaned == 'false'?'none':''}" (click)="openChangeStatus(borrow)">End loan</a>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+      <div *ngIf="loans.length == 0 && search.value">
+        <p class="nothing">Sorry, no books with this name were found.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #change>
+  <div class="col-12 ">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Are you sure you want to update the status of this item?</h4>
+        <div class="row">
+          <div class="col-md-9 ">
+            <button mat-button mat-dialog-close class="btn btn-primary">No,take me back</button>
+            <button mat-button mat-dialog-close class="btn btn-success" style="float: right;"
+              (click)="changeStatus()">Sure</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #searchInterval>
+  <div class="col-12 ">
+    <div class="card">
+      <form class="card-body" [formGroup]="serachDates">
+        <h4 class="card-title">Are you sure you want to update the status of this item?</h4>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Book Name</label>
+              <div class="col-sm-8">
+                <input type="date" class="form-control" matInput formControlName="start_Date" placeholder="Book name">
+                <br>
+                <mat-error class="text-danger"
+                  *ngIf="serachDates.controls['start_Date'].hasError('required') && serachDates.controls['start_Date'].touched">
+                  Start Date is <strong class="text-danger">required</strong>
+                </mat-error>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Author Name</label>
+              <div class="col-sm-8">
+                <input type="date" class="form-control" matInput formControlName="end_Date" placeholder="author name">
+                <br>
+                <mat-error class="text-danger"
+                  *ngIf="serachDates.controls['end_Date'].hasError('required') && serachDates.controls['end_Date'].touched">
+                  End Date is <strong class="text-danger">required</strong>
+                </mat-error>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-9 ">
+            <button mat-button mat-dialog-close class="btn btn-success"
+              [disabled]="!serachDates.valid" (click)="searchByDates()">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</ng-template>

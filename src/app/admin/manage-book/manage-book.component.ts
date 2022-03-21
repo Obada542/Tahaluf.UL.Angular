@@ -16,7 +16,6 @@ export class ManageBookComponent implements OnInit {
   selectedBook!: any;
   id: any;
   books: Array<any> = [];
-  filePath!: string;
 
   createbook: FormGroup = new FormGroup({
     book_Name: new FormControl('', [Validators.required]),
@@ -79,7 +78,6 @@ export class ManageBookComponent implements OnInit {
   }
   update() {
     let image : string = this.updatebook.controls['image'].value;
-
     if(!image){
       this.book.display_Image = this.selectedBook.image;
     }

@@ -16,3 +16,8 @@ td img{
   width: auto;
   border-radius: 0;
 }
+.nothing{
+  text-align: center;
+  font-size: 24px;
+  padding: 50px 0;
+}
