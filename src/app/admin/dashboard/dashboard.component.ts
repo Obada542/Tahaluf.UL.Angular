@@ -1,7 +1,4 @@
-import { ManageBookComponent } from './../manage-book/manage-book.component';
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -9,13 +6,9 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public dialog: MatDialog) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
-  openDialog() {
-    const dialogRef = this.dialog.open(ManageBookComponent);
-    dialogRef.afterClosed().subscribe(result => {
-    });
-  }
+
 }

@@ -50,7 +50,6 @@ export class ManageStudentComponent implements OnInit {
     var searchemployees: Array<any> = [];
     for (let i = 0; i < this.studentService.login.length; i++) {
       const name: string = this.studentService.students[i].first_Name.toLowerCase() + ' '+ this.studentService.students[i].last_Name.toLowerCase();
-
        if(name.includes(std.target.value.toLowerCase())){
         searchemployees.push(this.studentService.login.find((x:any)=>this.studentService.students[i].login_Id==x.id));
       }

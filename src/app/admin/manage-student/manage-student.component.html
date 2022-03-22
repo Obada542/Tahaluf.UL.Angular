@@ -21,7 +21,7 @@
 
           <tr *ngFor="let student of students.length == 0 ? studentService.login : students">
             <td class="py-1">
-              <img src="../../../assets/Images/{{student.image}}" alt="image" />
+              <img src="../../../assets/Images/{{student.image}}" style="border-radius: 50%;" alt="image" />
             </td>
             <td> {{studentFirstName(student.id)+ ' '+ studentLastName(student.id)}}</td>
             <td> {{student.username}} </td>
