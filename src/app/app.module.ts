@@ -25,6 +25,8 @@ import { ManageHomeComponent } from './admin/manage-home/manage-home.component';
 import { ManageLoaningComponent } from './admin/manage-loaning/manage-loaning.component';
 import { ManageEmployeeComponent } from './admin/manage-employee/manage-employee.component';
 import { ManageStudentComponent } from './admin/manage-student/manage-student.component';
+import { RoleComponent } from './admin/role/role.component';
+import { MessageComponent } from './admin/message/message.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { ManageStudentComponent } from './admin/manage-student/manage-student.co
     ManageHomeComponent,
     ManageLoaningComponent,
     ManageEmployeeComponent,
-    ManageStudentComponent
+    ManageStudentComponent,
+    RoleComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
