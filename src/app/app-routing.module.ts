@@ -17,6 +17,7 @@ import { ManageLibraryComponent } from './admin/manage-library/manage-library.co
 import { ManageHomeComponent } from './admin/manage-home/manage-home.component';
 import { RoleComponent } from './admin/role/role.component';
 import { MessageComponent } from './admin/message/message.component';
+import { ManageWebsiteComponent } from './admin/manage-website/manage-website.component';
 const routes: Routes = [
   {
     path: "home",
@@ -86,6 +87,10 @@ const routes: Routes = [
       {
         path:"contactMessage",
         component:MessageComponent
+      },
+      {
+        path:"manageWebsite",
+        component: ManageWebsiteComponent
       }
     ]
   },

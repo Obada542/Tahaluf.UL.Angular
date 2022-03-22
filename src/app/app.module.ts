@@ -27,6 +27,7 @@ import { ManageEmployeeComponent } from './admin/manage-employee/manage-employee
 import { ManageStudentComponent } from './admin/manage-student/manage-student.component';
 import { RoleComponent } from './admin/role/role.component';
 import { MessageComponent } from './admin/message/message.component';
+import { ManageWebsiteComponent } from './admin/manage-website/manage-website.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { MessageComponent } from './admin/message/message.component';
     ManageEmployeeComponent,
     ManageStudentComponent,
     RoleComponent,
-    MessageComponent
+    MessageComponent,
+    ManageWebsiteComponent
   ],
   imports: [
     BrowserModule,
