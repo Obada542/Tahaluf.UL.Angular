@@ -31,6 +31,8 @@ import { DatePipe } from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
+import { ManageWebsiteComponent } from './admin/manage-website/manage-website.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,8 @@ import {MatIconModule} from '@angular/material/icon';
     ManageEmployeeComponent,
     ManageStudentComponent,
     RoleComponent,
-    MessageComponent
+    MessageComponent,
+    ManageWebsiteComponent
   ],
   imports: [
     BrowserModule,

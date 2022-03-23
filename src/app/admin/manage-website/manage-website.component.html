@@ -1,0 +1,560 @@
+
+
+  
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+    <div class="col-12 dialog">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update Header </h4> 
+          <form class="form-sample" [formGroup]="updateheader">
+            <p class="card-description"> Header info </p>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Title</label>
+                  <div class="col-sm-6">
+                    <input type="text " class="form-control" [(ngModel)]="website.header.title" matInput
+                   
+                      formControlName="Title" placeholder="Title" >
+                    <br>
+                    <mat-error class="text-danger"
+                      *ngIf="updateheader.controls['Title'].hasError('required') && updateheader.controls['Title'].touched">
+                     Title is <strong class="text-danger">required</strong>
+                    </mat-error>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-12">
+               
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Image</label>
+                <img src="../../../assets/Images/{{website.header.logo}}" alt="image" width="50px" height="50px" class="logo"/>
+              </div>
+              
+              
+
+              </div>
+              
+            </div>
+  
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <div class="col-sm-9">
+                    <input type="file" #file placeholder="Choose Image" formControlName="logo"
+                      (change)="uploadFile2(file.files)" style="display:none;">
+                    <button class="btn btn-primary" (click)="file.click()">Upload Image</button>
+                   
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-12" [disabled]="!updateheader.valid"
+                      (click)="updateH()">Update</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+        </div>
+    </div>
+  
+
+
+
+    <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+    <div class="col-12 dialog">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update Footer </h4>
+          <form class="form-sample" [formGroup]="updatefooter">
+            <p class="card-description"> Footer info </p>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Facebook</label>
+                  <div class="col-sm-6">
+                    <input type="text " class="form-control" [(ngModel)]="website.footer.facebook" matInput
+                      formControlName="Facebook" placeholder="Facebook">
+                    <br>
+                    <mat-error class="text-danger"
+                      *ngIf="updatefooter.controls['Facebook'].hasError('required') && updatefooter.controls['Facebook'].touched">
+                     Facebook is <strong class="text-danger">required</strong>
+                    </mat-error>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Twitter</label>
+                  <div class="col-sm-6">
+                    <input type="text " class="form-control" [(ngModel)]="website.footer.twitter" matInput
+                      formControlName="Twitter" placeholder="Twitter">
+                    <br>
+                    <mat-error class="text-danger"
+                      *ngIf="updatefooter.controls['Twitter'].hasError('required') && updatefooter.controls['Twitter'].touched">
+                      Twitter is <strong class="text-danger">required</strong>
+                    </mat-error>
+                  </div>
+                </div>
+              </div>
+
+
+              
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Instagram</label>
+                    <div class="col-sm-6">
+                      <input type="text " class="form-control" [(ngModel)]="website.footer.instagram" matInput
+                        formControlName="Instagram" placeholder="Instagram">
+                      <br>
+                      <mat-error class="text-danger"
+                        *ngIf="updatefooter.controls['Instagram'].hasError('required') && updatefooter.controls['Instagram'].touched">
+                        Instagram is <strong class="text-danger">required</strong>
+                      </mat-error>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Description</label>
+                    <div class="col-sm-6">
+                      <input type="text " class="form-control" [(ngModel)]="website.footer.small_Desc" matInput
+                        formControlName="Small_Desc" placeholder="Description">
+                      <br>
+                      <mat-error class="text-danger"
+                        *ngIf="updatefooter.controls['Small_Desc'].hasError('required') && updatefooter.controls['Small_Desc'].touched">
+                        Description is <strong class="text-danger">required</strong>
+                      </mat-error>
+                    </div>
+                  </div>
+                </div>
+  
+  
+                
+              </div>
+  
+        
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-12" [disabled]="!updatefooter.valid"
+                      (click)="updateF()">Update</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+</div>
+  
+
+  <!-- <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body table-responsive">
+        <h4 class="card-title">Manage Contact </h4>
+       
+       
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th> Title </th>
+              <th>Sub_Title</th>
+              <th> description </th>
+              <th> numbers </th>
+              <th> addresses </th>
+              <th> Action </th>
+  
+            </tr>
+          </thead>
+          <tbody >
+            <tr  >
+  
+              <td> {{website.contact.title}} </td>
+              <td> {{website.contact.sub_Title}} </td>
+              <td> {{website.contact.description}} </td>
+              <td> {{website.contact.numbers}} </td>
+              <td> {{website.contact.addresses}} </td>
+             
+              <td>
+                <a class="link" (click)="openUpdateDialogContact(website.contact)">Update</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</div>
+</div> -->
+
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+    <div class="col-12 dialog">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update contact </h4>
+          <form class="form-sample" [formGroup]="updatecontact">
+            <p class="card-description"> Contact info </p>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Title</label>
+                  <div class="col-sm-6">
+                    <input type="text " class="form-control" [(ngModel)]="website.contact.title" matInput
+                      formControlName="Title" placeholder="Title">
+                    <br>
+                    <mat-error class="text-danger"
+                      *ngIf="updatecontact.controls['Title'].hasError('required') && updatecontact.controls['Title'].touched">
+                       Title is <strong class="text-danger">required</strong>
+                    </mat-error>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Sub_Title</label>
+                    <div class="col-sm-6">
+                      <input type="text " class="form-control" [(ngModel)]="website.contact.sub_Title" matInput
+                        formControlName="Sub_Title" placeholder="Sub_Title">
+                      <br>
+                      <mat-error class="text-danger"
+                        *ngIf="updatecontact.controls['Sub_Title'].hasError('required') && updatecontact.controls['Sub_Title'].touched">
+                        Sub_Title is <strong class="text-danger">required</strong>
+                      </mat-error>
+                    </div>
+                  </div>
+              </div>
+
+
+              
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+
+                      <div class="form-group row">
+                        <label class="col-sm-4 col-form-label"> Addresses</label>
+                        <div class="col-sm-6">
+                          <input type="text " class="form-control" [(ngModel)]="website.contact.addresses" matInput
+                            formControlName="addresses" placeholder=" Addresses">
+                          <br>
+                          <mat-error class="text-danger"
+                            *ngIf="updatecontact.controls['addresses'].hasError('required') && updatecontact.controls['addresses'].touched">
+                            Addresses is <strong class="text-danger">required</strong>
+                          </mat-error>
+                        </div>
+                      </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label"> Numbers</label>
+                    <div class="col-sm-6">
+                      <input type="text " class="form-control" [(ngModel)]="website.contact.numbers" matInput
+                        formControlName="numbers" placeholder=" Numbers">
+                      <br>
+                      <mat-error class="text-danger"
+                        *ngIf="updatecontact.controls['numbers'].hasError('required') && updatecontact.controls['numbers'].touched">
+                        Numbers is <strong class="text-danger">required</strong>
+                      </mat-error>
+                    </div>
+                  </div>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Description</label>
+                        <div class="col-sm-6">
+                          
+                            <textarea class="form-control" [(ngModel)]="website.contact.description" matInput
+                            formControlName="Description"></textarea>
+                          <br>
+                          <mat-error class="text-danger"
+                            *ngIf="updatecontact.controls['Description'].hasError('required') && updatecontact.controls['Description'].touched">
+                            Description is <strong class="text-danger">required</strong>
+                          </mat-error>
+                        </div>
+                      </div>
+                  </div>
+  
+  
+                
+              </div>
+  
+        
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-12" [disabled]="!updatecontact.valid"
+                      (click)="updateC()">Update</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+ </div>
+ </div>
+
+
+ <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+    <div class="col-12 dialog">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update About </h4>
+          <form class="form-sample" [formGroup]="updateabout">
+            <p class="card-description"> About info </p>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Title</label>
+                  <div class="col-sm-6">
+                    <input type="text " class="form-control" [(ngModel)]="website.about.title" matInput
+                      formControlName="Title" placeholder="Title">
+                    <br>
+                    <mat-error class="text-danger"
+                      *ngIf="updateabout.controls['Title'].hasError('required') && updateabout.controls['Title'].touched">
+                       Title is <strong class="text-danger">required</strong>
+                    </mat-error>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Sub_Title</label>
+                    <div class="col-sm-6">
+                      <input type="text " class="form-control" [(ngModel)]="website.about.sub_Title" matInput
+                        formControlName="Sub_Title" placeholder="Sub_Title">
+                      <br>
+                      <mat-error class="text-danger"
+                        *ngIf="updateabout.controls['Sub_Title'].hasError('required') && updateabout.controls['Sub_Title'].touched">
+                        Sub_Title is <strong class="text-danger">required</strong>
+                      </mat-error>
+                    </div>
+                  </div>
+              </div>
+
+
+              
+            </div>
+
+            <div class="row">
+               
+               
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Description</label>
+                        <div class="col-sm-6">
+                          
+                            <textarea class="form-control" [(ngModel)]="website.about.descriptions" matInput
+                            formControlName="Descriptions"></textarea>
+                          <br>
+                          <mat-error class="text-danger"
+                            *ngIf="updateabout.controls['Descriptions'].hasError('required') && updateabout.controls['Descriptions'].touched">
+                            Description is <strong class="text-danger">required</strong>
+                          </mat-error>
+                        </div>
+                      </div>
+                  </div>
+  
+  
+                
+              </div>
+  
+        
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-12" [disabled]="!updateabout.valid"
+                      (click)=" updateA()">Update</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+ </div>
+ </div>
+
+ <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body table-responsive">
+        <h4 class="card-title">Manage Background</h4>
+        <button class=" card-description btn btn-primary " (click)="openCreateDialogBackground()" style="color: #fff;"> Add
+         Background</button>
+       
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th> Page Name </th>
+              <th> Background </th>
+              <th> Action </th>
+  
+            </tr>
+          </thead>
+          <tbody >
+            <tr *ngFor="let web of website.background " >
+  
+              <td> {{web.page_Name}} </td>
+              <td class="py-1">
+                <img src="../../../assets/Images/{{web.background}}" alt="image" />
+              </td>
+              <td>
+                <a class="link" (click)=" openUpdateDialogBackground(web)">Update</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+</div>
+</div>
+</div>
+
+<ng-template #createBackground>
+    <div class="col-12 dialog">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Create New Background <button mat-button mat-dialog-close class="btn"
+              style="color: red; float: right; font-size: 25px;">X</button></h4>
+          <form class="form-sample" [formGroup]="createbackground">
+            <p class="card-description"> Background info </p>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Page Name</label>
+                  <div class="col-sm-8">
+                    <input type="text " class="form-control" matInput formControlName="Page_Name"
+                      placeholder="Page Name">
+                    <br>
+                    <mat-error class="text-danger"
+                      *ngIf="createbackground.controls['Page_Name'].hasError('required') && createbackground.controls['Page_Name'].touched">
+                      Page Name is <strong class="text-danger">required</strong>
+                    </mat-error>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
+  
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <div class="col-sm-9">
+                    <input type="file" #file placeholder="Choose Image" formControlName="background"
+                      (change)="uploadFile(file.files)" style="display:none;">
+                    <button class="btn btn-primary" (click)="file.click()">Upload Image</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-12" [disabled]="!createbackground.valid"
+                      (click)="submit()">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+  <ng-template #updateBackground>
+    <div class="col-12 dialog">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Update Background <button mat-button mat-dialog-close class="btn"
+              style="color: red; float: right; font-size: 25px;">X</button></h4>
+          <form class="form-sample" [formGroup]="updatebackground">
+            <p class="card-description"> Background info </p>
+             <!-- <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Page Name</label>
+                  <div class="col-sm-8">
+                    <input type="text " class="form-control" [(ngModel)]="selectedBackground.page_Name" matInput
+                      formControlName="Page_Name" placeholder="Page Name">
+                    <br>
+                    <mat-error class="text-danger"
+                      *ngIf="updatebackground.controls['Page_Name'].hasError('required') && updatebackground.controls['Page_Name'].touched">
+                     page name is <strong class="text-danger">required</strong>
+                    </mat-error>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+    -->
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <div class="col-sm-9">
+                    <input type="file" #file placeholder="Choose Image" formControlName="background"
+                      (change)="uploadFile(file.files)" style="display:none;">
+                    <button class="btn btn-primary" (click)="file.click()">Upload Image</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <button class="btn btn-success col-sm-12" [disabled]="!updatebackground.valid"
+                      (click)="updateB()">Update</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+
+
+
+
+
+
+

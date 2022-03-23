@@ -135,41 +135,41 @@
       <div class="card">
         <div class="card-body">
           <h4 class="card-title">Employee Salaries</h4>
-          <div class=" col-4" style="float: right; display: flex; align-items: center; margin-bottom: 20px;">
-            <label class="col-6" for="">Select report per:</label>
-            <select class="form-select col-7" (change)="changePeriodSalary($event)">
-              <option value="monthly">Month</option>
-              <option value="annual">Year</option>
-            </select>
-          </div>
           <div class="table-responsive">
             <table class="table" id="table2">
               <thead>
                 <tr>
-                  <th> Period </th>
                   <th> Employee Name </th>
-                  <th> Salary </th>
+                  <th> salary </th>
+                  <th> Salary per year </th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let report of this.reportService.salaries">
-                  <td>
-                    {{report.period}}
-                  </td>
                   <td>
                     {{report.username}}
                   </td>
                   <td>
                     {{report.salary}} JD
                   </td>
+                  <td>
+                    {{report.salary * 12}} JD
+                  </td>
                 </tr>
               </tbody>
+              <tfoot>
+                <tr>
+                  <td>Total</td>
+                  <td>Per month: {{this.reportService.totlatSalary}} JD</td>
+                  <td>Per year: {{this.reportService.totlatSalary * 12}} JD</td>
+                </tr>
+              </tfoot>
             </table>
             <br>
             <div class="col-3" style="float: right;">
               <div style="display: flex; gap: 20px;">
-                <button class="btn btn-dark" (click)="downloadAsPdf()" style="display: flex; align-items: center;padding: 10px 20px;"> <mat-icon>cloud_download</mat-icon> PDF </button>
-              <button class="btn btn-dark" (click)="exportexcel()"  style="display: flex; align-items: center;padding: 10px 20px;">
+                <button class="btn btn-dark" (click)="downloadSalaryAsPdf()" style="display: flex; align-items: center;padding: 10px 20px;"> <mat-icon>cloud_download</mat-icon> PDF </button>
+              <button class="btn btn-dark" (click)="exportSalaryexcel()"  style="display: flex; align-items: center;padding: 10px 20px;">
                 <mat-icon> cloud_download</mat-icon> Excel
               </button>
               </div>

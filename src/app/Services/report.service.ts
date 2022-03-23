@@ -15,7 +15,7 @@ export class ReportService {
   totalOrders:any;
   totalFines:any;
   totalSales:any;
-
+  totlatSalary:any;
   constructor(private http:HttpClient,private spinner:NgxSpinnerService,private toastr:ToastrService) {}
 
   getAnnualReports(){
@@ -46,6 +46,7 @@ export class ReportService {
     this.http.get("https://localhost:44346/api/report/Staitstics").subscribe(res=>{
       this.spinner.hide();
       this.staitstics = res;
+      console.log(res)
     },err=>{
       this.spinner.hide()
       this.toastr.error(err.message,err.status);
@@ -63,22 +64,15 @@ export class ReportService {
   }
   getMonthlySalary(){
     this.spinner.show();
-    this.http.get("https://localhost:44346/api/report/MonthlySalaryReport").subscribe(res=>{
+    this.http.get("https://localhost:44346/api/report/MonthlySalaryReport").subscribe((res:any)=>{
       this.spinner.hide();
       this.salaries = res;
+      this.totlatSalary=res.map((a:any) => a.salary).reduce(function(a:any, b:any){return a + b;})
+
     },err=>{
       this.spinner.hide()
       this.toastr.error(err.message,err.status);
     });
   }
-  getAnnualSalary(){
-    this.spinner.show();
-    this.http.get("https://localhost:44346/api/report/AnnualSalaryReport").subscribe(res=>{
-      this.spinner.hide();
-      this.salaries = res;
-    },err=>{
-      this.spinner.hide()
-      this.toastr.error(err.message,err.status);
-    });
-  }
+
 }

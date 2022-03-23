@@ -10,7 +10,7 @@ import * as XLSX from 'xlsx';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public reportService:ReportService) { }
+  constructor(public reportService: ReportService) { }
 
   ngOnInit(): void {
     this.reportService.getNewUsers();
@@ -18,34 +18,40 @@ export class DashboardComponent implements OnInit {
     this.reportService.getStaitstics();
     this.reportService.getMonthlySalary();
   }
-  changePeriod(period:any){
+  changePeriod(period: any) {
 
-    if(period.target.value === 'monthly'){
+    if (period.target.value === 'monthly') {
       this.reportService.getMonthlyReports();
     }
-    else{
+    else {
       this.reportService.getAnnualReports();
     }
   }
-  changePeriodSalary(period:any){
-    if(period.target.value === 'monthly'){
-      this.reportService.getMonthlySalary();
-    }
-    else{
-      this.reportService.getAnnualSalary();
-    }
-  }
-  downloadAsPdf(){
+
+  downloadAsPdf() {
     const doc = new jsPDF();
     autoTable(doc, { html: '#table' });
     doc.save('Sales-report.pdf');
   }
-  exportexcel(){
-      const fileName= 'Sales-report.xlsx';
-       let element = document.getElementById('table');
-       const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
-       const wb: XLSX.WorkBook = XLSX.utils.book_new();
-       XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-       XLSX.writeFile(wb,fileName);
-    }
+  exportexcel() {
+    const fileName = 'Sales-report.xlsx';
+    let element = document.getElementById('table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, fileName);
+  }
+  downloadSalaryAsPdf() {
+    const doc = new jsPDF();
+    autoTable(doc, { html: '#table2' });
+    doc.save('Salary-report.pdf');
+  }
+  exportSalaryexcel() {
+    const fileName = 'Salary-report.xlsx';
+    let element = document.getElementById('table2');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, fileName);
+  }
 }
