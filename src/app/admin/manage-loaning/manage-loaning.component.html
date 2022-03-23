@@ -9,8 +9,10 @@
       <table class="table table-striped" id="table">
         <thead>
           <tr>
+            <th> Loan Id</th>
             <th> Book Name </th>
             <th> Student Name </th>
+            <th> Price </th>
             <th> Start Date </th>
             <th> End Date </th>
             <th> Fines </th>
@@ -20,8 +22,11 @@
         </thead>
         <tbody [ngStyle]="{'display': loans.length == 0 && search.value ? 'none' : ''}">
           <tr *ngFor="let borrow of loans.length == 0 ? loanService.loans : loans ">
-            <td> {{getBookName(borrow.book_Id)}} </td>
-            <td> {{getStudentName(borrow.student_Id)}} </td>
+            <td> {{borrow.id}} </td>
+            <td> {{borrow.book_Name}} </td>
+            <td> {{borrow.student_Name}} </td>
+            <td> {{borrow.price}} </td>
+
             <td> {{borrow.start_Date | date:'dd-MM-yyyy'}} </td>
             <td> {{borrow.end_Date | date:'dd-MM-yyyy'}} </td>
             <td> {{borrow.fines}} </td>

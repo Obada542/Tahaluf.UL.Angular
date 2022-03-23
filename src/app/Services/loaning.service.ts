@@ -16,6 +16,7 @@ export class LoaningService {
     this.spinner.hide();
     this.toastr.success("Loan Data Retrieved!!");
     this.loans = res;
+    console.log(res)
     },err=>{
       this.spinner.hide();
       this.toastr.error(err.message,err.status);

@@ -1,6 +1,4 @@
-import { StudentService } from './../../Services/student.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { BookService } from './../../Services/book.service';
 import { MatDialog, } from '@angular/material/dialog';
 import { LoaningService } from './../../Services/loaning.service';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
@@ -26,15 +24,12 @@ export class ManageLoaningComponent implements OnInit {
     isloaned: '',
     fines: 0
   };
-  constructor(public loanService:LoaningService,private studentService:StudentService,private dialog:MatDialog,public bookService:BookService) { }
-
+  constructor(public loanService:LoaningService,private dialog:MatDialog) { }
 
   loans: Array<any> = [];
 
   ngOnInit(): void {
-    this.bookService.getAllBooks();
     this.loanService.getAllLoans();
-    this.studentService.getAllStudents();
   }
   openChangeStatus(loan:any){
     this.selectedLoan.id = loan.id;
@@ -46,23 +41,12 @@ export class ManageLoaningComponent implements OnInit {
     this.loanService.updateLoan(this.selectedLoan);
     location.reload();
   }
-  getBookName(id:number){
-    if(this.bookService.books){
-      return this.bookService.books.find((x:any)=>x.id==id).book_Name;
-    }
-  }
-  getStudentName(id:number){
-      if(!this.studentService.students){
-        return ""
-      }
-      var name:string = this.studentService.students.find((x:any)=>x.id==id).first_Name + ' '+this.studentService.students.find((x:any)=>x.id==id).last_Name;
-      return name;
-  }
+
   searchLoans(event: any) {
     let searchloans: Array<any> = [];
     for (let i = 0; i < this.loanService.loans.length; i++) {
-      const book: string = this.getBookName(this.loanService.loans[i].book_Id).toLowerCase();
-      const student: string = this.getStudentName(this.loanService.loans[i].student_Id).toLowerCase();
+      const book: string = this.loanService.loans[i].book_Name.toLowerCase();
+      const student: string = this.loanService.loans[i].student_Name.toLowerCase();
       if (book.includes(event.target.value.toLowerCase()) || student.includes(event.target.value.toLowerCase())) {
         searchloans.push(this.loanService.loans[i]);
       }
@@ -78,7 +62,7 @@ export class ManageLoaningComponent implements OnInit {
   }
   downloadAsPdf(){
     const doc = new jsPDF();
-    autoTable(doc, { html: '#table' ,columns:['Book Name','Student Name','Start Date','End Date','Fines','Status']});
+    autoTable(doc, { html: '#table' ,columns:['Loan Id','Book Name','Student Name','Price','Start Date','End Date','Fines','Status']});
     doc.save('LoaningReport.pdf');
   }
   exportexcel(){
@@ -86,8 +70,8 @@ export class ManageLoaningComponent implements OnInit {
      let element = document.getElementById('table');
      const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
      for(var i = 1;i<=this.loanService.loans.length+1;i++){
-        if(ws['G'+i]){
-          delete(ws['G'+i]);
+        if(ws['I'+i]){
+          delete(ws['I'+i]);
         }else{
           break;
         }
