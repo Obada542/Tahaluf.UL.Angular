@@ -6,3 +6,7 @@
 .sd .card-body h1{
   font-size: 28px;
 }
+thead,tfoot{
+  background-color: rgb(53, 53, 53);
+  color: #fff;
+}

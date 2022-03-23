@@ -1,10 +1,22 @@
 <div class="col-lg-12 grid-margin stretch-card">
   <div class="card">
+    <div class="card-body bubble">
+      <p style=" font-size: 16px; padding-top: 15px; z-index: 5;">Discount on each book is <span
+          style="font-weight: 700;">{{book.books[0].discount}}%</span> </p>
+      <button class="btn btn-info" style="z-index: 5;" (click)="openChangeDialog()">Change</button>
+      <svg viewBox="0 0 500 200">
+        <path d="M0, 100 C150, 200 350, 0 500, 100 L500, 00 L0, 0 Z"></path>
+      </svg>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
     <div class="card-body table-responsive">
       <h4 class="card-title">Manage Books</h4>
-      <button class=" card-description btn btn-primary "  (click)="openCreateDialog()" style="color: #fff;"> Add
+      <button class=" card-description btn btn-primary " (click)="openCreateDialog()" style="color: #fff;"> Add
         Book</button>
-      <input type="text" style="float: right;" #search placeholder="Search book by name"  (input)="searchBook($event)">
+      <input type="text" style="float: right;" #search placeholder="Search book by name" (input)="searchBook($event)">
       <table class="table  table-striped">
         <thead>
           <tr>
@@ -179,7 +191,7 @@
             </div>
             <div class="col-md-12">
               <div *ngIf="book.display_Image && book.display_Image !== ''">
-                <img src="../../../assets/Images/{{book.display_Image}}"  style="height: 300px !important;">
+                <img src="../../../assets/Images/{{book.display_Image}}" style="height: 300px !important;">
               </div>
             </div>
           </div>
@@ -209,6 +221,34 @@
             <button mat-button mat-dialog-close class="btn btn-primary">Close</button>
             <button mat-button mat-dialog-close class="btn btn-danger" style="float: right;"
               (click)="delete()">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<ng-template #change>
+  <div class="col-12 ">
+    <div class="card">
+      <div class="card-body" style="width: 500px;">
+        <h4 class="card-title">Please enter number between 1 and 100.</h4>
+        <hr>
+        <div class="row">
+          <div>
+            <label class="col-sm-4 col-form-label" for="discount">Discount rate:</label>
+            <input id="discount" type="number" [formControl]="changeControl" class="form-control col-md-8" >
+            <mat-error class="text-danger" *ngIf="changeControl.hasError('required') && changeControl.touched">
+              Discount is <strong class="text-danger">required</strong>
+            </mat-error>
+            <mat-error class="text-danger" *ngIf="changeControl.hasError('min') || changeControl.hasError('max')">
+              Discount rate must be between 1 and 100.
+            </mat-error>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 15px;">
+          <div class="col-md-4">
+            <button mat-button mat-dialog-close class="btn btn-success" [disabled]="!changeControl.valid"
+              (click)="changeDiscount()">Change</button>
           </div>
         </div>
       </div>
@@ -327,10 +367,10 @@
               <div class="form-group row">
                 <label class="col-sm-2 col-form-label">Library</label>
                 <div class="col-sm-10">
-                  <select class="form-control" matInput formControlName="library_Id" [(ngModel)]="selectedBook.library_Id">
+                  <select class="form-control" matInput formControlName="library_Id"
+                    [(ngModel)]="selectedBook.library_Id">
                     <option [ngValue]="0" disabled>Please choose one</option>
-                    <option *ngFor="let library of book.libraries"
-                      [ngValue]="library.id">{{library.library_Name}}
+                    <option *ngFor="let library of book.libraries" [ngValue]="library.id">{{library.library_Name}}
                     </option>
                   </select>
                   <br>

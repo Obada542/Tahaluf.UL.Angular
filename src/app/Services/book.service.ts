@@ -65,7 +65,17 @@ export class BookService {
       this.toastr.error(err.message , err.status)
     })
   }
-
+  changeDiscount(data:any){
+    this.spinner.show();
+    const discount:number = data;
+    this.http.put('https://localhost:44346/api/book/ChangeBookDiscount/', discount).subscribe((res:any)=>{
+      this.spinner.hide();
+      this.toastr.success('Update Discount Successfully :)')
+    }, err=>{
+      this.spinner.hide();
+      this.toastr.error(err.message , err.status)
+    });
+  }
   deleteBook(id:number){
     this.spinner.show();
     this.http.delete('https://localhost:44346/api/book/DeleteBook/' + id).subscribe((res)=>{

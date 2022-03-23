@@ -17,10 +17,10 @@
       <div class="card bg-gradient-danger card-img-holder text-white">
         <div class="card-body">
           <img src="/assets/adminassets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-          <h2 class="font-weight-normal mb-3">Weekly Sales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+          <h2 class="font-weight-normal mb-3">Monthly Sales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
           </h2>
-          <h1 class="mb-5">$ 15,0000</h1>
-          <h3 class="card-text">Increased by 60%</h3>
+          <h1 class="mb-5">JD {{this.reportService.staitstics.sales + this.reportService.staitstics.fines}}</h1>
+          <h3 class="card-text">JD {{this.reportService.staitstics.fines}} from fines</h3>
         </div>
       </div>
     </div>
@@ -28,10 +28,10 @@
       <div class="card bg-gradient-info card-img-holder text-white">
         <div class="card-body">
           <img src="/assets/adminassets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-          <h2 class="font-weight-normal mb-3">Weekly Orders <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+          <h2 class="font-weight-normal mb-3">Monthly Orders <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
           </h2>
-          <h1 class="mb-5">45,6334</h1>
-          <h3 class="card-text">Decreased by 10%</h3>
+          <h1 class="mb-5">{{this.reportService.staitstics.orders}}</h1>
+          <h3 class="card-text">Increased by 5%</h3>
         </div>
       </div>
     </div>
@@ -39,15 +39,15 @@
       <div class="card bg-gradient-success card-img-holder text-white">
         <div class="card-body">
           <img src="/assets/adminassets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-          <h2 class="font-weight-normal mb-3">Visitors Online <i class="mdi mdi-diamond mdi-24px float-right"></i>
+          <h2 class="font-weight-normal mb-3">New Users <i class="mdi mdi-diamond mdi-24px float-right"></i>
           </h2>
-          <h1 class="mb-5">95,5741</h1>
+          <h1 class="mb-5">{{this.reportService.newUsers}}</h1>
           <h3 class="card-text">Increased by 5%</h3>
         </div>
       </div>
     </div>
   </div>
-  <div class="row">
+  <!-- <div class="row">
     <div class="col-md-7 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">
@@ -68,70 +68,112 @@
         </div>
       </div>
     </div>
+  </div> -->
+  <div class="row">
+    <div class="col-12 grid-margin">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Sales Report</h4>
+          <div class=" col-4" style="float: right; display: flex; align-items: center; margin-bottom: 20px;">
+            <label class="col-6" for="">Select report per:</label>
+            <select class="form-select col-7" (change)="changePeriod($event)">
+              <option value="monthly">Month</option>
+              <option value="annual">Year</option>
+            </select>
+          </div>
+          <div class="table-responsive">
+            <table class="table" id="table">
+              <thead>
+                <tr>
+                  <th> Period </th>
+                  <th> Orders </th>
+                  <th> Sales </th>
+                  <th> Fines </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let report of this.reportService.report">
+                  <td>
+                    {{report.period}}
+                  </td>
+                  <td>
+                    {{report.orders}}
+                  </td>
+                  <td>
+                    {{report.sales}} JD
+                  </td>
+                  <td>
+                    {{report.fines}} JD
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td>Total</td>
+                  <td>{{this.reportService.totalOrders}}</td>
+                  <td>{{this.reportService.totalSales}} JD</td>
+                  <td>{{this.reportService.totalFines}} JD</td>
+                </tr>
+              </tfoot>
+            </table>
+            <br>
+            <div class="col-3" style="float: right;">
+              <div style="display: flex; gap: 20px;">
+                <button class="btn btn-dark" (click)="downloadAsPdf()" style="display: flex; align-items: center;padding: 10px 20px;"> <mat-icon>cloud_download</mat-icon> PDF </button>
+              <button class="btn btn-dark" (click)="exportexcel()"  style="display: flex; align-items: center;padding: 10px 20px;">
+                <mat-icon> cloud_download</mat-icon> Excel
+              </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-12 grid-margin">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Recent Tickets</h4>
+          <h4 class="card-title">Employee Salaries</h4>
+          <div class=" col-4" style="float: right; display: flex; align-items: center; margin-bottom: 20px;">
+            <label class="col-6" for="">Select report per:</label>
+            <select class="form-select col-7" (change)="changePeriodSalary($event)">
+              <option value="monthly">Month</option>
+              <option value="annual">Year</option>
+            </select>
+          </div>
           <div class="table-responsive">
-            <table class="table">
+            <table class="table" id="table2">
               <thead>
                 <tr>
-                  <th> Assignee </th>
-                  <th> Subject </th>
-                  <th> Status </th>
-                  <th> Last Update </th>
-                  <th> Tracking ID </th>
+                  <th> Period </th>
+                  <th> Employee Name </th>
+                  <th> Salary </th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
+                <tr *ngFor="let report of this.reportService.salaries">
                   <td>
-                    <img src="/assets/adminassets/images/faces/face1.jpg" class="me-2" alt="image"> David Grey
+                    {{report.period}}
                   </td>
-                  <td> Fund is not recieved </td>
                   <td>
-                    <label class="badge badge-gradient-success">DONE</label>
+                    {{report.username}}
                   </td>
-                  <td> Dec 5, 2017 </td>
-                  <td> WD-12345 </td>
-                </tr>
-                <tr>
                   <td>
-                    <img src="/assets/adminassets/images/faces/face2.jpg" class="me-2" alt="image"> Stella Johnson
+                    {{report.salary}} JD
                   </td>
-                  <td> High loading time </td>
-                  <td>
-                    <label class="badge badge-gradient-warning">PROGRESS</label>
-                  </td>
-                  <td> Dec 12, 2017 </td>
-                  <td> WD-12346 </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img src="/assets/adminassets/images/faces/face3.jpg" class="me-2" alt="image"> Marina Michel
-                  </td>
-                  <td> Website down for one week </td>
-                  <td>
-                    <label class="badge badge-gradient-info">ON HOLD</label>
-                  </td>
-                  <td> Dec 16, 2017 </td>
-                  <td> WD-12347 </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img src="/assets/adminassets/images/faces/face4.jpg" class="me-2" alt="image"> John Doe
-                  </td>
-                  <td> Loosing control on server </td>
-                  <td>
-                    <label class="badge badge-gradient-danger">REJECTED</label>
-                  </td>
-                  <td> Dec 3, 2017 </td>
-                  <td> WD-12348 </td>
                 </tr>
               </tbody>
             </table>
+            <br>
+            <div class="col-3" style="float: right;">
+              <div style="display: flex; gap: 20px;">
+                <button class="btn btn-dark" (click)="downloadAsPdf()" style="display: flex; align-items: center;padding: 10px 20px;"> <mat-icon>cloud_download</mat-icon> PDF </button>
+              <button class="btn btn-dark" (click)="exportexcel()"  style="display: flex; align-items: center;padding: 10px 20px;">
+                <mat-icon> cloud_download</mat-icon> Excel
+              </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

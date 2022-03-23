@@ -131,7 +131,6 @@ input[type="text"],
 input[type="password"],
 input[type="datetime"],
 input[type="datetime-local"],
-input[type="date"],
 input[type="month"],
 input[type="time"],
 input[type="week"],
@@ -145,19 +144,14 @@ input[type="color"],
   color: #666;
   outline: none;
   height: 40px;
-  background: #fff;
   font-size: 14px;
   box-shadow: none;
   line-height: 18px;
   padding: 10px 20px;
   border-radius: 4px;
-  display: inline-block;
-  vertical-align: middle;
   border: 1px solid #dbdbdb;
   text-transform: capitalize;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+
 }
 textarea.form-control {
   resize: none;

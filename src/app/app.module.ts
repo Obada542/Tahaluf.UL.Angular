@@ -25,6 +25,12 @@ import { ManageHomeComponent } from './admin/manage-home/manage-home.component';
 import { ManageLoaningComponent } from './admin/manage-loaning/manage-loaning.component';
 import { ManageEmployeeComponent } from './admin/manage-employee/manage-employee.component';
 import { ManageStudentComponent } from './admin/manage-student/manage-student.component';
+import { RoleComponent } from './admin/role/role.component';
+import { MessageComponent } from './admin/message/message.component';
+import { DatePipe } from '@angular/common';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +47,9 @@ import { ManageStudentComponent } from './admin/manage-student/manage-student.co
     ManageHomeComponent,
     ManageLoaningComponent,
     ManageEmployeeComponent,
-    ManageStudentComponent
+    ManageStudentComponent,
+    RoleComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -61,9 +69,12 @@ import { ManageStudentComponent } from './admin/manage-student/manage-student.co
     ),
     HttpClientModule,
     JwPaginationModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

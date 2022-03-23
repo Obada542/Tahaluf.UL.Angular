@@ -28,6 +28,7 @@
             <td> {{employee.email}} </td>
             <td> {{employee.password}} </td>
             <td> {{accountantSalary(employee.id)}} </td>
+            <td> {{employee.birthday | date:'longDate'}}</td>
             <td> {{accountantAddress(employee.id)}}</td>
             <td>
               <a class="text-danger" (click)="openDeleteDialog(employee.id)">Delete</a>

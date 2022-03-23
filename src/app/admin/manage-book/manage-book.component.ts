@@ -12,6 +12,7 @@ export class ManageBookComponent implements OnInit {
   @ViewChild('createNewBook') createNewBook!: TemplateRef<any>;
   @ViewChild('updateBook') updateBook!: TemplateRef<any>;
   @ViewChild('deleteBook') deleteBook!: TemplateRef<any>;
+  @ViewChild('change') change!: TemplateRef<any>;
 
   selectedBook!: any;
   id: any;
@@ -40,6 +41,7 @@ export class ManageBookComponent implements OnInit {
     category: new FormControl('', [Validators.required]),
   });
 
+  changeControl :FormControl = new FormControl('',[Validators.required,Validators.min(1),Validators.max(100)])
   constructor(private dialog: MatDialog, public book: BookService) {
   }
 
@@ -61,6 +63,9 @@ export class ManageBookComponent implements OnInit {
   openDeleteDialog(id: number) {
     this.id = id;
     this.dialog.open(this.deleteBook);
+  }
+  openChangeDialog() {
+    this.dialog.open(this.change);
   }
   uploadFile(file: any) {
     if (file.length === 0) {
@@ -101,5 +106,9 @@ export class ManageBookComponent implements OnInit {
   libraryname(id:number){
     if(this.book.libraries.length > 0)
       return this.book.libraries.find((x:any)=>x.id==id).library_Name;
+  }
+  changeDiscount(){
+    this.book.changeDiscount(this.changeControl.value);
+    location.reload();
   }
 }

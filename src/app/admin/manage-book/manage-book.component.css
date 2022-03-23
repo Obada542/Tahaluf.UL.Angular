@@ -21,3 +21,17 @@ td img{
   font-size: 24px;
   padding: 50px 0;
 }
+.bubble {
+  position: relative;
+    display: flex;
+    gap:30px;
+    overflow: hidden;
+    background: linear-gradient(to right ,rgb(255, 255, 255) 50%,rgba(0, 213, 228, 0.521));
+}
+svg {
+  position: absolute;
+  left: -5px;
+  top: -100px;
+  transform: rotate(180deg);
+  fill: #51ccbc;
+}
