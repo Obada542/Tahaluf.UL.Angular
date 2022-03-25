@@ -32,6 +32,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
 import { ManageWebsiteComponent } from './admin/manage-website/manage-website.component';
+import { AccountantComponent } from './accountant/accountant.component';
+import { DashboardaccComponent } from './accountant/dashboardacc/dashboardacc.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +54,9 @@ import { ManageWebsiteComponent } from './admin/manage-website/manage-website.co
     ManageStudentComponent,
     RoleComponent,
     MessageComponent,
-    ManageWebsiteComponent
+    ManageWebsiteComponent,
+    AccountantComponent,
+    DashboardaccComponent,
   ],
   imports: [
     BrowserModule,

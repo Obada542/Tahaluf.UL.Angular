@@ -18,6 +18,8 @@ import { ManageHomeComponent } from './admin/manage-home/manage-home.component';
 import { RoleComponent } from './admin/role/role.component';
 import { MessageComponent } from './admin/message/message.component';
 import { ManageWebsiteComponent } from './admin/manage-website/manage-website.component';
+import { AccountantComponent } from './accountant/accountant.component';
+import { DashboardaccComponent } from './accountant/dashboardacc/dashboardacc.component';
 const routes: Routes = [
   {
     path: "home",
@@ -94,6 +96,25 @@ const routes: Routes = [
       }
     ]
   },
+  
+  {
+    path:"accountant",
+    component: AccountantComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: "dashboard",
+        component: DashboardaccComponent
+      },
+
+      
+  ]
+  },
+  
   {
     path: 'PageNotFound-404',
     component: PagenotfoundComponent
