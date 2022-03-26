@@ -13,7 +13,7 @@
   <div class="container fform">
     <div class="row">
       <div class="col-sm-8 col-sm-offset-2 form">
-        <h1 class="page-header text-center">Sign up</h1>
+        <h1 class="page-headera">Sign up</h1>
         <div class="light-well">
           <div class="panel-body">
             <div class="row">
@@ -23,22 +23,29 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <input placeholder="first name" class="form-control" type="text" formControlName="firstname">
+                        <input placeholder="first name" class="form-control" type="text" formControlName="first_Name">
                         <mat-error
-                          *ngIf="registerGroup.controls['firstname'].hasError('required') &&registerGroup.controls['firstname'].touched ">
+                          *ngIf="registerGroup.controls['first_Name'].hasError('required') &&registerGroup.controls['first_Name'].touched ">
                           First name is required
                         </mat-error>
                       </div>
                     </div>
                     <div class="col-sm-6">
                       <div class="form-group">
-                        <input placeholder="last name" class="form-control" type="text" formControlName="lastname">
+                        <input placeholder="last name" class="form-control" type="text" formControlName="last_Name">
                         <mat-error
-                          *ngIf="registerGroup.controls['lastname'].hasError('required')&& registerGroup.controls['lastname'].touched ">
+                          *ngIf="registerGroup.controls['last_Name'].hasError('required')&& registerGroup.controls['last_Name'].touched ">
                           Last name is required
                         </mat-error>
                       </div>
                     </div>
+                  </div>
+                  <div class="form-group">
+                    <input placeholder="Username" class="form-control" type="text" formControlName="username">
+                    <mat-error
+                      *ngIf="registerGroup.controls['username'].hasError('required') && registerGroup.controls['username'].touched ">
+                      Username is required
+                    </mat-error>
                   </div>
                   <div class="form-group">
                     <input placeholder="email address" class="form-control" type="email" formControlName="email">
@@ -84,15 +91,15 @@
                   </div>
                   <div class="form-group">
                     <label for="birthday">Birthday</label>
-                    <input class="form-control" type="date" formControlName="Birthday">
+                    <input class="form-control" type="date" formControlName="birthday">
                     <mat-error
-                      *ngIf="registerGroup.controls['Birthday'].hasError('required')&& registerGroup.controls['Birthday'].touched ">
+                      *ngIf="registerGroup.controls['birthday'].hasError('required')&& registerGroup.controls['birthday'].touched ">
                       Birthday is required
                     </mat-error>
                   </div>
                   <div class="form-group">
                     <button [disabled]="!registerGroup.valid" type="submit"
-                      class="btn btn-success btn-lg btn-block col-6">Create account</button>
+                      class="btn btn-success btn-lg btn-block col-6" (click)="register()">Create account</button>
                   </div>
                   <div class="form-group" style="font-size: 16px; font-weight: 500;">
                     Already a member? <a class="log" [routerLink]="['/security/login']">Log in</a>

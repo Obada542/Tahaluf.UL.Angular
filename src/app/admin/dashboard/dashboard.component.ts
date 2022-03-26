@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
     else {
       this.reportService.getAnnualReports();
     }
+
   }
 
   downloadAsPdf() {
@@ -37,6 +38,14 @@ export class DashboardComponent implements OnInit {
     const fileName = 'Sales-report.xlsx';
     let element = document.getElementById('table');
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    var wscols = [
+      {wch:15},
+      {wch:7},
+      {wch:12},
+      {wch:12}
+  ];
+
+  ws['!cols'] = wscols;
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
     XLSX.writeFile(wb, fileName);

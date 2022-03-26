@@ -108,11 +108,9 @@
   </section>
   <section class="tg-sectionspace tg-bgtestimonials tg-haslayout testimonial text-center " style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);background-position: top;background-attachment: fixed;">
     <div class="container">
-      <div id="testimonial4"
-        class="carousel slide testimonial4_indicators testimonial4_control_button thumb_scroll_x swipe_x"
-        data-ride="carousel" data-pause="hover" data-interval="5000" data-duration="2000" style="margin-left: 100px;">
-        <div class="carousel-inner" role="listbox" style="margin-left: 100px;">
-          <div class="carousel-item active " >
+      <ngb-carousel>
+        <ng-template ngbSlide>
+          <div class="carousel-item active" >
             <div class="testimonial4_slide tg-testimonial">
               <figure><img src="http://exprostudio.com/html/book_library/images/author/imag-02.jpg"
                   alt="image description"></figure>
@@ -124,7 +122,9 @@
               </div>
             </div>
           </div>
-          <div class="carousel-item" >
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="carousel-item active" >
             <div class="testimonial4_slide tg-testimonial">
               <figure><img src="http://exprostudio.com/html/book_library/images/author/imag-02.jpg"
                   alt="image description"></figure>
@@ -136,8 +136,10 @@
               </div>
             </div>
           </div>
-          <div class="carousel-item">
-            <div class="tg-testimonial testimonial4_slide ">
+        </ng-template>
+        <ng-template ngbSlide>
+          <div class="carousel-item active" >
+            <div class="testimonial4_slide tg-testimonial">
               <figure><img src="http://exprostudio.com/html/book_library/images/author/imag-02.jpg"
                   alt="image description"></figure>
               <blockquote><q>Consectetur adipisicing elit sed do eiusmod tempor incididunt ut labore tolore magna aliqua
@@ -148,16 +150,10 @@
               </div>
             </div>
           </div>
-        </div>
-        <a class="carousel-control-prev" href="#testimonial4" data-slide="prev" >
-          <span class="carousel-control"><</span>
-        </a>
-        <a class="carousel-control-next" href="#testimonial4" data-slide="next">
-          <span class="carousel-control" >></span>
-        </a>
-      </div>
+        </ng-template>
+      </ngb-carousel>
     </div>
   </section>
 
-</main>
+
 <app-footer></app-footer>

@@ -1,3 +1,5 @@
+import { Router, RouterModule } from '@angular/router';
+import { StudentService } from './../../Services/student.service';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup , Validators } from '@angular/forms';
 
@@ -11,12 +13,13 @@ export class RegisterComponent implements OnInit {
     email : new FormControl('',[Validators.required,Validators.email]),
     password: new FormControl('',[Validators.required,Validators.minLength(8)]),
     ConfirmPassword: new FormControl('',[Validators.required,Validators.minLength(8)]),
-    firstname: new FormControl('',[Validators.required]),
-    lastname: new FormControl('',[Validators.required]),
+    username: new FormControl('', [Validators.required]),
+    first_Name: new FormControl('',[Validators.required]),
+    last_Name: new FormControl('',[Validators.required]),
     phone: new FormControl('',[Validators.required,Validators.minLength(10)]),
-    Birthday: new FormControl('',[Validators.required])
-  })
-  constructor() { }
+    birthday: new FormControl('',[Validators.required])
+  });
+  constructor(private studentService:StudentService,private route:Router) { }
   ngOnInit(): void {
   }
 
@@ -26,5 +29,7 @@ export class RegisterComponent implements OnInit {
     else
       this.registerGroup.controls['ConfirmPassword'].setErrors({mismatch:true});
   }
-
+  register(){
+    this.studentService.createStudentFromWebsite(this.registerGroup.value);
+  }
 }

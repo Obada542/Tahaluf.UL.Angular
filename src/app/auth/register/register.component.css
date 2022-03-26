@@ -10,10 +10,11 @@ mat-error {
   padding-bottom: 90px;
   margin-top: -80px;
 }
-.page-header{
-  font-size: 3.6rem;
+.page-headera{
+  font-size: 2.8rem;
     padding: 5rem 0;
     color: #2ecc71;
+    text-align: center;
 }
 .log{
   text-decoration: underline;

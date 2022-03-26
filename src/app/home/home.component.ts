@@ -9,7 +9,7 @@ import { BookService } from '../Services/book.service';
 export class HomeComponent implements OnInit {
 
   constructor(public bookService:BookService) {
-    bookService.getAllBooks();
+    
   }
   ngOnInit() {
 }

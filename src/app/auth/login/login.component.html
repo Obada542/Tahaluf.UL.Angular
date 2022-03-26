@@ -14,7 +14,7 @@
     <h1 class="form__heading">Welcome</h1>
     <hr>
     <div class="form__group">
-      <input matInput type="email" id="email" class="form__input" placeholder="email address" formControlName="email">
+      <input matInput class="form-control" type="email" id="email" class="form__input" placeholder="email address" formControlName="email">
       <div class="error">
         <mat-error
           *ngIf="formGroup.controls['email'].hasError('email') && !formGroup.controls['email'].hasError('required')&& formGroup.controls['email'].touched">
@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="form__group">
-      <input matInput type="password" autocomplete="false" id="password" class="form__input" placeholder="password"
+      <input matInput  type="password" autocomplete="false" id="password" class="form__input" placeholder="password"
         formControlName="password">
       <div class="error">
         <mat-error

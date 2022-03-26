@@ -1,12 +1,12 @@
 
 
-  
+
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
     <div class="col-12 dialog">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">Update Header </h4> 
+          <h4 class="card-title">Update Header </h4>
           <form class="form-sample" [formGroup]="updateheader">
             <p class="card-description"> Header info </p>
             <div class="row">
@@ -15,7 +15,7 @@
                   <label class="col-sm-4 col-form-label">Title</label>
                   <div class="col-sm-6">
                     <input type="text " class="form-control" [(ngModel)]="website.header.title" matInput
-                   
+
                       formControlName="Title" placeholder="Title" >
                     <br>
                     <mat-error class="text-danger"
@@ -29,18 +29,18 @@
 
             <div class="row">
               <div class="col-md-12">
-               
+
                 <div class="form-group row">
                     <label class="col-sm-4 col-form-label">Image</label>
                 <img src="../../../assets/Images/{{website.header.logo}}" alt="image" width="50px" height="50px" class="logo"/>
               </div>
-              
-              
+
+
 
               </div>
-              
+
             </div>
-  
+
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group row">
@@ -48,7 +48,7 @@
                     <input type="file" #file placeholder="Choose Image" formControlName="logo"
                       (change)="uploadFile2(file.files)" style="display:none;">
                     <button class="btn btn-primary" (click)="file.click()">Upload Image</button>
-                   
+
                   </div>
                 </div>
               </div>
@@ -70,7 +70,7 @@
 
         </div>
     </div>
-  
+
 
 
 
@@ -115,7 +115,7 @@
               </div>
 
 
-              
+
             </div>
 
             <div class="row">
@@ -149,12 +149,12 @@
                     </div>
                   </div>
                 </div>
-  
-  
-                
+
+
+
               </div>
-  
-        
+
+
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group row">
@@ -171,14 +171,14 @@
     </div>
 </div>
 </div>
-  
+
 
   <!-- <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body table-responsive">
         <h4 class="card-title">Manage Contact </h4>
-       
-       
+
+
         <table class="table table-striped">
           <thead>
             <tr>
@@ -188,18 +188,18 @@
               <th> numbers </th>
               <th> addresses </th>
               <th> Action </th>
-  
+
             </tr>
           </thead>
           <tbody >
             <tr  >
-  
+
               <td> {{website.contact.title}} </td>
               <td> {{website.contact.sub_Title}} </td>
               <td> {{website.contact.description}} </td>
               <td> {{website.contact.numbers}} </td>
               <td> {{website.contact.addresses}} </td>
-             
+
               <td>
                 <a class="link" (click)="openUpdateDialogContact(website.contact)">Update</a>
               </td>
@@ -251,7 +251,7 @@
               </div>
 
 
-              
+
             </div>
 
             <div class="row">
@@ -292,7 +292,7 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Description</label>
                         <div class="col-sm-6">
-                          
+
                             <textarea class="form-control" [(ngModel)]="website.contact.description" matInput
                             formControlName="Description"></textarea>
                           <br>
@@ -303,12 +303,12 @@
                         </div>
                       </div>
                   </div>
-  
-  
-                
+
+
+
               </div>
-  
-        
+
+
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group row">
@@ -368,17 +368,17 @@
               </div>
 
 
-              
+
             </div>
 
             <div class="row">
-               
-               
+
+
                 <div class="col-md-12">
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Description</label>
                         <div class="col-sm-6">
-                          
+
                             <textarea class="form-control" [(ngModel)]="website.about.descriptions" matInput
                             formControlName="Descriptions"></textarea>
                           <br>
@@ -389,12 +389,12 @@
                         </div>
                       </div>
                   </div>
-  
-  
-                
+
+
+
               </div>
-  
-        
+
+
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group row">
@@ -418,19 +418,19 @@
         <h4 class="card-title">Manage Background</h4>
         <button class=" card-description btn btn-primary " (click)="openCreateDialogBackground()" style="color: #fff;"> Add
          Background</button>
-       
+
         <table class="table table-striped">
           <thead>
             <tr>
               <th> Page Name </th>
               <th> Background </th>
               <th> Action </th>
-  
+
             </tr>
           </thead>
           <tbody >
             <tr *ngFor="let web of website.background " >
-  
+
               <td> {{web.page_Name}} </td>
               <td class="py-1">
                 <img src="../../../assets/Images/{{web.background}}" alt="image" />
@@ -469,8 +469,8 @@
                 </div>
               </div>
             </div>
-           
-  
+
+
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group row">
@@ -521,7 +521,7 @@
                   </div>
                 </div>
               </div>
-              
+
             </div>
     -->
             <div class="row">

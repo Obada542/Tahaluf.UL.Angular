@@ -147,7 +147,7 @@ input[type="color"],
   font-size: 14px;
   box-shadow: none;
   line-height: 18px;
-  padding: 10px 20px;
+  padding: 0 12px;
   border-radius: 4px;
   border: 1px solid #dbdbdb;
   text-transform: capitalize;
@@ -934,7 +934,7 @@ body.tg-comingsoonpage .tg-wrapper {
 }
 .tg-themedropdown.tg-currencydropdown {
   margin: 10px 0;
-  padding: 0 0 0 15px;
+  padding: 0 0 0 5px;
   border-left: 1px solid #dbdbdb;
 }
 .tg-currencydropdown .tg-btnthemedropdown {
@@ -980,7 +980,7 @@ body.tg-comingsoonpage .tg-wrapper {
   color: #666;
   width: 100%;
   float: left;
-  padding: 0 20px;
+  padding: 0 5px !important;
   line-height: inherit;
 }
 .tg-currencydropdown .tg-themedropdownmenu li a:hover {
@@ -1000,7 +1000,7 @@ body.tg-comingsoonpage .tg-wrapper {
 .tg-currencydropdown .tg-themedropdownmenu li a span:before {
   top: 0;
   left: -2px;
-  content: "-";
+  content: "";
   position: absolute;
   font-size: inherit;
   line-height: inherit;
@@ -4830,14 +4830,27 @@ box-shadow: none;
 -webkit-transition: all 0.6s cubic-bezier(0.3,1,0,1);
 transition: all 0.6s cubic-bezier(0.3,1,0,1);
 }
-.carousel-control{
+.carousel-control,
+.tg-bgtestimonials .carousel-control-next-icon,
+.tg-bgtestimonials .carousel-control-prev-icon{
+  display: block;
   border: 1px solid rgb(18, 190, 18) !important;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+  background-size: 10px;
+  fill: #000;
+  border-radius: 50%;
   font-size: 15px !important;
   color: rgb(61, 61, 61) !important;
   font-weight: 700 !important;
   transition: 0.5s !important;
 }
-.carousel-control:hover{
+.tg-bgtestimonials .carousel-control-prev-icon{
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+
+}
+.carousel-control:hover
+,.tg-bgtestimonials .carousel-control-next-icon:hover,
+.tg-bgtestimonials .carousel-control-prev-icon:hover{
 background-color: rgb(18, 190, 18) ;
 color: #fff !important;
 }
@@ -4879,14 +4892,20 @@ text-transform: uppercase;
 
 .testimonial4_slide{
 top: 0;
-left: 0;
+left: 15%;
 right: 0;
 bottom: 0;
 width: 70%;
 margin: auto;
 padding: 20px;
 position: relative;
-text-align: center;
+}
+@media (max-width: 768px) {
+  .testimonial4_slide{
+left: 0;
+width: 100%;
+  }
+
 }
 .testimonial4_slide img {
   top: 0;
@@ -4925,4 +4944,35 @@ padding-bottom:50px;
 /* ------testimonial  close-------*/
 .carousel-inner .visually-hidden {
   display: none;
+}
+.home-slider .carousel-indicators {
+  display: none !important;
+}
+.tg-themedropdownmenu .tg-description p { margin: 0; }
+.tg-themedropdownmenu {
+	top: 100px;
+	right: 0;
+	left: auto;
+	border: 0;
+	opacity: 0;
+	z-index: 10;
+	width: 330px;
+	padding: 15px;
+	display: block;
+	border-radius: 0;
+	margin: 25px 0 0;
+	visibility: hidden;
+	border-top: 3px solid;
+}
+.tg-minicartfoot .tg-btns .tg-btn + .tg-btn { float: right; }
+.tg-themedropdown.open .tg-themedropdownmenu {
+	top: 100%;
+	opacity: 1;
+	visibility: visible;
+}
+.tg-headervtwo .tg-themedropdown + .tg-themedropdown{margin:0 0 0 2px;}
+.tg-headervtwo .tg-currencydropdown .tg-themedropdownmenu{margin:1px 0 0;}
+.tg-headervtwo .tg-currencydropdown .tg-btnthemedropdown span{
+	color:#fff;
+	line-height:normal;
 }

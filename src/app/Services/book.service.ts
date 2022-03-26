@@ -23,6 +23,16 @@ export class BookService {
       this.toastr.error(err.message,err.status);
     });
   }
+  getAvailableBook() {
+    this.spinner.show();
+    return this.http.get('https://localhost:44346/api/book/GetAvailableBook').subscribe((res) => {
+      this.books = res;
+      this.spinner.hide();
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error("Sorry we facing some issuse with data");
+    });
+  }
   getAllLibraries() {
     this.spinner.show();
     this.http.get('https://localhost:44346/api/library/GetLibraries').subscribe((res) => {

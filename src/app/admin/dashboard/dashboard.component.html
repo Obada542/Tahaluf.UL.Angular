@@ -1,181 +1,183 @@
-  <div class="page-header">
-    <h3 class="page-title" style="font-weight: 600;">
-      <span class="page-title-icon bg-gradient-primary text-white me-2">
-        <i class="mdi mdi-home"></i>
-      </span> Dashboard
-    </h3>
-    <nav aria-label="breadcrumb">
-      <ul class="breadcrumb">
-        <li class="breadcrumb-item active" aria-current="page">
-          <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <div class="row sd">
-    <div class="col-md-4 stretch-card grid-margin">
-      <div class="card bg-gradient-danger card-img-holder text-white">
-        <div class="card-body">
-          <img src="/assets/adminassets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-          <h2 class="font-weight-normal mb-3">Monthly Sales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
-          </h2>
-          <h1 class="mb-5">JD {{this.reportService.staitstics.sales + this.reportService.staitstics.fines}}</h1>
-          <h3 class="card-text">JD {{this.reportService.staitstics.fines}} from fines</h3>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 stretch-card grid-margin">
-      <div class="card bg-gradient-info card-img-holder text-white">
-        <div class="card-body">
-          <img src="/assets/adminassets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-          <h2 class="font-weight-normal mb-3">Monthly Orders <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
-          </h2>
-          <h1 class="mb-5">{{this.reportService.staitstics.orders}}</h1>
-          <h3 class="card-text">Increased by 5%</h3>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 stretch-card grid-margin">
-      <div class="card bg-gradient-success card-img-holder text-white">
-        <div class="card-body">
-          <img src="/assets/adminassets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-          <h2 class="font-weight-normal mb-3">New Users <i class="mdi mdi-diamond mdi-24px float-right"></i>
-          </h2>
-          <h1 class="mb-5">{{this.reportService.newUsers}}</h1>
-          <h3 class="card-text">Increased by 5%</h3>
-        </div>
+<div class="page-header">
+  <h3 class="page-title" style="font-weight: 600;">
+    <span class="page-title-icon bg-gradient-primary text-white me-2">
+      <i class="mdi mdi-home"></i>
+    </span> Dashboard
+  </h3>
+  <nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+      <li class="breadcrumb-item active" aria-current="page">
+        <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+      </li>
+    </ul>
+  </nav>
+</div>
+<div class="row sd">
+  <div class="col-md-4 stretch-card grid-margin">
+    <div class="card bg-gradient-danger card-img-holder text-white">
+      <div class="card-body">
+        <img src="/assets/adminassets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <h2 class="font-weight-normal mb-3">Monthly Sales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
+        </h2>
+        <h1 class="mb-5">JD {{reportService.staitstics.sales + reportService.staitstics.fines}}</h1>
+        <h3 class="card-text">JD {{reportService.staitstics.fines}} from fines</h3>
       </div>
     </div>
   </div>
-  <!-- <div class="row">
-    <div class="col-md-7 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-          <div class="clearfix">
-            <h4 class="card-title float-left">Visit And Sales Statistics</h4>
-            <div id="visit-sale-chart-legend" class="rounded-legend legend-horizontal legend-top-right float-right"></div>
+  <div class="col-md-4 stretch-card grid-margin">
+    <div class="card bg-gradient-info card-img-holder text-white">
+      <div class="card-body">
+        <img src="/assets/adminassets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <h2 class="font-weight-normal mb-3">Monthly Orders <i class="mdi mdi-bookmark-outline mdi-24px float-right"></i>
+        </h2>
+        <h1 class="mb-5">{{reportService.staitstics.orders}}</h1>
+        <h3 class="card-text">Increased by 5%</h3>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4 stretch-card grid-margin">
+    <div class="card bg-gradient-success card-img-holder text-white">
+      <div class="card-body">
+        <img src="/assets/adminassets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+        <h2 class="font-weight-normal mb-3">New Users <i class="mdi mdi-diamond mdi-24px float-right"></i>
+        </h2>
+        <h1 class="mb-5">{{reportService.newUsers}}</h1>
+        <h3 class="card-text" style="font-size: 25px;"><i class="fa-solid fa-users"></i> <i class="fa-solid fa-user-plus"></i></h3>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="col-4" style="float: right; display:flex; align-items: center; margin-bottom: 20px;">
+          <label class="col-7">Show statistics by:</label>
+          <select class="col-lg-6" (change)="changePeriod($event)">
+            <option value="monthly">Monthly</option>
+            <option value="annual">Annual</option>
+          </select>
+        </div>
+        <div class="clearfix">
+          <h4 class="card-title float-left">Sales Statistics</h4>
+        </div>
+        <canvas baseChart [data]="reportService.salesData" [type]="'bar'" [options]="reportService.chartOptions">
+        </canvas>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Sales Report</h4>
+        <div class="table-responsive">
+          <table class="table" id="table">
+            <thead>
+              <tr>
+                <th> Period</th>
+                <th> Orders </th>
+                <th> Sales </th>
+                <th> Fines </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let report of reportService.report">
+                <td>
+                  {{report.period}}
+                </td>
+                <td>
+                  {{report.orders}}
+                </td>
+                <td>
+                  {{report.sales}} JD
+                </td>
+                <td>
+                  {{report.fines}} JD
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Total</td>
+                <td>{{this.reportService.totalOrders}}</td>
+                <td>{{this.reportService.totalSales}} JD</td>
+                <td>{{this.reportService.totalFines}} JD</td>
+              </tr>
+            </tfoot>
+          </table>
+
+        </div>
+        <br>
+
+        <div style="float: right;">
+          <div style="display: flex; gap: 20px;">
+            <button class="btn btn-dark" (click)="downloadAsPdf()"
+              style="display: flex; align-items: center;padding: 10px 20px;">
+              <mat-icon>cloud_download</mat-icon> PDF
+            </button>
+            <button class="btn btn-dark" (click)="exportexcel()"
+              style="display: flex; align-items: center;padding: 10px 20px;">
+              <mat-icon> cloud_download</mat-icon> Excel
+            </button>
           </div>
-          <canvas id="visit-sale-chart" class="mt-4"></canvas>
         </div>
       </div>
     </div>
-    <div class="col-md-5 grid-margin stretch-card">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Traffic Sources</h4>
-          <canvas id="traffic-chart"></canvas>
-          <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4"></div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Employee Salaries</h4>
+        <div class="table-responsive">
+          <table class="table" id="table2">
+            <thead>
+              <tr>
+                <th> Employee Name </th>
+                <th> salary </th>
+                <th> Salary per year </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let report of this.reportService.salaries">
+                <td>
+                  {{report.username}}
+                </td>
+                <td>
+                  {{report.salary}} JD
+                </td>
+                <td>
+                  {{report.salary * 12}} JD
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Total</td>
+                <td>Per month: {{this.reportService.totlatSalary}} JD</td>
+                <td>Per year: {{this.reportService.totlatSalary * 12}} JD</td>
+              </tr>
+            </tfoot>
+          </table>
+
         </div>
-      </div>
-    </div>
-  </div> -->
-  <div class="row">
-    <div class="col-12 grid-margin">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Sales Report</h4>
-          <div class=" col-4" style="float: right; display: flex; align-items: center; margin-bottom: 20px;">
-            <label class="col-6" for="">Select report per:</label>
-            <select class="form-select col-7" (change)="changePeriod($event)">
-              <option value="monthly">Month</option>
-              <option value="annual">Year</option>
-            </select>
-          </div>
-          <div class="table-responsive">
-            <table class="table" id="table">
-              <thead>
-                <tr>
-                  <th> Period </th>
-                  <th> Orders </th>
-                  <th> Sales </th>
-                  <th> Fines </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let report of this.reportService.report">
-                  <td>
-                    {{report.period}}
-                  </td>
-                  <td>
-                    {{report.orders}}
-                  </td>
-                  <td>
-                    {{report.sales}} JD
-                  </td>
-                  <td>
-                    {{report.fines}} JD
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td>Total</td>
-                  <td>{{this.reportService.totalOrders}}</td>
-                  <td>{{this.reportService.totalSales}} JD</td>
-                  <td>{{this.reportService.totalFines}} JD</td>
-                </tr>
-              </tfoot>
-            </table>
-            <br>
-            <div class="col-3" style="float: right;">
-              <div style="display: flex; gap: 20px;">
-                <button class="btn btn-dark" (click)="downloadAsPdf()" style="display: flex; align-items: center;padding: 10px 20px;"> <mat-icon>cloud_download</mat-icon> PDF </button>
-              <button class="btn btn-dark" (click)="exportexcel()"  style="display: flex; align-items: center;padding: 10px 20px;">
+        <br>
+          <div style="float: right;">
+            <div style="display: flex; gap: 20px;">
+              <button class="btn btn-dark" (click)="downloadSalaryAsPdf()"
+                style="display: flex; align-items: center;padding: 10px 20px;">
+                <mat-icon>cloud_download</mat-icon> PDF
+              </button>
+              <button class="btn btn-dark" (click)="exportSalaryexcel()"
+                style="display: flex; align-items: center;padding: 10px 20px;">
                 <mat-icon> cloud_download</mat-icon> Excel
               </button>
-              </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 grid-margin">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">Employee Salaries</h4>
-          <div class="table-responsive">
-            <table class="table" id="table2">
-              <thead>
-                <tr>
-                  <th> Employee Name </th>
-                  <th> salary </th>
-                  <th> Salary per year </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let report of this.reportService.salaries">
-                  <td>
-                    {{report.username}}
-                  </td>
-                  <td>
-                    {{report.salary}} JD
-                  </td>
-                  <td>
-                    {{report.salary * 12}} JD
-                  </td>
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td>Total</td>
-                  <td>Per month: {{this.reportService.totlatSalary}} JD</td>
-                  <td>Per year: {{this.reportService.totlatSalary * 12}} JD</td>
-                </tr>
-              </tfoot>
-            </table>
-            <br>
-            <div class="col-3" style="float: right;">
-              <div style="display: flex; gap: 20px;">
-                <button class="btn btn-dark" (click)="downloadSalaryAsPdf()" style="display: flex; align-items: center;padding: 10px 20px;"> <mat-icon>cloud_download</mat-icon> PDF </button>
-              <button class="btn btn-dark" (click)="exportSalaryexcel()"  style="display: flex; align-items: center;padding: 10px 20px;">
-                <mat-icon> cloud_download</mat-icon> Excel
-              </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+</div>

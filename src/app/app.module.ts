@@ -8,7 +8,7 @@ import { TestimonialComponent } from './testimonial/testimonial.component';
 import { SharedModule } from './shared/shared.module';
 import { ContactComponent } from './contact/contact.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule,NgbCarouselModule, } from '@ng-bootstrap/ng-bootstrap';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule, ToastNoAnimationModule } from 'ngx-toastr';
@@ -32,7 +32,9 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatIconModule} from '@angular/material/icon';
 import { ManageWebsiteComponent } from './admin/manage-website/manage-website.component';
-
+import { AccountantComponent } from './accountant/accountant.component';
+import { DashboardaccComponent } from './accountant/dashboardacc/dashboardacc.component';
+import { NgChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +54,9 @@ import { ManageWebsiteComponent } from './admin/manage-website/manage-website.co
     ManageStudentComponent,
     RoleComponent,
     MessageComponent,
-    ManageWebsiteComponent
+    ManageWebsiteComponent,
+    AccountantComponent,
+    DashboardaccComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +79,9 @@ import { ManageWebsiteComponent } from './admin/manage-website/manage-website.co
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatIconModule
+    MatIconModule,
+    NgbCarouselModule,
+    NgChartsModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
