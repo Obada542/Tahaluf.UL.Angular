@@ -1,0 +1,25 @@
+.dialog{
+    height: 450px;
+    overflow-y: scroll;
+  }
+  .col-form-label{
+    font-weight: 600;
+  }
+  small{
+    color: rgb(105, 105, 105);
+  }
+  td a{
+    cursor: pointer;
+  }
+  td img{
+    height: auto;
+    width: 70px;
+    border-radius: 0;
+  }
+  .nothing{
+    width: 100%;
+    text-align: center;
+    padding: 50px 0;
+    font-size: 25px;
+  }
+  

@@ -1,0 +1,62 @@
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body table-responsive">
+        <h4 class="card-title">Manage Testimonial</h4>
+        <!-- <button class=" card-description btn btn-primary "  (click)="openCreateDialog()" style="color: #fff;"> Add
+          New Testimonial</button> -->
+        <!-- <input type="text" style="float: right;" #search placeholder="Search On News by name"  (input)="searchTest($event)"> -->
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th> Name   </th>
+              <th>Testimonial</th>
+              <th> Student name</th>
+              <th> Status </th>
+              <th> Action    </th>
+            </tr>
+          </thead>
+  
+            <tr *ngFor="let test of testimonial.testsss">
+             
+             <td> {{test.name}} </td>
+             <td> {{test. testimonial}} </td>
+             <td> {{studentname(test.student_Id)}} </td>
+
+             <td style="font-weight: 500;" [ngStyle]="{'color': test.publishing == 'false'?'gray':'green'}"> {{test.publishing != 'false'? 'Rejection' : "publishing"}} </td>
+             <td>
+               <a class="link" [ngStyle]="{'display': test.publishing == 'false'?'none':''}" (click)="openChangeStatus(test)">publishing Testimonial</a>
+             </td>
+               
+            
+  
+              
+              <!-- <td>
+                <a class="link" (click)="openUpdateDialog(test)">Update</a>
+              </td> -->
+            </tr>
+          </table>
+         <!-- <div *ngIf="tests.length == 0 && search.value">
+        <p class="nothing">Sorry, no Testimonial with this name were found.</p>
+        </div> -->
+    </div>
+  </div>
+  </div>
+
+  <ng-template #change>
+    <div class="col-12 ">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Are you sure you want to update the status of this item?</h4>
+          <div class="row">
+            <div class="col-md-9 ">
+              <button mat-button mat-dialog-close class="btn btn-primary">No,take me back</button>
+              <button mat-button mat-dialog-close class="btn btn-success" style="float: right;"
+                (click)="changeStatus()">Sure</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  
+ 

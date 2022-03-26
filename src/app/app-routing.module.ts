@@ -20,6 +20,8 @@ import { MessageComponent } from './admin/message/message.component';
 import { ManageWebsiteComponent } from './admin/manage-website/manage-website.component';
 import { AccountantComponent } from './accountant/accountant.component';
 import { DashboardaccComponent } from './accountant/dashboardacc/dashboardacc.component';
+import { ManageNewsComponent } from './admin/manage-news/manage-news.component';
+import { ManageTestimonialsComponent } from './admin/manage-testimonials/manage-testimonials.component';
 const routes: Routes = [
   {
     path: "home",
@@ -93,6 +95,15 @@ const routes: Routes = [
       {
         path:"manageWebsite",
         component: ManageWebsiteComponent
+      },
+      {
+        path:"manageNews",
+        component:ManageNewsComponent
+      },
+
+      {
+        path:"manageTestimonial",
+        component:ManageTestimonialsComponent
       }
     ]
   },

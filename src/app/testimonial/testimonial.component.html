@@ -9,7 +9,12 @@
       </div>
     </div>
   </div>
-  <form [formGroup]="testimonialForm">
+
+
+
+  
+
+  <form [formGroup]="createtestimonial">
     <div class="form-all">
       <ul class="form-section page-section" >
         <li style="list-style-type: none;">
@@ -23,7 +28,7 @@
         </li>
         <li class="form-line">
           <label class="form-label form-label-left form-label-auto">
-            Full Name
+            Name
             <span class="form-required">
               *
             </span>
@@ -31,15 +36,15 @@
           <div class="form-input">
             <div>
               <mat-form-field hideRequiredMarker class="form-sub-label-container"  >
-                <input type="text" matInput formControlName="firstName" class="form-textbox " />
-                <mat-label class="form-sub-label" > First Name </mat-label>
+                <input type="text" matInput formControlName="name" class="form-textbox " />
+                <mat-label class="form-sub-label" > Name </mat-label>
                 <mat-error
-                  *ngIf="testimonialForm.controls['firstName'].touched && testimonialForm.controls['firstName'].hasError('required')"
+                  *ngIf="createtestimonial.controls['name'].touched && createtestimonial.controls['name'].hasError('required')"
                   class="form-required">
-                  First Name is <strong class="form-required">required</strong>
+                   Name is <strong class="form-required">required</strong>
                 </mat-error>
               </mat-form-field>
-              <mat-form-field hideRequiredMarker class="form-sub-label-container" >
+              <!-- <mat-form-field hideRequiredMarker class="form-sub-label-container" >
                 <input type="text" matInput formControlName="lastName"   class="form-textbox "/>
                 <mat-label class="form-sub-label"> Last Name
                 </mat-label>
@@ -48,11 +53,11 @@
                   class="form-required">
                   Last Name is <strong class="form-required">required</strong>
                 </mat-error>
-              </mat-form-field>
+              </mat-form-field> -->
             </div>
           </div>
         </li>
-        <li class="form-line">
+        <!-- <li class="form-line">
           <label class="form-label form-label-left">
             E-mail
             <span class="form-required">
@@ -76,7 +81,7 @@
               </mat-error>
             </mat-form-field>
           </div>
-        </li>
+        </li> -->
         <li class="form-line">
           <label class="form-label form-label-left">
             Your Testimonial
@@ -90,7 +95,7 @@
               <mat-label class="form-sub-label" > Your testimonial... </mat-label>
 
             <mat-error
-              *ngIf="testimonialForm.controls['testimonial'].touched && testimonialForm.controls['testimonial'].hasError('required')"
+              *ngIf="createtestimonial.controls['testimonial'].touched && createtestimonial.controls['testimonial'].hasError('required')"
               class="form-required">
               Testimonial is <strong class="form-required">required</strong>
             </mat-error>
@@ -116,14 +121,54 @@
           </div>
         </li>
         <li class="form-line">
+          <label class="form-label form-label-left">
+            Student name
+            <span class="form-required">
+              *
+            </span>
+           
+          </label>
+          
+              <div class="col-sm-6">
+                <select class="form-control" matInput formControlName="student_Id">
+                  <option value="0" disabled>Please choose one</option>
+                  <option *ngFor="let std of testss.students" [ngValue]="std.id">{{std.first_Name}}
+                   
+                  </option>
+                </select>
+                <br>
+                <mat-error class="text-danger"
+                  *ngIf="createtestimonial.controls['student_Id'].hasError('required') && createtestimonial.controls['student_Id'].touched && (createtestimonial.controls['student_Id'].value == 0)">
+                  Student Id is <strong class="text-danger">required</strong>
+                </mat-error>
+              </div>
+           
+          </li>
+       
+            
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <button class="btn btn-success col-sm-12" [disabled]="!createtestimonial.valid"
+                    (click)="submit()">Submit</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+         <!-- <li class="form-line">
           <div class="form-input-wide">
             <div class="form-buttons-wrapper">
-              <button [disabled]="!testimonialForm.valid" type="submit" class="btn-success btn jf-form-buttons " >
+              <button [disabled]="!createtestimonial.valid" type="submit" class="btn-success btn jf-form-buttons " (click)="submit()" >
                 Submit
               </button>
             </div>
           </div>
-        </li>
+        </li>  -->
       </ul>
     </div>
   </form>
