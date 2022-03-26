@@ -35,6 +35,9 @@ import { ManageWebsiteComponent } from './admin/manage-website/manage-website.co
 import { AccountantComponent } from './accountant/accountant.component';
 import { DashboardaccComponent } from './accountant/dashboardacc/dashboardacc.component';
 import { NgChartsModule } from 'ng2-charts';
+import { ManageTestimonialsComponent } from './admin/manage-testimonials/manage-testimonials.component';
+import { ManageNewsComponent } from './admin/manage-news/manage-news.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,6 +60,8 @@ import { NgChartsModule } from 'ng2-charts';
     ManageWebsiteComponent,
     AccountantComponent,
     DashboardaccComponent,
+    ManageTestimonialsComponent,
+    ManageNewsComponent,
   ],
   imports: [
     BrowserModule,

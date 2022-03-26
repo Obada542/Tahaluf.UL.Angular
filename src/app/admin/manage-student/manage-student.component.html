@@ -13,6 +13,7 @@
             <th> Student Name </th>
             <th> Username </th>
             <th> Email </th>
+            <th> Phone</th>
             <th> BirthDate </th>
             <th> Action </th>
           </tr>
@@ -26,6 +27,7 @@
             <td> {{studentFirstName(student.id)+ ' '+ studentLastName(student.id)}}</td>
             <td> {{student.username}} </td>
             <td> {{student.email}} </td>
+            <td> {{student.phone}} </td>
             <td> {{student.birthday | date:'longDate'}} </td>
             <td>
               <a class="text-danger" (click)="openDeleteDialog(student.id)">Delete</a>
@@ -109,6 +111,25 @@
                   </mat-error>
                   <mat-error class="text-danger" *ngIf="createStudent.controls['email'].hasError('email') ">
                     Invalid Email.
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Phone</label>
+                <div class="col-sm-10">
+                  <input type="tel" class="form-control" matInput formControlName="phone"
+                    placeholder="+962 79 0000 000">
+                  <br>
+                  <mat-error class="text-danger"
+                    *ngIf="createStudent.controls['phone'].hasError('required') && createStudent.controls['phone'].touched">
+                    Phone is <strong class="text-danger">required</strong>
+                  </mat-error>
+                  <mat-error class="text-danger" *ngIf="createStudent.controls['phone'].hasError('minlength') ">
+                    Invalid Phone.
                   </mat-error>
                 </div>
               </div>
@@ -264,6 +285,25 @@
                   </mat-error>
                   <mat-error class="text-danger" *ngIf="updateStudent.controls['email'].hasError('email') ">
                     Invalid Email.
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <label class="col-sm-2 col-form-label">Phone</label>
+                <div class="col-sm-10">
+                  <input type="tel" class="form-control" matInput formControlName="phone" [(ngModel)]="selectedStudent.phone"
+                    placeholder="+962 79 0000 000">
+                  <br>
+                  <mat-error class="text-danger"
+                    *ngIf="updateStudent.controls['phone'].hasError('required') && updateStudent.controls['phone'].touched">
+                    Phone is <strong class="text-danger">required</strong>
+                  </mat-error>
+                  <mat-error class="text-danger" *ngIf="updateStudent.controls['phone'].hasError('minlength') ">
+                    Invalid Phone.
                   </mat-error>
                 </div>
               </div>

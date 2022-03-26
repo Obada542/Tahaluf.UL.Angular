@@ -21,3 +21,9 @@ td img{
   font-size: 24px;
   padding: 50px 0;
 }
+thead tr th{
+  background-color: rgba(33, 148, 163, 0.555);
+  color:rgb(32, 32, 32);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

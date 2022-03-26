@@ -1,5 +1,5 @@
-import { Router, RouterModule } from '@angular/router';
-import { StudentService } from './../../Services/student.service';
+import { LoginService } from './../../Services/login.service';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup , Validators } from '@angular/forms';
 
@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
     phone: new FormControl('',[Validators.required,Validators.minLength(10)]),
     birthday: new FormControl('',[Validators.required])
   });
-  constructor(private studentService:StudentService,private route:Router) { }
+  constructor(private studentService:LoginService,private route:Router) { }
   ngOnInit(): void {
   }
 
@@ -30,6 +30,6 @@ export class RegisterComponent implements OnInit {
       this.registerGroup.controls['ConfirmPassword'].setErrors({mismatch:true});
   }
   register(){
-    this.studentService.createStudentFromWebsite(this.registerGroup.value);
+    this.studentService.createStudent(this.registerGroup.value);
   }
 }

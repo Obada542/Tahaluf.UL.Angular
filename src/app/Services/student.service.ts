@@ -13,7 +13,7 @@ export class StudentService {
   login: any;
   display_Image: any;
 
-  constructor(private http: HttpClient,private route:Router ,private spinner: NgxSpinnerService, private toastr: ToastrService) { }
+  constructor(private http: HttpClient, private route: Router, private spinner: NgxSpinnerService, private toastr: ToastrService) { }
 
   getAllStudents() {
     this.spinner.show();
@@ -54,35 +54,16 @@ export class StudentService {
         this.toastr.error(err.message, err.status);
       });
   }
-  createStudentFromWebsite(login: any) {
-    this.spinner.show();
-    login.role_Id = 2;
-    this.http.post('https://localhost:44346/api/login/', login)
-      .subscribe((res: any) => {
-        login.login_Id = res;
-        return this.http.post('https://localhost:44346/api/student/', login)
-          .subscribe((res) => {
-            this.route.navigate(['']).then(() => {
-              window.location.reload();
-            });
-            this.spinner.hide();
-          }, err => {
-            this.toastr.error(err.message, err.status);
-          });
-      }, err => {
-        this.spinner.hide();
-        this.toastr.error(err.message, err.status);
-      });
-  }
+  
   updateStudent(login: any) {
     this.spinner.show();
     login.image = this.display_Image;
     login.role_Id = 2;
-    const stdId:number = this.students.find((x: any) => x.login_Id == login.id).id;
+    const stdId: number = this.students.find((x: any) => x.login_Id == login.id).id;
     const student = {
-      id:stdId,
-      first_Name:login.first_Name,
-      last_Name:login.last_Name
+      id: stdId,
+      first_Name: login.first_Name,
+      last_Name: login.last_Name
     }
     this.http.put('https://localhost:44346/api/student', student)
       .subscribe((res) => {
@@ -104,9 +85,9 @@ export class StudentService {
   }
   deleteStudent(id: number) {
     this.spinner.show();
-    const stdId:number = this.students.find((x: any) => x.login_Id == id).id;
+    const stdId: number = this.students.find((x: any) => x.login_Id == id).id;
     this.http.delete('https://localhost:44346/api/login/Delete/' + id)
-      .subscribe((res:any) => {
+      .subscribe((res: any) => {
         this.spinner.hide();
       }, err => {
         this.spinner.hide();

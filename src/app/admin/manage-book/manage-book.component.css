@@ -35,3 +35,9 @@ svg {
   transform: rotate(180deg);
   fill: #51ccbc;
 }
+thead tr th{
+  background-color: #51ccbc;
+  color:rgb(32, 32, 32);
+  padding-top: 10px;
+  padding-bottom: 10px;
+}

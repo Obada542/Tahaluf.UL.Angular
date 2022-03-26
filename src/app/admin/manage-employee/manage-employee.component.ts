@@ -25,6 +25,7 @@ export class ManageEmployeeComponent implements OnInit {
     image: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     role_Id: new FormControl(),
+    phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
     salary: new FormControl('', [Validators.required, Validators.min(1)]),
     address: new FormControl('')
   });
@@ -34,6 +35,7 @@ export class ManageEmployeeComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     birthday: new FormControl('', [Validators.required]),
     image: new FormControl(''),
+    phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     salary: new FormControl('', [Validators.required, Validators.min(1)]),
     address: new FormControl('')

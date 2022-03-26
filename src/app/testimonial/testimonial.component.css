@@ -6,10 +6,7 @@ form{
   height: 46px;
   padding: 0 10px;
 }
-.form-textbox,
-.form-textarea {
-  color: undefined;
-}
+
 .rating-item input:hover + label {
   color: #2e69ff;
 }

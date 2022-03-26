@@ -25,6 +25,7 @@ export class ManageStudentComponent implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     birthday: new FormControl('', [Validators.required]),
     image: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)])
   });
   updateStudent: FormGroup = new FormGroup({
@@ -34,6 +35,7 @@ export class ManageStudentComponent implements OnInit {
     username: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     birthday: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required, Validators.minLength(10)]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
     image: new FormControl('')
   });
