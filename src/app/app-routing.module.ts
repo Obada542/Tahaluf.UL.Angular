@@ -22,6 +22,7 @@ import { AccountantComponent } from './accountant/accountant.component';
 import { DashboardaccComponent } from './accountant/dashboardacc/dashboardacc.component';
 import { ManageNewsComponent } from './admin/manage-news/manage-news.component';
 import { ManageTestimonialsComponent } from './admin/manage-testimonials/manage-testimonials.component';
+import { GetStudentComponent } from './accountant/get-student/get-student.component';
 const routes: Routes = [
   {
     path: "home",
@@ -121,6 +122,10 @@ const routes: Routes = [
         path: "dashboard",
         component: DashboardaccComponent
       },
+      {
+        path:"studentsInfo",
+        component: GetStudentComponent
+      }
 
 
   ]

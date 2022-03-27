@@ -4945,6 +4945,13 @@ body::-webkit-scrollbar {
   left: 0;
 }
 
+/* //by me 595 */
+.main_content_iner.overly_inner{
+  margin-top: -650px 
+
+}
+
+
 @media (max-width: 991px) {
   /* line 44, G:/admin_project/6 admin/sales/scss/_main_content.scss */
   .main_content .main_content_iner {
