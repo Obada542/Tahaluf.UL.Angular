@@ -38,6 +38,7 @@ import { NgChartsModule } from 'ng2-charts';
 import { ManageTestimonialsComponent } from './admin/manage-testimonials/manage-testimonials.component';
 import { ManageNewsComponent } from './admin/manage-news/manage-news.component';
 import { GetStudentComponent } from './accountant/get-student/get-student.component';
+import { GetEmployeeComponent } from './accountant/get-employee/get-employee.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { GetStudentComponent } from './accountant/get-student/get-student.compon
     ManageTestimonialsComponent,
     ManageNewsComponent,
     GetStudentComponent,
+    GetEmployeeComponent,
   ],
   imports: [
     BrowserModule,
