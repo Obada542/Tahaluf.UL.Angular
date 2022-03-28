@@ -1,52 +1,24 @@
 <app-header></app-header>
 <div class="carousel slide home-slider" id="carouselExampleCaptions" data-ride="carousel">
   <div class="carousel-inner">
-    <ngb-carousel>
-      <ng-template ngbSlide>
-        <div class="carousel-item active"><img class="d-block w-100" src="http://exprostudio.com/html/book_library/images/slider/img-03.jpg" alt="..."/>
+    <ngb-carousel >
+      <ng-template ngbSlide *ngFor="let slider of sliderService.data">
+        <div class="carousel-item active">
+          <img class="d-block w-100" src="../../assets/Images/{{slider.image}}"  alt="{{slider.image}}"/>
           <div class="carousel-caption d-none d-md-block" style="margin-bottom: 100px !important;">
             <div class="tg-slidercontent">
-              <h1 style="color: #fff;">Search your favourite Book</h1>
+              <h1 style="color: #fff; font-weight: 500;">{{slider.title}}</h1>
               <div class="tg-description">
-                <p style="color: #fff;">Consectetur adipisicing elit eiusmod lotanae pokalate sinote tempor incididunt ut labore popouye asoter.</p>
+                <p style="color: #fff;">{{slider.sub_Title}}</p>
               </div>
               <div class="tg-btns">
-                <a class="tg-btn tg-active" href="javascript:void(0);">buy now</a>
+                <a class="tg-btn tg-active" href="{{slider.url}}">buy now</a>
               </div>
             </div>
           </div>
         </div>
       </ng-template>
-      <ng-template ngbSlide>
-        <div class="carousel-item active"><img class="d-block w-100" src="http://exprostudio.com/html/book_library/images/slider/img-03.jpg" alt="..."/>
-          <div class="carousel-caption d-none d-md-block" style="margin-bottom: 100px !important;">
-            <div class="tg-slidercontent">
-              <h1 style="color: #fff;">Search your favourite Book</h1>
-              <div class="tg-description">
-                <p style="color: #fff;">Consectetur adipisicing elit eiusmod lotanae pokalate sinote tempor incididunt ut labore popouye asoter.</p>
-              </div>
-              <div class="tg-btns">
-                <a class="tg-btn tg-active" href="javascript:void(0);">buy now</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-template>
-      <ng-template ngbSlide>
-        <div class="carousel-item active"><img class="d-block w-100" src="http://exprostudio.com/html/book_library/images/slider/img-03.jpg" alt="..."/>
-          <div class="carousel-caption d-none d-md-block" style="margin-bottom: 100px !important;">
-            <div class="tg-slidercontent">
-              <h1 style="color: #fff;">Search your favourite Book</h1>
-              <div class="tg-description">
-                <p style="color: #fff;">Consectetur adipisicing elit eiusmod lotanae pokalate sinote tempor incididunt ut labore popouye asoter.</p>
-              </div>
-              <div class="tg-btns">
-                <a class="tg-btn tg-active" href="javascript:void(0);">buy now</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </ng-template>
+
     </ngb-carousel>
  </div>
 
@@ -60,202 +32,36 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <div class="tg-sectionhead">
             <h2><span>People’s Choice</span>Bestselling Books</h2>
-            <a class="tg-btn" href="javascript:void(0);">View All</a>
+            <a class="tg-btn" [routerLink]="['/books']">View All</a>
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
           <carousel [loop]="true" [cellsToScroll]="1"  class="tg-bestsellingbooksslider tg-bestsellingbooks" style="min-height: 550px;">
-            <div class="item carousel-cell "  >
+            <div class="item carousel-cell " *ngFor="let item of bookService.books" >
               <div class="tg-postbook">
-                <figure class="tg-featureimg"  >
-                  <div class="tg-bookimg" >
-                    <div class="tg-frontcover"><img  src="http://exprostudio.com/html/book_library/images/books/img-01.jpg" alt="image description"></div>
-                    <div class="tg-backcover" ><img  src="http://exprostudio.com/html/book_library/images/books/img-01.jpg" alt="image description"></div>
-                  </div>
-                </figure>
-                <div class="tg-postbookcontent">
-                  <ul class="tg-bookscategories">
-                    <li><a href="javascript:void(0);">Adventure</a></li>
-                    <li><a href="javascript:void(0);">Fun</a></li>
-                  </ul>
-                  <div class="tg-booktitle">
-                    <h3><a href="javascript:void(0);">Help Me Find My Stomach</a></h3>
-                  </div>
-                  <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
-                  <span class="tg-stars"><span></span></span>
-                  <span class="tg-bookprice">
-                    <ins>$25.18</ins>
-                  </span>
-                  <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                    <i class="fa fa-shopping-basket"></i>
-                    <em>Borrow</em>
+                <figure class="tg-featureimg" >
+                  <a class="tg-bookimg" (click)="OpenBookDetails(item.id)" >
+                    <div class="tg-frontcover"><img  src="../../assets/Images/{{item.image}}" alt="{{item.book_Name}}"></div>
+                    <div class="tg-backcover" ><img  src="../../assets/Images/{{item.image}}" alt="{{item.book_Name}}"></div>
                   </a>
-                </div>
-              </div>
-            </div>
-            <div class="item carousel-cell" >
-              <div class="tg-postbook">
-                <figure class="tg-featureimg">
-                  <div class="tg-bookimg">
-                    <div class="tg-frontcover"><img src="http://exprostudio.com/html/book_library/images/books/img-01.jpg" alt="image description"></div>
-                    <div class="tg-backcover"><img src="http://exprostudio.com/html/book_library/images/books/img-01.jpg" alt="image description"></div>
-                  </div>
-                </figure>
-                <div class="tg-postbookcontent">
-                  <ul class="tg-bookscategories">
-                    <li><a href="javascript:void(0);">Adventure</a></li>
-                    <li><a href="javascript:void(0);">Fun</a></li>
-                  </ul>
-                  <div class="tg-booktitle">
-                    <h3><a href="javascript:void(0);">Help Me Find My Stomach</a></h3>
-                  </div>
-                  <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
-                  <span class="tg-stars"><span></span></span>
-                  <span class="tg-bookprice">
-                    <ins>$25.18</ins>
-                  </span>
-                  <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                    <i class="fa fa-shopping-basket"></i>
-                    <em>Borrow</em>
+                  <a class="tg-btnaddtowishlist" >
+                    <i class="icon-heart"></i>
+                    <span>More details</span>
                   </a>
-                </div>
-              </div>
-            </div>
-            <div class="item carousel-cell">
-              <div class="tg-postbook">
-                <figure class="tg-featureimg">
-                  <div class="tg-bookimg">
-                    <div class="tg-frontcover"><img src="http://exprostudio.com/html/book_library/images/books/img-02.jpg" alt="image description"></div>
-                    <div class="tg-backcover"><img src="http://exprostudio.com/html/book_library/images/books/img-02.jpg" alt="image description"></div>
-                  </div>
                 </figure>
                 <div class="tg-postbookcontent">
                   <ul class="tg-bookscategories">
-                    <li><a href="javascript:void(0);">Adventure</a></li>
-                    <li><a href="javascript:void(0);">Fun</a></li>
+                    <li><a class="blue" (click)="SearchByCategory(item.category)">{{item.category}}</a></li>
                   </ul>
                   <div class="tg-booktitle">
-                    <h3><a href="javascript:void(0);">Drive Safely, No Bumping</a></h3>
+                    <h3><a class="blue" (click)="OpenBookDetails(item.id)">{{item.book_Name}}</a></h3>
                   </div>
-                  <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
+                  <span class="tg-bookwriter">By: <a class="blue" >{{item.author}}</a></span>
                   <span class="tg-stars"><span></span></span>
                   <span class="tg-bookprice">
-                    <ins>$25.18</ins>
+                    <ins>{{item.price}} JD</ins>
                   </span>
-                  <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                    <i class="fa fa-shopping-basket"></i>
-                    <em>Borrow</em>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="item carousel-cell">
-              <div class="tg-postbook tg-notag">
-                <figure class="tg-featureimg">
-                  <div class="tg-bookimg">
-                    <div class="tg-frontcover"><img src="http://exprostudio.com/html/book_library/images/books/img-03.jpg" alt="image description"></div>
-                    <div class="tg-backcover"><img src="http://exprostudio.com/html/book_library/images/books/img-03.jpg" alt="image description"></div>
-                  </div>
-
-                </figure>
-                <div class="tg-postbookcontent">
-                  <ul class="tg-bookscategories">
-                    <li><a href="javascript:void(0);">Adventure</a></li>
-                    <li><a href="javascript:void(0);">Fun</a></li>
-                  </ul>
-                  <div class="tg-booktitle">
-                    <h3><a href="javascript:void(0);">Let The Good Times Roll Up</a></h3>
-                  </div>
-                  <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
-                  <span class="tg-stars"><span></span></span>
-                  <span class="tg-bookprice">
-                    <ins>$25.18</ins>
-                  </span>
-                  <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                    <i class="fa fa-shopping-basket"></i>
-                    <em>Borrow</em>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="item carousel-cell">
-              <div class="tg-postbook tg-notag">
-                <figure class="tg-featureimg">
-                  <div class="tg-bookimg">
-                    <div class="tg-frontcover"><img src="http://exprostudio.com/html/book_library/images/books/img-03.jpg" alt="image description"></div>
-                    <div class="tg-backcover"><img src="http://exprostudio.com/html/book_library/images/books/img-03.jpg" alt="image description"></div>
-                  </div>
-                </figure>
-                <div class="tg-postbookcontent">
-                  <ul class="tg-bookscategories">
-                    <li><a href="javascript:void(0);">Adventure</a></li>
-                    <li><a href="javascript:void(0);">Fun</a></li>
-                  </ul>
-                  <div class="tg-booktitle">
-                    <h3><a href="javascript:void(0);">Let The Good Times Roll Up</a></h3>
-                  </div>
-                  <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
-                  <span class="tg-stars"><span></span></span>
-                  <span class="tg-bookprice">
-                    <ins>$25.18</ins>
-                  </span>
-                  <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                    <i class="fa fa-shopping-basket"></i>
-                    <em>Borrow</em>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="item carousel-cell">
-              <div class="tg-postbook">
-                <figure class="tg-featureimg">
-                  <div class="tg-bookimg">
-                    <div class="tg-frontcover"><img src="http://exprostudio.com/html/book_library/images/books/img-04.jpg" alt="image description"></div>
-                    <div class="tg-backcover"><img src="http://exprostudio.com/html/book_library/images/books/img-04.jpg" alt="image description"></div>
-                  </div>
-                </figure>
-                <div class="tg-postbookcontent">
-                  <ul class="tg-bookscategories">
-                    <li><a href="javascript:void(0);">Adventure</a></li>
-                    <li><a href="javascript:void(0);">Fun</a></li>
-                  </ul>
-                  <div class="tg-booktitle">
-                    <h3><a href="javascript:void(0);">Our State Fair Is A Great State Fair</a></h3>
-                  </div>
-                  <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
-                  <span class="tg-stars"><span></span></span>
-                  <span class="tg-bookprice">
-                    <ins>$25.18</ins>
-                  </span>
-                  <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
-                    <i class="fa fa-shopping-basket"></i>
-                    <em>Borrow</em>
-                  </a>
-                </div>
-              </div>
-            </div>
-            <div class="item carousel-cell">
-              <div class="tg-postbook">
-                <figure class="tg-featureimg">
-                  <div class="tg-bookimg">
-                    <div class="tg-frontcover"><img src="http://exprostudio.com/html/book_library/images/books/img-04.jpg" alt="image description"></div>
-                    <div class="tg-backcover"><img src="http://exprostudio.com/html/book_library/images/books/img-04.jpg" alt="image description"></div>
-                  </div>
-                </figure>
-                <div class="tg-postbookcontent">
-                  <ul class="tg-bookscategories">
-                    <li><a href="javascript:void(0);">Adventure</a></li>
-                    <li><a href="javascript:void(0);">Fun</a></li>
-                  </ul>
-                  <div class="tg-booktitle">
-                    <h3><a href="javascript:void(0);">Our State Fair Is A Great State Fair</a></h3>
-                  </div>
-                  <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
-                  <span class="tg-stars"><span></span></span>
-                  <span class="tg-bookprice">
-                    <ins>$25.18</ins>
-                  </span>
-                  <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                  <a class="tg-btn tg-btnstyletwo" >
                     <i class="fa fa-shopping-basket"></i>
                     <em>Borrow</em>
                   </a>
@@ -267,7 +73,7 @@
       </div>
     </div>
   </section>
-  <section class="tg-bglight tg-haslayout">
+  <!-- <section class="tg-bglight tg-haslayout">
     <div class="container">
       <div class="row">
         <div class="tg-featureditm">
@@ -297,11 +103,11 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
   <section class="tg-sectionspace tg-haslayout">
     <div class="container">
       <div class="row">
-        <div class="tg-newrelease">
+        <div class="col-xs-12 tg-newrelease">
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="tg-sectionhead">
               <h2><span>Taste The New Spice</span>New Release Books</h2>
@@ -310,84 +116,32 @@
               <p>Consectetur adipisicing elit sed do eiusmod tempor incididunt labore toloregna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamcoiars nisiuip commodo consequat aute irure dolor in aprehenderit aveli esseati cillum dolor fugiat nulla pariatur cepteur sint occaecat cupidatat.</p>
             </div>
             <div class="tg-btns">
-              <a class="tg-btn tg-active" href="javascript:void(0);">View All</a>
-              <a class="tg-btn" href="javascript:void(0);">Read More</a>
+              <a class="tg-btn tg-active" [routerLink]="['/books']">View All</a>
             </div>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="row">
               <div class="tg-newreleasebooks">
-                <div class="col-lg-4">
+                <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4" *ngFor="let book of bookService.newestBooks">
                   <div class="tg-postbook">
                     <figure class="tg-featureimg">
-                      <div class="tg-bookimg">
-                        <div class="tg-frontcover"><img src="http://exprostudio.com/html/book_library/images/books/img-07.jpg" alt="image description"></div>
-                        <div class="tg-backcover"><img src="http://exprostudio.com/html/book_library/images/books/img-07.jpg" alt="image description"></div>
-                      </div>
-                      <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+                      <a class="tg-bookimg" (click)="OpenBookDetails(book.id)">
+                        <div class="tg-frontcover"><img src="../../assets/Images/{{book.image}}" alt="{{book.book_Name}}"></div>
+                        <div class="tg-backcover"><img src="../../assets/Images/{{book.image}}" alt="{{book.book_Name}}"></div>
+                      </a>
+                      <a class="tg-btnaddtowishlist">
                         <i class="icon-heart"></i>
                         <span>Borrow</span>
                       </a>
                     </figure>
                     <div class="tg-postbookcontent">
                       <ul class="tg-bookscategories">
-                        <li><a href="javascript:void(0);">Adventure</a></li>
-                        <li><a href="javascript:void(0);">Fun</a></li>
+                        <li><a (click)="SearchByCategory(book.category)">{{book.category}}</a></li>
                       </ul>
                       <div class="tg-booktitle">
-                        <h3><a href="javascript:void(0);">Help Me Find My Stomach</a></h3>
+                        <h3><a (click)="OpenBookDetails(book.id)" >{{book.book_Name}}</a></h3>
                       </div>
-                      <span class="tg-bookwriter">By: <a href="javascript:void(0);">Kathrine Culbertson</a></span>
-                      <span class="tg-stars"><span></span></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4">
-                  <div class="tg-postbook">
-                    <figure class="tg-featureimg">
-                      <div class="tg-bookimg">
-                        <div class="tg-frontcover"><img src="http://exprostudio.com/html/book_library/images/books/img-08.jpg" alt="image description"></div>
-                        <div class="tg-backcover"><img src="http://exprostudio.com/html/book_library/images/books/img-08.jpg" alt="image description"></div>
-                      </div>
-                      <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                        <i class="icon-heart"></i>
-                        <span>Borrow</span>
-                      </a>
-                    </figure>
-                    <div class="tg-postbookcontent">
-                      <ul class="tg-bookscategories">
-                        <li><a href="javascript:void(0);">Adventure</a></li>
-                        <li><a href="javascript:void(0);">Fun</a></li>
-                      </ul>
-                      <div class="tg-booktitle">
-                        <h3><a href="javascript:void(0);">Drive Safely, No Bumping</a></h3>
-                      </div>
-                      <span class="tg-bookwriter">By: <a href="javascript:void(0);">Sunshine Orlando</a></span>
-                      <span class="tg-stars"><span></span></span>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-3 col-lg-4 hidden-md">
-                  <div class="tg-postbook">
-                    <figure class="tg-featureimg">
-                      <div class="tg-bookimg">
-                        <div class="tg-frontcover"><img src="http://exprostudio.com/html/book_library/images/books/img-09.jpg" alt="image description"></div>
-                        <div class="tg-backcover"><img src="http://exprostudio.com/html/book_library/images/books/img-09.jpg" alt="image description"></div>
-                      </div>
-                      <a class="tg-btnaddtowishlist" href="javascript:void(0);">
-                        <i class="icon-heart"></i>
-                        <span>Borrow</span>
-                      </a>
-                    </figure>
-                    <div class="tg-postbookcontent">
-                      <ul class="tg-bookscategories">
-                        <li><a href="javascript:void(0);">Adventure</a></li>
-                        <li><a href="javascript:void(0);">Fun</a></li>
-                      </ul>
-                      <div class="tg-booktitle">
-                        <h3><a href="javascript:void(0);">Let The Good Times Roll Up</a></h3>
-                      </div>
-                      <span class="tg-bookwriter">By: <a href="javascript:void(0);">Elisabeth Ronning</a></span>
+                      <span class="tg-bookwriter">By: <a>{{book.author}}</a></span>
                       <span class="tg-stars"><span></span></span>
                     </div>
                   </div>

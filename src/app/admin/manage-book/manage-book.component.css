@@ -41,3 +41,11 @@ thead tr th{
   padding-top: 10px;
   padding-bottom: 10px;
 }
+
+select
+{
+  color: rgb(53, 53, 53);
+}
+.file input{
+  padding-top: 10px;
+}

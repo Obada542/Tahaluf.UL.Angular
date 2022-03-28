@@ -27,6 +27,8 @@ export class ManageBookComponent implements OnInit {
     image: new FormControl('', [Validators.required]),
     library_Id: new FormControl('', [Validators.required],),
     category: new FormControl('', [Validators.required]),
+    pdf: new FormControl('', [Validators.required]),
+
   });
 
   updatebook: FormGroup = new FormGroup({
@@ -39,6 +41,8 @@ export class ManageBookComponent implements OnInit {
     image: new FormControl(''),
     library_Id: new FormControl('', [Validators.required],),
     category: new FormControl('', [Validators.required]),
+    pdf: new FormControl(),
+
   });
 
   changeControl :FormControl = new FormControl('',[Validators.required,Validators.min(1),Validators.max(100)])
@@ -58,6 +62,8 @@ export class ManageBookComponent implements OnInit {
     this.selectedBook = book;
     this.updatebook.controls['id'].setValue(book.id);
     this.book.display_Image = this.selectedBook.image;
+    this.book.pdf = this.selectedBook.pdf;
+
     this.dialog.open(this.updateBook);
   }
   openDeleteDialog(id: number) {
@@ -76,7 +82,15 @@ export class ManageBookComponent implements OnInit {
     fromData.append('file', fileUpload, fileUpload.name);
     this.book.uploadAttachment(fromData);
   }
-
+  uploadPdf(file: any) {
+    if (file.length === 0) {
+      return;
+    }
+    let fileUpload = <File>file[0];
+    const fromData = new FormData();
+    fromData.append('file', fileUpload, fileUpload.name);
+    this.book.uploadPdf(fromData);
+  }
   submit() {
     this.book.createBook(this.createbook.value);
     location.reload();
@@ -85,6 +99,10 @@ export class ManageBookComponent implements OnInit {
     let image : string = this.updatebook.controls['image'].value;
     if(!image){
       this.book.display_Image = this.selectedBook.image;
+    }
+    let pdf : string = this.updatebook.controls['pdf'].value;
+    if(!pdf){
+      this.book.pdf = this.selectedBook.pdf;
     }
     this.book.updateBook(this.updatebook.value);
     location.reload();

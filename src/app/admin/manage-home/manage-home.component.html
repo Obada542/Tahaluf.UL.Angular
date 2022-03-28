@@ -5,36 +5,39 @@
         <button class=" card-description btn btn-primary " (click)="create()" style="color: #fff;"> Add
         </button>
         <input type="text" style="float: right;" #search placeholder="Search slider title"  (input)="searchSlider($event)">
+        <div class=" table-responsive">
 
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th> Title </th>
-              <th> Sub Title </th>
-              <th> Image </th>
-              <th> URL </th>
-              <th> Oprations </th>
-            </tr>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th> Title </th>
+                <th> Sub Title </th>
+                <th> Image </th>
+                <th> URL </th>
+                <th> Oprations </th>
+              </tr>
 
-          </thead>
+            </thead>
 
-          <tbody [ngStyle]="{'display': sliders.length == 0 && search.value ? 'none' : ''}">
-            <!-- *ngFor="let slider of home.data" -->
+            <tbody [ngStyle]="{'display': sliders.length == 0 && search.value ? 'none' : ''}">
+              <!-- *ngFor="let slider of home.data" -->
 
-            <tr *ngFor="let slider of sliders.length == 0 ? home.data : sliders" >
-                <td>{{slider.title}}</td>
-                <td>{{slider.sub_Title}}</td>
-                <td><img src="../../../assets/Images/{{slider.image}}" style="height: 50px;width:50px;"></td>
-                <td>{{slider.url}}</td>
+              <tr *ngFor="let slider of sliders.length == 0 ? home.data : sliders" >
+                  <td>{{slider.title}}</td>
+                  <td>{{slider.sub_Title}}</td>
+                  <td><img src="../../../assets/Images/{{slider.image}}" style="height: 50px;width:50px;"></td>
+                  <td>{{slider.url}}</td>
 
-                <td>
-                    <a  class="click text-danger" (click)="openDeleteDailog(slider.id)">Delete</a> |
-                    <a  class="click" (click)="openUpdateDailog(slider)">Update</a>
-                </td>
-            </tr>
+                  <td>
+                      <a  class="click text-danger" (click)="openDeleteDailog(slider.id)">Delete</a> |
+                      <a  class="click" (click)="openUpdateDailog(slider)">Update</a>
+                  </td>
+              </tr>
 
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
+
         <div *ngIf="sliders.length == 0 && search.value">
           <p class="nothing">Sorry, No sliders with this title  were found.</p>
         </div>

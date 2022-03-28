@@ -17,11 +17,10 @@ export class HomeService {
     this.http.get('https://localhost:44346/api/Home/GetSliders/').subscribe((res) => {
       this.data = res;
       this.spinner.hide();
-      this.toastr.success('Data Retrieved!!');
     }, err => {
       this.spinner.hide();
       this.toastr.error(err.message,err.status);
-    })
+    });
   }
 
 
@@ -35,7 +34,7 @@ export class HomeService {
     }, err=>{
       this.spinner.hide();
       this.toastr.error(err.message , err.status)
-    })
+    });
   }
 
 
@@ -46,7 +45,7 @@ export class HomeService {
       this.display_Image=res.image;
     },err=>{
       this.toastr.error(err.message , err.status);
-    })
+    });
   }
 
 
@@ -59,7 +58,7 @@ export class HomeService {
     },err=>{
       this.spinner.hide();
       this.toastr.error(err.status,err.message);
-    })
+    });
   }
 
   deleteItem(id:number){
@@ -70,7 +69,7 @@ export class HomeService {
     },err=>{
       this.spinner.hide();
       this.toastr.error(err.status,err.message);
-    })
+    });
   }
 
 

@@ -1,4 +1,6 @@
+import { BookService } from './../Services/book.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-books',
@@ -7,15 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BooksComponent implements OnInit {
   pageOfItems!: Array<any>;
-  items:any;
-  constructor() { }
+  p:number = 1;
+  pageSize:number=1;
+  constructor(public bookService:BookService,private router: Router) { }
 
   ngOnInit() {
-    this.items = Array(100).fill(0).map((x, i) => ({ id: (i + 1), name: `Item ${i + 1}`}));
+    this.bookService.getAvailableBook();
+    this.bookService.getCategories();
 }
 
 onChangePage(pageOfItems: Array<any>) {
     this.pageOfItems = pageOfItems;
-    document.documentElement.scrollTop = 600;
+    document.documentElement.scrollTop = 500;
+  }
+  SearchByCategory(category:string){
+    console.log(category)
+  }
+  OpenBookDetails(id:number){
+    console.log(id)
   }
 }

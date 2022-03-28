@@ -1,22 +1,14 @@
 
-.pagination{
-  justify-self: center;
-  align-items: center;
+.ngx-pagination{
+  margin: 0 auto;
 }
-.pagination .page-item .page-link
+.ngx-pagination .current
 {
-  color: #429e00;
-  cursor: pointer;
+  background-color: #429e00 !important;
 }
-.pagination .page-item.active .page-link{
-  background-color: #44a300;
-  border-color: #77b748;
-  color: #fff;
+.ngx-pagination li{
+  transition:background 1s;
 }
-.page-item.disabled .page-link {
-  color: #6c757d;
-  pointer-events: none;
-  cursor: auto;
-  background-color: #fff;
-  border-color: #dee2e6;
+.tg-sectionspace .carousel-arrow-prev{
+  margin-right: 50px !important;
 }

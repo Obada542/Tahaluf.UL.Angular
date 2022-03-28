@@ -1,3 +1,4 @@
+import { HomeService } from './../Services/home.service';
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../Services/book.service';
 
@@ -8,10 +9,20 @@ import { BookService } from '../Services/book.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public bookService:BookService) {
-    
+  constructor(public bookService: BookService, public sliderService: HomeService) {
+
   }
   ngOnInit() {
-}
+    this.bookService.getBestBooks();
+    this.sliderService.getAll();
+    this.bookService.getNewestBooks();
+  }
 
+  SearchByCategory(category:string){
+    console.log(category)
+  }
+  OpenBookDetails(id:number){
+    console.log(id)
+
+  }
 }

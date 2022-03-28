@@ -2131,9 +2131,18 @@ li.menu-item-has-mega-menu {
   font-size: inherit;
   line-height: inherit;
 }
-.tg-bookscategories li a {
+.tg-bookscategories li a,
+.tg-postbookcontent h3 a {
   color: #666;
   display: block;
+}
+.tg-postbook a{
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.tg-postbookcontent li a:hover,
+.tg-postbookcontent h3:hover a {
+  color: #0a58ca;
 }
 .tg-themetagbox {
   width: 100%;
@@ -2163,7 +2172,6 @@ li.menu-item-has-mega-menu {
   border-bottom: 8px solid transparent !important;
 }
 .tg-booktitle {
-  height: 80px;
   width: 100%;
   float: left;
   padding: 0 0 20px;
@@ -4976,3 +4984,4 @@ padding-bottom:50px;
 	color:#fff;
 	line-height:normal;
 }
+

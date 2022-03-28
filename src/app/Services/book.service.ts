@@ -7,17 +7,49 @@ import { NgxSpinnerService } from 'ngx-spinner';
   providedIn: 'root'
 })
 export class BookService {
+  pdf:any;
   display_Image:any;
   books: any;
+  book: any;
   libraries: any;
-
+  newestBooks:any;
+  categories:any;
   constructor(private http: HttpClient, private toastr: ToastrService, private spinner: NgxSpinnerService) { }
   getAllBooks() {
+    this.spinner.show();
+    return this.http.get('https://localhost:44346/api/book/GetBooks').subscribe((res) => {
+      this.books = res;
+      this.spinner.hide();
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message,err.status);
+    });
+  }
+  getBookById(id:any) {
+    this.spinner.show();
+    return this.http.get('https://localhost:44346/api/book/GetBookById/'+id).subscribe((res) => {
+      this.book = res;
+      this.spinner.hide();
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message,err.status);
+    });
+  }
+  getBestBooks() {
     this.spinner.show();
     return this.http.get('https://localhost:44346/api/book/getbestbooks').subscribe((res) => {
       this.books = res;
       this.spinner.hide();
-      this.toastr.success('Data Retrieved!!');
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message,err.status);
+    });
+  }
+  getNewestBooks(){
+    this.spinner.show();
+    return this.http.get('https://localhost:44346/api/book/GetNewestBooks').subscribe((res) => {
+      this.newestBooks = res;
+      this.spinner.hide();
     }, err => {
       this.spinner.hide();
       this.toastr.error(err.message,err.status);
@@ -43,9 +75,21 @@ export class BookService {
       this.toastr.error(err.message,err.status);
     });
   }
+  getCategories() {
+    this.spinner.show();
+    this.http.get('https://localhost:44346/api/book/getCategories').subscribe((res) => {
+      this.spinner.hide();
+      this.categories = res;
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message,err.status);
+    });
+  }
   createBook(data:any){
     this.spinner.show();
     data.image=this.display_Image;
+    data.pdf=this.pdf;
+
     this.http.post('https://localhost:44346/api/book/CreateBook/',data).subscribe((res:any)=>{
       this.spinner.hide();
       this.toastr.success('Create Book Successfully :)')
@@ -64,9 +108,21 @@ export class BookService {
       this.toastr.error(err.message , err.status);
     });
   }
+  uploadPdf(file:FormData)
+  {
+    console.log(file)
+    this.http.post('https://localhost:44346/api/book/uploadPdf/',file)
+    .subscribe((res:any)=>{
+      this.pdf=res.pdf;
+      console.log(this.pdf)
+    },err=>{
+      this.toastr.error(err.message , err.status);
+    });
+  }
   updateBook(data:any){
     this.spinner.show();
     data.image=this.display_Image;
+    data.pdf=this.pdf;
     this.http.put('https://localhost:44346/api/book/UpdateBook/',data).subscribe((res:any)=>{
       this.spinner.hide();
       this.toastr.success('Update Book Successfully :)')

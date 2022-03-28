@@ -37,7 +37,9 @@ import { DashboardaccComponent } from './accountant/dashboardacc/dashboardacc.co
 import { NgChartsModule } from 'ng2-charts';
 import { ManageTestimonialsComponent } from './admin/manage-testimonials/manage-testimonials.component';
 import { ManageNewsComponent } from './admin/manage-news/manage-news.component';
-
+import { BookComponent } from './books/book/book.component';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { BookdetailsComponent } from './books/bookdetails/bookdetails.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,6 +64,8 @@ import { ManageNewsComponent } from './admin/manage-news/manage-news.component';
     DashboardaccComponent,
     ManageTestimonialsComponent,
     ManageNewsComponent,
+    BookComponent,
+    BookdetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +91,7 @@ import { ManageNewsComponent } from './admin/manage-news/manage-news.component';
     MatIconModule,
     NgbCarouselModule,
     NgChartsModule,
+    NgxPaginationModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

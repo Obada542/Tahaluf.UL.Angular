@@ -12,12 +12,13 @@
 </div>
 <div class="col-lg-12 grid-margin stretch-card">
   <div class="card">
-    <div class="card-body table-responsive">
+    <div class="card-body">
       <h4 class="card-title">Manage Books</h4>
       <button class=" card-description btn btn-primary " (click)="openCreateDialog()" style="color: #fff;"> Add
         Book</button>
       <input type="text" style="float: right;" #search placeholder="Search book by name" (input)="searchBook($event)">
-      <table class="table  table-striped">
+      <div class=" table-responsive">
+<table class="table  table-striped">
         <thead>
           <tr>
             <th> Image </th>
@@ -27,7 +28,6 @@
             <th> Quantity </th>
             <th> Library </th>
             <th> Category </th>
-            <th> Times sold </th>
             <th> Action </th>
           </tr>
         </thead>
@@ -42,7 +42,6 @@
             <td> {{book.quantity}} </td>
             <td> {{libraryname(book.library_Id)}} </td>
             <td> {{book.category}} </td>
-            <td> {{book.nosold}} </td>
             <td>
               <a class="text-danger" (click)="openDeleteDialog(book.id)">Delete</a>
               |
@@ -52,6 +51,8 @@
         </tbody>
 
       </table>
+      </div>
+
       <div *ngIf="books.length == 0 && search.value">
         <p class="nothing">Sorry, no books with this name were found.</p>
       </div>
@@ -132,8 +133,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Categoryies</label>
-                <div class="col-sm-10">
+                <label class="col-sm-4 col-form-label">Categoryies</label>
+                <div class="col-sm-8">
                   <input type="text" class="form-control" matInput formControlName="category">
                   <br>
                   <mat-error class="text-danger"
@@ -148,8 +149,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Overview</label>
-                <div class="col-sm-10">
+                <label class="col-sm-4 col-form-label">Overview</label>
+                <div class="col-sm-8">
                   <textarea class="form-control" matInput formControlName="overview"></textarea>
                   <br>
                   <mat-error class="text-danger"
@@ -163,9 +164,9 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Library</label>
-                <div class="col-sm-10">
-                  <select class="form-control" matInput formControlName="library_Id">
+                <label class="col-sm-4 col-form-label">Library</label>
+                <div class="col-sm-8">
+                  <select class="form-control" matInput formControlName="library_Id" ngModel="0" >
                     <option value="0" disabled selected>Please choose one</option>
                     <option *ngFor="let library of book.libraries" [ngValue]="library.id">{{library.library_Name}}
                     </option>
@@ -182,8 +183,25 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
+                <label class="col-sm-4 col-form-label">PDF file</label>
+                <div class="col-sm-8">
+                  <div class="mb-3 file">
+                    <input class="form-control" type="file" id="formFile" #pdf accept="application/pdf" formControlName="pdf" (change)="uploadPdf(pdf.files)">
+                  </div>
+                  <br>
+                  <mat-error class="text-danger"
+                    *ngIf="createbook.controls['pdf'].hasError('required') && createbook.controls['pdf'].touched">
+                    PDF is <strong class="text-danger">required</strong>
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
                 <div class="col-sm-9">
-                  <input type="file" #file placeholder="Choose Image" formControlName="image"
+                  <input type="file" #file placeholder="Choose Image" formControlName="image" accept="image/*"
                     (change)="uploadFile(file.files)" style="display:none;">
                   <button class="btn btn-primary" (click)="file.click()">Upload Image</button>
                 </div>
@@ -332,8 +350,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Categoryies</label>
-                <div class="col-sm-10">
+                <label class="col-sm-4 col-form-label">Categoryies</label>
+                <div class="col-sm-8">
                   <input type="text" class="form-control" [(ngModel)]="selectedBook.category" matInput
                     formControlName="category">
                   <br>
@@ -349,8 +367,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Overview</label>
-                <div class="col-sm-10">
+                <label class="col-sm-4 col-form-label">Overview</label>
+                <div class="col-sm-8">
                   <textarea class="form-control" [(ngModel)]="selectedBook.overview" matInput
                     formControlName="overview"></textarea>
                   <br>
@@ -365,8 +383,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Library</label>
-                <div class="col-sm-10">
+                <label class="col-sm-4 col-form-label">Library</label>
+                <div class="col-sm-8">
                   <select class="form-control" matInput formControlName="library_Id"
                     [(ngModel)]="selectedBook.library_Id">
                     <option [ngValue]="0" disabled>Please choose one</option>
@@ -385,8 +403,25 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
+                <label class="col-sm-4 col-form-label">PDF file</label>
+                <div class="col-sm-8">
+                  <div class="mb-3 file">
+                    <input class="form-control" type="file" id="formFile" #pdf accept="application/pdf" formControlName="pdf" (change)="uploadPdf(pdf.files)">
+                  </div>
+                  <br>
+                  <mat-error class="text-danger"
+                    *ngIf="updatebook.controls['pdf'].hasError('required') && updatebook.controls['pdf'].touched">
+                    PDF is <strong class="text-danger">required</strong>
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
                 <div class="col-sm-9">
-                  <input type="file" #file placeholder="Choose Image" formControlName="image"
+                  <input type="file" #file placeholder="Choose Image" formControlName="image" accept="image/*"
                     (change)="uploadFile(file.files)" style="display:none;">
                   <button class="btn btn-primary" (click)="file.click()">Upload Image</button>
                 </div>

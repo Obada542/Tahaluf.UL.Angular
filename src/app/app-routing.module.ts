@@ -1,3 +1,5 @@
+import { BookdetailsComponent } from './books/bookdetails/bookdetails.component';
+import { BookComponent } from './books/book/book.component';
 import { ManageStudentComponent } from './admin/manage-student/manage-student.component';
 import { ManageEmployeeComponent } from './admin/manage-employee/manage-employee.component';
 import { ManageLoaningComponent } from './admin/manage-loaning/manage-loaning.component';
@@ -29,8 +31,18 @@ const routes: Routes = [
   },
   {
     path: "books",
-    component: BooksComponent
+    component: BooksComponent,
+    children: [
+      {
+    path: "",
+    component: BookComponent
+  },{
+    path: ":id",
+    component: BookdetailsComponent
   },
+    ]
+  },
+
   {
     path: "about",
     component: AboutComponent
@@ -121,11 +133,8 @@ const routes: Routes = [
         path: "dashboard",
         component: DashboardaccComponent
       },
-
-
   ]
   },
-
   {
     path: 'PageNotFound-404',
     component: PagenotfoundComponent
