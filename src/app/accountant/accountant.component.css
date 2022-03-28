@@ -1,3 +1,7 @@
 li{
-    list-style: none !important;
-  }
+  list-style: none !important;
+}
+
+.header_iner.d-flex.justify-content-between.align-items-center {
+  height: 78px;
+}

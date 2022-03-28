@@ -24,6 +24,9 @@ import { AccountantComponent } from './accountant/accountant.component';
 import { DashboardaccComponent } from './accountant/dashboardacc/dashboardacc.component';
 import { ManageNewsComponent } from './admin/manage-news/manage-news.component';
 import { ManageTestimonialsComponent } from './admin/manage-testimonials/manage-testimonials.component';
+import { GetStudentComponent } from './accountant/get-student/get-student.component';
+import { GetEmployeeComponent } from './accountant/get-employee/get-employee.component';
+import { AuthorizationGuard } from './authorization.guard';
 const routes: Routes = [
   {
     path: "home",
@@ -34,12 +37,12 @@ const routes: Routes = [
     component: BooksComponent,
     children: [
       {
-    path: "",
-    component: BookComponent
-  },{
-    path: ":id",
-    component: BookdetailsComponent
-  },
+        path: "",
+        component: BookComponent
+      }, {
+        path: ":id",
+        component: BookdetailsComponent
+      },
     ]
   },
 
@@ -81,47 +84,49 @@ const routes: Routes = [
         component: ManageLibraryComponent
       },
       {
-        path:"manageHome",
+        path: "manageHome",
         component: ManageHomeComponent
       },
       {
-        path:"manageLoaning",
+        path: "manageLoaning",
         component: ManageLoaningComponent
       },
       {
-        path:"manageEmployee",
+        path: "manageEmployee",
         component: ManageEmployeeComponent
       },
       {
-        path:"manageStudent",
+        path: "manageStudent",
         component: ManageStudentComponent
       },
       {
-        path:"manageRole",
+        path: "manageRole",
         component: RoleComponent
       },
       {
-        path:"contactMessage",
-        component:MessageComponent
+        path: "contactMessage",
+        component: MessageComponent
       },
       {
-        path:"manageWebsite",
+        path: "manageWebsite",
         component: ManageWebsiteComponent
       },
       {
-        path:"manageNews",
-        component:ManageNewsComponent
+        path: "manageNews",
+        component: ManageNewsComponent
       },
 
       {
-        path:"manageTestimonial",
-        component:ManageTestimonialsComponent
+        path: "manageTestimonial",
+        component: ManageTestimonialsComponent
       }
-    ]
+    ],
+
+    canActivate: [AuthorizationGuard]
   },
 
   {
-    path:"accountant",
+    path: "accountant",
     component: AccountantComponent,
     children: [
       {
@@ -133,7 +138,16 @@ const routes: Routes = [
         path: "dashboard",
         component: DashboardaccComponent
       },
-  ]
+      {
+        path: "studentsInfo",
+        component: GetStudentComponent
+      },
+      {
+        path: "employeeInfo",
+        component: GetEmployeeComponent
+      },
+    ],
+    canActivate: [AuthorizationGuard]
   },
   {
     path: 'PageNotFound-404',

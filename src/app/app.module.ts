@@ -12,7 +12,7 @@ import { NgbModule,NgbCarouselModule, } from '@ng-bootstrap/ng-bootstrap';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule, ToastNoAnimationModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { BooksComponent } from './books/books.component';
@@ -40,6 +40,10 @@ import { ManageNewsComponent } from './admin/manage-news/manage-news.component';
 import { BookComponent } from './books/book/book.component';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { BookdetailsComponent } from './books/bookdetails/bookdetails.component';
+import { GetStudentComponent } from './accountant/get-student/get-student.component';
+import { GetEmployeeComponent } from './accountant/get-employee/get-employee.component';
+import { TokenInterceptor } from './Interceptor/token.interceptor';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +70,8 @@ import { BookdetailsComponent } from './books/bookdetails/bookdetails.component'
     ManageNewsComponent,
     BookComponent,
     BookdetailsComponent,
+    GetStudentComponent,
+    GetEmployeeComponent,
   ],
   imports: [
     BrowserModule,
@@ -93,7 +99,13 @@ import { BookdetailsComponent } from './books/bookdetails/bookdetails.component'
     NgChartsModule,
     NgxPaginationModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptor,
+      multi:true
+    }
+  ] ,
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
