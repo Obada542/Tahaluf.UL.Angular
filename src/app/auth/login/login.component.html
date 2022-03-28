@@ -10,7 +10,65 @@
       </div>
     </div>
   </div>
-  <form class="form container" id="login" [formGroup]="formGroup">
+
+
+
+   <form class="form container" id="login" > 
+    <h1 class="form__heading">Welcome</h1>
+    <hr>
+    <div class="form__group">
+      <input matInput class="form-control" type="email" id="email" class="form__input" placeholder="email address" [formControl]="email">
+      <div class="error">
+        <mat-error
+          *ngIf="email.hasError('email') && !email.hasError('required')&& email.touched">
+          *Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="email.hasError('required') &&email.touched">
+          *Email is required
+        </mat-error>
+      </div>
+    </div>
+    <div class="form__group">
+      <input matInput  type="password" autocomplete="false" id="password" class="form__input" placeholder="password"
+      [formControl]="password">
+      <div class="error">
+        <mat-error
+          *ngIf="password.hasError('minlength') && !password.hasError('required') && password.touched">
+          *Please enter strong password
+        </mat-error>
+        <mat-error
+          *ngIf="password.hasError('required') && password.touched">
+          *Password is required
+        </mat-error>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <input type="checkbox" id="checkbox" (click)="remember()">
+      <label for="checkbox" style="font-size: 15px;"> Remember me</label>
+    </div>
+    <br>
+    <button class="btn btn--large btn--green" type="submit"
+    [disabled]="!email.valid || !password.valid" (click)="submit()">
+      Login
+    </button>
+    <p id="account" > new member? <a
+        [routerLink]="['/security/register']">Create new Account</a> </p>
+  </form>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    <form class="form container" id="login" [formGroup]="formGroup"> 
     <h1 class="form__heading">Welcome</h1>
     <hr>
     <div class="form__group">
@@ -50,6 +108,6 @@
     </button>
     <p id="account" > new member? <a
         [routerLink]="['/security/register']">Create new Account</a> </p>
-  </form>
+  </form>   -->
 </div>
 <app-footer></app-footer>

@@ -24,6 +24,7 @@ import { ManageNewsComponent } from './admin/manage-news/manage-news.component';
 import { ManageTestimonialsComponent } from './admin/manage-testimonials/manage-testimonials.component';
 import { GetStudentComponent } from './accountant/get-student/get-student.component';
 import { GetEmployeeComponent } from './accountant/get-employee/get-employee.component';
+import { AuthorizationGuard } from './authorization.guard';
 const routes: Routes = [
   {
     path: "home",
@@ -107,7 +108,9 @@ const routes: Routes = [
         path:"manageTestimonial",
         component:ManageTestimonialsComponent
       }
-    ]
+    ],
+
+    canActivate:[AuthorizationGuard]
   },
 
   {
@@ -133,7 +136,10 @@ const routes: Routes = [
       },
 
 
-  ]
+  ],
+
+  canActivate:[AuthorizationGuard]
+
   },
 
   {

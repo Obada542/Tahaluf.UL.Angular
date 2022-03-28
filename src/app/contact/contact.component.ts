@@ -16,6 +16,7 @@ export class ContactComponent implements OnInit {
     subject:new FormControl('',[Validators.required]),
     firstname:new FormControl('',[Validators.required]),
     lastname:new FormControl('',[Validators.required]),
+    name:new FormControl(),
   });
   constructor(public contact: ContactMsgService) { }
 
@@ -24,6 +25,8 @@ export class ContactComponent implements OnInit {
 
 
   submit(){
-  this.contact.createMessage(this.contactForm.value);
+    this.contactForm.controls['name'].setValue(this.contactForm.value.firstname + ' ' + this.contactForm.value.lastname)
+    this.contact.createMessage(this.contactForm.value);
+    location.reload();
   }
 }

@@ -12,7 +12,7 @@ import { NgbModule,NgbCarouselModule, } from '@ng-bootstrap/ng-bootstrap';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule, ToastNoAnimationModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { JwPaginationModule } from 'jw-angular-pagination';
 import { BooksComponent } from './books/books.component';
@@ -39,6 +39,7 @@ import { ManageTestimonialsComponent } from './admin/manage-testimonials/manage-
 import { ManageNewsComponent } from './admin/manage-news/manage-news.component';
 import { GetStudentComponent } from './accountant/get-student/get-student.component';
 import { GetEmployeeComponent } from './accountant/get-employee/get-employee.component';
+import { TokenInterceptor } from './Interceptor/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,13 @@ import { GetEmployeeComponent } from './accountant/get-employee/get-employee.com
     NgbCarouselModule,
     NgChartsModule,
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptor,
+      multi:true
+    }
+  ] ,
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
