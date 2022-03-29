@@ -19,10 +19,7 @@ export class HomeComponent implements OnInit {
   }
 
   SearchByCategory(category:string){
-    console.log(category)
   }
   OpenBookDetails(id:number){
-    console.log(id)
-
   }
 }

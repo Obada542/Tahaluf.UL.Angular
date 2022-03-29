@@ -90,7 +90,6 @@ export class ReportService {
     this.http.get("https://localhost:44346/api/report/Staitstics").subscribe(res=>{
       this.spinner.hide();
       this.staitstics = res;
-      console.log(res)
     },err=>{
       this.spinner.hide()
       this.toastr.error(err.message,err.status);
@@ -134,14 +133,14 @@ export class ReportService {
           { label: 'Sales', data: res.map(function(a:any) {return a.sales;}).reverse() },
           { label: 'Fines', data: res.map(function(a:any) {return a.fines;}).reverse() },
           { label: 'Book', data: res.map(function(a:any) {return a.bookname;}).reverse() },
-          
+
         ],
       };
     },err=>{
       this.spinner.hide()
       this.toastr.error(err.message,err.status);
     })
-  }   
+  }
 
 
   getMonthlyBook(){
@@ -159,14 +158,14 @@ export class ReportService {
           { label: 'Sales', data: res.map(function(a:any) {return a.sales;}).reverse() },
           { label: 'Fines', data: res.map(function(a:any) {return a.fines;}).reverse() },
           { label: 'Book', data: res.map(function(a:any) {return a.bookname;}).reverse() },
-          
+
         ],
       };
     },err=>{
       this.spinner.hide()
       this.toastr.error(err.message,err.status);
     })
-  }   
+  }
 
   getAnnualBook(){
     this.spinner.show();
@@ -183,13 +182,13 @@ export class ReportService {
           { label: 'Sales', data: res.map(function(a:any) {return a.sales;}).reverse() },
           { label: 'Fines', data: res.map(function(a:any) {return a.fines;}).reverse() },
           { label: 'Book', data: res.map(function(a:any) {return a.bookname;}).reverse() },
-          
+
         ],
       };
     },err=>{
       this.spinner.hide()
       this.toastr.error(err.message,err.status);
     })
-  }   
+  }
 
 }

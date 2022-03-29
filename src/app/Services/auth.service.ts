@@ -13,7 +13,7 @@ export class AuthService {
   constructor(public spinner :NgxSpinnerService, public router:Router, private http :HttpClient,private toater:ToastrService) { }
 
   submit(email:any, password:any){
-
+    this.spinner.show();
     var body ={
       email:email.value.toString(),
       password:password.value.toString()
@@ -35,17 +35,29 @@ export class AuthService {
       localStorage.setItem('token', responce.token);
        let data:any= jwt_decode(responce.token);
 
-       localStorage.setItem('user',JSON.stringify({...data}))
-      if(data.role=="Admin")
-      this.router.navigate(['admin/dashboard']);
-      else if (data.role=="Student")
-      this.router.navigate(['home']);
-      else if(data.role=="Accountant")
-      this.router.navigate(['accountant/dashboard']);
+       localStorage.setItem('user',JSON.stringify({...data}));
+      if(data.role=="Admin"){
+        this.spinner.hide();
+        this.router.navigate(['admin/dashboard']);
+      }
+
+      else if (data.role=="Student"){
+        this.spinner.hide();
+        this.router.navigate(['home']);
+      }
+      else if(data.role=="Accountant"){
+        this.spinner.hide();
+        this.router.navigate(['accountant/dashboard']);
+      }
     },err=>{
+      this.spinner.hide();
       this.router.navigate(['security/login']);
       this.toater.error('Error Login ')
     })
 
+  }
+  getUser(){
+    const user:any =localStorage.getItem('user')
+    return JSON.parse( user);
   }
 }

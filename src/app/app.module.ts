@@ -14,7 +14,6 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule, ToastNoAnimationModule } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { JwPaginationModule } from 'jw-angular-pagination';
 import { BooksComponent } from './books/books.component';
 import {MatSelectModule} from '@angular/material/select';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
@@ -43,7 +42,7 @@ import { BookdetailsComponent } from './books/bookdetails/bookdetails.component'
 import { GetStudentComponent } from './accountant/get-student/get-student.component';
 import { GetEmployeeComponent } from './accountant/get-employee/get-employee.component';
 import { TokenInterceptor } from './Interceptor/token.interceptor';
-
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,14 +89,14 @@ import { TokenInterceptor } from './Interceptor/token.interceptor';
       }
     ),
     HttpClientModule,
-    JwPaginationModule,
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatIconModule,
     NgbCarouselModule,
     NgChartsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    PdfViewerModule
   ],
   providers: [DatePipe,
     {

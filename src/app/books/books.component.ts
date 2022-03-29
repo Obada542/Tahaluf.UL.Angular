@@ -23,9 +23,7 @@ onChangePage(pageOfItems: Array<any>) {
     document.documentElement.scrollTop = 500;
   }
   SearchByCategory(category:string){
-    console.log(category)
   }
   OpenBookDetails(id:number){
-    console.log(id)
   }
 }

@@ -47,7 +47,7 @@
                   </ul>
                 </div>
               </nav>
-              <div class="tg-wishlistandcart">
+              <div class="tg-wishlistandcart" *ngIf="user.getUser()">
                 <div class="dropdown tg-themedropdown tg-minicartdropdown ">
                   <a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -72,19 +72,16 @@
                     </div>
                   </div>
                 </div>
-                <div class="dropdown tg-themedropdown tg-currencydropdown tg-userlogin" style="height: 60px;">
+                <div class="dropdown tg-themedropdown tg-currencydropdown tg-userlogin" style="height: 60px;" >
                   <a href="javascript:void(0);" id="tg-currenty" class="tg-btnthemedropdown " data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <figure><a href="javascript:void(0);"><img
                           src="http://exprostudio.com/html/book_library/images/users/img-01.jpg"
                           alt="Profile picture"></a></figure>
-                    <span>Hi, Melonie</span>
+                    <span>Hi, {{user.getUser().unique_name}}</span>
                   </a>
                   <ul class="tg-themedropdownmenu dropdown-menu ">
                     <li>
-                      <a [routerLink]="['/security/login']">
-                        <span><i class="fa-solid fa-right-to-bracket"></i>&nbsp;&nbsp; Log in</span>
-                      </a>
                       <a href="javascript:void(0);">
                         <span><i class="fa-solid fa-user"></i>&nbsp;&nbsp; My profile</span>
                       </a>
@@ -93,8 +90,15 @@
                       </a>
                     </li>
                   </ul>
-
                 </div>
+              </div>
+              <div class="tg-wishlistandcart" *ngIf="!user.getUser()">
+                <div class="dropdown tg-themedropdown tg-minicartdropdown ">
+                  <a [routerLink]="['/security/login']" style="color:#fff" class="tg-btnthemedropdown">
+                    Login/Register
+                  </a>
+                </div>
+
               </div>
             </div>
           </div>

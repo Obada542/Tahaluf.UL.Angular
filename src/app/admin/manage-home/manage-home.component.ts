@@ -88,9 +88,6 @@ openUpdateDailog(home:any)
         {
           if(result=='yes')
           this.home.deleteItem(id);
-          else if(result=='no')
-          console.log("Thank you ");
-
         }
       })
   }

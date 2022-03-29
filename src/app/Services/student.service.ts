@@ -54,7 +54,7 @@ export class StudentService {
         this.toastr.error(err.message, err.status);
       });
   }
-  
+
   updateStudent(login: any) {
     this.spinner.show();
     login.image = this.display_Image;
@@ -67,7 +67,6 @@ export class StudentService {
     }
     this.http.put('https://localhost:44346/api/student', student)
       .subscribe((res) => {
-        console.log(res)
         this.spinner.hide();
         this.toastr.success("student Updated successfully");
       }, err => {

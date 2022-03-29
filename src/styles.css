@@ -12,3 +12,13 @@
 .tg-sectionspace .carousel-arrow-prev{
   margin-right: 50px !important;
 }
+.pdfViewer{
+  height: 2015px !important;
+  overflow: hidden;
+}
+@media (min-width: 768px) {
+  .pdfViewer{
+    height: 4070px !important;
+    overflow: hidden;
+  }
+}

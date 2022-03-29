@@ -17,6 +17,7 @@ export class BookService {
   constructor(private http: HttpClient, private toastr: ToastrService, private spinner: NgxSpinnerService) { }
   getAllBooks() {
     this.spinner.show();
+    this.getAllLibraries();
     return this.http.get('https://localhost:44346/api/book/GetBooks').subscribe((res) => {
       this.books = res;
       this.spinner.hide();
@@ -27,6 +28,7 @@ export class BookService {
   }
   getBookById(id:any) {
     this.spinner.show();
+    this.getAllLibraries();
     return this.http.get('https://localhost:44346/api/book/GetBookById/'+id).subscribe((res) => {
       this.book = res;
       this.spinner.hide();
@@ -110,11 +112,9 @@ export class BookService {
   }
   uploadPdf(file:FormData)
   {
-    console.log(file)
     this.http.post('https://localhost:44346/api/book/uploadPdf/',file)
     .subscribe((res:any)=>{
       this.pdf=res.pdf;
-      console.log(this.pdf)
     },err=>{
       this.toastr.error(err.message , err.status);
     });

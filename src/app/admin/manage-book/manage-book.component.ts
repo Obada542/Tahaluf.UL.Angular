@@ -50,7 +50,6 @@ export class ManageBookComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.book.getAllLibraries();
     this.book.getAllBooks();
   }
 
