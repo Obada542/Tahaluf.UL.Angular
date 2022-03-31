@@ -58,10 +58,8 @@ export class StudentService {
   updateStudent(login: any) {
     this.spinner.show();
     login.image = this.display_Image;
-    login.role_Id = 2;
-    const stdId: number = this.students.find((x: any) => x.login_Id == login.id).id;
     const student = {
-      id: stdId,
+      login_Id: login.id,
       first_Name: login.first_Name,
       last_Name: login.last_Name
     }

@@ -1,3 +1,4 @@
+import { LoaningService } from './loaning.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
@@ -9,8 +10,8 @@ import jwt_decode from "jwt-decode";
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(public spinner :NgxSpinnerService, public router:Router, private http :HttpClient,private toater:ToastrService) { }
+  user:any;
+  constructor(public spinner :NgxSpinnerService,public loaning:LoaningService, public router:Router, private http :HttpClient,private toater:ToastrService) { }
 
   submit(email:any, password:any){
     this.spinner.show();
@@ -37,15 +38,18 @@ export class AuthService {
 
        localStorage.setItem('user',JSON.stringify({...data}));
       if(data.role=="Admin"){
+        this.getUser()
         this.spinner.hide();
         this.router.navigate(['admin/dashboard']);
       }
 
       else if (data.role=="Student"){
+        this.getUser()
         this.spinner.hide();
         this.router.navigate(['home']);
       }
       else if(data.role=="Accountant"){
+        this.getUser()
         this.spinner.hide();
         this.router.navigate(['accountant/dashboard']);
       }
@@ -57,7 +61,24 @@ export class AuthService {
 
   }
   getUser(){
-    const user:any =localStorage.getItem('user')
-    return JSON.parse( user);
+    this.spinner.show();
+    const local:any =localStorage.getItem('user')
+    this.user = JSON.parse( local);
+    const id:number = this.user.certserialnumber
+    if(this.user.role === "Student"){
+      this.http.get('https://localhost:44346/api/student/getdata/'+id)
+      .subscribe((res: any) => {
+        this.spinner.hide();
+        this.user = res;
+        this.loaning.getStudentLoans(this.user.id);
+
+        this.toater.success("Welcome back "+this.user.first_Name + " "+this.user.last_Name);
+      }, err => {
+        this.spinner.hide();
+        this.toater.error(err.message, err.status);
+      });
+    }else{
+
+    }
   }
 }

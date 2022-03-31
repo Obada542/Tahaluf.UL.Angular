@@ -1,5 +1,6 @@
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component,OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { BookService } from 'src/app/Services/book.service';
 import { Subscription } from 'rxjs';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
@@ -12,7 +13,9 @@ import { PDFDocumentProxy } from 'ng2-pdf-viewer';
 export class BookdetailsComponent implements OnInit ,OnDestroy{
   private subscription!: Subscription;
   totalPages:any;
-  constructor(public book:BookService,private route:ActivatedRoute) { }
+  @ViewChild('page') page!:TemplateRef<any>;
+  currentpage!:number;
+  constructor(public book:BookService,private route:ActivatedRoute,private dialog:MatDialog) { }
 
   ngOnInit(): void {
     var id:any;
@@ -31,5 +34,9 @@ export class BookdetailsComponent implements OnInit ,OnDestroy{
   }
   getPages(pdf:PDFDocumentProxy){
       this.totalPages = pdf.numPages;
+  }
+  openPage(page:number){
+    this.currentpage = page;
+    this.dialog.open(this.page);
   }
 }

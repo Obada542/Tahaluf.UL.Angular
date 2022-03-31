@@ -1,0 +1,119 @@
+<app-header></app-header>
+
+<main id="tg-main" class="tg-main tg-haslayout"
+  style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);background-position: top;background-attachment: fixed;">
+  <div class="tg-haslayout">
+    <div class="container">
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="right border">
+                  <div class="header">Order Summary</div>
+                  <div class="row item">
+                    <div class="col-4 align-self-center">
+                      <img class="img-fluid" src="../../../assets/Images/{{bookservice.book.image}}">
+                    </div>
+                    <div class="col-8">
+                      <div><b>{{bookservice.book.price}} JD</b></div>
+                      <b class="row text-muted">{{bookservice.book.book_Name}}</b>
+                      <div class="row text-muted" style="margin-top: 65px;">{{bookservice.book.category}}</div>
+
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row lower" style="margin: 0;">
+                    <div class="col text-left"><b>Total to pay</b></div>
+                    <div class="col text-right"><b>{{bookservice.book.price}} JD</b></div>
+                  </div>
+                  <hr>
+                  <div class="row lower" style="margin: 0;">
+                  </div>
+                  <p class="text-muted text-center">Complimentary Shipping & Returns</p>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="left border">
+                  <mat-accordion class="example-headers-align">
+                    <mat-expansion-panel [expanded]="state === 1" (opened)="state =1" (closed)="state =0" hideToggle>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Pay with PayPal
+
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          <div class="icons">
+                            <img src="https://img.icons8.com/color/48/000000/paypal.png" />
+                          </div>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+
+                      <form> <span>Cardholder's name:</span> <input placeholder="Linda Williams"> <span>Card
+                          Number:</span>
+                        <input placeholder="0125 6780 4567 9909">
+                        <div class="row">
+                          <div class="col-4"><span>Expiry date:</span> <input placeholder="YY/MM"> </div>
+                          <div class="col-4"><span>CVV:</span> <input id="cvv"> </div>
+                        </div>
+                        <div class="row" style="margin: 0;">
+                          <div class="col-1">
+                            <input type="checkbox" id="a">
+                          </div>
+                          <div class="col-9" style="margin-left: -20px;">
+                            <label for="a">Save card details to wallet</label>
+                          </div>
+                        </div>
+                        <button class="btn">Place order</button>
+
+                      </form>
+                    </mat-expansion-panel>
+                    <mat-expansion-panel [expanded]="state === 0" (opened)="state =0" (closed)="state =1" hideToggle>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Pay with credit Card
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          <div class="icons">
+                            <img src="https://img.icons8.com/color/48/000000/visa.png" />
+                            <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
+                            <img src="https://img.icons8.com/color/48/000000/maestro.png" />
+                          </div>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+
+                      <form>
+                        <span>Cardholder's name:</span>
+                        <input placeholder="Linda Williams">
+                        <span>CardNumber:</span>
+                        <input placeholder="0125 6780 4567 9909">
+                        <div class="row" style="margin: 0;">
+                          <div class="col-4">
+                            <span>Expiry date:</span> <input placeholder="YY/MM">
+                          </div>
+                          <div class="col-4">
+                            <span>CVV:</span> <input maxlength="4" id="cvv">
+                          </div>
+                        </div>
+                        <div class="row" style="margin: 0;">
+                          <div class="col-1">
+                            <input type="checkbox" id="a">
+                          </div>
+                          <div class="col-9" style="margin-left: -20px;">
+                            <label for="a">Save card details to wallet</label>
+                          </div>
+                        </div>
+                        <button class="btn">Place order</button>
+                      </form>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<app-footer></app-footer>

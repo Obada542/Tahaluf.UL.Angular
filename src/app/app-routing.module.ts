@@ -1,3 +1,4 @@
+import { ClientModule } from './client/client.module';
 import { BookdetailsComponent } from './books/bookdetails/bookdetails.component';
 import { BookComponent } from './books/book/book.component';
 import { ManageStudentComponent } from './admin/manage-student/manage-student.component';
@@ -61,6 +62,11 @@ const routes: Routes = [
   {
     path: "security",
     loadChildren: () => AuthModule
+  },
+  {
+    path: "client",
+    loadChildren: () => ClientModule,
+    canActivate: [AuthorizationGuard]
   },
   {
     path: 'admin',

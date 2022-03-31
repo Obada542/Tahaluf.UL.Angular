@@ -9,6 +9,7 @@ import { DatePipe } from '@angular/common';
 })
 export class LoaningService {
   loans: any =[];
+  studentloans:any;
   constructor(public datepipe: DatePipe,private http:HttpClient,private spinner:NgxSpinnerService,private toastr:ToastrService) { }
   getAllLoans(){
     this.spinner.show();
@@ -16,6 +17,17 @@ export class LoaningService {
     this.spinner.hide();
     this.toastr.success("Loan Data Retrieved!!");
     this.loans = res;
+    },err=>{
+      this.spinner.hide();
+      this.toastr.error(err.message,err.status);
+    });
+  }
+  getStudentLoans(id:any){
+    this.spinner.show();
+    this.http.get("https://localhost:44346/api/loaning/StudentBorrowing/"+id).subscribe(res=>{
+    this.spinner.hide();
+    this.studentloans = res;
+    console.table(res)
     },err=>{
       this.spinner.hide();
       this.toastr.error(err.message,err.status);

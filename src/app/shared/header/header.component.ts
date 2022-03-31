@@ -1,3 +1,4 @@
+import { LoaningService } from './../../Services/loaning.service';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,9 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(public user:AuthService) { }
+  constructor(public userService:AuthService,public loanService:LoaningService) { }
 
   ngOnInit(): void {
+
   }
 
 }

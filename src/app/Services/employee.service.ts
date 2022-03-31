@@ -57,8 +57,6 @@ export class EmployeeService {
   updateEmployee(login: any) {
     this.spinner.show();
     login.image = this.display_Image;
-    login.role_Id = 3;
-    const empId:number = this.employees.find((x: any) => x.login_Id == login.id).id;
     this.http.put('https://localhost:44346/api/login/Update/', login)
       .subscribe((res) => {
         this.spinner.hide();
@@ -68,7 +66,7 @@ export class EmployeeService {
       });
 
     const acc:any = {
-      id:empId,
+      login_Id:login.id,
       address:login.address,
       salary:login.salary
     }

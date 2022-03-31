@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.bookService.getBestBooks();
     this.sliderService.getAll();
-    this.bookService.getNewestBooks();
   }
 
   SearchByCategory(category:string){

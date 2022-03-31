@@ -39,8 +39,10 @@ export class BookService {
   }
   getBestBooks() {
     this.spinner.show();
+    this.getNewestBooks();
     return this.http.get('https://localhost:44346/api/book/getbestbooks').subscribe((res) => {
       this.books = res;
+
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
@@ -48,12 +50,9 @@ export class BookService {
     });
   }
   getNewestBooks(){
-    this.spinner.show();
     return this.http.get('https://localhost:44346/api/book/GetNewestBooks').subscribe((res) => {
       this.newestBooks = res;
-      this.spinner.hide();
     }, err => {
-      this.spinner.hide();
       this.toastr.error(err.message,err.status);
     });
   }
@@ -68,9 +67,7 @@ export class BookService {
     });
   }
   getAllLibraries() {
-    this.spinner.show();
     this.http.get('https://localhost:44346/api/library/GetLibraries').subscribe((res) => {
-      this.spinner.hide();
       this.libraries = res;
     }, err => {
       this.spinner.hide();
@@ -78,9 +75,7 @@ export class BookService {
     });
   }
   getCategories() {
-    this.spinner.show();
     this.http.get('https://localhost:44346/api/book/getCategories').subscribe((res) => {
-      this.spinner.hide();
       this.categories = res;
     }, err => {
       this.spinner.hide();

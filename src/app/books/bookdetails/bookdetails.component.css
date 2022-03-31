@@ -5,3 +5,12 @@
 .tg-featureimg img{
   max-height: 400px ;
 }
+.pdf{
+  width: 200%;
+   height: 200px;
+    cursor: pointer;
+    transition: 0.6s;
+}
+.pdf:hover{
+  transform: translateY(-20px);
+}

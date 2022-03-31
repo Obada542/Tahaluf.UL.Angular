@@ -1,4 +1,5 @@
-import {  NgxSpinnerService } from 'ngx-spinner';
+import { AuthService } from 'src/app/Services/auth.service';
+import { LoaningService } from './Services/loaning.service';
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
@@ -8,8 +9,11 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'Tahaluf.UL.Angular';
-  constructor(private toastr:ToastrService,private spinner: NgxSpinnerService){
+  constructor(private toastr:ToastrService,private borrowings:LoaningService,private user:AuthService){
     this.toastr.success("Welcome");
+    if(localStorage.getItem("user")){
+      // this.borrowings.getStudentLoans(this.user.getUser().unique_name)
+      this.user.getUser();
+    }
   }
 }

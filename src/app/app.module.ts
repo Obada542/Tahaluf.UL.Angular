@@ -8,14 +8,13 @@ import { TestimonialComponent } from './testimonial/testimonial.component';
 import { SharedModule } from './shared/shared.module';
 import { ContactComponent } from './contact/contact.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule,NgbCarouselModule, } from '@ng-bootstrap/ng-bootstrap';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { ToastrModule, ToastNoAnimationModule } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { BooksComponent } from './books/books.component';
-import {MatSelectModule} from '@angular/material/select';
+
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { ManageBookComponent } from './admin/manage-book/manage-book.component';
 import { AdminComponent } from './admin/admin.component';
@@ -27,22 +26,20 @@ import { ManageStudentComponent } from './admin/manage-student/manage-student.co
 import { RoleComponent } from './admin/role/role.component';
 import { MessageComponent } from './admin/message/message.component';
 import { DatePipe } from '@angular/common';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatIconModule} from '@angular/material/icon';
+
 import { ManageWebsiteComponent } from './admin/manage-website/manage-website.component';
 import { AccountantComponent } from './accountant/accountant.component';
 import { DashboardaccComponent } from './accountant/dashboardacc/dashboardacc.component';
-import { NgChartsModule } from 'ng2-charts';
+
 import { ManageTestimonialsComponent } from './admin/manage-testimonials/manage-testimonials.component';
 import { ManageNewsComponent } from './admin/manage-news/manage-news.component';
 import { BookComponent } from './books/book/book.component';
-import {NgxPaginationModule} from 'ngx-pagination';
+
 import { BookdetailsComponent } from './books/bookdetails/bookdetails.component';
 import { GetStudentComponent } from './accountant/get-student/get-student.component';
 import { GetEmployeeComponent } from './accountant/get-employee/get-employee.component';
 import { TokenInterceptor } from './Interceptor/token.interceptor';
-import { PdfViewerModule } from 'ng2-pdf-viewer';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +74,6 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    NgbModule,
     IvyCarouselModule,
     NgxSpinnerModule,
     ToastrModule.forRoot(),
@@ -89,14 +85,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
       }
     ),
     HttpClientModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatIconModule,
-    NgbCarouselModule,
-    NgChartsModule,
-    NgxPaginationModule,
-    PdfViewerModule
+
   ],
   providers: [DatePipe,
     {

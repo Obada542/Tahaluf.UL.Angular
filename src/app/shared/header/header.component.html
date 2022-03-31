@@ -47,7 +47,7 @@
                   </ul>
                 </div>
               </nav>
-              <div class="tg-wishlistandcart" *ngIf="user.getUser()">
+              <div class="tg-wishlistandcart" *ngIf="userService.user">
                 <div class="dropdown tg-themedropdown tg-minicartdropdown ">
                   <a href="javascript:void(0);" id="tg-minicart" class="tg-btnthemedropdown" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -55,19 +55,19 @@
                   </a>
                   <div class=" tg-themedropdownmenu dropdown-menu" aria-labelledby="tg-minicart" style="margin: 50px 0 0  -270px;">
                     <div class="tg-minicartbody">
-                      <div class="tg-minicarproduct">
+                      <div class="tg-minicarproduct"*ngFor="let loan of loanService.studentloans">
                         <figure>
-                          <img src="http://exprostudio.com/html/book_library/images/products/img-03.jpg" alt="image description">
+                          <img src="../../../assets/Images/{{loan.image}}" alt="image description">
                         </figure>
-                        <div class="tg-minicarproductdata">
-                          <h5><a href="javascript:void(0);">Have Faith In Your Soul</a></h5>
-                          <h6><a href="javascript:void(0);">$ 12.15</a></h6>
+                        <div class="tg-minicarproductdata" >
+                          <h5><a href="javascript:void(0);" style="font-size: 14px">{{loan.book_Name}}</a></h5>
+                          <h6><b style="font-size: 14px">{{loan.price}} JD</b></h6>
                         </div>
                       </div>
                     </div>
                     <div class="tg-minicartfoot">
                       <div class="tg-btns">
-                        <a class="tg-btn tg-active" href="javascript:void(0);">View Cart</a>
+                        <a class="tg-btn tg-active" [routerLink]="['/client/payment']">View History</a>
                       </div>
                     </div>
                   </div>
@@ -78,7 +78,7 @@
                     <figure><a href="javascript:void(0);"><img
                           src="http://exprostudio.com/html/book_library/images/users/img-01.jpg"
                           alt="Profile picture"></a></figure>
-                    <span>Hi, {{user.getUser().unique_name}}</span>
+                    <span>Hi, {{userService.user.username}}</span>
                   </a>
                   <ul class="tg-themedropdownmenu dropdown-menu ">
                     <li>
@@ -92,7 +92,7 @@
                   </ul>
                 </div>
               </div>
-              <div class="tg-wishlistandcart" *ngIf="!user.getUser()">
+              <div class="tg-wishlistandcart" *ngIf="!userService.user">
                 <div class="dropdown tg-themedropdown tg-minicartdropdown ">
                   <a [routerLink]="['/security/login']" style="color:#fff" class="tg-btnthemedropdown">
                     Login/Register
