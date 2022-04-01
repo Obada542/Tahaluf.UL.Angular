@@ -13,10 +13,20 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit() {
-    this.bookService.getBestBooks();
     this.sliderService.getAll();
-  }
 
+    setTimeout(()=>{
+    this.bookService.getBestBooks();
+      },3000);
+
+  }
+  getRate(id:number){
+    if(this.bookService.rates){
+      const rate =this.bookService.rates.find((x:any) => x.book_Id ==id);
+      return rate.rate
+    }
+
+  }
   SearchByCategory(category:string){
   }
   OpenBookDetails(id:number){

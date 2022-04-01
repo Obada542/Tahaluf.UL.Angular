@@ -2,7 +2,7 @@
   max-width: 1100px;
   padding-top: 50px;
   margin: 5vh;
-  min-height: 580px;
+  min-height: 750px;
 }
 
 .card-top {
@@ -39,7 +39,7 @@ form span {
 form {
   padding: 2vh 0
 }
-input {
+.example-headers-align input {
   border: 1px solid rgba(0, 0, 0, 0.137);
   padding: 1vh;
   margin-bottom: 4vh;

@@ -17,5 +17,11 @@ export class BookComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  getRate(id:number){
+    if(this.bookService.rates){
+      const rate =this.bookService.rates.find((x:any) => x.book_Id ==id);
+      return rate.rate
+    }
 
+  }
 }

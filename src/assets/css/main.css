@@ -129,10 +129,6 @@ select,
 .form-control,
 input[type="text"],
 input[type="password"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="month"],
-input[type="time"],
 input[type="week"],
 input[type="number"],
 input[type="email"],
@@ -1130,9 +1126,8 @@ body.tg-comingsoonpage .tg-wrapper {
   border-bottom: 1px solid #dbdbdb;
 }
 .tg-minicarproduct {
-  width: 100%;
+  width: 80%;
   float: left;
-  padding: 0 0 20px;
 }
 .tg-minicarproduct figure {
   float: left;
@@ -1169,7 +1164,6 @@ body.tg-comingsoonpage .tg-wrapper {
 .tg-minicartfoot {
   width: 100%;
   float: left;
-  padding: 20px 0 0;
 }
 .tg-btnemptycart {
   float: left;

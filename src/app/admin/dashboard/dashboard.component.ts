@@ -14,9 +14,18 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.reportService.getNewUsers();
-    this.reportService.getMonthlyReports();
-    this.reportService.getStaitstics();
-    this.reportService.getMonthlySalary();
+    setTimeout(()=>{
+      this.reportService.getMonthlyReports();
+
+      },3000);
+    setTimeout(()=>{
+      this.reportService.getStaitstics();
+
+      },3000);
+    setTimeout(()=>{
+      this.reportService.getMonthlySalary();
+
+      },3000);
   }
   changePeriod(period: any) {
 

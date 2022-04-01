@@ -55,14 +55,17 @@
                   </a>
                   <div class=" tg-themedropdownmenu dropdown-menu" aria-labelledby="tg-minicart" style="margin: 50px 0 0  -270px;">
                     <div class="tg-minicartbody">
-                      <div class="tg-minicarproduct"*ngFor="let loan of loanService.studentloans">
-                        <figure>
-                          <img src="../../../assets/Images/{{loan.image}}" alt="image description">
-                        </figure>
-                        <div class="tg-minicarproductdata" >
-                          <h5><a href="javascript:void(0);" style="font-size: 14px">{{loan.book_Name}}</a></h5>
-                          <h6><b style="font-size: 14px">{{loan.price}} JD</b></h6>
+                      <div class="tg-minicarproduct"*ngFor="let loan of loanService.studentloans;let i =index">
+                        <div style="height: 110px;" *ngIf=" loan.isloaned == 'true'">
+                          <figure >
+                            <img src="../../../assets/Images/{{loan.image}}" alt="image description">
+                          </figure>
+                          <div class="tg-minicarproductdata" >
+                            <h5><a [routerLink]="['/books/',loan.book_Id]" style="font-size: 14px">{{loan.book_Name}}</a></h5>
+                            <h6><b style="font-size: 14px">{{loan.price}} JD</b></h6>
+                          </div>
                         </div>
+
                       </div>
                     </div>
                     <div class="tg-minicartfoot">

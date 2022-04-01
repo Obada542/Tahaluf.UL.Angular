@@ -57,7 +57,7 @@
                     <h3><a class="blue" (click)="OpenBookDetails(item.id)">{{item.book_Name}}</a></h3>
                   </div>
                   <span class="tg-bookwriter">By: <a class="blue" >{{item.author}}</a></span>
-                  <span class="tg-stars"><span></span></span>
+                  <input class="rating"  style="--value:{{getRate(item.id)}}" type="range" readonly [value]="getRate(item.id)">
                   <span class="tg-bookprice">
                     <ins>{{item.price}} JD</ins>
                   </span>
@@ -142,7 +142,8 @@
                         <h3><a (click)="OpenBookDetails(book.id)" >{{book.book_Name}}</a></h3>
                       </div>
                       <span class="tg-bookwriter">By: <a>{{book.author}}</a></span>
-                      <span class="tg-stars"><span></span></span>
+                      <input class="rating"  style="--value:{{getRate(book.id)}}" type="range" readonly [value]="getRate(book.id)">
+
                     </div>
                   </div>
                 </div>

@@ -38,18 +38,24 @@ export class AuthService {
 
        localStorage.setItem('user',JSON.stringify({...data}));
       if(data.role=="Admin"){
-        this.getUser()
+        setTimeout(()=>{
+          this.getUser()
+          },3000);
         this.spinner.hide();
         this.router.navigate(['admin/dashboard']);
       }
 
       else if (data.role=="Student"){
-        this.getUser()
+        setTimeout(()=>{
+          this.getUser()
+          },3000);
         this.spinner.hide();
         this.router.navigate(['home']);
       }
       else if(data.role=="Accountant"){
-        this.getUser()
+        setTimeout(()=>{
+          this.getUser()
+          },3000);
         this.spinner.hide();
         this.router.navigate(['accountant/dashboard']);
       }
@@ -64,13 +70,16 @@ export class AuthService {
     this.spinner.show();
     const local:any =localStorage.getItem('user')
     this.user = JSON.parse( local);
-    const id:number = this.user.certserialnumber
+    const id:number = this.user.certserialnumber;
     if(this.user.role === "Student"){
       this.http.get('https://localhost:44346/api/student/getdata/'+id)
       .subscribe((res: any) => {
-        this.spinner.hide();
         this.user = res;
-        this.loaning.getStudentLoans(this.user.id);
+
+        setTimeout(()=>{
+          this.loaning.getStudentLoans(this.user.id);
+          this.spinner.hide();
+          },3000);
 
         this.toater.success("Welcome back "+this.user.first_Name + " "+this.user.last_Name);
       }, err => {

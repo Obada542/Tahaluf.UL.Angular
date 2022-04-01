@@ -45,7 +45,7 @@
             <h3><a class="blue" >{{book.book_Name}}</a></h3>
           </div>
           <span class="tg-bookwriter">By: <a class="blue" >{{book.author}}</a></span>
-          <span class="tg-stars"><span></span></span>
+          <input class="rating"  style="--value:{{getRate(book.id)}}" type="range" readonly [value]="getRate(book.id)">
           <span class="tg-bookprice">
             <ins>{{book.price}} JD</ins>
           </span>

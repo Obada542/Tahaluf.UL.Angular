@@ -35,78 +35,95 @@
               </div>
               <div class="col-md-7">
                 <div class="left border">
-                  <mat-accordion class="example-headers-align">
-                    <mat-expansion-panel [expanded]="state === 1" (opened)="state =1" (closed)="state =0" hideToggle>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          Pay with PayPal
+                  <mat-tab-group mat-align-tabs="start">
+                    <mat-tab label="Second">
+                      <mat-form-field  class="example-full-width" appearance="fill">
+                        <mat-label>Enter a date range</mat-label>
+                        <mat-date-range-input [rangePicker]="picker" [min]="startDate.value" >
+                          <input type="asd" readonly [formControl]="startDate" #start matStartDate  placeholder="Start date" >
+                          <input type="asd" matEndDate #end placeholder="End date">
+                        </mat-date-range-input>
+                        <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-date-range-picker #picker></mat-date-range-picker>
+                      </mat-form-field>
+                    </mat-tab>
 
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          <div class="icons">
-                            <img src="https://img.icons8.com/color/48/000000/paypal.png" />
-                          </div>
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>
+                    <mat-tab label="First">
+                      <mat-accordion class="example-headers-align">
+                        <mat-expansion-panel [expanded]="state === 1" (opened)="state =1" (closed)="state =0" hideToggle>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              Pay with PayPal
 
-                      <form> <span>Cardholder's name:</span> <input placeholder="Linda Williams"> <span>Card
-                          Number:</span>
-                        <input placeholder="0125 6780 4567 9909">
-                        <div class="row">
-                          <div class="col-4"><span>Expiry date:</span> <input placeholder="YY/MM"> </div>
-                          <div class="col-4"><span>CVV:</span> <input id="cvv"> </div>
-                        </div>
-                        <div class="row" style="margin: 0;">
-                          <div class="col-1">
-                            <input type="checkbox" id="a">
-                          </div>
-                          <div class="col-9" style="margin-left: -20px;">
-                            <label for="a">Save card details to wallet</label>
-                          </div>
-                        </div>
-                        <button class="btn">Place order</button>
+                            </mat-panel-title>
+                            <mat-panel-description>
+                              <div class="icons">
+                                <img src="https://img.icons8.com/color/48/000000/paypal.png" />
+                              </div>
+                            </mat-panel-description>
+                          </mat-expansion-panel-header>
 
-                      </form>
-                    </mat-expansion-panel>
-                    <mat-expansion-panel [expanded]="state === 0" (opened)="state =0" (closed)="state =1" hideToggle>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                          Pay with credit Card
-                        </mat-panel-title>
-                        <mat-panel-description>
-                          <div class="icons">
-                            <img src="https://img.icons8.com/color/48/000000/visa.png" />
-                            <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
-                            <img src="https://img.icons8.com/color/48/000000/maestro.png" />
-                          </div>
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>
+                          <form> <span>Cardholder's name:</span> <input placeholder="Linda Williams"> <span>Card
+                              Number:</span>
+                            <input placeholder="0125 6780 4567 9909">
+                            <div class="row">
+                              <div class="col-4"><span>Expiry date:</span> <input placeholder="YY/MM"> </div>
+                              <div class="col-4"><span>CVV:</span> <input id="cvv"> </div>
+                            </div>
+                            <div class="row" style="margin: 0;">
+                              <div class="col-1">
+                                <input type="checkbox" id="a">
+                              </div>
+                              <div class="col-9" style="margin-left: -20px;">
+                                <label for="a">Save card details to wallet</label>
+                              </div>
+                            </div>
+                            <button class="btn">Place order</button>
 
-                      <form>
-                        <span>Cardholder's name:</span>
-                        <input placeholder="Linda Williams">
-                        <span>CardNumber:</span>
-                        <input placeholder="0125 6780 4567 9909">
-                        <div class="row" style="margin: 0;">
-                          <div class="col-4">
-                            <span>Expiry date:</span> <input placeholder="YY/MM">
-                          </div>
-                          <div class="col-4">
-                            <span>CVV:</span> <input maxlength="4" id="cvv">
-                          </div>
-                        </div>
-                        <div class="row" style="margin: 0;">
-                          <div class="col-1">
-                            <input type="checkbox" id="a">
-                          </div>
-                          <div class="col-9" style="margin-left: -20px;">
-                            <label for="a">Save card details to wallet</label>
-                          </div>
-                        </div>
-                        <button class="btn">Place order</button>
-                      </form>
-                    </mat-expansion-panel>
-                  </mat-accordion>
+                          </form>
+                        </mat-expansion-panel>
+                        <mat-expansion-panel [expanded]="state === 0" (opened)="state =0" (closed)="state =1" hideToggle>
+                          <mat-expansion-panel-header>
+                            <mat-panel-title>
+                              Pay with credit Card
+                            </mat-panel-title>
+                            <mat-panel-description>
+                              <div class="icons">
+                                <img src="https://img.icons8.com/color/48/000000/visa.png" />
+                                <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
+                                <img src="https://img.icons8.com/color/48/000000/maestro.png" />
+                              </div>
+                            </mat-panel-description>
+                          </mat-expansion-panel-header>
+
+                          <form>
+                            <span>Cardholder's name:</span>
+                            <input placeholder="Linda Williams">
+                            <span>CardNumber:</span>
+                            <input placeholder="0125 6780 4567 9909">
+                            <div class="row" style="margin: 0;">
+                              <div class="col-4">
+                                <span>Expiry date:</span> <input placeholder="YY/MM">
+                              </div>
+                              <div class="col-4">
+                                <span>CVV:</span> <input maxlength="4" id="cvv">
+                              </div>
+                            </div>
+                            <div class="row" style="margin: 0;">
+                              <div class="col-1">
+                                <input type="checkbox" id="a">
+                              </div>
+                              <div class="col-9" style="margin-left: -20px;">
+                                <label for="a">Save card details to wallet</label>
+                              </div>
+                            </div>
+                            <button class="btn">Place order</button>
+                          </form>
+                        </mat-expansion-panel>
+                      </mat-accordion>
+                    </mat-tab>
+                  </mat-tab-group>
+
                 </div>
               </div>
             </div>

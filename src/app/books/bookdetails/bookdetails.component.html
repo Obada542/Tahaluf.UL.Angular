@@ -8,7 +8,9 @@
           <span class="tg-bookprice">
             <ins>{{book.book.price}} JD</ins>
           </span>
-          <a class="tg-btn tg-active tg-btn-lg" href="javascript:void(0);">Add To Basket</a>
+          <a class="tg-btn tg-active tg-btn-lg" *ngIf="checkUser" [routerLink]="['/client/payment']">Borrow </a>
+          <a class="tg-btn tg-active tg-btn-lg" *ngIf="!checkUser" [routerLink]="['/security/login']">Borrow </a>
+
         </div>
       </div>
     </div>
@@ -21,8 +23,13 @@
           <h3>{{book.book.book_Name}}</h3>
         </div>
         <span class="tg-bookwriter">By: <a href="javascript:void(0);">{{book.book.author}}</a></span>
-        <span class="tg-stars" style="margin-left: -20px;"><span></span></span>
-        <span class="tg-addreviews" style="margin-left: 20px;"><a href="javascript:void(0);">Add Your Review</a></span>
+        <div class=" col-xs-6 " style="display: flex; align-items: center;">
+          <input class="rating" style="--value:{{getRate(book.book.id)}}" type="range" readonly
+            [value]="getRate(book.book.id)">
+          <span class="tg-addreviews" style="float: right;"><a (click)="openRate()">Add Your Review</a></span>
+
+        </div>
+        <div class="text-danger"> {{error}}</div>
         <div class="tg-share">
           <span>Share:</span>
           <ul class="tg-socialicons">
@@ -78,24 +85,31 @@
         <div class="tg-tab-content tab-content">
           <div role="tabpanel" class="tg-tab-pane tab-pane active" id="review">
             <div class="tg-description">
-              <p>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veni quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                Duis aute irure dolor in reprehenden
-                voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-              <ul class="tg-liststyle">
-                <li><span>Sed do eiusmod tempor incididunt ut labore et dolore</span></li>
-                <li><span>Magna aliqua enim ad minim veniam</span></li>
-                <li><span>Quis nostrud exercitation ullamco laboris nisi ut</span></li>
-                <li><span>Aliquip ex ea commodo consequat aute dolor reprehenderit</span></li>
-                <li><span>Voluptate velit esse cillum dolore eu fugiat nulla pariatur</span></li>
-                <li><span>Magna aliqua enim ad minim veniam</span></li>
-                <li><span>Quis nostrud exercitation ullamco laboris nisi ut</span></li>
-              </ul>
-              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam
-                remmata aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt
-                explicabo. Nemo enimsam
-                voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos
-                quistatoa.</p>
+              <div class="main-section">
+                <div class="rating-part">
+                  <div class="comment-part" style=" margin-top: 22px;" *ngFor="let rate of  (more ? (book.bookRates|slice:0:more) : book.bookRates)">
+                    <div class="user-img-part">
+                      <div class="user-img">
+                        <img src="../../../assets/Images/{{getStudentImage(rate.student_Id)}}">
+                      </div>
+                      <div class="user-text">
+                        <h4>{{calculateDiff(rate.daterate)}}</h4>
+                        <p style="text-transform: capitalize;">{{getStudentName(rate.student_Id)}}</p>
+                      </div>
+                    </div>
+                    <div class="comment">
+                      <input class="rating" style="--value:{{rate.rate}}" type="range" readonly
+            [value]="rate.rate">
+                      <p>{{rate.review}}</p>
+                    </div>
+                    <div style="clear: both;"></div>
+                  </div>
+                  <div style="text-align: center;">
+                  <button class="more" *ngIf="more <= book.bookRates.length" (click)="more = more + 3">Show more</button>
+
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -114,38 +128,33 @@
       </div>
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div id="tg-relatedproductslider" class="tg-relatedproductslider tg-relatedbooks">
-          <div class="col-lg-3 ">
+          <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3">
             <div class="tg-postbook">
               <figure class="tg-featureimg">
                 <div class="tg-bookimg">
-                  <div class="tg-frontcover"><img src="../../../assets/Images/{{book.book.image}}"
-                      alt="image description"></div>
-                  <div class="tg-backcover"><img src="../../../assets/Images/{{book.book.image}}"
-                      alt="image description"></div>
+                  <div class="tg-frontcover"><img src="aaaaa" alt="aaaaa"></div>
+                  <div class="tg-backcover"><img src="aaaaa" alt="image description"></div>
                 </div>
-                <a class="tg-btnaddtowishlist" href="javascript:void(0);">
+                <a class="tg-btnaddtowishlist" aaaaa>
                   <i class="icon-heart"></i>
-                  <span>add to wishlist</span>
+                  <span>More details</span>
                 </a>
               </figure>
               <div class="tg-postbookcontent">
                 <ul class="tg-bookscategories">
-                  <li><a href="javascript:void(0);">Adventure</a></li>
-                  <li><a href="javascript:void(0);">Fun</a></li>
+                  <li><a class="blue">aaaaa</a></li>
                 </ul>
-                <div class="tg-themetagbox"><span class="tg-themetag">sale</span></div>
                 <div class="tg-booktitle">
-                  <h3><a href="javascript:void(0);">Help Me Find My Stomach</a></h3>
+                  <h3><a class="blue">aaaaa</a></h3>
                 </div>
-                <span class="tg-bookwriter">By: <a href="javascript:void(0);">Angela Gunning</a></span>
+                <span class="tg-bookwriter">By: <a class="blue">aaaaa</a></span>
                 <span class="tg-stars"><span></span></span>
                 <span class="tg-bookprice">
-                  <ins>$25.18</ins>
-                  <del>$27.20</del>
+                  <ins>aaaaa JD</ins>
                 </span>
-                <a class="tg-btn tg-btnstyletwo" href="javascript:void(0);">
+                <a class="tg-btn tg-btnstyletwo">
                   <i class="fa fa-shopping-basket"></i>
-                  <em>Add To Basket</em>
+                  <em>Borrow</em>
                 </a>
               </div>
             </div>
@@ -160,4 +169,54 @@
   <pdf-viewer style="width: 500px; height: 90vh;" [src]="'../../../assets/books/'+book.book.pdf" [page]="currentpage"
     [original-size]="false" [render-text]="false" [show-borders]="true" [show-all]="false" [zoom-scale]="'page-fit'">
   </pdf-viewer>
+</ng-template>
+
+<ng-template #rating>
+  <div class="col-12 dialog" style="width: 700px;">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Rate our book</h4>
+        <button mat-button mat-dialog-close class="btn"
+          style="color: red; float: right; font-size: 25px; margin-top: -50px;">X</button>
+        <br>
+        <form class="form-sample" [formGroup]="rateForm">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group ">
+
+                <input class="rating" max="5" formControlName="rate"
+                  oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)" step="0.5"
+                  style="--starsize: 1.8rem;--value:2.5" type="range" value="2.5">
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group ">
+                <textarea matInput formControlName="review" class="form-control" style="height: 130px;"
+                  placeholder="What would you like to say about this book"></textarea>
+                <br>
+                <mat-error class="text-danger"
+                  *ngIf="rateForm.controls['review'].hasError('required') && rateForm.controls['review'].touched">
+                  Review is <strong class="text-danger">required</strong>
+                </mat-error>
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <button class="btn btn-out btn-square" style="float: right; background-color: #77B748;"
+                    [disabled]="!rateForm.valid" (click)="submitReview()">Save Review</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </ng-template>

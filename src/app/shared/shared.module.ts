@@ -16,7 +16,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NgbModule,NgbCarouselModule, } from '@ng-bootstrap/ng-bootstrap';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -39,7 +39,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     NgxPaginationModule,
     PdfViewerModule,
     NgbModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTabsModule
   ],
   exports:[
     HeaderComponent,
@@ -59,7 +60,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     NgxPaginationModule,
     PdfViewerModule,
     NgbModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTabsModule
   ]
 })
 export class SharedModule { }
