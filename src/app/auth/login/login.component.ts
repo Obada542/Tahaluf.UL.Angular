@@ -19,9 +19,9 @@ export class LoginComponent implements OnInit {
   //   email : new FormControl('',[Validators.required,Validators.email]),
   //   password: new FormControl('',[Validators.required,Validators.minLength(8)])
   // })
-  
+
   user:any ={};
-  constructor(private router:Router,private login:LoginService, public spinner :NgxSpinnerService,private auth:AuthService) { }
+  constructor( private auth:AuthService) { }
   ngOnInit(): void {
   }
 
@@ -30,8 +30,6 @@ export class LoginComponent implements OnInit {
     // localStorage.setItem("user",JSON.stringify(this.user));
   }
   submit(){
-    this.spinner.show();
     this.auth.submit(this.email,this.password);
-    this.spinner.hide();
   }
 }

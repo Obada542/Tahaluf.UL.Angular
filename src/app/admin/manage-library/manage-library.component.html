@@ -4,38 +4,43 @@
       <h4 class="card-title">Manage Libraries</h4>
       <button class=" card-description btn btn-primary " (click)="openCreateDialog()" style="color: #fff;"> Add
         Library</button>
-        <input type="text" style="float: right;" #search placeholder="Search Library by name"  (input)="searchLibrary($event)">
-        <div class=" table-responsive">
+        <div style="float: right;" >
+          <input type="text"  #search placeholder="Search Library by name"
+        (input)="searchLibrary($event)">
+        <p class="advance" (click)="openMapAll()">Open Map</p>
+          </div>
+          <br>
+      <div class=" table-responsive" style="margin-top: 12px;">
         <table class="table table-striped">
-        <thead>
-          <tr>
-            <th> library Name </th>
-            <th> Location </th>
-            <th> Description </th>
-            <th> Image </th>
-            <th> Action </th>
+          <thead>
+            <tr>
+              <th> library Name </th>
+              <th> Location </th>
+              <th> Description </th>
+              <th> Image </th>
+              <th> Action </th>
 
-          </tr>
-        </thead>
-        <tbody [ngStyle]="{'display': searchL.length == 0 && search.value ? 'none' : ''}">
-          <tr *ngFor="let library of searchL.length == 0 ? library.libraries : searchL " >
+            </tr>
+          </thead>
+          <tbody [ngStyle]="{'display': searchL.length == 0 && search.value ? 'none' : ''}">
+            <tr *ngFor="let library of searchL.length == 0 ? library.libraries : searchL ">
 
-            <td> {{library.library_Name}} </td>
-            <td> {{library.location}} </td>
-            <td> {{library.description}} </td>
-            <td class="py-1">
-              <img src="../../../assets/Images/{{library.image}}" alt="image" />
-            </td>
+              <td> {{library.library_Name}} </td>
+              <td> {{library.location.split(",")[0]}} </td>
+              <td> {{library.description}} </td>
+              <td class="py-1">
+                <img src="../../../assets/Images/{{library.image}}" alt="image" />
+              </td>
 
-            <td>
-              <a class="text-danger" (click)="openDeleteDialog(library.id)">Delete</a>
-              |
-              <a class="link" (click)="openUpdateDialog(library)">Update</a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+              <td>
+                <a class="text-danger" (click)="openDeleteDialog(library.id)">Delete</a>
+                |
+                <a class="link" (click)="openUpdateDialog(library)">Update</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <div *ngIf="searchL.length == 0 && search.value">
         <p class="nothing">Sorry, no books with this name were found.</p>
       </div>
@@ -94,7 +99,17 @@
               </div>
             </div>
           </div>
-
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Mark location on map</label>
+                <div class="col-sm-8">
+                  <button (click)="openMap()" class="btn btn-outline-info  link" style="cursor: pointer;">Open map <i
+                      class="fa-solid fa-map-location"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
@@ -165,9 +180,9 @@
             </div>
             <div class="col-md-6">
               <div class="form-group row">
-                <label class="col-sm-4 col-form-label">Location</label>
+                <label class="col-sm-4 col-form-label">Location Name</label>
                 <div class="col-sm-8">
-                  <input type="text" class="form-control" [(ngModel)]="selectedLibrary.location" matInput
+                  <input type="text" class="form-control" [(ngModel)]="selectedLibrary.location.split(',')[0]" matInput
                     formControlName="Location" placeholder="Location">
                   <br>
                   <mat-error class="text-danger"
@@ -178,8 +193,6 @@
               </div>
             </div>
           </div>
-
-
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
@@ -196,7 +209,17 @@
               </div>
             </div>
           </div>
-
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Mark location on map</label>
+                <div class="col-sm-8">
+                  <button (click)="openMap()" class="btn btn-outline-info  link" style="cursor: pointer;">Open map <i
+                      class="fa-solid fa-map-location"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
@@ -223,3 +246,32 @@
     </div>
   </div>
 </ng-template>
+
+<ng-template #map>
+  <button mat-button mat-dialog-close class="btn" style="color: red; float: right; font-size: 25px;">X</button>
+  <agm-map (mapClick)="addMarker($event)"  [latitude]="lat" [zoom]="13" [longitude]="lng"
+    style="height: 450px;width: 1000px;">
+    <agm-marker  [latitude]="lat"[longitude]="lng">
+    </agm-marker>
+
+  </agm-map>
+  <div class="col-sm-12" style="margin-top: 15px;">
+
+  <button mat-button mat-dialog-close class="btn" style="background-color: rgb(95, 138, 255); float: right; font-size: 18px;">Done</button>
+</div>
+</ng-template>
+<ng-template #mapAll>
+  <agm-map [fitBounds]="true"
+    style="height: 450px;width: 900px;">
+    <agm-marker  [agmFitBounds]="true"  [latitude]="location.lat"
+      [longitude]="location.lng" (mouseOver)="infoWindow.open()" (mouseOut)="infoWindow.close()"
+      *ngFor="let location of locations; let i=index">
+      <agm-info-window #infoWindow>
+
+        {{location.name}}
+      </agm-info-window>
+    </agm-marker>
+  </agm-map>
+</ng-template>
+
+

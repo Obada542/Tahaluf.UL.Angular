@@ -19,8 +19,6 @@ export class AuthService {
       email:email.value.toString(),
       password:password.value.toString()
     }
-
-
     const headerDir={
       'Content-Type':'application/json',
       'Accept':'application/json'
@@ -40,23 +38,25 @@ export class AuthService {
       if(data.role=="Admin"){
         setTimeout(()=>{
           this.getUser()
-          },3000);
-        this.spinner.hide();
+
+          },1500);
         this.router.navigate(['admin/dashboard']);
       }
 
       else if (data.role=="Student"){
         setTimeout(()=>{
           this.getUser()
-          },3000);
-        this.spinner.hide();
-        this.router.navigate(['home']);
+          },1500);
+          setTimeout(()=>{
+            this.router.navigate(['home']);
+          this.spinner.hide();
+
+            },2500);
       }
       else if(data.role=="Accountant"){
         setTimeout(()=>{
           this.getUser()
-          },3000);
-        this.spinner.hide();
+          },1500);
         this.router.navigate(['accountant/dashboard']);
       }
     },err=>{
@@ -67,7 +67,6 @@ export class AuthService {
 
   }
   getUser(){
-    this.spinner.show();
     const local:any =localStorage.getItem('user')
     this.user = JSON.parse( local);
     const id:number = this.user.certserialnumber;
@@ -78,8 +77,7 @@ export class AuthService {
 
         setTimeout(()=>{
           this.loaning.getStudentLoans(this.user.id);
-          this.spinner.hide();
-          },3000);
+          },1500);
 
         this.toater.success("Welcome back "+this.user.first_Name + " "+this.user.last_Name);
       }, err => {

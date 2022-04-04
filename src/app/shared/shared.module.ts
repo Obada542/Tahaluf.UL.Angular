@@ -17,6 +17,9 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NgbModule,NgbCarouselModule, } from '@ng-bootstrap/ng-bootstrap';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatTabsModule} from '@angular/material/tabs';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
+import { NgxSpinnerModule } from "ngx-spinner";
+import { AgmCoreModule } from '@agm/core';
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -40,7 +43,12 @@ import {MatTabsModule} from '@angular/material/tabs';
     PdfViewerModule,
     NgbModule,
     MatExpansionModule,
-    MatTabsModule
+    MatTabsModule,
+    IvyCarouselModule,
+    NgxSpinnerModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA41uiYMVyQ7KK5nFAO7QuexMj9_olgQIM'
+    }),
   ],
   exports:[
     HeaderComponent,
@@ -61,7 +69,10 @@ import {MatTabsModule} from '@angular/material/tabs';
     PdfViewerModule,
     NgbModule,
     MatExpansionModule,
-    MatTabsModule
+    IvyCarouselModule,
+    MatTabsModule,
+    NgxSpinnerModule,
+    AgmCoreModule
   ]
 })
 export class SharedModule { }

@@ -40,21 +40,21 @@
             <div class="item carousel-cell " *ngFor="let item of bookService.books" >
               <div class="tg-postbook">
                 <figure class="tg-featureimg" >
-                  <a class="tg-bookimg" (click)="OpenBookDetails(item.id)" >
+                  <a class="tg-bookimg"  >
                     <div class="tg-frontcover"><img  src="../../assets/Images/{{item.image}}" alt="{{item.book_Name}}"></div>
                     <div class="tg-backcover" ><img  src="../../assets/Images/{{item.image}}" alt="{{item.book_Name}}"></div>
                   </a>
-                  <a class="tg-btnaddtowishlist" >
+                  <a class="tg-btnaddtowishlist" [routerLink]="['/books',item.id]">
                     <i class="icon-heart"></i>
                     <span>More details</span>
                   </a>
                 </figure>
                 <div class="tg-postbookcontent">
                   <ul class="tg-bookscategories">
-                    <li><a class="blue" (click)="SearchByCategory(item.category)">{{item.category}}</a></li>
+                    <li><a class="blue" >{{item.category}}</a></li>
                   </ul>
                   <div class="tg-booktitle">
-                    <h3><a class="blue" (click)="OpenBookDetails(item.id)">{{item.book_Name}}</a></h3>
+                    <h3><a class="blue" >{{item.book_Name}}</a></h3>
                   </div>
                   <span class="tg-bookwriter">By: <a class="blue" >{{item.author}}</a></span>
                   <input class="rating"  style="--value:{{getRate(item.id)}}" type="range" readonly [value]="getRate(item.id)">
@@ -125,21 +125,21 @@
                 <div class="col-xs-4 col-sm-4 col-md-6 col-lg-4" *ngFor="let book of bookService.newestBooks">
                   <div class="tg-postbook">
                     <figure class="tg-featureimg">
-                      <a class="tg-bookimg" (click)="OpenBookDetails(book.id)">
+                      <a class="tg-bookimg" >
                         <div class="tg-frontcover"><img src="../../assets/Images/{{book.image}}" alt="{{book.book_Name}}"></div>
                         <div class="tg-backcover"><img src="../../assets/Images/{{book.image}}" alt="{{book.book_Name}}"></div>
                       </a>
-                      <a class="tg-btnaddtowishlist">
+                      <a class="tg-btnaddtowishlist" [routerLink]="['/books',book.id]">
                         <i class="icon-heart"></i>
-                        <span>Borrow</span>
+                        <span>More details</span>
                       </a>
                     </figure>
                     <div class="tg-postbookcontent">
                       <ul class="tg-bookscategories">
-                        <li><a (click)="SearchByCategory(book.category)">{{book.category}}</a></li>
+                        <li><a >{{book.category}}</a></li>
                       </ul>
                       <div class="tg-booktitle">
-                        <h3><a (click)="OpenBookDetails(book.id)" >{{book.book_Name}}</a></h3>
+                        <h3><a  >{{book.book_Name}}</a></h3>
                       </div>
                       <span class="tg-bookwriter">By: <a>{{book.author}}</a></span>
                       <input class="rating"  style="--value:{{getRate(book.id)}}" type="range" readonly [value]="getRate(book.id)">

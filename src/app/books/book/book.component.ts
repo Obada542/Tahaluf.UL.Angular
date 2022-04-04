@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 export class BookComponent implements OnInit {
 
   p:number = 1;
-  pageSize:number=1;
+  pageSize:number=8;
   constructor(public bookService:BookService) { }
 
   ngOnInit(): void {
@@ -23,5 +23,8 @@ export class BookComponent implements OnInit {
       return rate.rate
     }
 
+  }
+  changeSize(page:any){
+    this.pageSize=page.target.value
   }
 }

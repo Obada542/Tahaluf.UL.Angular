@@ -4979,3 +4979,17 @@ padding-bottom:50px;
 	line-height:normal;
 }
 
+.fixed-top
+{
+  z-index: 1 !important;
+}
+.advance{
+  color: rgb(0, 204, 204);
+  padding-left: 15px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.advance:hover{
+  color: rgb(0, 160, 160);
+  text-decoration: underline;
+}

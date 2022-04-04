@@ -6,17 +6,7 @@ td a{
   font-size: 24px;
   padding: 50px 0;
 }
-.advance{
-  color: rgb(0, 204, 204);
-  margin-top: -18px;
-  padding-left: 15px;
-  font-size: 13px;
-  cursor: pointer;
-}
-.advance:hover{
-  color: rgb(0, 160, 160);
-  text-decoration: underline;
-}
+
 thead tr th{
   background-color: rgba(77, 175, 64, 0.555);
   color:rgb(32, 32, 32);

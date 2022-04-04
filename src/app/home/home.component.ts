@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
 
     setTimeout(()=>{
     this.bookService.getBestBooks();
-      },3000);
+      },1500);
 
   }
   getRate(id:number){
@@ -26,9 +26,5 @@ export class HomeComponent implements OnInit {
       return rate.rate
     }
 
-  }
-  SearchByCategory(category:string){
-  }
-  OpenBookDetails(id:number){
   }
 }

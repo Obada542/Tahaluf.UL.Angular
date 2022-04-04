@@ -13,6 +13,16 @@ export class ManageLibraryComponent implements OnInit {
   @ViewChild('createNewLibrary') createNewLibrary!: TemplateRef<any>;
   @ViewChild('updateLibrary') updateLibrary!: TemplateRef<any>;
   @ViewChild('deleteLibrary') deleteLibrary!: TemplateRef<any>;
+  @ViewChild('map') map!: TemplateRef<any>;
+  @ViewChild('mapAll') mapAll!: TemplateRef<any>;
+
+  lat: number = 31.963158893209485;
+  lng: number = 35.92289845781814;
+  locations:any=[];
+  selectedLibrary:any;
+  id :any;
+
+  searchL:Array<any>=[];
 
   createLibrary:FormGroup= new FormGroup({
     Library_Name:new FormControl('',[Validators.required]),
@@ -28,13 +38,7 @@ export class ManageLibraryComponent implements OnInit {
     Description:new FormControl('',[Validators.required]),
     Image:new FormControl('')
   });
-
   constructor(private dialog:MatDialog,public library:LibraryService ) { }
-
-  selectedLibrary:any;
-  id :any;
-
-  searchL:Array<any>=[];
 
   ngOnInit(): void {
     this.library.getAllLibraries();
@@ -46,6 +50,10 @@ export class ManageLibraryComponent implements OnInit {
 
   openUpdateDialog(library:any){
     this.selectedLibrary = library;
+    var splitted = this.selectedLibrary.location.split(",");
+    this.lat = Number(splitted[1]);
+    this.lng = Number(splitted[2]);
+
     this.updatelibrary.controls['id'].setValue(library.id);
     this.dialog.open(this.updateLibrary);
   }
@@ -54,7 +62,19 @@ export class ManageLibraryComponent implements OnInit {
     this.id =id;
     this.dialog.open(this.deleteLibrary);
   }
+  openMapAll(){
+    for(var i = 0;i<this.library.libraries.length;i++){
+      const loca = this.library.libraries[i].location.split(",")
+      this.locations.push({
+        name:this.library.libraries[i].library_Name,
+        address:loca[0],
+        lat:loca[1],
+        lng:loca[2]
+      })
+    }
+    this.dialog.open(this.mapAll);
 
+  }
   uploadFile(file: any) {
     if (file.length === 0) {
       return;
@@ -66,6 +86,8 @@ export class ManageLibraryComponent implements OnInit {
   }
 
   submit(){
+    const loca = this.createLibrary.controls['Location'].value +','+this.lat+','+this.lng
+    this.createLibrary.controls['Location'].setValue(loca)
     this.library.createLibrary(this.createLibrary.value);
     location.reload();
   }
@@ -75,16 +97,19 @@ export class ManageLibraryComponent implements OnInit {
     if(!image){
       this.library.display_Image = this.selectedLibrary.image;
     }
+    const loca = this.updatelibrary.controls['Location'].value +','+this.lat+','+this.lng
+    this.updatelibrary.controls['Location'].setValue(loca)
     this.library.updateLibrary(this.updatelibrary.value);
     location.reload();
-
   }
 
   delete(){
     this.library.deleteLibrary(this.id);
     location.reload();
   }
-
+  openMap(){
+    this.dialog.open(this.map)
+  }
   searchLibrary(ev:any){
    var searchlibrary:Array<any>=[];
    for( let i =0 ;i<this.library.libraries.length;i++ ){
@@ -97,13 +122,12 @@ export class ManageLibraryComponent implements OnInit {
    }
 
    this.searchL=searchlibrary;
-
-
+  }
+ 
+  addMarker($event:any){
+      this.lat = $event.coords.lat;
+      this.lng = $event.coords.lng;
 
   }
-
-
-
-
 
 }

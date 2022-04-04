@@ -1,36 +1,32 @@
-
 <div class="tg-products">
   <div class="tg-sectionhead">
     <h2><span>Explore our</span>Bestselling Books</h2>
   </div>
-  <div class="tg-productgrid" *ngIf="bookService.books">
+  <div class="tg-productgrid" *ngIf="bookService.books.length >0">
     <div class="tg-refinesearch">
-      <span>showing 1 to 8 of 20 total</span>
+      <span>showing 1 to {{pageSize}} of {{bookService.books.length }} total</span>
       <form class="tg-formtheme tg-formsortshoitems">
         <fieldset>
           <div class="form-group">
             <label>show:</label>
             <span class="tg-select">
-              <select>
-                <option>8</option>
-                <option>16</option>
-                <option>20</option>
+              <select (change)="changeSize($event)">
+                <option >8</option>
+                <option >12</option>
+                <option >16</option>
               </select>
             </span>
           </div>
         </fieldset>
       </form>
     </div>
-    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3" *ngFor="let book of bookService.books | paginate: { id: 'books',itemsPerPage: pageSize,currentPage: p,totalItems: bookService.books.length }">
+    <div class="col-xs-6 col-sm-6 col-md-4 col-lg-3"
+      *ngFor="let book of bookService.books | paginate: { id: 'books',itemsPerPage: pageSize,currentPage: p,totalItems: bookService.books.length }">
       <div class="tg-postbook">
         <figure class="tg-featureimg">
           <div class="tg-bookimg">
-            <div class="tg-frontcover"><img
-                src="../../assets/Images/{{book.image}}"
-                alt="{{book.book_Name}}"></div>
-            <div class="tg-backcover"><img
-                src="../../assets/Images/{{book.image}}"
-                alt="image description"></div>
+            <div class="tg-frontcover"><img src="../../assets/Images/{{book.image}}" alt="{{book.book_Name}}"></div>
+            <div class="tg-backcover"><img src="../../assets/Images/{{book.image}}" alt="image description"></div>
           </div>
           <a class="tg-btnaddtowishlist" [routerLink]="['/books/',book.id]">
             <i class="icon-heart"></i>
@@ -39,37 +35,32 @@
         </figure>
         <div class="tg-postbookcontent">
           <ul class="tg-bookscategories">
-            <li><a class="blue" >{{book.category}}</a></li>
+            <li><a class="blue">{{book.category}}</a></li>
           </ul>
           <div class="tg-booktitle">
-            <h3><a class="blue" >{{book.book_Name}}</a></h3>
+            <h3><a class="blue">{{book.book_Name}}</a></h3>
           </div>
-          <span class="tg-bookwriter">By: <a class="blue" >{{book.author}}</a></span>
-          <input class="rating"  style="--value:{{getRate(book.id)}}" type="range" readonly [value]="getRate(book.id)">
+          <span class="tg-bookwriter">By: <a class="blue">{{book.author}}</a></span>
+          <input class="rating" style="--value:{{getRate(book.id)}}" type="range" readonly [value]="getRate(book.id)">
           <span class="tg-bookprice">
             <ins>{{book.price}} JD</ins>
           </span>
-          <a class="tg-btn tg-btnstyletwo" >
+          <a class="tg-btn tg-btnstyletwo">
             <i class="fa fa-shopping-basket"></i>
             <em>Borrow</em>
           </a>
         </div>
       </div>
+
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-      <pagination-controls  id="books"
-        (pageChange)="p =$event"
-        (pageBoundsCorrection)="p =$event"
-        [maxSize]="9"
-        [directionLinks]="true"
-        [autoHide]="true"
-        [responsive]="true"
-        previousLabel="Previous"
-        nextLabel="Next"
-        screenReaderPaginationLabel="Pagination"
-        screenReaderPageLabel="page"
-        screenReaderCurrentLabel="You're on page">
-</pagination-controls>
+      <pagination-controls id="books" (pageChange)="p =$event" (pageBoundsCorrection)="p =$event" [maxSize]="9"
+        [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Previous" nextLabel="Next"
+        screenReaderPaginationLabel="Pagination" screenReaderPageLabel="page" screenReaderCurrentLabel="You're on page">
+      </pagination-controls>
     </div>
+  </div>
+  <div class="tg-productgrid" *ngIf="bookService.books.length ==0">
+    nothing
   </div>
 </div>

@@ -1,3 +1,9 @@
 .pt-3{
   text-align: center;
 }
+.tg-widgetcontent a{
+  cursor: pointer;
+}
+.tg-widgetcontent a:hover{
+  color:#77B748
+}
