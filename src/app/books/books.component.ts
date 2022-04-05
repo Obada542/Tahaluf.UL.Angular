@@ -14,6 +14,7 @@ export class BooksComponent implements OnInit {
   constructor(public bookService: BookService,private router: Router) { }
 
   ngOnInit() {
+    document.body.scrollTop = 0;
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };

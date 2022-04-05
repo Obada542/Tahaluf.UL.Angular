@@ -16,6 +16,7 @@ export class HomeService {
     this.spinner.show();
     this.http.get('https://localhost:44346/api/Home/GetSliders/').subscribe((res) => {
       this.data = res;
+      this.spinner.hide();
     }, err => {
       this.spinner.hide();
       this.toastr.error(err.message,err.status);

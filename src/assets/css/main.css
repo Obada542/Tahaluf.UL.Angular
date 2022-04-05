@@ -404,7 +404,6 @@ address {
 .tg-socialicons {
   overflow: hidden;
   list-style: none;
-  text-align: center;
   line-height: 30px;
 }
 .tg-socialicons li {
@@ -526,7 +525,6 @@ li.tg-rss a {
   display: block;
   font-size: 13px;
   line-height: 30px;
-  text-align: center;
 }
 .tg-socialicons li a:hover {
   color: #fff;

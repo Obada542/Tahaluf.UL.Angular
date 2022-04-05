@@ -12,16 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 export class AppComponent {
   constructor(private toastr:ToastrService,private router:Router,private user:AuthService,private bookService:BookService){
     this.toastr.success("Welcome");
-    setTimeout(() => {
     this.bookService.getAllRates();
-    }, 3000);
-    setTimeout(() => {
-      this.bookService.getAllLibraries();
-    }, 5000);
-    setTimeout(() => {
-      this.bookService.getCategories();
-    }, 7000);
-
+    
+    
     if(localStorage.getItem("user")){
       this.user.getUser();
       if(this.user.user.role =="Admin"){

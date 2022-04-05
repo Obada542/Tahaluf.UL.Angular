@@ -2,6 +2,7 @@ import { BookService } from './../../Services/book.service';
 import { MatDialog } from '@angular/material/dialog';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {  NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-manage-book',
@@ -46,11 +47,14 @@ export class ManageBookComponent implements OnInit {
   });
 
   changeControl :FormControl = new FormControl('',[Validators.required,Validators.min(1),Validators.max(100)])
-  constructor(private dialog: MatDialog, public book: BookService) {
+  constructor(private dialog: MatDialog, public book: BookService,private spinner:NgxSpinnerService) {
   }
 
   ngOnInit(): void {
-    this.book.getAllBooks();
+    this.spinner.show()
+    setTimeout(() => {
+      this.book.getAllBooks();
+    }, 15000);
   }
 
   openCreateDialog() {
@@ -127,5 +131,12 @@ export class ManageBookComponent implements OnInit {
   changeDiscount(){
     this.book.changeDiscount(this.changeControl.value);
     location.reload();
+  }
+  getBooks(){
+    const books=this.book.books.map(({ id, ...rest }: {id:any}) => ({
+      id, ...rest, rates: this.book.rates.filter(({ book_Id }: {book_Id:any}) => book_Id === id)
+    }))
+    console.log(books)
+    return books
   }
 }

@@ -20,6 +20,9 @@ import {MatTabsModule} from '@angular/material/tabs';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AgmCoreModule } from '@agm/core';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+
 @NgModule({
   declarations: [
     HeaderComponent,
@@ -49,6 +52,8 @@ import { AgmCoreModule } from '@agm/core';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyA41uiYMVyQ7KK5nFAO7QuexMj9_olgQIM'
     }),
+    ShareButtonsModule,
+    ShareIconsModule
   ],
   exports:[
     HeaderComponent,
@@ -72,7 +77,9 @@ import { AgmCoreModule } from '@agm/core';
     IvyCarouselModule,
     MatTabsModule,
     NgxSpinnerModule,
-    AgmCoreModule
+    AgmCoreModule,
+    ShareButtonsModule,
+    ShareIconsModule
   ]
 })
 export class SharedModule { }

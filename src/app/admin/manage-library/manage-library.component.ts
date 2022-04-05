@@ -41,7 +41,6 @@ export class ManageLibraryComponent implements OnInit {
   constructor(private dialog:MatDialog,public library:LibraryService ) { }
 
   ngOnInit(): void {
-    this.library.getAllLibraries();
   }
 
   openCreateDialog(){

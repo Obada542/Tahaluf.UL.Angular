@@ -1,4 +1,4 @@
-<div class="col-lg-12 grid-margin stretch-card">
+<div class="col-lg-12 grid-margin stretch-card" *ngIf="book.books.length > 0">
   <div class="card">
     <div class="card-body bubble">
       <p style=" font-size: 16px; padding-top: 15px; z-index: 5;">Discount on each book is <span
@@ -18,39 +18,39 @@
         Book</button>
       <input type="text" style="float: right;" #search placeholder="Search book by name" (input)="searchBook($event)">
       <div class=" table-responsive">
-<table class="table  table-striped">
-        <thead>
-          <tr>
-            <th> Image </th>
-            <th> Book Name </th>
-            <th> Author </th>
-            <th> Price </th>
-            <th> Quantity </th>
-            <th> Library </th>
-            <th> Category </th>
-            <th> Action </th>
-          </tr>
-        </thead>
-        <tbody [ngStyle]="{'display': books.length == 0 && search.value ? 'none' : ''}">
-          <tr *ngFor="let book of books.length == 0 ? book.books : books">
-            <td class="py-1">
-              <img src="../../../assets/Images/{{book.image}}" alt="image" />
-            </td>
-            <td> {{book.book_Name}} </td>
-            <td> {{book.author}} </td>
-            <td> {{book.price}} </td>
-            <td> {{book.quantity}} </td>
-            <td> {{libraryname(book.library_Id)}} </td>
-            <td> {{book.category}} </td>
-            <td>
-              <a class="text-danger" (click)="openDeleteDialog(book.id)">Delete</a>
-              |
-              <a class="link" (click)="openUpdateDialog(book)">Update</a>
-            </td>
-          </tr>
-        </tbody>
+        <table class="table  table-striped">
+          <thead>
+            <tr>
+              <th> Image </th>
+              <th> Book Name </th>
+              <th> Author </th>
+              <th> Price </th>
+              <th> Quantity </th>
+              <th> Library </th>
+              <th> Category </th>
+              <th> Action </th>
+            </tr>
+          </thead>
+          <tbody [ngStyle]="{'display': books.length == 0 && search.value ? 'none' : ''}">
+            <tr *ngFor="let book of books.length == 0 ? book.books : books">
+              <td class="py-1">
+                <img src="../../../assets/Images/{{book.image}}" alt="image" />
+              </td>
+              <td> {{book.book_Name}} </td>
+              <td> {{book.author}} </td>
+              <td> {{book.price}} </td>
+              <td> {{book.quantity}} </td>
+              <td> {{libraryname(book.library_Id)}} </td>
+              <td> {{book.category}} </td>
+              <td>
+                <a class="text-danger" (click)="openDeleteDialog(book.id)">Delete</a>
+                |
+                <a class="link" (click)="openUpdateDialog(book)">Update</a>
+              </td>
+            </tr>
+          </tbody>
 
-      </table>
+        </table>
       </div>
 
       <div *ngIf="books.length == 0 && search.value">
@@ -59,7 +59,41 @@
     </div>
   </div>
 </div>
+<div class="col-lg-12 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Books rates</h4>
+      <div class=" table-responsive">
+        <table class="table  table-striped">
+          <thead>
+            <tr>
+              <th> Book Name </th>
+              <th> Rates </th>
+              <th> Number of rates </th>
+              <th> Time sold </th>
 
+            </tr>
+          </thead>
+          <tbody *ngIf="book.books.length >0">
+            <tr *ngFor="let book of getBooks()">
+              <td> {{book.book_Name}} </td>
+              <td> <input class="rating" style="--value:{{book.rates[0].rate}}" type="range" readonly
+                [value]="book.rates[0].rate"> </td>
+              <td> {{book.rates[0].id}} </td>
+              <td> {{book.nosold}} </td>
+
+            </tr>
+          </tbody>
+
+        </table>
+      </div>
+
+      <div *ngIf="books.length == 0 && search.value">
+        <p class="nothing">Sorry, no books with this name were found.</p>
+      </div>
+    </div>
+  </div>
+</div>
 <ng-template #createNewBook>
   <div class="col-12 dialog">
     <div class="card">
@@ -166,7 +200,7 @@
               <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Library</label>
                 <div class="col-sm-8">
-                  <select class="form-control" matInput formControlName="library_Id" ngModel="0" >
+                  <select class="form-control" matInput formControlName="library_Id" ngModel="0">
                     <option value="0" disabled selected>Please choose one</option>
                     <option *ngFor="let library of book.libraries" [ngValue]="library.id">{{library.library_Name}}
                     </option>
@@ -186,7 +220,8 @@
                 <label class="col-sm-4 col-form-label">PDF file</label>
                 <div class="col-sm-8">
                   <div class="mb-3 file">
-                    <input class="form-control" type="file" id="formFile" #pdf accept="application/pdf" formControlName="pdf" (change)="uploadPdf(pdf.files)">
+                    <input class="form-control" type="file" id="formFile" #pdf accept="application/pdf"
+                      formControlName="pdf" (change)="uploadPdf(pdf.files)">
                   </div>
                   <br>
                   <mat-error class="text-danger"
@@ -254,7 +289,7 @@
         <div class="row">
           <div>
             <label class="col-sm-4 col-form-label" for="discount">Discount rate:</label>
-            <input id="discount" type="number" [formControl]="changeControl" class="form-control col-md-8" >
+            <input id="discount" type="number" [formControl]="changeControl" class="form-control col-md-8">
             <mat-error class="text-danger" *ngIf="changeControl.hasError('required') && changeControl.touched">
               Discount is <strong class="text-danger">required</strong>
             </mat-error>
@@ -406,7 +441,8 @@
                 <label class="col-sm-4 col-form-label">PDF file</label>
                 <div class="col-sm-8">
                   <div class="mb-3 file">
-                    <input class="form-control" type="file" id="formFile" #pdf accept="application/pdf" formControlName="pdf" (change)="uploadPdf(pdf.files)">
+                    <input class="form-control" type="file" id="formFile" #pdf accept="application/pdf"
+                      formControlName="pdf" (change)="uploadPdf(pdf.files)">
                   </div>
                   <br>
                   <mat-error class="text-danger"

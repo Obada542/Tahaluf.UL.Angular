@@ -1,3 +1,4 @@
+import { LoaningService } from './../../Services/loaning.service';
 import { StudentService } from './../../Services/student.service';
 import { AuthService } from 'src/app/Services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -7,7 +8,6 @@ import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/c
 import { BookService } from 'src/app/Services/book.service';
 import { Subscription } from 'rxjs';
 import { PDFDocumentProxy } from 'ng2-pdf-viewer';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bookdetails',
@@ -24,6 +24,8 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
   checkUser = false;
   more = 3;
   error!: string;
+  error2!: string;
+
   unavailable: boolean = false;
 
 
@@ -33,8 +35,8 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
     book_Id: new FormControl(),
     student_Id: new FormControl(),
   })
-  constructor(public bookService: BookService,
-    private route: ActivatedRoute, private dialog: MatDialog, private userService: AuthService, private studentService: StudentService) {
+  constructor(public bookService: BookService, public router:Router,
+    private route: ActivatedRoute, private dialog: MatDialog, private userService: AuthService, private studentService: StudentService,private loanService:LoaningService) {
 
   }
 
@@ -75,6 +77,10 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
   openPage(page: number) {
     this.currentpage = page;
     this.dialog.open(this.page);
+  }
+  borrow(){
+    
+    this.router.navigate(['/client/payment'])
   }
   openRate() {
     if(localStorage.getItem("user") === null){

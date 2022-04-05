@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
   logout(){
     localStorage.clear();
     location.reload()
-    this.route.navigate([''])
   }
   openMap(){
     for(var i = 0;i<this.bookService.libraries.length;i++){

@@ -20,7 +20,6 @@ export class AdminComponent implements OnInit,OnDestroy {
   logout(){
     localStorage.clear();
     setTimeout(()=>{
-      this.route.navigate([''])
       location.reload()
     },1500)
 

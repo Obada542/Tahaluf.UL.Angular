@@ -35,20 +35,29 @@
               </div>
               <div class="col-md-7">
                 <div class="left border">
-                  <mat-tab-group mat-align-tabs="start">
-                    <mat-tab label="Second">
-                      <mat-form-field  class="example-full-width" appearance="fill">
-                        <mat-label>Enter a date range</mat-label>
-                        <mat-date-range-input [rangePicker]="picker" [min]="startDate.value" >
-                          <input type="asd" readonly [formControl]="startDate" #start matStartDate  placeholder="Start date" >
-                          <input type="asd" matEndDate #end placeholder="End date">
-                        </mat-date-range-input>
-                        <mat-datepicker-toggle  matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-date-range-picker #picker></mat-date-range-picker>
-                      </mat-form-field>
+                  <mat-tab-group mat-align-tabs="start" [selectedIndex]="btnNextPrev.index">
+                    
+                      <mat-tab label="Period">
+                        <div class="col-12">
+                          <br>
+                          <h4>Please select end date: <small>(minimum 3 days)</small> </h4>
+                          <mat-form-field appearance="fill" >
+                            <mat-label>Choose end date</mat-label>
+                            <input matInput [formControl]="end_Date" [min]="startDate" [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                          <br>
+                          <small>
+                            *Important: If you do not return the book on time, you will be charged <b>{{(bookservice.book.price * bookservice.book.discount / 100)}}</b> JD every day.
+                          </small>
+                      <br>
+                      <button mat-raised-button  (click)="submit()" [disabled]="!end_Date.valid">Next <i class="fa-solid fa-circle-arrow-right"></i></button>
+                    </div>
                     </mat-tab>
+                    
 
-                    <mat-tab label="First">
+                    <mat-tab label="Payment">
                       <mat-accordion class="example-headers-align">
                         <mat-expansion-panel [expanded]="state === 1" (opened)="state =1" (closed)="state =0" hideToggle>
                           <mat-expansion-panel-header>
@@ -121,6 +130,8 @@
                           </form>
                         </mat-expansion-panel>
                       </mat-accordion>
+                      <a mat-raised-button  (click)="navig('prev')">Prev <i class="fa-solid fa-circle-arrow-left"></i></a>
+
                     </mat-tab>
                   </mat-tab-group>
 

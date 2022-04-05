@@ -2,6 +2,9 @@
   <div class="tg-sectionhead">
     <h2><span>Explore our</span>Bestselling Books</h2>
   </div>
+  <div class="tg-productgrid" style="text-align: center; padding: 20px; font-size: 20px;" *ngIf="bookService.books.length ==0">
+    We didn't find what you were looking for <span style="color: rgb(230, 172, 15);"><i class="fa-solid fa-face-frown"></i></span>. 
+  </div>
   <div class="tg-productgrid" *ngIf="bookService.books.length >0">
     <div class="tg-refinesearch">
       <span>showing 1 to {{pageSize}} of {{bookService.books.length }} total</span>
@@ -60,7 +63,5 @@
       </pagination-controls>
     </div>
   </div>
-  <div class="tg-productgrid" *ngIf="bookService.books.length ==0">
-    nothing
-  </div>
+  
 </div>

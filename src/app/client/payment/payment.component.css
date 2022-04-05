@@ -8,7 +8,7 @@
 .card-top {
   padding: 0.7rem 5rem
 }
-b{
+.right b{
   margin-left: -20px !important;
 }
 .card-top a {
@@ -143,4 +143,12 @@ input[type=checkbox] {
 }
 .text-muted{
   text-transform: capitalize;
+}
+
+.left.border button{
+  margin-top: 10px;
+  background-color: inherit;
+  float: right;
+  font-size: 16px;
+  color: rgb(121, 121, 121);
 }

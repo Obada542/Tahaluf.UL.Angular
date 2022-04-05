@@ -38,8 +38,8 @@
                 </div>
                 <div class="tg-widgetcontent">
                   <ul>
-                    <li *ngFor="let category of bookService.categories"><a (click)="bookService.searchBook(category.name)"><span>{{category.name}}</span><em>{{category.total}}</em></a></li>
-                    <li><a (click)="bookService.getAvailableBook()"><span>View All</span></a></li>
+                    <li *ngFor="let category of bookService.categories"><a (click)="bookService.searchBook(category.name)" [routerLink]="['/books']"><span>{{category.name}}</span><em>{{category.total}}</em></a></li>
+                    <li><a (click)="bookService.getAvailableBook()" [routerLink]="['/books']"><span>View All</span></a></li>
                   </ul>
                 </div>
               </div>

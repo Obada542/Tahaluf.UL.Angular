@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,21 @@ export class LoaningService {
     },err=>{
       this.spinner.hide();
       this.toastr.error(err.message,err.status);
+    });
+  }
+  createLoan(loan:any){
+    this.spinner.show();
+    const borrow = this.http.post("https://localhost:44346/api/loaning/",loan,{responseType: 'text'})
+    const book = this.http.put('https://localhost:44346/api/book/updatesold/'+loan.book_Id,{responseType: 'text'});
+
+    forkJoin(borrow, book).subscribe(([res1, res2]) => {
+
+      this.spinner.hide();
+      this.toastr.success("Thanks");
+
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status);
     });
   }
   updateLoan(data:any){

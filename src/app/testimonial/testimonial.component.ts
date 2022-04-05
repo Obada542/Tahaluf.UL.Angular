@@ -14,10 +14,11 @@ export class TestimonialComponent implements OnInit {
     testimonial: new FormControl('', [Validators.required]),
     student_Id: new FormControl(''),
   });
-
+ 
   constructor(public testss: TestimonialService) { }
 
   ngOnInit(): void {
+    document.body.scrollTop = 0;
     this.testss.getAllStudent();
   }
 

@@ -24,7 +24,6 @@ export class AuthorizationGuard implements CanActivate {
             return true;
           }
           else {
-            this.toaster.warning('This page only for admin');
             return false;
           }
         }
@@ -39,7 +38,6 @@ export class AuthorizationGuard implements CanActivate {
             return true;
           }
           else {
-            this.toaster.warning('This page only for accountant');
             return false;
           }
         }
@@ -57,8 +55,7 @@ export class AuthorizationGuard implements CanActivate {
     }
 
     else {
-      this.router.navigate(['security/login']);
-      this.toaster.warning('You must Login')
+      this.router.navigate(['']);
       return false;
     }
   }
