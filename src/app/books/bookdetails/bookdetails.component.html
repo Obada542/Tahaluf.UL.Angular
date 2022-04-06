@@ -96,6 +96,7 @@
         </div>
         <ul class="tg-themetabs" role="tablist">
           <li role="presentation" class="active"><a href="#review" data-toggle="tab">Reviews</a></li>
+          <li role="presentation" ><a href="#comment" data-toggle="tab">Comments</a></li>
         </ul>
         <div class="tg-tab-content tab-content">
           <div role="tabpanel" class="tg-tab-pane tab-pane active" id="review">
@@ -127,6 +128,93 @@
               </div>
             </div>
           </div>
+
+          
+          <div role="tabpanel" class="tg-tab-pane tab-pane" id="comment">
+            <div class="tg-description">
+              <div class="main-section">
+                <div class="comments-container">
+		
+                  <ul id="comments-list" class="comments-list" *ngFor="let test of  (more ? (bookService.data|slice:0:more) : bookService.data)">
+                    <li>
+                      <div class="comment-main-level">
+                        <!-- Avatar -->
+                        <div class="comment-avatar"><img src="../../../assets/Images/{{getStudentImage(test.student_Id)}}" alt=""></div>
+                        <!-- Contenedor del Comentario -->
+                        <div class="comment-box">
+                          <div class="comment-head">
+                            <h6 class="comment-name by-author"><a href="http://creaticode.com/blog">{{getStudentName(test.student_Id)}}</a></h6>
+                            <span>{{test.postdate| date:'mm:hh dd-MM-yyy'}}</span>
+                            <span *ngIf="checkUser ">
+                            <i class="fa fa-reply" (click)="openCreateDialog(test.id)" ></i>
+                          </span>
+                          <span *ngIf=" checkUser && test.student_Id==userService.user.id  ">
+                            <i  (click)="openDeleteDialog(test.id)">Delete</i>
+                            <i (click)=" openUpdateDialog(test)" >Edit</i>
+                          </span>
+                          </div>
+                          <div class="comment-content">
+                            {{test.student_Comment}}
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Respuestas de los comentarios -->
+                      <ul class="comments-list reply-list" *ngFor="let te of  bookService.data1 ">
+                        <li *ngIf=" test.id==te.comment_Id " >
+                          <!-- Avatar -->
+                          <div class="comment-avatar"><img src="../../../assets/Images/{{getStudentImage(te.student_Id)}}" alt=""></div>
+                          <!-- Contenedor del Comentario -->
+                          <div class="comment-box">
+                            <div class="comment-head">
+                              <h6 class="comment-name"><a href="http://creaticode.com/blog">{{getStudentName(te.student_Id)}}</a></h6>
+                              <span>{{te.postdate| date:'mm:hh dd-MM-yyy'}}</span>
+                              <span *ngIf=" checkUser && te.student_Id==userService.user.id  " >
+                              <i (click)=" DeleteDialogRecomment(te.id)">Delete</i>
+                              <i  (click)="UpdateDialogRecomment(te)"  >Edit</i>
+                            </span>
+                            </div>
+                            <div class="comment-content">
+                              {{te.student_Comment}} 
+                            </div>
+                          </div>
+                        </li>
+                
+                       
+                      </ul>
+                    </li>
+                
+                    
+                  </ul>
+                  <div style="text-align: center;">
+                  <button class="more" *ngIf="more <= bookService.data.length" (click)="more = more + 3">Show Comment </button>
+                  </div>
+                
+                  <div *ngIf="checkUser" id="commentarea" style="position: relative;
+                  right: 57px;" >
+                    <form   [formGroup]=" commentForm">
+                     
+                      <textarea  class="comment" placeholder="Comment" formControlName="student_Comment" style="position: relative;
+                      top: 57px;"></textarea>
+                      
+                     
+                      <div class="user-img">
+                      <img  width="25px" src="../../../assets/Images/{{userService.user.image}}">
+                    </div>
+                      <button class="btn btn-primary"  style="position: relative;
+                      top: 100px;
+                      left: 628px;background-color: #28305b;" id="add" type="submit" (click)="onSubmit()">Add comment</button>
+                    </form>
+                </div>
+                
+                
+              </div>
+            </div>
+          </div>
+
+
+
+
+
         </div>
       </div>
     </div>
@@ -237,4 +325,164 @@
     </div>
   </div>
 </ng-template>
+
+<ng-template #deleteComment>
+  <div class="col-12 ">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Are you sure you want to delete your comment?</h4>
+        <div class="row">
+          <div class="col-md-9 ">
+            <button mat-button mat-dialog-close class="btn btn-primary">Close</button>
+            <button mat-button mat-dialog-close class="btn btn-danger" style="float: right;"
+              (click)="delete()">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+<ng-template #updateComment>
+  <div class="col-12 dialog" style="width: 700px;">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Edit Your Comment</h4>
+        <button mat-button mat-dialog-close class="btn"
+          style="color: red; float: right; font-size: 25px; margin-top: -50px;">X</button>
+        <br>
+        <form class="form-sample" [formGroup]="commentUpdate">
+         
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group ">
+                <textarea matInput formControlName="student_Comment" class="form-control" style="height: 130px;"
+                [(ngModel)]="selectedComment.student_Comment" ></textarea>
+                <br>
+               
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <button class="btn btn-out btn-square" style="float: right; background-color: #77B748;"
+                     (click)="update()">Update</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+
+<ng-template #createRecomment>
+  <div class="col-12 dialog" style="width: 700px;">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Reply Comment</h4>
+        <button mat-button mat-dialog-close class="btn"
+          style="color: red; float: right; font-size: 25px; margin-top: -50px;">X</button>
+        <br>
+        <form class="form-sample" [formGroup]="RecommentForm">
+         
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group ">
+                <textarea matInput formControlName="student_Comment" class="form-control" style="height: 130px;"
+                ></textarea>
+                <br>
+               
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <button class="btn btn-out btn-square" style="float: right; background-color: #77B748;"
+                     (click)="recommentSubmit()">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #updateRecomment>
+  <div class="col-12 dialog" style="width: 700px;">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Edit Your Comment</h4>
+        <button mat-button mat-dialog-close class="btn"
+          style="color: red; float: right; font-size: 25px; margin-top: -50px;">X</button>
+        <br>
+        <form class="form-sample" [formGroup]=" RecommentUpdate">
+         
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group ">
+                <textarea matInput formControlName="student_Comment" class="form-control" style="height: 130px;"
+                [(ngModel)]="selectedRecomment.student_Comment" ></textarea>
+                <br>
+               
+              </div>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <div class="col-sm-12">
+                  <button class="btn btn-out btn-square" style="float: right; background-color: #77B748;"
+                     (click)="updateRecomments()">Update</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #deleteRecomment>
+  <div class="col-12 ">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title">Are you sure you want to delete your comment?</h4>
+        <div class="row">
+          <div class="col-md-9 ">
+            <button mat-button mat-dialog-close class="btn btn-primary">Close</button>
+            <button mat-button mat-dialog-close class="btn btn-danger" style="float: right;"
+              (click)="deleteRecomments()">Delete</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
+
+
+
 
