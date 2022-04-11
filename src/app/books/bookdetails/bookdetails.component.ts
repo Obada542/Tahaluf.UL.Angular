@@ -19,6 +19,11 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
   totalPages: any;
   @ViewChild('page') page!: TemplateRef<any>;
   @ViewChild('rating') rating!: TemplateRef<any>;
+  @ViewChild('updateComment') updateComment!: TemplateRef<any>;
+  @ViewChild('deleteComment') deleteComment!: TemplateRef<any>;
+  @ViewChild('updateRecomment') updateRecomment!: TemplateRef<any>;
+  @ViewChild('createRecomment') createRecomment!: TemplateRef<any>;
+  @ViewChild('deleteRecomment') deleteRecomment!: TemplateRef<any>;
 
   currentpage!: number;
   checkUser = false;
@@ -26,17 +31,49 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
   error!: string;
   error2!: string;
 
+  selectedComment: any;
+  selectedRecomment: any;
+  idC: any;
+  idRc: any;
   rateForm = new FormGroup({
     rate: new FormControl(2.5, [Validators.required, Validators.min(0), Validators.max(5)]),
     review: new FormControl('', [Validators.required]),
     book_Id: new FormControl(),
     student_Id: new FormControl(),
   })
-  constructor(public bookService: BookService, public router:Router,
-    private route: ActivatedRoute, private dialog: MatDialog, private userService: AuthService, private studentService: StudentService,private loanService:LoaningService) {
+  commentForm: FormGroup = new FormGroup({
+    student_Comment: new FormControl(['']),
+    postdate: new FormControl(),
+    student_Id: new FormControl(),
+    book_Id: new FormControl(),
+  });
+  commentUpdate: FormGroup = new FormGroup({
+    id: new FormControl(''),
+    student_Comment: new FormControl(['']),
+    postdate: new FormControl(),
+    student_Id: new FormControl(),
+    book_Id: new FormControl()
+  });
+  RecommentForm: FormGroup = new FormGroup({
+    student_Comment: new FormControl(['']),
+    postdate: new FormControl(),
+    student_Id: new FormControl(),
+    book_Id: new FormControl(),
+    comment_Id: new FormControl()
+  });
 
+  RecommentUpdate: FormGroup = new FormGroup({
+    id: new FormControl(''),
+    student_Comment: new FormControl(['']),
+    postdate: new FormControl(),
+    student_Id: new FormControl(),
+    book_Id: new FormControl(),
+    comment_Id: new FormControl()
+  });
+
+  constructor(public bookService: BookService, public router: Router,
+    private route: ActivatedRoute, private dialog: MatDialog, public userService: AuthService, private studentService: StudentService, private loanService: LoaningService) {
   }
-
   ngOnInit(): void {
 
     var id: any;
@@ -69,8 +106,8 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
     this.currentpage = page;
     this.dialog.open(this.page);
   }
-  borrow(){
-    var user = this.loanService.studentloans.find((x: any) => x.book_Id == this.bookService.book.id && x.isloaned =="true");
+  borrow() {
+    var user = this.loanService.studentloans.find((x: any) => x.book_Id == this.bookService.book.id && x.isloaned == "true");
     if (user) {
       this.error2 = "You have already borrowed this book";
       return
@@ -78,7 +115,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
     this.router.navigate(['/client/payment'])
   }
   openRate() {
-    if(localStorage.getItem("user") === null){
+    if (localStorage.getItem("user") === null) {
       this.error = "Please login first.";
       return
     }
@@ -94,7 +131,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
   getRate(id: number) {
     if (this.bookService.rates) {
       const rate = this.bookService.rates.find((x: any) => x.book_Id == id);
-      if(rate)
+      if (rate)
         return rate.rate
       else return false
     }
@@ -135,16 +172,86 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
       return (time / 365 + " year ago")
     }
   }
-  unavailable(){
-    if(this.bookService.availableBooks){
+  unavailable() {
+    if (this.bookService.availableBooks) {
       const book = this.bookService.availableBooks.find((x: any) => x.id == this.bookService.book.id);
       if (book == null) {
         return true;
       }
-      else{
+      else {
         return false
       }
     }
     return
+  }
+
+  onSubmit() {
+    this.commentForm.controls['book_Id'].setValue(this.bookService.book.id)
+    this.commentForm.controls['student_Id'].setValue(this.userService.user.id)
+
+    this.bookService.createComment(this.commentForm.value);
+
+    location.reload();
+
+  }
+
+  openCreateDialog(id: number) {
+    this.idC = id;
+    this.dialog.open(this.createRecomment);
+  }
+  openUpdateDialog(comment: any) {
+    this.selectedComment = comment;
+    this.commentUpdate.controls['id'].setValue(comment.id);
+    this.commentUpdate.controls['student_Id'].setValue(comment.student_Id);
+    this.commentUpdate.controls['book_Id'].setValue(comment.book_Id);
+    this.commentUpdate.controls['postdate'].setValue(comment.postdate);
+
+    this.dialog.open(this.updateComment);
+  }
+  openDeleteDialog(id: number) {
+    this.idC = id;
+    this.dialog.open(this.deleteComment);
+  }
+  update() {
+    this.bookService.updateComment(this.commentUpdate.value);
+    location.reload();
+  }
+
+  delete() {
+    this.bookService.deleteComment(this.idC);
+    location.reload();
+  }
+
+  recommentSubmit() {
+    this.RecommentForm.controls['book_Id'].setValue(this.bookService.book.id)
+    this.RecommentForm.controls['student_Id'].setValue(this.userService.user.id)
+    this.RecommentForm.controls['comment_Id'].setValue(this.idC)
+    this.bookService.createRecomment(this.RecommentForm.value);
+    location.reload();
+
+  }
+
+  UpdateDialogRecomment(Recomment: any) {
+    this.selectedRecomment = Recomment;
+    this.RecommentUpdate.controls['id'].setValue(Recomment.id);
+    this.RecommentUpdate.controls['student_Id'].setValue(Recomment.student_Id);
+    this.RecommentUpdate.controls['book_Id'].setValue(Recomment.book_Id);
+    this.RecommentUpdate.controls['comment_Id'].setValue(Recomment.comment_Id);
+    this.dialog.open(this.updateRecomment);
+  }
+
+  DeleteDialogRecomment(id: number) {
+    this.idRc = id;
+    this.dialog.open(this.deleteRecomment);
+  }
+
+  updateRecomments() {
+    this.bookService.updateRecomment(this.RecommentUpdate.value);
+    location.reload();
+  }
+
+  deleteRecomments() {
+    this.bookService.deleteRecomment(this.idRc);
+    location.reload();
   }
 }

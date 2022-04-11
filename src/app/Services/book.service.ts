@@ -11,14 +11,16 @@ export class BookService {
   pdf: any;
   display_Image: any;
   books: any = [];
-  availableBooks:any;
+  availableBooks: any;
   book: any;
   libraries: any;
   newestBooks: any;
   categories: any;
   rates: any;
   bookRates: any;
-  empty=false;
+  empty = false;
+  data1: any;
+  data: any;
   constructor(private http: HttpClient, private toastr: ToastrService, private spinner: NgxSpinnerService) { }
 
   getAllBooks() {
@@ -37,15 +39,19 @@ export class BookService {
     this.spinner.show();
     const call1 = this.http.get('https://localhost:44346/api/book/GetBookById/' + id)
     const call2 = this.http.get('https://localhost:44346/api/rating/' + id)
-    return forkJoin(call1, call2).subscribe(([res1, res2]) => {
+    const call3 = this.http.get('https://localhost:44346/api/Comment/' + id)
+    const call4 = this.http.get('https://localhost:44346/api/Recomment/' + id)
+    return forkJoin(call1, call2, call3, call4).subscribe(([res1, res2, res3, res4]) => {
       this.book = res1;
       this.bookRates = res2;
-      this.http.get('https://localhost:44346/api/book/Search/' + this.book.category).subscribe((res:any)=>{
+      this.http.get('https://localhost:44346/api/book/Search/' + this.book.category).subscribe((res: any) => {
         this.books = res;
-        if(res.length<=0){
+        if (res.length <= 0) {
           this.empty = true;
         }
       })
+      this.data = res3;
+      this.data1 = res4
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
@@ -54,10 +60,10 @@ export class BookService {
   }
   getBooksByLibrary(library: string) {
     this.spinner.show();
-    forkJoin(this.http.get('https://localhost:44346/api/book/SearchByLibrary/' + library), this.http.get('https://localhost:44346/api/book/GetAvailableBook')).subscribe(([res1, res2]:any) => {
+    forkJoin(this.http.get('https://localhost:44346/api/book/SearchByLibrary/' + library), this.http.get('https://localhost:44346/api/book/GetAvailableBook')).subscribe(([res1, res2]: any) => {
       this.books = res1;
       this.availableBooks = res2;
-      if(res1.length<=0){
+      if (res1.length <= 0) {
         this.empty = true;
       }
       this.spinner.hide();
@@ -82,10 +88,10 @@ export class BookService {
   }
   searchBook(book: any) {
     this.spinner.show();
-    forkJoin(this.http.get('https://localhost:44346/api/book/Search/' + book), this.http.get('https://localhost:44346/api/book/GetAvailableBook')).subscribe(([res1, res2]:any) => {
+    forkJoin(this.http.get('https://localhost:44346/api/book/Search/' + book), this.http.get('https://localhost:44346/api/book/GetAvailableBook')).subscribe(([res1, res2]: any) => {
       this.books = res1;
       this.availableBooks = res2;
-      if(res1.length<=0){
+      if (res1.length <= 0) {
         this.empty = true;
       }
       this.spinner.hide();
@@ -114,7 +120,7 @@ export class BookService {
     const categories = this.http.get('https://localhost:44346/api/book/getCategories')
     const libraries = this.http.get('https://localhost:44346/api/library/GetLibraries')
 
-    forkJoin(rates, categories,libraries).subscribe(([res1, res2,res3]) => {
+    forkJoin(rates, categories, libraries).subscribe(([res1, res2, res3]) => {
       this.rates = res1;
       this.categories = res2;
       this.libraries = res3;
@@ -185,6 +191,83 @@ export class BookService {
     }, err => {
       this.spinner.hide();
       this.toastr.error(err.message, err.status)
+    })
+  }
+  getAllComment(id: number) {
+    this.spinner.show();
+    this.http.get('https://localhost:44346/api/Comment/' + id).subscribe((res) => {
+      this.data = res;
+      this.spinner.hide();
+      this.toastr.success('Comments Retrieved');
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status);
+    })
+  }
+  createComment(body: any) {
+    this.spinner.show;
+    this.http.post('https://localhost:44346/api/Comment/', body).subscribe((res) => {
+      this.spinner.hide;
+      this.toastr.success('Create Comment Successfully :)');
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status)
+    })
+  }
+  updateComment(body: any) {
+    this.spinner.show;
+    this.http.put('https://localhost:44346/api/Comment/', body).subscribe((res) => {
+      this.spinner.hide;
+      this.toastr.success('updated Successfully :)');
+    }, err => {
+      this.spinner.hide;
+      this.toastr.error(err.message, err.status)
+    })
+  }
+  deleteComment(id: number) {
+    this.http.delete('https://localhost:44346/api/Comment/delete/' + id).subscribe((res) => {
+      this.toastr.success('Deleted Successfully :)');
+    }, err => {
+      this.toastr.error(err.message, err.status)
+    })
+  }
+  createRecomment(body: any) {
+    this.spinner.show;
+    this.http.post('https://localhost:44346/api/Recomment/', body).subscribe((res) => {
+      this.spinner.hide;
+      this.toastr.success('Create Recomment Successfully :)');
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status)
+    })
+  }
+  updateRecomment(body: any) {
+    this.spinner.show;
+    this.http.put('https://localhost:44346/api/Recomment/', body).subscribe((res) => {
+      this.spinner.hide;
+      this.toastr.success('updated Successfully :)');
+
+    }, err => {
+      this.spinner.hide;
+      this.toastr.error(err.message, err.status)
+    })
+  }
+  deleteRecomment(id: number) {
+    this.http.delete('https://localhost:44346/api/Recomment/delete/' + id).subscribe((res) => {
+      this.toastr.success('Deleted Successfully :)');
+    }, err => {
+      this.toastr.error(err.message, err.status)
+    })
+  }
+  getAllRecomment(id: number) {
+    this.spinner.show();
+    this.http.get('https://localhost:44346/api/Recomment/' + id).subscribe((res) => {
+      this.data1 = res;
+      this.spinner.hide();
+      this.toastr.success('Recomments Retrieved');
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status);
     })
   }
 }
