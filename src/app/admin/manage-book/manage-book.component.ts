@@ -51,10 +51,7 @@ export class ManageBookComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.spinner.show()
-    setTimeout(() => {
       this.book.getAllBooks();
-    }, 15000);
   }
 
   openCreateDialog() {
@@ -136,7 +133,6 @@ export class ManageBookComponent implements OnInit {
     const books=this.book.books.map(({ id, ...rest }: {id:any}) => ({
       id, ...rest, rates: this.book.rates.filter(({ book_Id }: {book_Id:any}) => book_Id === id)
     }))
-    console.log(books)
     return books
   }
 }

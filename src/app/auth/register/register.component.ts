@@ -21,6 +21,7 @@ export class RegisterComponent implements OnInit {
   });
   constructor(private studentService:LoginService,private route:Router) { }
   ngOnInit(): void {
+    document.body.scrollTop = 300;
   }
 
   onChange(){

@@ -1,5 +1,6 @@
 <app-header></app-header>
-<div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner" style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);background-position: top;background-attachment: fixed;">
+<div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner view jarallax"
+  style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);">
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -21,46 +22,57 @@
             </div>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-            <div id="tg-locationmap" class="tg-locationmap tg-map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.0227235251605!2d36.11683568478937!3d32.095671525719226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf4bf2b5f648d9aed!2zMzLCsDA1JzQ0LjQiTiAzNsKwMDYnNTIuNyJF!5e0!3m2!1sar!2sjo!4v1647105662601!5m2!1sar!2sjo" height="100%" style="border: 1px solid rgb(52, 209, 60);" allowfullscreen="" loading="lazy"></iframe></div>
+            <div id="tg-locationmap" class="tg-locationmap tg-map"><iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3380.0227235251605!2d36.11683568478937!3d32.095671525719226!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf4bf2b5f648d9aed!2zMzLCsDA1JzQ0LjQiTiAzNsKwMDYnNTIuNyJF!5e0!3m2!1sar!2sjo!4v1647105662601!5m2!1sar!2sjo"
+                height="100%" style="border: 1px solid rgb(52, 209, 60);" allowfullscreen="" loading="lazy"></iframe>
+            </div>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <form class="tg-formtheme tg-formcontactus" [formGroup]="contactForm">
               <fieldset>
                 <div class="form-group">
-                  <input type="text" formControlName="firstname"  class="form-control" placeholder="First Name*">
-                  <mat-error class="text-danger" *ngIf="contactForm.controls['firstname'].hasError('required') && contactForm.controls['firstname'].touched">
+                  <input type="text" formControlName="firstname" class="form-control" placeholder="First Name*">
+                  <mat-error class="text-danger"
+                    *ngIf="contactForm.controls['firstname'].hasError('required') && contactForm.controls['firstname'].touched">
                     First name is <strong>required</strong>
                   </mat-error>
                 </div>
                 <div class="form-group">
-                  <input type="text" formControlName="lastname" name="lastname" class="form-control" placeholder="Last Name*">
-                  <mat-error class="text-danger" *ngIf="contactForm.controls['lastname'].hasError('required') && contactForm.controls['lastname'].touched">
+                  <input type="text" formControlName="lastname" name="lastname" class="form-control"
+                    placeholder="Last Name*">
+                  <mat-error class="text-danger"
+                    *ngIf="contactForm.controls['lastname'].hasError('required') && contactForm.controls['lastname'].touched">
                     Last name is <strong>required</strong>
                   </mat-error>
                 </div>
                 <div class="form-group">
                   <input type="email" formControlName="email" name="email" class="form-control" placeholder="Email*">
-                  <mat-error class="text-danger" *ngIf="contactForm.controls['email'].hasError('email') && !contactForm.controls['email'].hasError('required') && contactForm.controls['email'].touched">
+                  <mat-error class="text-danger"
+                    *ngIf="contactForm.controls['email'].hasError('email') && !contactForm.controls['email'].hasError('required') && contactForm.controls['email'].touched">
                     Please enter a valid email address
                   </mat-error>
-                  <mat-error class="text-danger" *ngIf="contactForm.controls['email'].hasError('required') && contactForm.controls['email'].touched">
+                  <mat-error class="text-danger"
+                    *ngIf="contactForm.controls['email'].hasError('required') && contactForm.controls['email'].touched">
                     Email is <strong>required</strong>
                   </mat-error>
                 </div>
                 <div class="form-group">
                   <input type="text" formControlName="subject" class="form-control" placeholder="Subject*">
-                  <mat-error class="text-danger" *ngIf="contactForm.controls['subject'].hasError('required') && contactForm.controls['subject'].touched">
+                  <mat-error class="text-danger"
+                    *ngIf="contactForm.controls['subject'].hasError('required') && contactForm.controls['subject'].touched">
                     Subject is <strong>required</strong>
                   </mat-error>
                 </div>
                 <div class="form-group tg-hastextarea">
                   <textarea formControlName="message" name="message" placeholder="Comment"></textarea>
-                  <mat-error class="text-danger" *ngIf="contactForm.controls['message'].hasError('required') && contactForm.controls['message'].touched">
+                  <mat-error class="text-danger"
+                    *ngIf="contactForm.controls['message'].hasError('required') && contactForm.controls['message'].touched">
                     Comment is <strong>required</strong>
                   </mat-error>
                 </div>
                 <div class="form-group">
-                  <button type="submit" (click)="submit()" class="btn tg-btn tg-active" [disabled]="!contactForm.valid" >Submit</button>
+                  <button type="submit" (click)="submit()" class="btn tg-btn tg-active"
+                    [disabled]="!contactForm.valid">Submit</button>
                 </div>
               </fieldset>
             </form>
@@ -75,7 +87,7 @@
                 </li>
                 <li>
                   <i class="fa-solid fa-phone"></i>
-                  <span >
+                  <span>
                     <em>0800 12345 - 678 - 89</em>
                     <em>+4 1234 - 4567 - 67</em>
                   </span>

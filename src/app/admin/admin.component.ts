@@ -1,3 +1,4 @@
+import { LoaningService } from './../Services/loaning.service';
 import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
@@ -8,10 +9,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class AdminComponent implements OnInit,OnDestroy {
 
-  constructor(private route:Router) { }
+  constructor(private loanService:LoaningService) { }
 
 
   ngOnInit(): void {
+    this.loanService.sendLateFeesMessage();
   }
 
   ngOnDestroy(): void {

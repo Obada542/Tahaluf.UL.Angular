@@ -11,25 +11,27 @@ export class BookService {
   pdf: any;
   display_Image: any;
   books: any = [];
+  availableBooks:any;
   book: any;
   libraries: any;
   newestBooks: any;
   categories: any;
   rates: any;
   bookRates: any;
-  search = '';
-  library = '';
+  empty=false;
   constructor(private http: HttpClient, private toastr: ToastrService, private spinner: NgxSpinnerService) { }
 
   getAllBooks() {
+    this.spinner.show()
 
-    this.http.get('https://localhost:44346/api/book/GetBooks').subscribe((res: any) => {
-      this.books = res
+    forkJoin(this.http.get('https://localhost:44346/api/book/GetBooks'), this.http.get('https://localhost:44346/api/book/GetAvailableBook')).subscribe(([res1, res2]) => {
+      this.books = res1;
+      this.availableBooks = res2;
       this.spinner.hide();
     }, err => {
+      this.spinner.hide();
       this.toastr.error(err.message, err.status);
     });
-
   }
   getBookById(id: any) {
     this.spinner.show();
@@ -38,8 +40,13 @@ export class BookService {
     return forkJoin(call1, call2).subscribe(([res1, res2]) => {
       this.book = res1;
       this.bookRates = res2;
+      this.http.get('https://localhost:44346/api/book/Search/' + this.book.category).subscribe((res:any)=>{
+        this.books = res;
+        if(res.length<=0){
+          this.empty = true;
+        }
+      })
       this.spinner.hide();
-
     }, err => {
       this.spinner.hide();
       this.toastr.error(err.message, err.status);
@@ -47,9 +54,12 @@ export class BookService {
   }
   getBooksByLibrary(library: string) {
     this.spinner.show();
-    this.http.get('https://localhost:44346/api/book/SearchByLibrary/' + library).subscribe((res) => {
-      this.books = res;
-      this.library = ''
+    forkJoin(this.http.get('https://localhost:44346/api/book/SearchByLibrary/' + library), this.http.get('https://localhost:44346/api/book/GetAvailableBook')).subscribe(([res1, res2]:any) => {
+      this.books = res1;
+      this.availableBooks = res2;
+      if(res1.length<=0){
+        this.empty = true;
+      }
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
@@ -70,24 +80,15 @@ export class BookService {
       this.toastr.error(err.message, err.status);
     });
   }
-  getAvailableBook() {
-    this.spinner.show();
-    this.http.get('https://localhost:44346/api/book/GetAvailableBook').subscribe((res) => {
-      this.books = res;
-      this.spinner.hide();
-    }, err => {
-      this.spinner.hide();
-      this.toastr.error("Sorry we facing some issuse with data");
-    });
-  }
   searchBook(book: any) {
     this.spinner.show();
-
-    this.http.get('https://localhost:44346/api/book/Search/' + book).subscribe((res) => {
-      this.books = res;
-      this.search = '';
+    forkJoin(this.http.get('https://localhost:44346/api/book/Search/' + book), this.http.get('https://localhost:44346/api/book/GetAvailableBook')).subscribe(([res1, res2]:any) => {
+      this.books = res1;
+      this.availableBooks = res2;
+      if(res1.length<=0){
+        this.empty = true;
+      }
       this.spinner.hide();
-
     }, err => {
       this.spinner.hide();
       this.toastr.error(err.message, err.status);
@@ -108,7 +109,7 @@ export class BookService {
   }
   getAllRates() {
     this.spinner.show()
-    
+
     const rates = this.http.get('https://localhost:44346/api/rating')
     const categories = this.http.get('https://localhost:44346/api/book/getCategories')
     const libraries = this.http.get('https://localhost:44346/api/library/GetLibraries')
@@ -119,7 +120,7 @@ export class BookService {
       this.libraries = res3;
 
       this.spinner.hide();
-      
+
     }, err => {
       this.spinner.hide();
       this.toastr.error(err.message, err.status);

@@ -21,8 +21,7 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { AgmCoreModule } from '@agm/core';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
-import { ShareIconsModule } from 'ngx-sharebuttons/icons';
-
+import { ShareIconsModule } from 'ngx-sharebuttons/icons'; 
 @NgModule({
   declarations: [
     HeaderComponent,

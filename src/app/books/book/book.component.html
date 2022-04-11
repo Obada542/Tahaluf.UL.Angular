@@ -2,8 +2,8 @@
   <div class="tg-sectionhead">
     <h2><span>Explore our</span>Bestselling Books</h2>
   </div>
-  <div class="tg-productgrid" style="text-align: center; padding: 20px; font-size: 20px;" *ngIf="bookService.books.length ==0">
-    We didn't find what you were looking for <span style="color: rgb(230, 172, 15);"><i class="fa-solid fa-face-frown"></i></span>. 
+  <div class="tg-productgrid" style="text-align: center; padding: 20px; font-size: 20px;" *ngIf="!bookService.empty">
+    We couldn't find what you were looking for <span style="color: rgb(230, 172, 15);"><i class="fa-solid fa-face-frown"></i></span>.
   </div>
   <div class="tg-productgrid" *ngIf="bookService.books.length >0">
     <div class="tg-refinesearch">
@@ -44,7 +44,7 @@
             <h3><a class="blue">{{book.book_Name}}</a></h3>
           </div>
           <span class="tg-bookwriter">By: <a class="blue">{{book.author}}</a></span>
-          <input class="rating" style="--value:{{getRate(book.id)}}" type="range" readonly [value]="getRate(book.id)">
+          <input class="rating" *ngIf="getRate(book.id)" style="--value:{{getRate(book.id)}}" type="range" readonly [value]="getRate(book.id)">
           <span class="tg-bookprice">
             <ins>{{book.price}} JD</ins>
           </span>
@@ -63,5 +63,5 @@
       </pagination-controls>
     </div>
   </div>
-  
+
 </div>

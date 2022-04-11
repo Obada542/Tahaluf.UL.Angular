@@ -4,9 +4,9 @@ mat-error{
 .error{
   min-height: 23px !important;
 }
-form#login {
+#login {
   margin-top: -85px;
-  background-color: #fff;
+  background-color: #fff !important;
 }
 p#account {
   font-size: 15px;

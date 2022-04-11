@@ -46,6 +46,9 @@
                 <a class="text-danger" (click)="openDeleteDialog(book.id)">Delete</a>
                 |
                 <a class="link" (click)="openUpdateDialog(book)">Update</a>
+                <hr>
+                <a class="link" href="../../../assets/books/{{book.pdf}}" target="_blank">PDF</a>
+
               </td>
             </tr>
           </tbody>
@@ -77,9 +80,9 @@
           <tbody *ngIf="book.books.length >0">
             <tr *ngFor="let book of getBooks()">
               <td> {{book.book_Name}} </td>
-              <td> <input class="rating" style="--value:{{book.rates[0].rate}}" type="range" readonly
-                [value]="book.rates[0].rate"> </td>
-              <td> {{book.rates[0].id}} </td>
+              <td style="display: flex;justify-content: center;" > <input class="rating" style="--value:{{book.rates[0]?book.rates[0].rate:0}}" type="range" readonly
+                [value]="book.rates[0]?book.rates[0].rate:0"> ({{book.rates[0]?book.rates[0].rate:'-'}}) </td>
+              <td > {{book.rates[0]?book.rates[0].id:0}} </td>
               <td> {{book.nosold}} </td>
 
             </tr>
@@ -176,7 +179,6 @@
                     Category is <strong class="text-danger">required</strong>
                   </mat-error>
                 </div>
-                <small>*For more than one category, please add a comma between the categories :).</small>
               </div>
             </div>
           </div>

@@ -22,6 +22,7 @@ export class PaymentComponent implements OnInit {
 }
   state : number = 0;
   ngOnInit(): void {
+    document.body.scrollTop = 200;
     if(!this.bookservice.book){
         this.route.navigate(['/books'])
     }

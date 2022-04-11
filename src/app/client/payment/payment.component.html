@@ -1,7 +1,7 @@
 <app-header></app-header>
 
-<main id="tg-main" class="tg-main tg-haslayout"
-  style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);background-position: top;background-attachment: fixed;">
+<main id="tg-main" class="tg-main tg-haslayout view jarallax"
+  style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);">
   <div class="tg-haslayout">
     <div class="container">
       <div class="row">
@@ -36,7 +36,7 @@
               <div class="col-md-7">
                 <div class="left border">
                   <mat-tab-group mat-align-tabs="start" [selectedIndex]="btnNextPrev.index">
-                    
+
                       <mat-tab label="Period">
                         <div class="col-12">
                           <br>
@@ -55,7 +55,7 @@
                       <button mat-raised-button  (click)="submit()" [disabled]="!end_Date.valid">Next <i class="fa-solid fa-circle-arrow-right"></i></button>
                     </div>
                     </mat-tab>
-                    
+
 
                     <mat-tab label="Payment">
                       <mat-accordion class="example-headers-align">

@@ -10,6 +10,9 @@ export class FooterComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    jarallax(document.querySelectorAll('.jarallax'), {
+      speed: 0.4
+    });
   }
   topFunction() {
     document.body.scrollTop = 0;

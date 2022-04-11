@@ -31,6 +31,17 @@ export class LoaningService {
       this.toastr.error(err.message,err.status);
     });
   }
+  sendLateFeesMessage(){
+    const email = {
+      emailFrom:"obada.tawfiq700@gmail.com",
+      password:"Obada0789735213"
+    }
+    this.http.post("https://localhost:44346/api/jwt/LateFeesEmail/",email).subscribe(res=>{
+    },err=>{
+      this.spinner.hide();
+      this.toastr.error(err.message,err.status);
+    });
+  }
   createLoan(loan:any){
     this.spinner.show();
     const borrow = this.http.post("https://localhost:44346/api/loaning/",loan,{responseType: 'text'})

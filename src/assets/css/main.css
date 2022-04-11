@@ -4832,22 +4832,29 @@ transition: all 0.6s cubic-bezier(0.3,1,0,1);
 }
 .carousel-control,
 .tg-bgtestimonials .carousel-control-next-icon,
-.tg-bgtestimonials .carousel-control-prev-icon{
+.tg-bgtestimonials .carousel-control-prev-icon
+{
   display: block;
   border: 1px solid rgb(18, 190, 18) !important;
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
   background-size: 10px;
   fill: #000;
   border-radius: 50%;
-  font-size: 15px !important;
-  color: rgb(61, 61, 61) !important;
   font-weight: 700 !important;
   transition: 0.5s !important;
 }
-.tg-bgtestimonials .carousel-control-prev-icon{
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 8 8'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
-
+.tg-postbook .carousel-control-next-icon,
+.tg-postbook .carousel-control-prev-icon{
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 10 10'%3E%3Cpath d='M2.75 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
+  fill: #000;
+  transition: 0.5s !important;
 }
+.tg-bgtestimonials .carousel-control-prev-icon,
+.tg-postbook .carousel-control-prev-icon{
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23000' viewBox='0 0 11 11'%3E%3Cpath d='M5.25 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
+}
+
+
 .carousel-control:hover
 ,.tg-bgtestimonials .carousel-control-next-icon:hover,
 .tg-bgtestimonials .carousel-control-prev-icon:hover{
@@ -4937,7 +4944,8 @@ font-size: 22px;
 .testimonial .carousel {
 padding-bottom:50px;
 }
-.testimonial .carousel-control-next-icon, .testimonial .carousel-control-prev-icon {
+.testimonial .carousel-control-next-icon,
+ .testimonial .carousel-control-prev-icon {
   width: 35px;
   height: 35px;
 }
@@ -4991,3 +4999,21 @@ padding-bottom:50px;
   color: rgb(0, 160, 160);
   text-decoration: underline;
 }
+.tg-featureimg .pdfViewer .page,
+.tg-featureimg .pdfViewer .page .canvasWrapper,
+.tg-featureimg .pdfViewer .page .canvasWrapper canvas
+{
+  width: 100% !important;
+  height: auto !important;
+}
+.dialog-book .mat-dialog-container{
+  padding: 0 !important;
+  box-shadow: none !important;
+  background-color: inherit !important;
+}
+
+.ng2-pdf-viewer-container
+{
+  overflow-x: unset !important;
+}
+

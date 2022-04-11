@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/Services/auth.service';
 import { Component } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-
+import 'jarallax';
+declare var jarallax: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -13,8 +14,8 @@ export class AppComponent {
   constructor(private toastr:ToastrService,private router:Router,private user:AuthService,private bookService:BookService){
     this.toastr.success("Welcome");
     this.bookService.getAllRates();
-    
-    
+
+
     if(localStorage.getItem("user")){
       this.user.getUser();
       if(this.user.user.role =="Admin"){

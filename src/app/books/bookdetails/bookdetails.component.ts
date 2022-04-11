@@ -26,9 +26,6 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
   error!: string;
   error2!: string;
 
-  unavailable: boolean = false;
-
-
   rateForm = new FormGroup({
     rate: new FormControl(2.5, [Validators.required, Validators.min(0), Validators.max(5)]),
     review: new FormControl('', [Validators.required]),
@@ -51,9 +48,6 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
       this.studentService.getAllStudents();
 
     }, 1200)
-    setTimeout(() => {
-      this.bookService.searchBook(this.bookService.book.category);
-    }, 3200)
     if (localStorage.getItem("user")) {
       this.checkUser = true
     }
@@ -69,17 +63,18 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
   }
   getPages(pdf: PDFDocumentProxy) {
     this.totalPages = pdf.numPages;
-    const book = this.bookService.books.find((x: any) => x.id == this.bookService.book.id);
-    if (book == null) {
-      this.unavailable = true;
-    }
+
   }
   openPage(page: number) {
     this.currentpage = page;
     this.dialog.open(this.page);
   }
   borrow(){
-    
+    var user = this.loanService.studentloans.find((x: any) => x.book_Id == this.bookService.book.id && x.isloaned =="true");
+    if (user) {
+      this.error2 = "You have already borrowed this book";
+      return
+    }
     this.router.navigate(['/client/payment'])
   }
   openRate() {
@@ -90,7 +85,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
     var user = this.bookService.bookRates.find((x: any) => x.student_Id == this.userService.user.id);
 
     if (user) {
-      this.error = " You already rate this book";
+      this.error = " You have already rated this book";
       return
     }
 
@@ -99,7 +94,9 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
   getRate(id: number) {
     if (this.bookService.rates) {
       const rate = this.bookService.rates.find((x: any) => x.book_Id == id);
-      return rate.rate
+      if(rate)
+        return rate.rate
+      else return false
     }
 
   }
@@ -137,5 +134,17 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
     } else {
       return (time / 365 + " year ago")
     }
+  }
+  unavailable(){
+    if(this.bookService.availableBooks){
+      const book = this.bookService.availableBooks.find((x: any) => x.id == this.bookService.book.id);
+      if (book == null) {
+        return true;
+      }
+      else{
+        return false
+      }
+    }
+    return
   }
 }

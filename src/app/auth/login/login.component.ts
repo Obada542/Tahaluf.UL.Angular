@@ -15,14 +15,10 @@ export class LoginComponent implements OnInit {
   email = new FormControl('',[Validators.required,Validators.email]);
  password=new FormControl('',[Validators.required,Validators.minLength(8)]);
 
-  // formGroup :FormGroup = new FormGroup({
-  //   email : new FormControl('',[Validators.required,Validators.email]),
-  //   password: new FormControl('',[Validators.required,Validators.minLength(8)])
-  // })
-
   user:any ={};
   constructor( private auth:AuthService) { }
   ngOnInit(): void {
+    document.body.scrollTop = 300;
   }
 
   remember(){

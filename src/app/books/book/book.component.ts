@@ -1,7 +1,6 @@
 import { BookService } from './../../Services/book.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-book',
@@ -11,6 +10,7 @@ import { Subscription } from 'rxjs';
 export class BookComponent implements OnInit {
 
   p:number = 1;
+  array!: Array<any>;
   pageSize:number=8;
   constructor(public bookService:BookService) { }
 
@@ -20,11 +20,16 @@ export class BookComponent implements OnInit {
   getRate(id:number){
     if(this.bookService.rates){
       const rate =this.bookService.rates.find((x:any) => x.book_Id ==id);
-      return rate.rate
+      if(rate)
+        return rate.rate
+      else return false
     }
 
   }
   changeSize(page:any){
     this.pageSize=page.target.value
+  }
+  sortBooks(){
+    this.array.sort()
   }
 }

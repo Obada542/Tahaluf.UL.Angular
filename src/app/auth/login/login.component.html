@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="tg-haslayout">
-  <div class="tg-innerbanner tg-bginnerbanner"
-    style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);background-position: top;background-attachment: fixed;">
+  <div class="tg-innerbanner tg-bginnerbanner view jarallax"
+    style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         <div class="tg-innerbannercontent">
@@ -10,104 +10,52 @@
       </div>
     </div>
   </div>
-
-
-
-   <form class="form container" id="login" > 
-    <h1 class="form__heading">Welcome</h1>
-    <hr>
-    <div class="form__group">
-      <input matInput class="form-control" type="email" id="email" class="form__input" placeholder="email address" [formControl]="email">
-      <div class="error">
-        <mat-error
-          *ngIf="email.hasError('email') && !email.hasError('required')&& email.touched">
-          *Please enter a valid email address
-        </mat-error>
-        <mat-error *ngIf="email.hasError('required') &&email.touched">
-          *Email is required
-        </mat-error>
-      </div>
+  <div class="container fform" >
+    <div class="row">
+      <div class="col-sm-8 col-sm-offset-2 ">
+            <div class="row">
+              <form class="form container" id="login">
+                <h1 class="form__heading">Welcome</h1>
+                <hr>
+                <div class="form__group">
+                  <input matInput class="form-control" type="email" id="email" class="form__input" placeholder="email address"
+                    [formControl]="email">
+                  <div class="error">
+                    <mat-error *ngIf="email.hasError('email') && !email.hasError('required')&& email.touched">
+                      *Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="email.hasError('required') &&email.touched">
+                      *Email is required
+                    </mat-error>
+                  </div>
+                </div>
+                <div class="form__group">
+                  <input matInput type="password" autocomplete="false" id="password" class="form__input" placeholder="password"
+                    [formControl]="password">
+                  <div class="error">
+                    <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required') && password.touched">
+                      *Please enter strong password
+                    </mat-error>
+                    <mat-error *ngIf="password.hasError('required') && password.touched">
+                      *Password is required
+                    </mat-error>
+                  </div>
+                </div>
+                <div style="display: flex; justify-content: center;">
+                  <input type="checkbox" id="checkbox" (click)="remember()">
+                  <label for="checkbox" style="font-size: 15px;"> Remember me</label>
+                </div>
+                <br>
+                <button class="btn btn--large btn--green" type="submit" [disabled]="!email.valid || !password.valid"
+                  (click)="submit()">
+                  Login
+                </button>
+                <p id="account"> new member? <a [routerLink]="['/security/register']">Create new Account</a> </p>
+              </form>
+            </div>
+          </div>
     </div>
-    <div class="form__group">
-      <input matInput  type="password" autocomplete="false" id="password" class="form__input" placeholder="password"
-      [formControl]="password">
-      <div class="error">
-        <mat-error
-          *ngIf="password.hasError('minlength') && !password.hasError('required') && password.touched">
-          *Please enter strong password
-        </mat-error>
-        <mat-error
-          *ngIf="password.hasError('required') && password.touched">
-          *Password is required
-        </mat-error>
-      </div>
-    </div>
-    <div style="display: flex; justify-content: center;">
-      <input type="checkbox" id="checkbox" (click)="remember()">
-      <label for="checkbox" style="font-size: 15px;"> Remember me</label>
-    </div>
-    <br>
-    <button class="btn btn--large btn--green" type="submit"
-    [disabled]="!email.valid || !password.valid" (click)="submit()">
-      Login
-    </button>
-    <p id="account" > new member? <a
-        [routerLink]="['/security/register']">Create new Account</a> </p>
-  </form>  
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!-- 
-    <form class="form container" id="login" [formGroup]="formGroup"> 
-    <h1 class="form__heading">Welcome</h1>
-    <hr>
-    <div class="form__group">
-      <input matInput class="form-control" type="email" id="email" class="form__input" placeholder="email address" formControlName="email">
-      <div class="error">
-        <mat-error
-          *ngIf="formGroup.controls['email'].hasError('email') && !formGroup.controls['email'].hasError('required')&& formGroup.controls['email'].touched">
-          *Please enter a valid email address
-        </mat-error>
-        <mat-error *ngIf="formGroup.controls['email'].hasError('required') &&formGroup.controls['email'].touched">
-          *Email is required
-        </mat-error>
-      </div>
-    </div>
-    <div class="form__group">
-      <input matInput  type="password" autocomplete="false" id="password" class="form__input" placeholder="password"
-        formControlName="password">
-      <div class="error">
-        <mat-error
-          *ngIf="formGroup.controls['password'].hasError('minlength') && !formGroup.controls['password'].hasError('required') && formGroup.controls['password'].touched">
-          *Please enter strong password
-        </mat-error>
-        <mat-error
-          *ngIf="formGroup.controls['password'].hasError('required') && formGroup.controls['password'].touched">
-          *Password is required
-        </mat-error>
-      </div>
-    </div>
-    <div style="display: flex; justify-content: center;">
-      <input type="checkbox" id="checkbox" (click)="remember()">
-      <label for="checkbox" style="font-size: 15px;"> Remember me</label>
-    </div>
-    <br>
-    <button class="btn btn--large btn--green" type="submit"
-      [disabled]="!formGroup.controls['password'].valid && !formGroup.controls['email'].valid" (click)="submit()">
-      Login
-    </button>
-    <p id="account" > new member? <a
-        [routerLink]="['/security/register']">Create new Account</a> </p>
-  </form>   -->
+  </div>
 </div>
+
 <app-footer></app-footer>

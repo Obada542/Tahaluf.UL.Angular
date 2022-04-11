@@ -1,20 +1,41 @@
 
 <div class="tg-productdetail" *ngIf="bookService.book">
   <div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf=" unavailable">
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf=" unavailable()">
       <div class="alert alert-danger" role="alert">
         This book is not available now
       </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5">
       <div class="tg-postbook">
-        <figure class="tg-featureimg"><img src="../../../assets/Images/{{bookService.book.image}}"
-            alt="{{bookService.book.book_name}}"></figure>
+
+            <ngb-carousel [showNavigationIndicators]="false" [interval]="0">
+              <ng-template ngbSlide>
+                <div class="carousel-item active">
+                  <figure class="tg-featureimg">
+                    <img src="../../../assets/Images/{{bookService.book.image}}"
+                    alt="{{bookService.book.book_name}}">
+                  </figure>
+                </div>
+
+              </ng-template>
+              <ng-template ngbSlide *ngFor="let page of [1,2,3]">
+                <figure class="tg-featureimg">
+                <pdf-viewer  (after-load-complete)="getPages($event)"
+                (click)="openPage(page)" class="pdf" [src]="'../../../assets/books/'+bookService.book.pdf" [page]="page"
+                [render-text]="false" [show-all]="false"
+                >
+              </pdf-viewer>
+              </figure>
+
+              </ng-template>
+
+            </ngb-carousel>
         <div class="tg-postbookcontent">
           <span class="tg-bookprice">
             <ins>{{bookService.book.price}} JD</ins>
           </span>
-          <a class="tg-btn tg-active tg-btn-lg" *ngIf="!unavailable" (click)="borrow()">Borrow </a>
+          <a class="tg-btn tg-active tg-btn-lg" *ngIf="checkUser && !unavailable()" (click)="borrow()">Borrow </a>
           <a class="tg-btn tg-active " *ngIf="!checkUser" [routerLink]="['/security/login']">Please log in first</a>
 
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="error2">
@@ -25,7 +46,7 @@
         </div>
       </div>
     </div>
-    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
       <div class="tg-productcontent">
         <ul class="tg-bookscategories">
           <li><a style="text-transform: capitalize;">{{bookService.book.category}}</a></li>
@@ -35,7 +56,7 @@
         </div>
         <span class="tg-bookwriter">By: <a href="javascript:void(0);">{{bookService.book.author}}</a></span>
         <div class=" col-xs-6 " style="display: flex; align-items: center;">
-          <input class="rating" style="--value:{{getRate(bookService.book.id)}}" type="range" readonly
+          <input class="rating" *ngIf="getRate(bookService.book.id)"  style="--value:{{getRate(bookService.book.id)}}" type="range" readonly
             [value]="getRate(bookService.book.id)">
           <span class="tg-addreviews" style="float: right;"><a (click)="openRate()">Add Your Review</a></span>
 
@@ -69,23 +90,7 @@
           <li><span>Library:</span><span>{{libraryname(bookService.book.library_Id)}}</span></li>
 
           <li><span>Late fine percentage:</span><span class="text-danger">{{bookService.book.discount}}%</span></li>
-          <li>
-            <mat-expansion-panel hideToggle>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  Show demo
-                </mat-panel-title>
 
-              </mat-expansion-panel-header>
-              <div style="display: flex; background-color: #F5F2F2; padding-top: 15px;">
-                <pdf-viewer *ngFor="let page of [1,2,3]" (after-load-complete)="getPages($event)"
-                  (click)="openPage(page)" class="pdf" [src]="'../../../assets/books/'+bookService.book.pdf" [page]="page"
-                  [original-size]="false" [render-text]="false" [show-borders]="true" [show-all]="false"
-                  [zoom-scale]="'page-fit'"></pdf-viewer>
-
-              </div>
-            </mat-expansion-panel>
-          </li>
         </ul>
       </div>
     </div>
@@ -181,60 +186,63 @@
     </div>
   </div>
 </div>
-<ng-template #page>
+<div class="dialog-book">
+  <ng-template #page >
 
-  <pdf-viewer style="width: 500px; height: 90vh;" [src]="'../../../assets/books/'+bookService.book.pdf" [page]="currentpage"
-    [original-size]="false" [render-text]="false" [show-borders]="true" [show-all]="false" [zoom-scale]="'page-fit'">
-  </pdf-viewer>
-</ng-template>
+    <pdf-viewer style="height: 90vh; width: 70vw;" [src]="'../../../assets/books/'+bookService.book.pdf" [page]="currentpage"
+       [render-text]="false" [show-all]="false" >
+    </pdf-viewer>
+  </ng-template>
 
-<ng-template #rating>
-  <div class="col-12 dialog" style="width: 700px;">
-    <div class="card">
-      <div class="card-body">
-        <h4 class="card-title">Rate our book</h4>
-        <button mat-button mat-dialog-close class="btn"
-          style="color: red; float: right; font-size: 25px; margin-top: -50px;">X</button>
-        <br>
-        <form class="form-sample" [formGroup]="rateForm">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group ">
+  <ng-template #rating>
+    <div class="col-12 dialog" style="width: 700px;">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Rate our book</h4>
+          <button mat-button mat-dialog-close class="btn"
+            style="color: red; float: right; font-size: 25px; margin-top: -50px;">X</button>
+          <br>
+          <form class="form-sample" [formGroup]="rateForm">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group ">
 
-                <input class="rating" max="5" formControlName="rate"
-                  oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)" step="0.5"
-                  style="--starsize: 1.8rem;--value:2.5" type="range" value="2.5">
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group ">
-                <textarea matInput formControlName="review" class="form-control" style="height: 130px;"
-                  placeholder="What would you like to say about this book"></textarea>
-                <br>
-                <mat-error class="text-danger"
-                  *ngIf="rateForm.controls['review'].hasError('required') && rateForm.controls['review'].touched">
-                  Review is <strong class="text-danger">required</strong>
-                </mat-error>
-              </div>
-            </div>
-          </div>
-
-          <hr>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group row">
-                <div class="col-sm-12">
-                  <button class="btn btn-out btn-square" style="float: right; background-color: #77B748;"
-                    [disabled]="!rateForm.valid" (click)="submitReview()">Save Review</button>
+                  <input class="rating" max="5" formControlName="rate"
+                    oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)" step="0.5"
+                    style="--starsize: 1.8rem;--value:2.5" type="range" value="2.5">
                 </div>
               </div>
             </div>
-          </div>
-        </form>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group ">
+                  <textarea matInput formControlName="review" class="form-control" style="height: 130px;"
+                    placeholder="What would you like to say about this book"></textarea>
+                  <br>
+                  <mat-error class="text-danger"
+                    *ngIf="rateForm.controls['review'].hasError('required') && rateForm.controls['review'].touched">
+                    Review is <strong class="text-danger">required</strong>
+                  </mat-error>
+                </div>
+              </div>
+            </div>
+
+            <hr>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <button class="btn btn-out btn-square" style="float: right; background-color: #77B748;"
+                      [disabled]="!rateForm.valid" (click)="submitReview()">Save Review</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</ng-template>
+  </ng-template>
 
+
+</div>

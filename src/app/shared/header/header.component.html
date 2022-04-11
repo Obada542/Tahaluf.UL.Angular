@@ -1,5 +1,4 @@
 <header id="tg-header" class="tg-header tg-headervtwo tg-haslayout" >
-
     <div class="tg-middlecontainer">
       <div class="container">
         <div class="row">
@@ -44,7 +43,7 @@
                     <li class="menu-item-has-children" routerLinkActive="current-menu-item">
                       <a [routerLink]="['/about']">About</a>
                     </li>
-                    <li routerLinkActive="current-menu-item"><a [routerLink]="['/books']" (click)="bookService.search =''" >Books</a></li>
+                    <li routerLinkActive="current-menu-item"><a [routerLink]="['/books']" (click)="bookService.getAllBooks()" >Books</a></li>
                     <li routerLinkActive="current-menu-item"><a [routerLink]="['/contact']" >Contact</a></li>
                   </ul>
                 </div>

@@ -1,3 +1,4 @@
+import { forkJoin } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -85,25 +86,23 @@ export class ReportService {
       this.toastr.error(err.message,err.status);
     });
   }
-  getStaitstics(){
-    this.spinner.show();
-    this.http.get("https://localhost:44346/api/report/Staitstics").subscribe(res=>{
-      this.spinner.hide();
-      this.staitstics = res;
-    },err=>{
-      this.spinner.hide()
-      this.toastr.error(err.message,err.status);
-    });
-  }
   getNewUsers(){
     this.spinner.show();
-    this.http.get("https://localhost:44346/api/report/GetNewUsers").subscribe(res=>{
+    const user=this.http.get("https://localhost:44346/api/report/GetNewUsers")
+    const staitstics=this.http.get("https://localhost:44346/api/report/Staitstics")
+    const salary=this.http.get("https://localhost:44346/api/report/MonthlySalaryReport")
+
+    forkJoin(user,staitstics,salary).subscribe(([res1, res2,res3]) => {
+      this.newUsers = res1;
+      this.staitstics = res2;
+      this.salaries = res3;
+
       this.spinner.hide();
-      this.newUsers = res;
-    },err=>{
-      this.spinner.hide()
-      this.toastr.error(err.message,err.status);
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status);
     });
+    
   }
   getMonthlySalary(){
     this.spinner.show();

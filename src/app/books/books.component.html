@@ -1,6 +1,6 @@
 <app-header></app-header>
-<div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner"
-  style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);background-position: top;background-attachment: fixed;">
+<div class="tg-innerbanner tg-haslayout tg-parallax tg-bginnerbanner view jarallax"
+  style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);">
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -39,7 +39,7 @@
                 <div class="tg-widgetcontent">
                   <ul>
                     <li *ngFor="let category of bookService.categories"><a (click)="bookService.searchBook(category.name)" [routerLink]="['/books']"><span>{{category.name}}</span><em>{{category.total}}</em></a></li>
-                    <li><a (click)="bookService.getAvailableBook()" [routerLink]="['/books']"><span>View All</span></a></li>
+                    <li><a (click)="bookService.getAllBooks()" [routerLink]="['/books']"><span>View All</span></a></li>
                   </ul>
                 </div>
               </div>

@@ -18,17 +18,12 @@ export class BooksComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     };
-
-    if( this.bookService.library !=''){
-      this.bookService.getBooksByLibrary(this.bookService.library);
-    }
-     else if(this.bookService.search != ""){
-      this.bookService.searchBook(this.bookService.search);
-    }
-    else{
-      this.bookService.getAvailableBook();
+    if(!this.bookService.empty){
+      this.bookService.getAllBooks();
+      this.bookService.empty = true;
     }
   }
+
   onChangePage(pageOfItems: Array<any>) {
     this.pageOfItems = pageOfItems;
     document.documentElement.scrollTop = 500;

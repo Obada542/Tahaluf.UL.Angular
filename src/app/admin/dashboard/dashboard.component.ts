@@ -18,14 +18,6 @@ export class DashboardComponent implements OnInit {
       this.reportService.getMonthlyReports();
 
       },3000);
-    setTimeout(()=>{
-      this.reportService.getStaitstics();
-
-      },3000);
-    setTimeout(()=>{
-      this.reportService.getMonthlySalary();
-
-      },3000);
   }
   changePeriod(period: any) {
 

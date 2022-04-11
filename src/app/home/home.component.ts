@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { HomeService } from './../Services/home.service';
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../Services/book.service';
@@ -9,12 +10,12 @@ import { BookService } from '../Services/book.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public bookService: BookService, public sliderService: HomeService) {
+  constructor(public bookService: BookService, public sliderService: HomeService,private route:Router) {
 
   }
   ngOnInit() {
     this.sliderService.getAll();
-
+    document.body.scrollTop = 0;
     setTimeout(()=>{
     this.bookService.getBestBooks();
       },1500);
@@ -23,8 +24,17 @@ export class HomeComponent implements OnInit {
   getRate(id:number){
     if(this.bookService.rates){
       const rate =this.bookService.rates.find((x:any) => x.book_Id ==id);
-      return rate.rate
+      if(rate)
+        return rate.rate
+      else return false
     }
 
+  }
+  borrow(id:number){
+    this.bookService.getBookById(id);
+    setTimeout(()=>{
+      this.route.navigate(['/client/payment']);
+
+    },1000)
   }
 }
