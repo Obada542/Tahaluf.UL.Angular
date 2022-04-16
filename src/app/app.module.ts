@@ -34,6 +34,7 @@ import { ToastrModule, ToastNoAnimationModule } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BookdetailsComponent,
     GetStudentComponent,
     GetEmployeeComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

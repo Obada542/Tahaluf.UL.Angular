@@ -76,6 +76,13 @@
                     </div>
                   </div>
                 </div>
+
+                <button [routerLink]="['/cart']" class="btn btn " >
+                  <i style="font-size: 25px;" class="fas fa-cart-plus"></i>
+                  <div style="font-size: 8px;" class="badge bg-danger">{{totalItem}}</div>
+                 </button>
+
+
                 <div class="dropdown tg-themedropdown tg-currencydropdown tg-userlogin" style="height: 60px;" >
                   <a href="javascript:void(0);" id="tg-currenty" class="tg-btnthemedropdown " data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
