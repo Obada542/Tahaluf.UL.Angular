@@ -109,14 +109,20 @@ export class AuthService {
         this.user.first_Name= student.first_Name;
         this.user.last_Name= student.last_Name;
         this.spinner.hide();
-         this.toater.success("Profile Updated successfully");
+        //  this.toater.success("Profile Updated successfully");
+        // login.first_Name= student.first_Name;
+        // login.last_Name= student.last_Name;
       }, err => {
         this.spinner.hide();
         this.toater.error(err.message, err.status);
       });
 
       var loginInfo = {
+      // login_Id: login.login_Id,
+      //  login_Id: this.user.certserialnumber,
         id: login.login_Id,
+        // first_Name: login.first_Name,
+        // last_Name: login.last_Name,
         username: login.username,
         email: login.email,
         phone:login.phone,
@@ -132,9 +138,15 @@ export class AuthService {
         this.user.phone=loginInfo.phone;
         this.user.birthday= loginInfo.birthday;
         this.user.password= loginInfo.password;
+        // this.user.image=loginInfo.image;
+
+    
+ 
 
         this.spinner.hide();
-        this.toater.success("Profile Updated successfully");      
+        this.toater.success("Profile Updated successfully");
+       
+        // location.reload();
       }, err => {
         this.spinner.hide();
         this.toater.error(err.message, err.status);

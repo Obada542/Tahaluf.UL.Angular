@@ -94,11 +94,11 @@
 
 
 
-
+                      <!-- (ngModelChange)="getDate($event)"  -->
                       <label class="col-sm-2 col-form-label">BirthDate</label>
                       <div class="col-sm-10">
-                        <input type="text" class="form-control" matInput formControlName="birthday" 
-                        [(ngModel)]="userService.user.birthday"   (ngModelChange)="getDate($event)" 
+                        <input type="text" class="form-control" matInput formControlName="birthday" (ngModelChange)="getDate($event)"
+                        [(ngModel)]="userService.user.birthday"   
                         placeholder=""   >
                         <br>
                         <mat-error class="text-danger"
@@ -151,7 +151,6 @@
     </div>
 
 </div>
-
 
 
 
