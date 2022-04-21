@@ -140,8 +140,6 @@ export class AuthService {
         this.user.password= loginInfo.password;
         // this.user.image=loginInfo.image;
 
-    
- 
 
         this.spinner.hide();
         this.toater.success("Profile Updated successfully");
