@@ -41,6 +41,7 @@ export class ManageLibraryComponent implements OnInit {
   constructor(private dialog:MatDialog,public library:LibraryService ) { }
 
   ngOnInit(): void {
+    this.library.getAllLibraries()
   }
 
   openCreateDialog(){
@@ -122,7 +123,7 @@ export class ManageLibraryComponent implements OnInit {
 
    this.searchL=searchlibrary;
   }
- 
+
   addMarker($event:any){
       this.lat = $event.coords.lat;
       this.lng = $event.coords.lng;

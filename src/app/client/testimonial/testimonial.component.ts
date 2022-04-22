@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TestimonialService } from '../Services/testimonial.service';
+import { TestimonialService } from 'src/app/Services/testimonial.service';
 
 @Component({
   selector: 'app-testimonial',
@@ -14,12 +14,11 @@ export class TestimonialComponent implements OnInit {
     testimonial: new FormControl('', [Validators.required]),
     student_Id: new FormControl(''),
   });
- 
+
   constructor(public testss: TestimonialService) { }
 
   ngOnInit(): void {
     document.body.scrollTop = 0;
-    this.testss.getAllStudent();
   }
 
   submit() {

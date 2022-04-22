@@ -1,4 +1,9 @@
 <div class="tg-productdetail" *ngIf="bookService.book">
+  <div style="opacity: 0; z-index: -100;">
+    <pdf-viewer (after-load-complete)="getPages($event)" [src]="'../../../assets/books/'+bookService.book.pdf"
+      [page]="1" [render-text]="false" [show-all]="false">
+    </pdf-viewer>
+  </div>
   <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf=" unavailable()">
       <div class="alert alert-danger" role="alert">
@@ -19,9 +24,8 @@
           </ng-template>
           <ng-template ngbSlide *ngFor="let page of [1,2,3]">
             <figure class="tg-featureimg">
-              <pdf-viewer (after-load-complete)="getPages($event)" (click)="openPage(page)" class="pdf"
-                [src]="'../../../assets/books/'+bookService.book.pdf" [page]="page" [render-text]="false"
-                [show-all]="false">
+              <pdf-viewer (click)="openPage(page)" class="pdf" [src]="'../../../assets/books/'+bookService.book.pdf"
+                [page]="page" [render-text]="false" [show-all]="false">
               </pdf-viewer>
             </figure>
 
@@ -46,19 +50,22 @@
     <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
       <div class="tg-productcontent">
         <ul class="tg-bookscategories">
-          <li><a style="text-transform: capitalize;">{{bookService.book.category}}</a></li>
+          <li><a class="first-letter">{{bookService.book.category}}</a></li>
         </ul>
-        <div class="tg-booktitle">
+        <div class="tg-booktitle" style="text-transform:capitalize">
           <h3>{{bookService.book.book_Name}}</h3>
         </div>
-        <span class="tg-bookwriter">By: <a href="javascript:void(0);">{{bookService.book.author}}</a></span>
-        <div class=" col-xs-6 " style="display: flex; align-items: center;">
-          <input class="rating" *ngIf="getRate(bookService.book.id)" style="--value:{{getRate(bookService.book.id)}}"
-            type="range" readonly [value]="getRate(bookService.book.id)">
+        <span class="tg-bookwriter">By: <a style="text-transform:capitalize">{{bookService.book.author}}</a></span>
+        <div class=" col-xs-9 " style="display: flex; align-items: center;">
+          <input class="rating"
+            style="--value:{{getRate(bookService.book.id).rate?getRate(bookService.book.id).rate:0}}" type="range"
+            readonly [value]="getRate(bookService.book.id).rate?getRate(bookService.book.id).rate:0">
+          ({{getRate(bookService.book.id).id}})
           <span class="tg-addreviews" style="float: right;"><a (click)="openRate()">Add Your Review</a></span>
-
         </div>
-        <div class="text-danger"> {{error}}</div>
+        <br>
+        <div class="tg-bookwriter text-danger" style="margin-top: 5px;"> {{error}}</div>
+
         <div class="tg-share">
           <span>Share:</span>
 
@@ -80,7 +87,7 @@
           <li><span>Publication Date:</span><span>{{bookService.book.published_Date | date:'longDate'}}</span></li>
           <li><span>Quantity:</span><span>{{bookService.book.quantity}}</span></li>
           <li><span>Language:</span><span>English</span></li>
-          <li><span>Library:</span><span>{{libraryname(bookService.book.library_Id)}}</span></li>
+          <li><span>Library:</span><span style="text-transform:capitalize">{{libraryname(bookService.book.library_Id)}}</span></li>
 
           <li><span>Late fine percentage:</span><span class="text-danger">{{bookService.book.discount}}%</span></li>
 
@@ -141,8 +148,7 @@
                         <!-- Contenedor del Comentario -->
                         <div class="comment-box">
                           <div class="comment-head">
-                            <h6 class="comment-name by-author"><a
-                                href="http://creaticode.com/blog">{{getStudentName(test.student_Id)}}</a></h6>
+                            <h6 class="comment-name by-author"><a>{{getStudentName(test.student_Id)}}</a></h6>
                             <span>{{test.postdate| date:'mm:hh dd-MM-yyy'}}</span>
                             <span *ngIf="checkUser ">
                               <i class="fa fa-reply" (click)="openCreateDialog(test.id)"></i>
@@ -166,8 +172,7 @@
                           <!-- Contenedor del Comentario -->
                           <div class="comment-box">
                             <div class="comment-head">
-                              <h6 class="comment-name"><a
-                                  href="http://creaticode.com/blog">{{getStudentName(te.student_Id)}}</a></h6>
+                              <h6 class="comment-name"><a>{{getStudentName(te.student_Id)}}</a></h6>
                               <span>{{te.postdate| date:'mm:hh dd-MM-yyy'}}</span>
                               <span *ngIf=" checkUser && te.student_Id==userService.user.id  ">
                                 <i (click)=" DeleteDialogRecomment(te.id)">Delete</i>
@@ -233,12 +238,12 @@
                   </figure>
                   <div class="tg-postbookcontent">
                     <ul class="tg-bookscategories">
-                      <li><a class="blue">{{item.category}}</a></li>
+                      <li><a class="blue first-letter">{{item.category}}</a></li>
                     </ul>
-                    <div class="tg-booktitle">
-                      <h3><a class="blue">{{item.book_Name}}</a></h3>
+                    <div class="tg-booktitle" >
+                      <h3><a class="blue" style="text-transform:capitalize">{{item.book_Name}}</a></h3>
                     </div>
-                    <span class="tg-bookwriter">By: <a class="blue">{{item.author}}</a></span>
+                    <span class="tg-bookwriter">By: <a class="blue" style="text-transform:capitalize">{{item.author}}</a></span>
                     <span class="tg-stars"><span></span></span>
                     <span class="tg-bookprice">
                       <ins>{{item.price}} JD</ins>
@@ -252,6 +257,11 @@
               </div>
             </ng-template>
           </div>
+        </div>
+        <div class="tg-productgrid" style="text-align: center; padding: 20px; font-size: 20px;"
+          *ngIf="bookService.books.length <= 1">
+          No books of the same category were found <span style="color: rgb(230, 172, 15);"><i
+              class="fa-solid fa-face-frown"></i></span>.
         </div>
       </div>
     </div>
@@ -326,10 +336,6 @@
       </div>
     </div>
   </ng-template>
-
-
-
-
   <ng-template #updateComment>
     <div class="col-12 dialog" style="width: 700px;">
       <div class="card">
@@ -339,18 +345,15 @@
             style="color: red; float: right; font-size: 25px; margin-top: -50px;">X</button>
           <br>
           <form class="form-sample" [formGroup]="commentUpdate">
-
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group ">
                   <textarea matInput formControlName="student_Comment" class="form-control" style="height: 130px;"
                     [(ngModel)]="selectedComment.student_Comment"></textarea>
                   <br>
-
                 </div>
               </div>
             </div>
-
             <hr>
             <div class="row">
               <div class="col-md-12">
@@ -367,11 +370,6 @@
       </div>
     </div>
   </ng-template>
-
-
-
-
-
   <ng-template #createRecomment>
     <div class="col-12 dialog" style="width: 700px;">
       <div class="card">
@@ -381,18 +379,15 @@
             style="color: red; float: right; font-size: 25px; margin-top: -50px;">X</button>
           <br>
           <form class="form-sample" [formGroup]="RecommentForm">
-
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group ">
                   <textarea matInput formControlName="student_Comment" class="form-control"
                     style="height: 130px;"></textarea>
                   <br>
-
                 </div>
               </div>
             </div>
-
             <hr>
             <div class="row">
               <div class="col-md-12">
@@ -409,7 +404,6 @@
       </div>
     </div>
   </ng-template>
-
   <ng-template #updateRecomment>
     <div class="col-12 dialog" style="width: 700px;">
       <div class="card">
@@ -419,18 +413,15 @@
             style="color: red; float: right; font-size: 25px; margin-top: -50px;">X</button>
           <br>
           <form class="form-sample" [formGroup]=" RecommentUpdate">
-
             <div class="row">
               <div class="col-md-12">
                 <div class="form-group ">
                   <textarea matInput formControlName="student_Comment" class="form-control" style="height: 130px;"
                     [(ngModel)]="selectedRecomment.student_Comment"></textarea>
                   <br>
-
                 </div>
               </div>
             </div>
-
             <hr>
             <div class="row">
               <div class="col-md-12">

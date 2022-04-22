@@ -19,7 +19,7 @@
         <img src="/assets/adminassets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
         <h2 class="font-weight-normal mb-3">Monthly Sales <i class="mdi mdi-chart-line mdi-24px float-right"></i>
         </h2>
-        <h1 class="mb-5">JD {{reportService.staitstics.sales + reportService.staitstics.fines}}</h1>
+        <h1 class="mb-5">JD {{reportService.staitstics.sales}}</h1>
         <h3 class="card-text">JD {{reportService.staitstics.fines}} from fines</h3>
       </div>
     </div>
@@ -142,7 +142,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let report of this.reportService.salaries">
+              <tr *ngFor="let report of reportService.salaries">
                 <td>
                   {{report.username}}
                 </td>
@@ -157,8 +157,8 @@
             <tfoot>
               <tr>
                 <td>Total</td>
-                <td>Per month: {{this.reportService.totlatSalary}} JD</td>
-                <td>Per year: {{this.reportService.totlatSalary * 12}} JD</td>
+                <td>Per month: {{reportService.totlatSalary}} JD</td>
+                <td>Per year: {{reportService.totlatSalary * 12}} JD</td>
               </tr>
             </tfoot>
           </table>

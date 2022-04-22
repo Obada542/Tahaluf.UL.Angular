@@ -40,11 +40,11 @@
           <ul class="tg-bookscategories">
             <li><a class="blue">{{book.category}}</a></li>
           </ul>
-          <div class="tg-booktitle">
+          <div class="tg-booktitle" style="height: 80px;">
             <h3><a class="blue">{{book.book_Name}}</a></h3>
           </div>
           <span class="tg-bookwriter">By: <a class="blue">{{book.author}}</a></span>
-          <input class="rating" *ngIf="getRate(book.id)" style="--value:{{getRate(book.id)}}" type="range" readonly [value]="getRate(book.id)">
+          <div style="height: 150px;"><input class="rating" *ngIf="getRate(book.id)" style="--value:{{getRate(book.id)}}" type="range" readonly [value]="getRate(book.id)"></div>
           <span class="tg-bookprice">
             <ins>{{book.price}} JD</ins>
           </span>

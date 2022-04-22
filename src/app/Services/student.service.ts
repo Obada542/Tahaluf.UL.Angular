@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -17,22 +18,17 @@ export class StudentService {
 
   getAllStudents() {
     this.spinner.show();
-    this.http.get('https://localhost:44346/api/login/')
-      .subscribe((res: any) => {
-        var log: Array<any> = res;
-        this.login = log.filter((x: any) => x.role_Id == 2);
-      }, err => {
-        this.toastr.error(err.message, err.status);
-      });
-    this.http.get('https://localhost:44346/api/student/')
-      .subscribe((res: any) => {
-        this.spinner.hide();
-        this.students = res;
-        this.toastr.success("Data Retrieved successfully");
-      }, err => {
-        this.spinner.hide();
-        this.toastr.error(err.message, err.status);
-      });
+    const logins = this.http.get('https://localhost:44346/api/login/');
+    const students = this.http.get('https://localhost:44346/api/student/');
+    forkJoin(logins, students).subscribe(([res1, res2]: any) => {
+      this.login = res1.filter((x: any) => x.role_Id == 2);
+      this.students = res2;
+      this.spinner.hide();
+      this.toastr.success("Data Retrieved successfully");
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status);
+    });
   }
   createStudent(login: any) {
     this.spinner.show();
@@ -63,41 +59,30 @@ export class StudentService {
       first_Name: login.first_Name,
       last_Name: login.last_Name
     }
-    this.http.put('https://localhost:44346/api/student', student)
-      .subscribe((res) => {
-        this.spinner.hide();
-        this.toastr.success("student Updated successfully");
-      }, err => {
-        this.spinner.hide();
-        this.toastr.error(err.message, err.status);
-      });
-    this.http.put('https://localhost:44346/api/login/Update/', login)
-      .subscribe((res) => {
-        this.spinner.hide();
-        location.reload();
-      }, err => {
-        this.spinner.hide();
-        this.toastr.error(err.message, err.status);
-      });
+    const students = this.http.put('https://localhost:44346/api/student', student);
+    const logins = this.http.put('https://localhost:44346/api/login/Update/', login);
+    forkJoin(logins, students).subscribe(([res1, res2]: any) => {
+      this.spinner.hide();
+      this.toastr.success("student Updated successfully");
+
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status);
+    });
   }
   deleteStudent(id: number) {
     this.spinner.show();
     const stdId: number = this.students.find((x: any) => x.login_Id == id).id;
-    this.http.delete('https://localhost:44346/api/login/Delete/' + id)
-      .subscribe((res: any) => {
-        this.spinner.hide();
-      }, err => {
-        this.spinner.hide();
-        this.toastr.error(err.message, err.status);
-      });
-    this.http.delete('https://localhost:44346/api/student/delete/' + stdId)
-      .subscribe((res) => {
-        this.spinner.hide();
-        this.toastr.warning("Student Deleted successfully");
-      }, err => {
-        this.spinner.hide();
-        this.toastr.error(err.message, err.status);
-      });
+    const logins = this.http.delete('https://localhost:44346/api/login/Delete/' + id);
+    const students = this.http.delete('https://localhost:44346/api/student/delete/' + stdId);
+    forkJoin(logins, students).subscribe(([res1, res2]: any) => {
+      this.spinner.hide();
+      this.toastr.warning("Student Deleted successfully");
+
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status);
+    });
   }
   uploadAttachment(file: FormData) {
     this.http.post('https://localhost:44346/api/login/uploadImage/', file)

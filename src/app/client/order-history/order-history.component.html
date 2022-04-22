@@ -1,0 +1,35 @@
+<app-header></app-header>
+<div class="limiter">
+  <div class="container-table100">
+    <div class="wrap-table100">
+      <div class="table100">
+        <table>
+          <caption>Order Summary</caption>
+          <thead>
+            <tr>
+              <th scope="col">Book name</th>
+              <th scope="col">Period<small style="font-size: 7px;">(start date-end date)</small></th>
+              <th scope="col">Price</th>
+              <th scope="col">Library</th>
+
+              <th scope="col">Fines</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let loan of loans.studentloans">
+              <td scope="row" data-label="Book name" style="text-transform: capitalize;">{{loan.book_Name }}</td>
+              <td data-label="Period">{{loan.start_Date | date:'yyyy-MM-dd'}} - {{loan.end_Date | date:'yyyy-MM-dd'}}</td>
+              <td data-label="Price">{{loan.price}} JD</td>
+              <td data-label="Library"style="text-transform: capitalize;">{{loan.library_name}}</td>
+              <td data-label="Fines">{{loan.fines == 0 ?'-':loan.fines + ' JD'}}</td>
+
+              <td data-label="Status" [ngStyle]="{'color': loan.isloaned == 'false'?'gray':loan.fines>0?'red':'green'}">{{loan.isloaned == 'true'?'Active':'Closed'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -36,12 +36,12 @@
               <td class="py-1">
                 <img src="../../../assets/Images/{{book.image}}" alt="image" />
               </td>
-              <td> {{book.book_Name}} </td>
-              <td> {{book.author}} </td>
+              <td style="text-transform:capitalize"> {{book.book_Name}} </td>
+              <td style="text-transform:capitalize"> {{book.author}} </td>
               <td> {{book.price}} </td>
               <td> {{book.quantity}} </td>
-              <td> {{libraryname(book.library_Id)}} </td>
-              <td> {{book.category}} </td>
+              <td class="first-letter"> {{libraryname(book.library_Id)}} </td>
+              <td class="first-letter"> {{book.category}} </td>
               <td>
                 <a class="text-danger" (click)="openDeleteDialog(book.id)">Delete</a>
                 |
@@ -79,8 +79,8 @@
           </thead>
           <tbody *ngIf="book.books.length >0">
             <tr *ngFor="let book of getBooks()">
-              <td> {{book.book_Name}} </td>
-              <td style="display: flex;justify-content: center;" > <input class="rating" style="--value:{{book.rates[0]?book.rates[0].rate:0}}" type="range" readonly
+              <td style="text-transform:capitalize"> {{book.book_Name}} </td>
+              <td style="display: flex;justify-content: center;" > <input class="rating" style="--value:{{book.rates[0]?book.rates[0].rate:0}};background-color: transparent;" type="range" readonly
                 [value]="book.rates[0]?book.rates[0].rate:0"> ({{book.rates[0]?book.rates[0].rate:'-'}}) </td>
               <td > {{book.rates[0]?book.rates[0].id:0}} </td>
               <td> {{book.nosold}} </td>

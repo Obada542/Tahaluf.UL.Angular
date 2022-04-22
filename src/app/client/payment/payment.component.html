@@ -37,33 +37,33 @@
                 <div class="left border">
                   <mat-tab-group mat-align-tabs="start" [selectedIndex]="btnNextPrev.index">
 
-                      <mat-tab label="Period">
-                        <div class="col-12">
-                          <br>
-                          <h4>Please select end date: <small>(minimum 3 days)</small> </h4>
-                          <mat-form-field appearance="fill" >
-                            <mat-label>Choose end date</mat-label>
-                            <input matInput [formControl]="end_Date" [min]="startDate" [matDatepicker]="picker">
-                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                            <mat-datepicker #picker></mat-datepicker>
-                          </mat-form-field>
-                          <br>
-                          <small>
-                            *Important: If you do not return the book on time, you will be charged <b>{{(bookservice.book.price * bookservice.book.discount / 100)}}</b> JD every day.
-                          </small>
-                      <br>
-                      <button mat-raised-button  (click)="submit()" [disabled]="!end_Date.valid">Next <i class="fa-solid fa-circle-arrow-right"></i></button>
-                    </div>
+                    <mat-tab label="Period">
+                      <div class="col-12">
+                        <br>
+                        <h4>Please select end date: <small>(minimum 3 days)</small> </h4>
+                        <mat-form-field appearance="fill">
+                          <mat-label>Choose end date</mat-label>
+                          <input matInput [formControl]="end_Date" [min]="startDate" [matDatepicker]="picker">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <br>
+                        <small>
+                          *Important: If you do not return the book on time, you will be charged
+                          <b>{{(bookservice.book.price * bookservice.book.discount / 100)}}</b> JD every day.
+                        </small>
+                        <br>
+                        <button mat-raised-button [disabled]="!end_Date.valid">Next <i
+                            class="fa-solid fa-circle-arrow-right"></i></button>
+                      </div>
                     </mat-tab>
-
-
-                    <mat-tab label="Payment">
+                    <mat-tab label="Payment" [disabled]="!end_Date.valid">
                       <mat-accordion class="example-headers-align">
-                        <mat-expansion-panel [expanded]="state === 1" (opened)="state =1" (closed)="state =0" hideToggle>
+                        <mat-expansion-panel [expanded]="state === 1" (opened)="state =1" (closed)="state =0"
+                          hideToggle>
                           <mat-expansion-panel-header>
                             <mat-panel-title>
                               Pay with PayPal
-
                             </mat-panel-title>
                             <mat-panel-description>
                               <div class="icons">
@@ -71,7 +71,6 @@
                               </div>
                             </mat-panel-description>
                           </mat-expansion-panel-header>
-
                           <form> <span>Cardholder's name:</span> <input placeholder="Linda Williams"> <span>Card
                               Number:</span>
                             <input placeholder="0125 6780 4567 9909">
@@ -83,15 +82,13 @@
                               <div class="col-1">
                                 <input type="checkbox" id="a">
                               </div>
-                              <div class="col-9" style="margin-left: -20px;">
-                                <label for="a">Save card details to wallet</label>
-                              </div>
+
                             </div>
                             <button class="btn">Place order</button>
-
                           </form>
                         </mat-expansion-panel>
-                        <mat-expansion-panel [expanded]="state === 0" (opened)="state =0" (closed)="state =1" hideToggle>
+                        <mat-expansion-panel [expanded]="state === 0" (opened)="state =0" (closed)="state =1"
+                          hideToggle>
                           <mat-expansion-panel-header>
                             <mat-panel-title>
                               Pay with credit Card
@@ -105,17 +102,32 @@
                             </mat-panel-description>
                           </mat-expansion-panel-header>
 
-                          <form>
+                          <form [formGroup]="paymentForm">
                             <span>Cardholder's name:</span>
                             <input placeholder="Linda Williams">
                             <span>CardNumber:</span>
-                            <input placeholder="0125 6780 4567 9909">
+                            <input matInput formControlName="card_Number"
+                              placeholder="0125 6780 4567 9909">
+                              <mat-error class="text-danger"
+                                  *ngIf="(paymentForm.controls['card_Number'].hasError('required') || paymentForm.controls['card_Number'].hasError('minlength') || paymentForm.controls['card_Number'].hasError('maxlength')) && paymentForm.controls['card_Number'].touched">
+                                  Invalid Card
+                                </mat-error>
                             <div class="row" style="margin: 0;">
                               <div class="col-4">
-                                <span>Expiry date:</span> <input placeholder="YY/MM">
+                                <span>Expiry date:</span>
+                                <input type="text" matInput formControlName="expired_Date" placeholder="YY/MM">
+                                <mat-error class="text-danger"
+                                  *ngIf="paymentForm.controls['expired_Date'].hasError('required') && paymentForm.controls['expired_Date'].touched">
+                                  Expired Date is <strong class="text-danger">required</strong>
+                                </mat-error>
                               </div>
                               <div class="col-4">
-                                <span>CVV:</span> <input maxlength="4" id="cvv">
+                                <span>CVV:</span>
+                                <input type="number" matInput formControlName="cvv" maxlength="4" id="cvv">
+                                <mat-error class="text-danger"
+                                  *ngIf="(paymentForm.controls['cvv'].hasError('required') || paymentForm.controls['cvv'].hasError('maxlength')) && paymentForm.controls['cvv'].touched">
+                                  Invalid CVV
+                                </mat-error>
                               </div>
                             </div>
                             <div class="row" style="margin: 0;">
@@ -126,11 +138,12 @@
                                 <label for="a">Save card details to wallet</label>
                               </div>
                             </div>
-                            <button class="btn">Place order</button>
+                            <button (click)="submit()" [disabled]="!paymentForm.valid" class="btn">Place order</button>
                           </form>
                         </mat-expansion-panel>
                       </mat-accordion>
-                      <a mat-raised-button  (click)="navig('prev')">Prev <i class="fa-solid fa-circle-arrow-left"></i></a>
+                      <a mat-raised-button (click)="navig('prev')">Prev <i
+                          class="fa-solid fa-circle-arrow-left"></i></a>
 
                     </mat-tab>
                   </mat-tab-group>

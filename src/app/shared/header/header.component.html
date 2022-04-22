@@ -71,7 +71,7 @@
                     </div>
                     <div class="tg-minicartfoot">
                       <div class="tg-btns">
-                        <a class="tg-btn tg-active" [routerLink]="['/client/payment']">View History</a>
+                        <a class="tg-btn tg-active" [routerLink]="['/client/order-history']">My order history</a>
                       </div>
                     </div>
                   </div>
@@ -79,8 +79,8 @@
                 <div class="dropdown tg-themedropdown tg-currencydropdown tg-userlogin" style="height: 60px;" >
                   <a href="javascript:void(0);" id="tg-currenty" class="tg-btnthemedropdown " data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-                    <figure><a href="javascript:void(0);"><img
-                          src="http://exprostudio.com/html/book_library/images/users/img-01.jpg"
+                    <figure style="margin-top: -15px;" ><a  ><img
+                          src="../../../assets/Images/{{userService.user.image}}"  style="height: 50px;width: 50px;"
                           alt="Profile picture"></a></figure>
                     <span>Hi, {{userService.user.username}}</span>
                   </a>

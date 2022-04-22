@@ -12,7 +12,7 @@
                 <p style="color: #fff;">{{slider.sub_Title}}</p>
               </div>
               <div class="tg-btns">
-                <a class="tg-btn tg-active" href="{{slider.url}}">buy now</a>
+                <a class="tg-btn tg-active" href="{{slider.url}}">shop</a>
               </div>
             </div>
           </div>
@@ -51,13 +51,13 @@
                 </figure>
                 <div class="tg-postbookcontent">
                   <ul class="tg-bookscategories">
-                    <li><a class="blue" >{{item.category}}</a></li>
+                    <li><a class="blue first-letter" >{{item.category}}</a></li>
                   </ul>
-                  <div class="tg-booktitle">
+                  <div class="tg-booktitle" style="text-transform:capitalize ;height: 70px;" >
                     <h3><a class="blue" >{{item.book_Name}}</a></h3>
                   </div>
-                  <span class="tg-bookwriter">By: <a class="blue" >{{item.author}}</a></span>
-                  <input class="rating" *ngIf="getRate(item.id)" style="--value:{{getRate(item.id)}}" type="range" readonly [value]="getRate(item.id)">
+                  <span class="tg-bookwriter">By: <a class="blue" style="text-transform:capitalize">{{item.author}}</a></span>
+                  <div style="height: 150px;"><input class="rating" *ngIf="getRate(item.id)" style="--value:{{getRate(item.id)}}" type="range" readonly [value]="getRate(item.id)"></div>
                   <span class="tg-bookprice">
                     <ins>{{item.price}} JD</ins>
                   </span>
@@ -107,7 +107,7 @@
                       <ul class="tg-bookscategories">
                         <li><a >{{book.category}}</a></li>
                       </ul>
-                      <div class="tg-booktitle">
+                      <div class="tg-booktitle" style="height: 80px;">
                         <h3><a  >{{book.book_Name}}</a></h3>
                       </div>
                       <span class="tg-bookwriter">By: <a>{{book.author}}</a></span>

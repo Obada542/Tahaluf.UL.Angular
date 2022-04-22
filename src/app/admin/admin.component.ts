@@ -1,7 +1,6 @@
 import { LoaningService } from './../Services/loaning.service';
-import { Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-
+import {CookieService} from 'ngx-cookie-service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -9,11 +8,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 })
 export class AdminComponent implements OnInit,OnDestroy {
 
-  constructor(private loanService:LoaningService) { }
+  constructor(private loanService:LoaningService,private cookieService:CookieService) { }
 
 
   ngOnInit(): void {
-    this.loanService.sendLateFeesMessage();
+      this.loanService.sendLateFeesMessage();
   }
 
   ngOnDestroy(): void {

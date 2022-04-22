@@ -1,12 +1,14 @@
 <div class="col-lg-12 grid-margin stretch-card">
   <div class="card">
     <div class="card-body table-responsive">
-      <h4 class="card-title">Manage Students</h4>
+      <h4 class="card-title">Manage Testimonials</h4>
       <table class="table table-striped">
         <thead>
           <tr>
             <th> Name </th>
             <th>Testimonial</th>
+            <th>Rate</th>
+
             <th> Student name</th>
             <th> Status </th>
             <th> Action </th>
@@ -15,17 +17,21 @@
         <tbody>
           <tr *ngFor="let test of testimonial.testsss">
             <td> {{test.name}} </td>
-            <td> {{test. testimonial}} </td>
+            <td style="display: flex;justify-content: center;" > <input class="rating" style="--value:{{test.rate}};background-color: transparent;" type="range" readonly
+              [value]="test.rate"> </td>
+            <td> {{test.testimonial}} </td>
             <td> {{studentname(test.student_Id)}} </td>
-            <td style="font-weight: 500;" [ngStyle]="{'color': test.publishing == 'false'?'gray':'green'}">
-              {{test.publishing != 'false'? 'Rejection' : "publishing"}} </td>
+            <td style="font-weight: 500;" [ngStyle]="{'color': test.publishing == 'false'?'green':'gray'}">
+              {{test.publishing != 'false'? 'Wating' : "published"}} </td>
             <td>
-              <a class="link" [ngStyle]="{'display': test.publishing == 'false'?'none':''}"
-                (click)="openChangeStatus(test)">publishing Testimonial</a>
+              <a class="link" [ngStyle]="{'display': test.publishing == 'true'?'none':''}"
+                (click)="openChangeStatus(test)">Publish</a>
+                <a style="color: red;" [ngStyle]="{'display': test.publishing != 'true'?'none':''}"
+                (click)="openChangeStatus(test)">Hide</a>
             </td>
           </tr>
         </tbody>
-        
+
       </table>
     </div>
   </div>
@@ -35,7 +41,7 @@
   <div class="col-12 ">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title">Are you sure you want to update the status of this item?</h4>
+        <h4 class="card-title">Are you sure you want to update the status of the testimonial?</h4>
         <div class="row">
           <div class="col-md-9 ">
             <button mat-button mat-dialog-close class="btn btn-primary">No,take me back</button>

@@ -96,21 +96,25 @@ export class ReportService {
       this.newUsers = res1;
       this.staitstics = res2;
       this.salaries = res3;
-
+      this.totlatSalary = this.salaries.reduce((sum:any, obj:any) => {
+        return sum + obj.salary;
+      }, 0);
       this.spinner.hide();
     }, err => {
       this.spinner.hide();
       this.toastr.error(err.message, err.status);
     });
-    
+
   }
   getMonthlySalary(){
     this.spinner.show();
     this.http.get("https://localhost:44346/api/report/MonthlySalaryReport").subscribe((res:any)=>{
       this.spinner.hide();
       this.salaries = res;
-      this.totlatSalary=res.map((a:any) => a.salary).reduce(function(a:any, b:any){return a + b;})
-
+      this.totlatSalary = this.salaries.reduce((sum:any, obj:any) => {
+        return sum + obj.salary;
+      }, 0);
+      console.log(this.totlatSalary)
     },err=>{
       this.spinner.hide()
       this.toastr.error(err.message,err.status);

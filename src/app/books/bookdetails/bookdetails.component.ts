@@ -100,7 +100,6 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
   }
   getPages(pdf: PDFDocumentProxy) {
     this.totalPages = pdf.numPages;
-
   }
   openPage(page: number) {
     this.currentpage = page;
@@ -132,7 +131,7 @@ export class BookdetailsComponent implements OnInit, OnDestroy {
     if (this.bookService.rates) {
       const rate = this.bookService.rates.find((x: any) => x.book_Id == id);
       if (rate)
-        return rate.rate
+        return rate
       else return false
     }
 

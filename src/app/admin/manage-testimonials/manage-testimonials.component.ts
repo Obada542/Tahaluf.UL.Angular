@@ -11,56 +11,28 @@ import { TestimonialService } from 'src/app/Services/testimonial.service';
 export class ManageTestimonialsComponent implements OnInit {
   @ViewChild("change") change!: TemplateRef<any>;
   @ViewChild('updateTestimonial') updateTestimonial!: TemplateRef<any>;
-
-  // selectedTest!: any;
   id: any;
   tests: Array<any> = [];
 
   selectedTes: any={
     id: 0,
     publishing: '',
-   
   };
 
- 
-
-  // updatetestimonial: FormGroup = new FormGroup({
-  //   id: new FormControl(''),
-  //   name: new FormControl('', [Validators.required]),
-  //   rate: new FormControl('', [Validators.required,Validators.maxLength(5),Validators.min(0)]),
-  //   //testimonial: new FormControl('', [Validators.required, ]),
-  //   student_Id: new FormControl('', ),
-  // });
   constructor(private dialog: MatDialog, public testimonial: TestimonialService) { }
 
   ngOnInit(): void {
-    this.testimonial.getAllStudent();
     this.testimonial.getAllTestimonial();
   }
- 
-  // openUpdateDialog(tst: any) {
-  //   this.selectedTest = tst;
-  //   this.updatetestimonial.controls['id'].setValue(tst.id);
-  //   this.dialog.open(this.updateTestimonial);
-  // }
-  
-  // update() {
-  //   this.testss.updateTestimonial(this.updatetestimonial.value);
-  //   location.reload();
-  // }
-
-
   openChangeStatus(data:any){
     this.selectedTes.id = data.id;
-    this.selectedTes.publishing = 'false';
+    console.log(data.publishing)
     this.dialog.open(this.change);
   }
-
   changeStatus(){
     this.testimonial.updateTestimonial(this.selectedTes);
     location.reload();
   }
-
 
   studentname(id:number){
     if(this.testimonial.students.length > 0)

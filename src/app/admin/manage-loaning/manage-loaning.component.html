@@ -16,7 +16,7 @@
             <th> Price </th>
             <th> Start Date </th>
             <th> End Date </th>
-            <th> Fines </th>
+            <th> Fines <small style="font-size: 10px;">(discount)</small> </th>
             <th> Status </th>
             <th> Action </th>
           </tr>
@@ -30,7 +30,7 @@
 
             <td> {{borrow.start_Date | date:'dd-MM-yyyy'}} </td>
             <td> {{borrow.end_Date | date:'dd-MM-yyyy'}} </td>
-            <td> {{borrow.fines}} </td>
+            <td> {{borrow.fines}}<small style="font-size: 9px;"> ({{borrow.discount}}%)</small> </td>
             <td style="font-weight: 500;" [ngStyle]="{'color': borrow.isloaned == 'false'?'gray':'green'}"> {{borrow.isloaned != 'false'? 'Active' : "Closed"}} </td>
             <td>
               <a class="link" [ngStyle]="{'display': borrow.isloaned == 'false'?'none':''}" (click)="openChangeStatus(borrow)">End loan</a>

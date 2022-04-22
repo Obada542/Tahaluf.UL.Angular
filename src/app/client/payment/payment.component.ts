@@ -3,7 +3,7 @@ import { LoaningService } from './../../Services/loaning.service';
 import { Router } from '@angular/router';
 import { BookService } from 'src/app/Services/book.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators,FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-payment',
@@ -12,7 +12,13 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class PaymentComponent implements OnInit {
   end_Date = new FormControl('',Validators.required);
-  startDate = new Date(new Date().setDate(new Date().getDate() + 3))
+  startDate = new Date(new Date().setDate(new Date().getDate() + 3));
+  paymentForm = new FormGroup({
+    card_Number : new FormControl('',[Validators.required,Validators.minLength(14),Validators.maxLength(14)]),
+    expired_Date : new FormControl('',Validators.required),
+    cvv : new FormControl('',[Validators.required,Validators.maxLength(4)]),
+    amount : new FormControl()
+  });
   constructor(public bookservice:BookService,private route:Router,private loanService:LoaningService,private userService:AuthService) {
    }
    btnNextPrev = {
@@ -36,9 +42,8 @@ export class PaymentComponent implements OnInit {
       student_Name:this.userService.user.first_Name + " "+this.userService.user.last_Name,
       end_Date:new Date(this.end_Date.value.setDate(this.end_Date.value.getDate() + 1))
     }
-    this.loanService.createLoan(loan);
-    this.route.navigate([''])
-    location.reload();
+    this.loanService.createLoan(loan,this.paymentForm.value);
+
   }
   navig(n:any) {
     switch (n) {

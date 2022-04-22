@@ -5017,3 +5017,6 @@ padding-bottom:50px;
   overflow-x: unset !important;
 }
 
+.first-letter::first-letter{
+  text-transform: capitalize;
+}

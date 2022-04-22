@@ -77,7 +77,7 @@ export class AuthService {
 
         setTimeout(()=>{
           this.loaning.getStudentLoans(this.user.id);
-          },5000);
+          },3000);
 
         this.toater.success("Welcome back "+this.user.first_Name + " "+this.user.last_Name);
       }, err => {

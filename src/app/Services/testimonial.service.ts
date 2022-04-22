@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,26 +14,18 @@ export class TestimonialService {
 
   getAllTestimonial() {
     this.spinner.show();
-    return this.http.get('https://localhost:44346/api/testimonial/').subscribe((res) => {
-      this.testsss = res;
-      this.spinner.hide();
-      this.toastr.success('Data Retrieved!!');
-    }, err => {
-      this.spinner.hide();
-      this.toastr.error(err.message,err.status);
-    });
-  }
-  getAllStudent() {
-    this.spinner.show();
-    this.http.get('https://localhost:44346/api/student/').subscribe((res) => {
-      this.spinner.hide();
-      this.students = res;
-    }, err => {
-      this.spinner.hide();
-      this.toastr.error(err.message,err.status);
-    });
-  }
+    const students=this.http.get('https://localhost:44346/api/student/');
 
+    const testimonials= this.http.get('https://localhost:44346/api/testimonial/');
+    forkJoin(students,testimonials).subscribe(([res1,res2]) => {
+      this.testsss = res2;
+      this.students = res1;
+      this.spinner.hide();
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message,err.status);
+    });
+  }
   createTestimonial(data:any){
     this.spinner.show();
     this.http.post('https://localhost:44346/api/testimonial/',data).subscribe((res:any)=>{

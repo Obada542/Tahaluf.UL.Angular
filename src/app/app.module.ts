@@ -2,7 +2,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
-import { TestimonialComponent } from './testimonial/testimonial.component';
 import { SharedModule } from './shared/shared.module';
 import { ContactComponent } from './contact/contact.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
@@ -15,7 +14,6 @@ import { ManageHomeComponent } from './admin/manage-home/manage-home.component';
 import { ManageLoaningComponent } from './admin/manage-loaning/manage-loaning.component';
 import { ManageEmployeeComponent } from './admin/manage-employee/manage-employee.component';
 import { ManageStudentComponent } from './admin/manage-student/manage-student.component';
-import { RoleComponent } from './admin/role/role.component';
 import { MessageComponent } from './admin/message/message.component';
 import { ManageWebsiteComponent } from './admin/manage-website/manage-website.component';
 import { AccountantComponent } from './accountant/accountant.component';
@@ -34,6 +32,7 @@ import { ToastrModule, ToastNoAnimationModule } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -41,7 +40,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AboutComponent,
     HomeComponent,
     ContactComponent,
-    TestimonialComponent,
     PagenotfoundComponent,
     BooksComponent,
     DashboardComponent,
@@ -52,7 +50,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ManageLoaningComponent,
     ManageEmployeeComponent,
     ManageStudentComponent,
-    RoleComponent,
     MessageComponent,
     ManageWebsiteComponent,
     AccountantComponent,
@@ -85,7 +82,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       provide:HTTP_INTERCEPTORS,
       useClass:TokenInterceptor,
       multi:true
-    }
+    },
+    CookieService
   ] ,
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

@@ -2,6 +2,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,22 +17,18 @@ export class EmployeeService {
 
   getAllEmployees() {
     this.spinner.show();
-    this.http.get('https://localhost:44346/api/login/')
-      .subscribe((res: any) => {
-        var log: Array<any> = res;
-        this.login = log.filter((x: any) => x.role_Id == 3);
-      }, err => {
-        this.toastr.error(err.message, err.status);
-      });
-    this.http.get('https://localhost:44346/api/accountant/')
-      .subscribe((res: any) => {
-        this.spinner.hide();
-        this.employees = res;
-        this.toastr.success("Data Retrieved successfully");
-      }, err => {
-        this.spinner.hide();
-        this.toastr.error(err.message, err.status);
-      });
+    const logins = this.http.get('https://localhost:44346/api/login/');
+    const accountants = this.http.get('https://localhost:44346/api/accountant/');
+    forkJoin(logins, accountants).subscribe(([res1, res2]: any) => {
+      this.login = res1.filter((x: any) => x.role_Id == 3);
+      this.employees = res2;
+      this.spinner.hide();
+
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status);
+    });
+
   }
   createEmployee(login: any) {
     this.spinner.show();
@@ -57,47 +54,34 @@ export class EmployeeService {
   updateEmployee(login: any) {
     this.spinner.show();
     login.image = this.display_Image;
-    this.http.put('https://localhost:44346/api/login/Update/', login)
-      .subscribe((res) => {
-        this.spinner.hide();
-      }, err => {
-        this.spinner.hide();
-        this.toastr.error(err.message, err.status);
-      });
-
-    const acc:any = {
-      login_Id:login.id,
-      address:login.address,
-      salary:login.salary
+    const acc: any = {
+      login_Id: login.id,
+      address: login.address,
+      salary: login.salary
     }
-    this.http.put('https://localhost:44346/api/accountant/', acc)
-      .subscribe((res) => {
-        this.spinner.hide();
-        this.toastr.success("Employee Updated successfully");
-      }, err => {
-        this.spinner.hide();
-        this.toastr.error(err.message, err.status);
-      });
+    const logins = this.http.put('https://localhost:44346/api/login/Update/', login);
+    const accountants= this.http.put('https://localhost:44346/api/accountant/', acc)
+    forkJoin(logins, accountants).subscribe(([res1, res2]: any) => {
+      this.spinner.hide();
+      this.toastr.success("Employee Updated successfully");
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status);
+    });
   }
   deleteEmployee(id: number) {
     this.spinner.show();
-    const empId:number = this.employees.find((x: any) => x.login_Id == id).id;
-    this.http.delete('https://localhost:44346/api/login/Delete/' + id)
-      .subscribe((res:any) => {
-        this.spinner.hide();
-        this.toastr.success(res);
-      }, err => {
-        this.spinner.hide();
-        this.toastr.error(err.message, err.status);
-      });
-    this.http.delete('https://localhost:44346/api/accountant/delete/' + empId)
-      .subscribe((res) => {
-        this.spinner.hide();
-        this.toastr.warning("deleted Employee successfully");
-      }, err => {
-        this.spinner.hide();
-        this.toastr.error(err.message, err.status);
-      });
+    const empId: number = this.employees.find((x: any) => x.login_Id == id).id;
+    const logins = this.http.delete('https://localhost:44346/api/login/Delete/' + id);
+
+    const accountants = this.http.delete('https://localhost:44346/api/accountant/delete/' + empId);
+    forkJoin(logins, accountants).subscribe(([res1, res2]: any) => {
+      this.spinner.hide();
+      this.toastr.warning("deleted Employee successfully");
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status);
+    });
   }
   uploadAttachment(file: FormData) {
     this.http.post('https://localhost:44346/api/login/uploadImage/', file)

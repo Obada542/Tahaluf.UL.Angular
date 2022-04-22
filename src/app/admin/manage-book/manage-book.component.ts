@@ -92,6 +92,10 @@ export class ManageBookComponent implements OnInit {
     this.book.uploadPdf(fromData);
   }
   submit() {
+    var book :string = this.createbook.controls['book_Name'].value
+    var category :string = this.createbook.controls['category'].value
+    this.createbook.controls['book_Name'].setValue(book.toLowerCase())
+    this.createbook.controls['category'].setValue(category.toLowerCase())
     this.book.createBook(this.createbook.value);
     location.reload();
   }
@@ -104,6 +108,10 @@ export class ManageBookComponent implements OnInit {
     if(!pdf){
       this.book.pdf = this.selectedBook.pdf;
     }
+    var book :string = this.updatebook.controls['book_Name'].value
+    var category :string = this.updatebook.controls['category'].value
+    this.updatebook.controls['book_Name'].setValue(book.toLowerCase())
+    this.updatebook.controls['category'].setValue(category.toLowerCase())
     this.book.updateBook(this.updatebook.value);
     location.reload();
   }

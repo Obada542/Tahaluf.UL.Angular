@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
   serchBook(search:any){
-    this.bookService.searchBook(search)
+    this.bookService.searchBook(search.toLowerCase())
     this.route.navigate(['/books'])
   }
   logout(){

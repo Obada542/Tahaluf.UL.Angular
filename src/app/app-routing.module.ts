@@ -8,7 +8,6 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { AdminComponent } from './admin/admin.component';
 import { BooksComponent } from './books/books.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
-import { TestimonialComponent } from './testimonial/testimonial.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
@@ -18,7 +17,6 @@ import { AuthModule } from './auth/auth.module';
 import { ManageBookComponent } from './admin/manage-book/manage-book.component';
 import { ManageLibraryComponent } from './admin/manage-library/manage-library.component';
 import { ManageHomeComponent } from './admin/manage-home/manage-home.component';
-import { RoleComponent } from './admin/role/role.component';
 import { MessageComponent } from './admin/message/message.component';
 import { ManageWebsiteComponent } from './admin/manage-website/manage-website.component';
 import { AccountantComponent } from './accountant/accountant.component';
@@ -50,10 +48,6 @@ const routes: Routes = [
   {
     path: "about",
     component: AboutComponent
-  },
-  {
-    path: "testimonial",
-    component: TestimonialComponent
   },
   {
     path: "contact",
@@ -104,10 +98,6 @@ const routes: Routes = [
       {
         path: "manageStudent",
         component: ManageStudentComponent
-      },
-      {
-        path: "manageRole",
-        component: RoleComponent
       },
       {
         path: "contactMessage",

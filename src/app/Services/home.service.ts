@@ -22,8 +22,6 @@ export class HomeService {
       this.toastr.error(err.message,err.status);
     });
   }
-
-
   createSliders(body:any){
     this.spinner.show();
     body.image=this.display_Image;
@@ -36,8 +34,6 @@ export class HomeService {
       this.toastr.error(err.message , err.status)
     });
   }
-
-
   uploadAttachment(file:FormData)
   {
     this.http.post('https://localhost:44346/api/Home/uploadImage/',file)
@@ -47,8 +43,6 @@ export class HomeService {
       this.toastr.error(err.message , err.status);
     });
   }
-
-
   updateHome(body:any){
     this.spinner.show();
     body.image=this.display_Image;
@@ -71,6 +65,4 @@ export class HomeService {
       this.toastr.error(err.status,err.message);
     });
   }
-
-
 }
