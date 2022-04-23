@@ -3,6 +3,7 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { PaymentComponent } from './payment/payment.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -16,7 +17,10 @@ const routes: Routes = [
   {
     path: "testimonial",
     component: TestimonialComponent
-  },
+  },{
+    path:"myProfile",
+    component:ProfileComponent
+  }
 ];
 
 @NgModule({

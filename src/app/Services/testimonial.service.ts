@@ -30,7 +30,8 @@ export class TestimonialService {
     this.spinner.show();
     this.http.post('https://localhost:44346/api/testimonial/',data).subscribe((res:any)=>{
       this.spinner.hide();
-      this.toastr.success('Create Testimonial Successfully :)')
+      this.toastr.success('Testimonial Send Successfully, Thank You :)')
+      location.reload();
     }, err=>{
       this.spinner.hide();
       this.toastr.error(err.message , err.status)

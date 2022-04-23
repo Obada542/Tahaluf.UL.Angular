@@ -3,7 +3,7 @@
 <main id="tg-main" class="tg-main tg-haslayout view jarallax"
   style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);">
   <div class="tg-haslayout">
-    <div class="container">
+    <div class="container" *ngIf="bookservice.book.book_Name">
       <div class="row">
         <div class="card">
           <div class="card-body">
@@ -34,7 +34,7 @@
                 </div>
               </div>
               <div class="col-md-7">
-                <div class="left border">
+                <div class="left border" *ngIf="checkFines() == 0">
                   <mat-tab-group mat-align-tabs="start" [selectedIndex]="btnNextPrev.index">
 
                     <mat-tab label="Period">
@@ -106,12 +106,11 @@
                             <span>Cardholder's name:</span>
                             <input placeholder="Linda Williams">
                             <span>CardNumber:</span>
-                            <input matInput formControlName="card_Number"
-                              placeholder="0125 6780 4567 9909">
-                              <mat-error class="text-danger"
-                                  *ngIf="(paymentForm.controls['card_Number'].hasError('required') || paymentForm.controls['card_Number'].hasError('minlength') || paymentForm.controls['card_Number'].hasError('maxlength')) && paymentForm.controls['card_Number'].touched">
-                                  Invalid Card
-                                </mat-error>
+                            <input matInput formControlName="card_Number" placeholder="0125 6780 4567 9909">
+                            <mat-error class="text-danger"
+                              *ngIf="(paymentForm.controls['card_Number'].hasError('required') || paymentForm.controls['card_Number'].hasError('minlength') || paymentForm.controls['card_Number'].hasError('maxlength')) && paymentForm.controls['card_Number'].touched">
+                              Invalid Card
+                            </mat-error>
                             <div class="row" style="margin: 0;">
                               <div class="col-4">
                                 <span>Expiry date:</span>
@@ -144,6 +143,105 @@
                       </mat-accordion>
                       <a mat-raised-button (click)="navig('prev')">Prev <i
                           class="fa-solid fa-circle-arrow-left"></i></a>
+
+                    </mat-tab>
+                  </mat-tab-group>
+
+                </div>
+                <div class="left border" *ngIf="checkFines() != 0">
+                  <mat-tab-group mat-align-tabs="start"[selectedIndex]="btnNextPrev.index">
+
+                    <mat-tab label="Payment" disabled>
+                      <h4 style="padding-top: 15px;font-weight: 500;"> We're sorry that you can't borrow more books because you have some fines that you have to pay first, please pay your fines.</h4>
+                      <button (click)="bookservice.book = checkFines()" [routerLink]="['/client/payment']"  class="btn">Pay now</button>
+                    </mat-tab>
+                  </mat-tab-group>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container" *ngIf="!bookservice.book.book_Name">
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-5">
+                <div class="right border">
+                  <div class="header">Fines Summary</div>
+                  <div class="row item" *ngFor="let loan of loans()">
+                    <div class="col-4 align-self-center">
+                      <img class="img-fluid" src="../../../assets/Images/{{loan.image}}">
+                    </div>
+                    <div class="col-8">
+                      <div><b>Fines: {{loan.fines}} JD</b></div>
+                      <b class="row text-muted">{{loan.book_Name}}</b>
+                    </div>
+
+                  </div>
+                  <hr>
+                  <div class="row lower" style="margin: 0;">
+                    <div class="col text-left"><b>Total to pay</b></div>
+                    <div class="col text-right"><b>{{bookservice.book}} JD</b></div>
+                  </div>
+                  <hr>
+                  <div class="row lower" style="margin: 0;">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-7">
+                <div class="left border">
+                  <mat-tab-group mat-align-tabs="start" [selectedIndex]="btnNextPrev.index">
+                    <mat-tab label="Payment" disabled>
+                      <div class="example-headers-align">
+                        <div style="width: 100%; display: flex; align-items: center; justify-content: space-between;">
+                          <span>Pay with credit Card</span>
+                          <div class="icons">
+                            <img src="https://img.icons8.com/color/48/000000/visa.png" />
+                            <img src="https://img.icons8.com/color/48/000000/mastercard-logo.png" />
+                            <img src="https://img.icons8.com/color/48/000000/maestro.png" />
+                          </div>
+                        </div>
+                        <form [formGroup]="paymentForm">
+                          <span>Cardholder's name:</span>
+                          <input placeholder="Linda Williams">
+                          <span>CardNumber:</span>
+                          <input matInput formControlName="card_Number" placeholder="0125 6780 4567 9909">
+                          <mat-error class="text-danger"
+                            *ngIf="(paymentForm.controls['card_Number'].hasError('required') || paymentForm.controls['card_Number'].hasError('minlength') || paymentForm.controls['card_Number'].hasError('maxlength')) && paymentForm.controls['card_Number'].touched">
+                            Invalid Card
+                          </mat-error>
+                          <div class="row" style="margin: 0;">
+                            <div class="col-4">
+                              <span>Expiry date:</span>
+                              <input type="text" matInput formControlName="expired_Date" placeholder="YY/MM">
+                              <mat-error class="text-danger"
+                                *ngIf="paymentForm.controls['expired_Date'].hasError('required') && paymentForm.controls['expired_Date'].touched">
+                                Expired Date is <strong class="text-danger">required</strong>
+                              </mat-error>
+                            </div>
+                            <div class="col-4">
+                              <span>CVV:</span>
+                              <input type="number" matInput formControlName="cvv" maxlength="4" id="cvv">
+                              <mat-error class="text-danger"
+                                *ngIf="(paymentForm.controls['cvv'].hasError('required') || paymentForm.controls['cvv'].hasError('maxlength')) && paymentForm.controls['cvv'].touched">
+                                Invalid CVV
+                              </mat-error>
+                            </div>
+                          </div>
+                          <div class="row" style="margin: 0;">
+                            <div class="col-1">
+                              <input type="checkbox" id="a">
+                            </div>
+                            <div class="col-9" style="margin-left: -20px;">
+                              <label for="a">Save card details to wallet</label>
+                            </div>
+                          </div>
+                          <button (click)="submitFines()" [disabled]="!paymentForm.valid" class="btn">Pay</button>
+                        </form>
+                      </div>
 
                     </mat-tab>
                   </mat-tab-group>

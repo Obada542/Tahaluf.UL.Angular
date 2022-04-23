@@ -1,0 +1,113 @@
+<app-header></app-header>
+<div class="container rounded bg-white mt-5 mb-5">
+  <div class="row">
+    <div class="col-md-3 border-right">
+      <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <img class="rounded-circle mt-5" src="../../../assets/Images/{{userService.user.image}}"
+          onerror="src = '../../../assets/Images/user-face.webp' "
+          src="../../../assets/Images/{{userService.user.image}} ">
+        <span class="font-weight-bold">{{userService.user.username}}</span><span
+          class="text-black-50">{{userService.user.email}}</span><span> </span>
+      </div>
+    </div>
+    <div class="col-md-5 border-right">
+      <div class="p-3 py-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="text-right">Profile Settings</h2>
+        </div>
+        <form [formGroup]="updateStudentInfo">
+          <div class="row mt-2">
+            <div class="col-md-6"><label class="labels">First Name</label>
+              <input type="text" matInput  formControlName="first_Name" class="form-control"
+                [(ngModel)]="userService.user.first_Name" placeholder="first name">
+
+              <mat-error class="text-danger"
+                *ngIf="updateStudentInfo.controls['first_Name'].hasError('required') && updateStudentInfo.controls['first_Name'].touched">
+                First name is <strong class="text-danger">required</strong>
+              </mat-error>
+            </div>
+            <div class="col-md-6"><label class="labels">Last Name</label>
+              <input type="text" matInput formControlName="last_Name" class="form-control"
+                [(ngModel)]="userService.user.last_Name" placeholder="last name">
+              <mat-error class="text-danger"
+                *ngIf="updateStudentInfo.controls['last_Name'].hasError('required') && updateStudentInfo.controls['last_Name'].touched">
+                Last name is <strong class="text-danger">required</strong>
+              </mat-error>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <label class="col-sm-2 col-form-label">Email</label>
+            <div class="col-sm-10">
+              <input type="email" class="form-control" matInput formControlName="email"
+                [(ngModel)]="userService.user.email" placeholder="Example@company.com">
+              <br>
+              <mat-error class="text-danger"
+                *ngIf="updateStudentInfo.controls['email'].hasError('required') && updateStudentInfo.controls['email'].touched">
+                Email is <strong class="text-danger">required</strong>
+              </mat-error>
+              <mat-error class="text-danger"
+                *ngIf="updateStudentInfo.controls['email'].hasError('email') && updateStudentInfo.controls['email'].touched">
+                Invalid Email.
+              </mat-error>
+            </div>
+
+            <label class="col-sm-2 col-form-label">Phone</label>
+            <div class="col-sm-10">
+              <input type="tel" class="form-control" matInput formControlName="phone"
+                [(ngModel)]="userService.user.phone" placeholder="+962 79 0000 000">
+              <br>
+              <mat-error class="text-danger"
+                *ngIf="updateStudentInfo.controls['phone'].hasError('required') && updateStudentInfo.controls['phone'].touched">
+                Phone is <strong class="text-danger">required</strong>
+              </mat-error>
+              <mat-error class="text-danger" *ngIf="updateStudentInfo.controls['phone'].hasError('minlength') ">
+                Invalid Phone.
+              </mat-error>
+            </div>
+            <label class="col-sm-2 col-form-label">UserName</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" matInput formControlName="username"
+                [(ngModel)]="userService.user.username" placeholder="">
+              <br>
+              <mat-error class="text-danger"
+                *ngIf="updateStudentInfo.controls['username'].hasError('required') && updateStudentInfo.controls['username'].touched">
+                Username is <strong class="text-danger">required</strong>
+              </mat-error>
+            </div>
+            <label class="col-sm-2 col-form-label">BirthDate</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" matInput formControlName="birthday"
+                (ngModelChange)="getDate($event)" [(ngModel)]="userService.user.birthday" placeholder="">
+              <br>
+              <mat-error class="text-danger"
+                *ngIf="updateStudentInfo.controls['birthday'].hasError('required') && updateStudentInfo.controls['birthday'].touched">
+                Birthdate is <strong class="text-danger">required</strong>
+              </mat-error>
+            </div>
+            <label class="col-sm-2 col-form-label">Password</label>
+            <div class="col-sm-10">
+              <input type="password" class="form-control" matInput formControlName="password"
+                [(ngModel)]="userService.user.password" placeholder="********">
+              <br>
+              <mat-error class="text-danger"
+                *ngIf="updateStudentInfo.controls['password'].hasError('required') && updateStudentInfo.controls['password'].touched">
+                Password is <strong class="text-danger">required</strong>
+              </mat-error>
+              <mat-error class="text-danger" *ngIf="updateStudentInfo.controls['password'].hasError('minlength') ">
+                Password must contain at least 8 characters.
+              </mat-error>
+            </div>
+          </div>
+          <div class="col-sm-9">
+            <input type="file" #file placeholder="Choose Image" formControlName="image"
+              (change)="uploadFile(file.files)" style="display:none;">
+            <button class="btn btn-primary" (click)="file.click()">Upload Image</button>
+          </div>
+          <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button"
+              (click)="update()">Save Profile</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

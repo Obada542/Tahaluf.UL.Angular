@@ -33,6 +33,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CookieService } from 'ngx-cookie-service';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { CookieService } from 'ngx-cookie-service';
     BookdetailsComponent,
     GetStudentComponent,
     GetEmployeeComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

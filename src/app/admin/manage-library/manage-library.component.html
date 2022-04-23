@@ -16,8 +16,6 @@
             <tr>
               <th> library Name </th>
               <th> Location </th>
-              <th> Description </th>
-              <th> Image </th>
               <th> Action </th>
 
             </tr>
@@ -27,11 +25,6 @@
 
               <td> {{library.library_Name}} </td>
               <td> {{library.location.split(",")[0]}} </td>
-              <td> {{library.description}} </td>
-              <td class="py-1">
-                <img src="../../../assets/Images/{{library.image}}" alt="image" />
-              </td>
-
               <td>
                 <a class="text-danger" (click)="openDeleteDialog(library.id)">Delete</a>
                 |
@@ -42,7 +35,7 @@
         </table>
       </div>
       <div *ngIf="searchL.length == 0 && search.value">
-        <p class="nothing">Sorry, no books with this name were found.</p>
+        <p class="nothing">Sorry, no library with this name were found.</p>
       </div>
     </div>
   </div>
@@ -87,36 +80,10 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Description</label>
-                <div class="col-sm-10">
-                  <textarea class="form-control" matInput formControlName="Description"></textarea>
-                  <br>
-                  <mat-error class="text-danger"
-                    *ngIf="createLibrary.controls['Description'].hasError('required') && createLibrary.controls['Description'].touched">
-                    Description is <strong class="text-danger">required</strong>
-                  </mat-error>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group row">
                 <label class="col-sm-4 col-form-label">Mark location on map</label>
                 <div class="col-sm-8">
                   <button (click)="openMap()" class="btn btn-outline-info  link" style="cursor: pointer;">Open map <i
                       class="fa-solid fa-map-location"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group row">
-                <div class="col-sm-9">
-                  <input type="file" #file placeholder="Choose Image" formControlName="Image"
-                    (change)="uploadFile(file.files)" style="display:none;">
-                  <button class="btn btn-primary" (click)="file.click()">Upload Image</button>
                 </div>
               </div>
             </div>
@@ -187,23 +154,7 @@
                   <br>
                   <mat-error class="text-danger"
                     *ngIf="updatelibrary.controls['Location'].hasError('required') && updatelibrary.controls['Location'].touched">
-                    Location name is <strong class="text-danger">required</strong>
-                  </mat-error>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group row">
-                <label class="col-sm-2 col-form-label">Description</label>
-                <div class="col-sm-10">
-                  <textarea class="form-control" [(ngModel)]="selectedLibrary.description" matInput
-                    formControlName="Description"></textarea>
-                  <br>
-                  <mat-error class="text-danger"
-                    *ngIf="updatelibrary.controls['Description'].hasError('required') && updatelibrary.controls['Description'].touched">
-                    Description is <strong class="text-danger">required</strong>
+                    Location is <strong class="text-danger">required</strong>
                   </mat-error>
                 </div>
               </div>
@@ -216,17 +167,6 @@
                 <div class="col-sm-8">
                   <button (click)="openMap()" class="btn btn-outline-info  link" style="cursor: pointer;">Open map <i
                       class="fa-solid fa-map-location"></i></button>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="form-group row">
-                <div class="col-sm-9">
-                  <input type="file" #file placeholder="Choose Image" formControlName="Image"
-                    (change)="uploadFile(file.files)" style="display:none;">
-                  <button class="btn btn-primary" (click)="file.click()">Upload Image</button>
                 </div>
               </div>
             </div>

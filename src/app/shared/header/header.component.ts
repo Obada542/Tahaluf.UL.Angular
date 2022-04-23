@@ -1,4 +1,3 @@
-import { FormControl } from '@angular/forms';
 import { BookService } from 'src/app/Services/book.service';
 import { LoaningService } from './../../Services/loaning.service';
 import { AuthService } from 'src/app/Services/auth.service';
@@ -13,12 +12,25 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  locations:any=[]
+  locations:any=[];
+  totalItem:number=0;
   @ViewChild("map") map!:TemplateRef<any>;
-  constructor(private dialog:MatDialog,private route:Router,public userService:AuthService,public loanService:LoaningService,public bookService:BookService,private spinner:NgxSpinnerService) { }
+  constructor(private dialog:MatDialog,private route:Router,public userService:AuthService,public loanService:LoaningService,public bookService:BookService,private spinner:NgxSpinnerService) {
+    this.userService.CartSubject.subscribe((data)=>{
+      this.totalItem= data
+    })
+  }
 
   ngOnInit(): void {
+    this.cartItem();
   }
+
+  cartItem(){
+    if (localStorage.getItem("Cart") != null){
+      let data = JSON.parse(localStorage.getItem("Cart")|| '{}');
+      this.totalItem= data.length;
+    }
+   }
   serchBook(search:any){
     this.bookService.searchBook(search.toLowerCase())
     this.route.navigate(['/books'])
@@ -49,5 +61,15 @@ export class HeaderComponent implements OnInit {
     this.bookService.getBooksByLibrary(location.name)
     this.dialog.closeAll();
       this.route.navigate(['/books'])
+  }
+  fines(){
+    if(this.loanService.studentloans){
+      const sum =this.loanService.studentloans.reduce((sum:any, obj:any) => {
+        return sum + obj.fines;
+      }, 0);
+
+    return Math.round(sum * 100) / 100;
+    }
+    return '';
   }
 }

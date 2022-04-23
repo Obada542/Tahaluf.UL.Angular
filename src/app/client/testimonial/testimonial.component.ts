@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TestimonialService } from 'src/app/Services/testimonial.service';
+import { AuthService } from 'src/app/Services/auth.service';
 
 @Component({
   selector: 'app-testimonial',
@@ -15,13 +16,14 @@ export class TestimonialComponent implements OnInit {
     student_Id: new FormControl(''),
   });
 
-  constructor(public testss: TestimonialService) { }
+  constructor(public testss: TestimonialService, public userService:AuthService) { }
 
   ngOnInit(): void {
     document.body.scrollTop = 0;
   }
 
   submit() {
+    this.createtestimonial.controls['student_Id'].setValue(this.userService.user.id);
     this.testss.createTestimonial(this.createtestimonial.value);
   }
 

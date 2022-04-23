@@ -66,15 +66,16 @@
           </label>
           <div class="form-input">
             <br>
-            <input class="rating" max="5" oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
+            <input  formControlName="rate" class="rating" max="5" oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)"
               step="0.5" style="--value:5" type="range" value="5">
           </div>
         </li>
+
         <div class="row">
           <div class="col-md-12">
             <div class="form-group row">
               <div class="col-sm-12">
-                <button class="btn btn-success col-sm-12" [disabled]="!createtestimonial.valid"
+                <button class="btn btn-success col-sm-12"  [disabled]="!createtestimonial.valid"
                   (click)="submit()">Submit</button>
               </div>
             </div>

@@ -26,7 +26,6 @@ export class LoaningService {
   getStudentLoans(id: any) {
     this.http.get("https://localhost:44346/api/loaning/StudentBorrowing/" + id).subscribe(res => {
       this.studentloans = res;
-      console.log(res)
     }, err => {
       this.spinner.hide();
       this.toastr.error(err.message, err.status);
@@ -45,9 +44,7 @@ export class LoaningService {
   }
   createLoan(loan: any, visa: any) {
     this.spinner.show();
-    console.log(visa)
     this.http.post("https://localhost:44346/api/payment", visa).subscribe((res: any) => {
-
       if (res <= 0 || res == null) {
         this.spinner.hide();
         this.toastr.warning("Please try again with another card.")
@@ -70,7 +67,36 @@ export class LoaningService {
           this.toastr.error(err.message, err.status);
         });
       }
-      console.log(res)
+    }, err => {
+      this.spinner.hide();
+      this.toastr.error(err.message, err.status);
+    });
+
+  }
+  payFines(loan: any, visa: any) {
+    this.spinner.show();
+    this.http.post("https://localhost:44346/api/payment", visa).subscribe((res: any) => {
+      if (res <= 0 || res == null) {
+        this.spinner.hide();
+        this.toastr.warning("Please try again with another card.")
+      } else if (res < loan.fines) {
+        this.spinner.hide();
+        this.toastr.warning("You dont have enough money to buy this book.")
+      } else {
+        visa.amount = loan.fines;
+        const card = this.http.put("https://localhost:44346/api/payment/", visa, { responseType: 'text' })
+        const borrow = this.http.post("https://localhost:44346/api/payment/payfines/"+ loan.student_Id, { responseType: 'text' })
+        forkJoin(borrow,card).subscribe(([res1, res2]) => {
+          this.toastr.success("Thanks :).");
+          setTimeout(()=>{
+            this.spinner.hide();
+            location.reload()
+          },2000)
+        }, err => {
+          this.spinner.hide();
+          this.toastr.error(err.message, err.status);
+        });
+      }
     }, err => {
       this.spinner.hide();
       this.toastr.error(err.message, err.status);

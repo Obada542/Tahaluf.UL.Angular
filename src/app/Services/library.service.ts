@@ -3,17 +3,13 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
 export class LibraryService {
 
   libraries:any=[];
-  display_Image:any;
   selectedLibrary:any=[];
-
 
   constructor(private http:HttpClient,private toastr:ToastrService,private spinner:NgxSpinnerService ) { }
 
@@ -21,8 +17,8 @@ export class LibraryService {
     this.spinner.show;
     this.http.get('https://localhost:44346/api/Library/GetLibraries').subscribe((res)=>{
      this.libraries=res;
-     this.spinner.hide;  
-     this.toastr.success('Data Retrieved!!'); 
+     this.spinner.hide;
+     this.toastr.success('Data Retrieved!!');
     },err=>{
       this.spinner.hide;
       this.toastr.error(err.message,err.status);
@@ -31,7 +27,6 @@ export class LibraryService {
 
   createLibrary(body:any){
     this.spinner.show;
-    body.image= this.display_Image;
     this.http.post('https://localhost:44346/api/Library/CreateLibrary/',body).subscribe((res)=>{
       this.spinner.hide;
       this.toastr.success('Create Library Successfully :)');
@@ -41,46 +36,25 @@ export class LibraryService {
     })
 
   }
-
-  uploadAttachment(file:FormData)
-  {
-    this.http.post('https://localhost:44346/api/Library/uploadImage/',file)
-    .subscribe((res:any)=>{
-     
-      this.display_Image=res.image;
-    },err=>{
-      this.toastr.error(err.message , err.status);
-    });
-  }
-
-
   updateLibrary(body:any){
    this.spinner.show;
-   body.image= this.display_Image;
    this.http.put('https://localhost:44346/api/Library/UpdateLibrary/',body).subscribe((res)=>{
      this.spinner.hide;
     this.toastr.success('updated Successfully :)') ;
-
    },err=>{
     this.spinner.hide;
     this.toastr.error(err.message , err.status)
-
    })
-   
   }
-
   deleteLibrary(id:number){
     this.http.delete('https://localhost:44346/api/Library/DeleteLibrary/'+id).subscribe((res)=>{
       this.toastr.success('Deleted Successfully :)');
     },err=>{
       this.toastr.error(err.message,err.status)
     })
-
   }
-
-
   getByName(name:string){
-    
+
     this.spinner.show;
     this.http.get('https://localhost:44346/api/Library/GetLibraries/'+name).subscribe((res)=>{
       this.selectedLibrary= res;
@@ -89,12 +63,8 @@ export class LibraryService {
     },err=>{
       this.spinner.hide;
       this.toastr.error(err.message, err.status);
-
     })
-
-
   }
-
   getByLocation(location:string){
     this.spinner.show;
     this.http.get('https://localhost:44346/api/Library/LibrariesByLocation/'+location).subscribe((res)=>
@@ -102,26 +72,9 @@ export class LibraryService {
       this.selectedLibrary=res;
       this.spinner.hide;
       this.toastr.success('Data Retrieved !!')
-
-
     },err=>{
       this.spinner.hide;
       this.toastr.error(err.message, err.status);
-
     })
-
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

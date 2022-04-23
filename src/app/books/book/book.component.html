@@ -48,14 +48,34 @@
           <span class="tg-bookprice">
             <ins>{{book.price}} JD</ins>
           </span>
-          <a class="tg-btn tg-btnstyletwo">
-            <i class="fa fa-shopping-basket"></i>
-            <em>Borrow</em>
+          <a class="tg-btn tg-btnstyletwo" (click)="addToCart(book)"   >
+            <i class="fa fa-shopping-basket" ></i>
+
+            <em>Add To Cart</em>
+           
           </a>
+         
         </div>
+
+       
       </div>
 
     </div>
+    <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="error2">
+      <div class="col-xs-12 alert alert-danger" role="alert">
+        {{error2}}
+      </div>
+    </div> -->
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="error3">
+      <div class="col-xs-12 alert alert-danger" role="alert">
+        {{error3}}
+      </div>
+    </div>
+   
+
+   
+    
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       <pagination-controls id="books" (pageChange)="p =$event" (pageBoundsCorrection)="p =$event" [maxSize]="9"
         [directionLinks]="true" [autoHide]="true" [responsive]="true" previousLabel="Previous" nextLabel="Next"

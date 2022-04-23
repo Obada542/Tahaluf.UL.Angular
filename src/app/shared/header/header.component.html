@@ -70,12 +70,21 @@
                       </div>
                     </div>
                     <div class="tg-minicartfoot">
+                      <small class="danger-text text-danger" *ngIf="fines() > 0">*Please pay your fines.</small>
                       <div class="tg-btns">
                         <a class="tg-btn tg-active" [routerLink]="['/client/order-history']">My order history</a>
+                        <a class="tg-btn tg-active btn-danger" style="background-color: rgb(151, 23, 23);box-shadow: inset 0 -2px 0 0 rgb(151, 23, 23);" *ngIf="fines() > 0" (click)="bookService.book = fines()" [routerLink]="['/client/payment']" >Pay {{fines()}}</a>
                       </div>
                     </div>
                   </div>
                 </div>
+
+                <button [routerLink]="['/cart']" class="btn btn " >
+                  <i style="font-size: 25px;" class="fas fa-cart-plus"></i>
+                  <div style="font-size: 8px;" class="badge bg-danger">{{totalItem}}</div>
+                 </button>
+
+
                 <div class="dropdown tg-themedropdown tg-currencydropdown tg-userlogin" style="height: 60px;" >
                   <a href="javascript:void(0);" id="tg-currenty" class="tg-btnthemedropdown " data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
@@ -86,7 +95,7 @@
                   </a>
                   <ul class="tg-themedropdownmenu dropdown-menu ">
                     <li>
-                      <a href="javascript:void(0);">
+                      <a href="javascript:void(0);" [routerLink]="['/client/myProfile']">
                         <span><i class="fa-solid fa-user"></i>&nbsp;&nbsp; My profile</span>
                       </a>
                       <a (click)="logout()" style="cursor: pointer;">

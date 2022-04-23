@@ -19,7 +19,7 @@ export class PaymentComponent implements OnInit {
     cvv : new FormControl('',[Validators.required,Validators.maxLength(4)]),
     amount : new FormControl()
   });
-  constructor(public bookservice:BookService,private route:Router,private loanService:LoaningService,private userService:AuthService) {
+  constructor(public bookservice:BookService,private route:Router,public loanService:LoaningService,private userService:AuthService) {
    }
    btnNextPrev = {
     prev: true,
@@ -45,6 +45,13 @@ export class PaymentComponent implements OnInit {
     this.loanService.createLoan(loan,this.paymentForm.value);
 
   }
+  submitFines(){
+    const loan = {
+      student_Id: this.userService.user.id,
+      fines:this.bookservice.book
+    }
+    this.loanService.payFines(loan,this.paymentForm.value);
+  }
   navig(n:any) {
     switch (n) {
       case 'next': {
@@ -67,5 +74,24 @@ export class PaymentComponent implements OnInit {
       }; break;
 
     }
+  }
+  loans(){
+    if(this.loanService.studentloans){
+      const loans = this.loanService.studentloans.filter((x: any) => x.fines >0);
+      return loans;
+    }
+  }
+  checkFines(){
+    if(this.loanService.studentloans){
+      const sum =this.loanService.studentloans.reduce((sum:any, obj:any) => {
+        return sum + obj.fines;
+      }, 0);
+      if(sum > 0){
+        return sum
+      }else{
+        return 0
+      }
+    }
+    return;
   }
 }
