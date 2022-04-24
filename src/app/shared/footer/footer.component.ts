@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WebsitePartsService } from 'src/app/Services/website-parts.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,12 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+  constructor(public website:WebsitePartsService) { }
 
   ngOnInit(): void {
     jarallax(document.querySelectorAll('.jarallax'), {
       speed: 0.4
     });
+    this.website.getAbout();
+    this.website.getContact();
+    this.website.updateFooter
   }
   topFunction() {
     document.body.scrollTop = 0;

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ContactMsgService } from '../Services/contact-msg.service';
+import { WebsitePartsService } from '../Services/website-parts.service';
 
 @Component({
   selector: 'app-contact',
@@ -18,9 +19,10 @@ export class ContactComponent implements OnInit {
     lastname:new FormControl('',[Validators.required]),
     name:new FormControl(),
   });
-  constructor(public contact: ContactMsgService) { }
+  constructor(public contact: ContactMsgService,public website:WebsitePartsService) { }
 
   ngOnInit(): void {
+    this.website.getContact();
   }
 
 

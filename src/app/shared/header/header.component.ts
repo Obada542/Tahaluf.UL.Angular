@@ -5,6 +5,8 @@ import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { StudentService } from 'src/app/Services/student.service';
+import { WebsitePartsService } from 'src/app/Services/website-parts.service';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +17,7 @@ export class HeaderComponent implements OnInit {
   locations:any=[];
   totalItem:number=0;
   @ViewChild("map") map!:TemplateRef<any>;
-  constructor(private dialog:MatDialog,private route:Router,public userService:AuthService,public loanService:LoaningService,public bookService:BookService,private spinner:NgxSpinnerService) {
+  constructor(private dialog:MatDialog,private route:Router,public userService:AuthService,public loanService:LoaningService,public bookService:BookService,private spinner:NgxSpinnerService,public website : WebsitePartsService,public studentService:StudentService) {
     this.userService.CartSubject.subscribe((data)=>{
       this.totalItem= data
     })
@@ -23,6 +25,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartItem();
+    this.website.getHeader();
+
   }
 
   cartItem(){

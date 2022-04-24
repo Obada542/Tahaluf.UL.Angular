@@ -13,7 +13,6 @@ import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthModule } from './auth/auth.module';
 import { ManageBookComponent } from './admin/manage-book/manage-book.component';
 import { ManageLibraryComponent } from './admin/manage-library/manage-library.component';
 import { ManageHomeComponent } from './admin/manage-home/manage-home.component';
@@ -27,6 +26,7 @@ import { GetStudentComponent } from './accountant/get-student/get-student.compon
 import { GetEmployeeComponent } from './accountant/get-employee/get-employee.component';
 import { AuthorizationGuard } from './authorization.guard';
 import { CartComponent } from './cart/cart.component';
+import { AuthModule } from './auth/auth.module';
 const routes: Routes = [
   {
     path: "home",

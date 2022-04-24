@@ -1,7 +1,4 @@
-
-
-
-    <div class="col-lg-12 grid-margin stretch-card">
+<div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
     <div class="col-12 dialog">
       <div class="card">
@@ -16,10 +13,10 @@
                   <div class="col-sm-6">
                     <input type="text " class="form-control" [(ngModel)]="website.header.title" matInput
 
-                      formControlName="Title" placeholder="Title" >
+                      formControlName="title" placeholder="Title" >
                     <br>
                     <mat-error class="text-danger"
-                      *ngIf="updateheader.controls['Title'].hasError('required') && updateheader.controls['Title'].touched">
+                      *ngIf="updateheader.controls['title'].hasError('required') && updateheader.controls['Title'].touched">
                      Title is <strong class="text-danger">required</strong>
                     </mat-error>
                   </div>
