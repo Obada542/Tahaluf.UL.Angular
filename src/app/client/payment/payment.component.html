@@ -53,7 +53,7 @@
                           <b>{{(bookservice.book.price * bookservice.book.discount / 100)}}</b> JD every day.
                         </small>
                         <br>
-                        <button mat-raised-button [disabled]="!end_Date.valid">Next <i
+                        <button mat-raised-button  (click)="navig('next')" [disabled]="!end_Date.valid">Next <i
                             class="fa-solid fa-circle-arrow-right"></i></button>
                       </div>
                     </mat-tab>

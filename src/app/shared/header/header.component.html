@@ -102,8 +102,9 @@
                   <a href="javascript:void(0);" id="tg-currenty" class="tg-btnthemedropdown " data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     <figure style="margin-top: -15px;" ><a  ><img
-                          src="../../../assets/Images/{{userService.user.image}}"  style="height: 50px;width: 50px;"
-                          alt="Profile picture"></a></figure>
+                      src="../../../assets/Images/{{userService.user.image}}" 
+                      onerror="src = '../../../assets/Images/user-face.webp' " src="../../../assets/Images/{{userService.user.image}} "
+                        style="height: 40px; width:40px;"  alt="Profile picture"></a></figure>
                     <span>Hi, {{userService.user.username}}</span>
                   </a>
                   <ul class="tg-themedropdownmenu dropdown-menu ">
