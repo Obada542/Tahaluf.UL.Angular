@@ -26,7 +26,11 @@ export class ManageTestimonialsComponent implements OnInit {
   }
   openChangeStatus(data:any){
     this.selectedTes.id = data.id;
-    console.log(data.publishing)
+    if(data.publishing == 'false'){
+      this.selectedTes.publishing= 'true';
+    }else{
+      this.selectedTes.publishing= 'false';
+    }
     this.dialog.open(this.change);
   }
   changeStatus(){

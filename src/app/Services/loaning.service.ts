@@ -34,7 +34,7 @@ export class LoaningService {
   sendLateFeesMessage() {
     const email = {
       emailFrom: "obada.tawfiq700@gmail.com",
-      password: "Obada0789735213"
+      password: "Obada079079"
     }
     this.http.post("https://localhost:44346/api/jwt/LateFeesEmail/", email).subscribe(res => {
     }, err => {

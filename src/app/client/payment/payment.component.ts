@@ -3,7 +3,7 @@ import { LoaningService } from './../../Services/loaning.service';
 import { Router } from '@angular/router';
 import { BookService } from 'src/app/Services/book.service';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators,FormGroup } from '@angular/forms';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-payment',
@@ -11,48 +11,48 @@ import { FormControl, Validators,FormGroup } from '@angular/forms';
   styleUrls: ['./payment.component.css']
 })
 export class PaymentComponent implements OnInit {
-  end_Date = new FormControl('',Validators.required);
+  end_Date = new FormControl('', Validators.required);
   startDate = new Date(new Date().setDate(new Date().getDate() + 3));
   paymentForm = new FormGroup({
-    card_Number : new FormControl('',[Validators.required,Validators.minLength(14),Validators.maxLength(14)]),
-    expired_Date : new FormControl('',Validators.required),
-    cvv : new FormControl('',[Validators.required,Validators.maxLength(4)]),
-    amount : new FormControl()
+    card_Number: new FormControl('', [Validators.required, Validators.minLength(14), Validators.maxLength(14)]),
+    expired_Date: new FormControl('', Validators.required),
+    cvv: new FormControl('', [Validators.required, Validators.maxLength(4)]),
+    amount: new FormControl()
   });
-  constructor(public bookservice:BookService,private route:Router,public loanService:LoaningService,private userService:AuthService) {
-   }
-   btnNextPrev = {
+  constructor(public bookservice: BookService, private route: Router, public loanService: LoaningService, private userService: AuthService) {
+  }
+  btnNextPrev = {
     prev: true,
     next: false,
     index: 0
-}
-  state : number = 0;
+  }
+  state: number = 0;
   ngOnInit(): void {
     document.body.scrollTop = 200;
-    if(!this.bookservice.book){
-        this.route.navigate(['/books'])
+    if (!this.bookservice.book) {
+      this.route.navigate(['/books'])
     }
   }
-  submit(){
-    const loan ={
-      book_Id:this.bookservice.book.id,
-      student_Id:this.userService.user.id,
-      price:this.bookservice.book.price,
-      book_Name:this.bookservice.book.book_Name,
-      student_Name:this.userService.user.first_Name + " "+this.userService.user.last_Name,
-      end_Date:new Date(this.end_Date.value.setDate(this.end_Date.value.getDate() + 1))
+  submit() {
+    const loan = {
+      book_Id: this.bookservice.book.id,
+      student_Id: this.userService.user.id,
+      price: this.bookservice.book.price,
+      book_Name: this.bookservice.book.book_Name,
+      student_Name: this.userService.user.first_Name + " " + this.userService.user.last_Name,
+      end_Date: new Date(this.end_Date.value.setDate(this.end_Date.value.getDate() + 1))
     }
-    this.loanService.createLoan(loan,this.paymentForm.value);
+    this.loanService.createLoan(loan, this.paymentForm.value);
 
   }
-  submitFines(){
+  submitFines() {
     const loan = {
       student_Id: this.userService.user.id,
-      fines:this.bookservice.book
+      fines: this.bookservice.book
     }
-    this.loanService.payFines(loan,this.paymentForm.value);
+    this.loanService.payFines(loan, this.paymentForm.value);
   }
-  navig(n:any) {
+  navig(n: any) {
     switch (n) {
       case 'next': {
         this.btnNextPrev.index++
@@ -75,20 +75,20 @@ export class PaymentComponent implements OnInit {
 
     }
   }
-  loans(){
-    if(this.loanService.studentloans){
-      const loans = this.loanService.studentloans.filter((x: any) => x.fines >0);
+  loans() {
+    if (this.loanService.studentloans) {
+      const loans = this.loanService.studentloans.filter((x: any) => x.fines > 0);
       return loans;
     }
   }
-  checkFines(){
-    if(this.loanService.studentloans){
-      const sum =this.loanService.studentloans.reduce((sum:any, obj:any) => {
+  checkFines() {
+    if (this.loanService.studentloans) {
+      const sum = this.loanService.studentloans.reduce((sum: any, obj: any) => {
         return sum + obj.fines;
       }, 0);
-      if(sum > 0){
+      if (sum > 0) {
         return sum
-      }else{
+      } else {
         return 0
       }
     }

@@ -21,8 +21,8 @@
               [value]="test.rate"> </td>
             <td> {{test.testimonial}} </td>
             <td> {{studentname(test.student_Id)}} </td>
-            <td style="font-weight: 500;" [ngStyle]="{'color': test.publishing == 'false'?'green':'gray'}">
-              {{test.publishing != 'false'? 'Wating' : "published"}} </td>
+            <td style="font-weight: 500;" [ngStyle]="{'color': test.publishing != 'false'?'green':'gray'}">
+              {{test.publishing == 'false'? 'Wating' : "published"}} </td>
             <td>
               <a class="link" [ngStyle]="{'display': test.publishing == 'true'?'none':''}"
                 (click)="openChangeStatus(test)">Publish</a>
