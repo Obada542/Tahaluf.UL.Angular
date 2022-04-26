@@ -5,15 +5,19 @@
         <div class="tg-threecolumns">
           <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
             <div class="tg-footercol">
-              <strong class="tg-logo"><a href="javascript:void(0);"><img src="http://exprostudio.com/html/book_library/images/flogo.png" alt="image description"></a></strong>
-              <div class="tg-contactinfo">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellat maiores animi reiciendis ex facere eius vitae sequi corrupti quo quas unde eos, neque mollitia ipsum, consequatur exercitationem sapiente laboriosam commodi.</div>
-
+              <strong class="tg-logo"><a [routerLink]="['/home']"></a>
+                {{website.header.title}}
+                <br>
+                <br>
+                    <img src="../../../assets/adminassets/images/{{website.header.logo}}" alt="image" width="70%" height="50px" class="logo"/>
+                  </strong>            
+            <div class="tg-contactinfo">{{website.footer.small_Desc}}</div>
               <ul class="tg-socialicons">
-                <li class="tg-facebook"><a href="javascript:void(0);"><i class="fa-brands fa-facebook-f"></i></a></li>
-                <li class="tg-twitter"><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-                <li class="tg-linkedin"><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
-                <li class="tg-googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
-                <li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li>
+                <li class="tg-facebook"><a href="https://www.facebook.com/">{{website.footer.facebook}}<i class="fa-brands fa-facebook-f"></i></a></li>
+                <li class="tg-twitter"><a href="https://twitter.com/i/flow/login">{{website.footer.twitter}}<i class="fa fa-twitter"></i></a></li>
+                <li class="tg-linkedin"><a href="https://www.instagram.com/accounts/login/">{{website.footer.instagram}}<i class="fa fa-instagram"></i></a></li>
+                <!--<li class="tg-googleplus"><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
+                <li class="tg-rss"><a href="javascript:void(0);"><i class="fa fa-rss"></i></a></li> -->
               </ul>
             </div>
           </div>
@@ -26,23 +30,23 @@
                 <ul class="tg-contactinfo">
                   <li>
                     <i class="fa-solid fa-location-dot"></i>
-                    <address>Suit # 07, Rose world Building, Street # 02, AT246T Manchester</address>
+                    <em>{{website.contact.addresses}}</em>
                   </li>
                   <li>
                     <i class="fa-solid fa-phone"></i>
                     <span>
-                      <em>+4 1234 - 4567 - 67</em>
+                      <em>{{website.contact.numbers}}</em>
                     </span>
                   </li>
-                  <li>
+                <!--<li>
                     <i class="fa-solid fa-clock"></i>
-                    <span>Serving 7 Days A Week From 9am - 5pm</span>
-                  </li>
+                    <span>{{website.contact.sub_Title}}</span>
+                  </li> -->
                   <li>
+                 
                     <i class="fa-solid fa-envelope"></i>
                     <span>
-                      <em><a href="mailto:support@domain.com">support@domain.com</a></em>
-                      <em><a href="mailto:info@domain.com">info@domain.com</a></em>
+                      <em><a href="mailto:{{website.contact.email}}">{{website.contact.email}}</a></em>
                     </span>
                   </li>
                 </ul>

@@ -16,7 +16,7 @@ export class ManageWebsiteComponent implements OnInit {
 
 
   updateheader:FormGroup= new FormGroup({
-    Title:new FormControl('',[Validators.required]),
+    title:new FormControl('',[Validators.required]),
     logo:new FormControl('')
   });
 

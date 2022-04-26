@@ -12,7 +12,7 @@ export class AdminComponent implements OnInit,OnDestroy {
 
 
   ngOnInit(): void {
-      this.loanService.sendLateFeesMessage();
+      //this.loanService.sendLateFeesMessage();
   }
 
   ngOnDestroy(): void {

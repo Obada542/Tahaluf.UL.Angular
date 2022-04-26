@@ -1,61 +1,127 @@
-<app-header></app-header>
-<div class="tg-haslayout">
-  <div class="tg-innerbanner tg-bginnerbanner view jarallax"
-    style="background-image: url(http://exprostudio.com/html/book_library/images/parallax/bgparallax-07.jpg);">
-    <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <div class="tg-innerbannercontent">
-          <h1>Log in</h1>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="container fform" >
-    <div class="row">
-      <div class="col-sm-8 col-sm-offset-2 ">
-            <div class="row">
-              <form class="form container" id="login">
-                <h1 class="form__heading">Welcome</h1>
-                <hr>
-                <div class="form__group">
-                  <input matInput class="form-control" type="email" id="email" class="form__input" placeholder="email address"
-                    [formControl]="email">
-                  <div class="error">
-                    <mat-error *ngIf="email.hasError('email') && !email.hasError('required')&& email.touched">
-                      *Please enter a valid email address
-                    </mat-error>
-                    <mat-error *ngIf="email.hasError('required') &&email.touched">
-                      *Email is required
-                    </mat-error>
-                  </div>
-                </div>
-                <div class="form__group">
-                  <input matInput type="password" autocomplete="false" id="password" class="form__input" placeholder="password"
-                    [formControl]="password">
-                  <div class="error">
-                    <mat-error *ngIf="password.hasError('minlength') && !password.hasError('required') && password.touched">
-                      *Please enter strong password
-                    </mat-error>
-                    <mat-error *ngIf="password.hasError('required') && password.touched">
-                      *Password is required
-                    </mat-error>
-                  </div>
-                </div>
-                <div style="display: flex; justify-content: center;">
-                  <input type="checkbox" id="checkbox" (click)="remember()">
-                  <label for="checkbox" style="font-size: 15px;"> Remember me</label>
-                </div>
-                <br>
-                <button class="btn btn--large btn--green" type="submit" [disabled]="!email.valid || !password.valid"
-                  (click)="submit()">
-                  Login
-                </button>
-                <p id="account"> new member? <a [routerLink]="['/security/register']">Create new Account</a> </p>
-              </form>
-            </div>
-          </div>
-    </div>
-  </div>
-</div>
 
-<app-footer></app-footer>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="main">  	
+      <input type="checkbox" id="chk" aria-hidden="true">
+  
+        <div class="signup">
+          <form [formGroup]="registerGroup">
+            <label for="chk" aria-hidden="true">Sign up</label>
+            <div class="row">
+              <div class="col-sm-6">
+                  <input placeholder="first name" class="form-control" type="text" formControlName="first_Name">
+                  <mat-error
+                    *ngIf="registerGroup.controls['first_Name'].hasError('required') &&registerGroup.controls['first_Name'].touched ">
+                    First name is required
+                  </mat-error>
+              </div>
+              <div class="col-sm-6">
+                  <input placeholder="last name" class="form-control" type="text" formControlName="last_Name">
+                  <mat-error
+                    *ngIf="registerGroup.controls['last_Name'].hasError('required')&& registerGroup.controls['last_Name'].touched ">
+                    Last name is required
+                  </mat-error>
+              </div>
+            </div>
+              <input placeholder="Username" class="form-control" type="text" formControlName="username">
+              <mat-error
+                *ngIf="registerGroup.controls['username'].hasError('required') && registerGroup.controls['username'].touched ">
+                Username is required
+              </mat-error>
+            
+              <input placeholder="email address" class="form-control" type="email" formControlName="email">
+              <mat-error
+                *ngIf="registerGroup.controls['email'].hasError('email') && !registerGroup.controls['email'].hasError('required')&& registerGroup.controls['email'].touched ">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error
+                *ngIf="registerGroup.controls['email'].hasError('required') && registerGroup.controls['email'].touched ">
+                Email is required
+              </mat-error>
+            
+              <input placeholder="Phone number" class="form-control" type="tel" formControlName="phone">
+              <mat-error
+                *ngIf="registerGroup.controls['phone'].hasError('minlength') && !registerGroup.controls['phone'].hasError('required')&&registerGroup.controls['phone'].touched">
+                Please enter a valid phone number
+              </mat-error>
+              <mat-error
+                *ngIf="registerGroup.controls['phone'].hasError('required') && registerGroup.controls['phone'].touched">
+                phone is required
+              </mat-error>
+  
+              <input placeholder="password" class="form-control" type="password" formControlName="password">
+              <mat-error
+                *ngIf="registerGroup.controls['password'].hasError('minlength') && !registerGroup.controls['password'].hasError('required')&&registerGroup.controls['password'].touched">
+                Please enter strong password
+              </mat-error>
+              <mat-error
+                *ngIf="registerGroup.controls['password'].hasError('required') && registerGroup.controls['password'].touched">
+                password is required
+              </mat-error>
+              <input placeholder="re-type your password" class="form-control" type="password" (click)="onChange()"
+                id="user_password_confirmation" formControlName="ConfirmPassword">
+              <mat-error
+                *ngIf="(registerGroup.controls['ConfirmPassword'].value != registerGroup.controls['password'].value) &&registerGroup.controls['ConfirmPassword'].touched">
+                confirm password must match with password
+              </mat-error>
+              <input class="form-control" type="date" formControlName="birthday">
+              <mat-error
+                *ngIf="registerGroup.controls['birthday'].hasError('required')&& registerGroup.controls['birthday'].touched ">
+                Birthday is required
+              </mat-error>
+             
+       
+              <button class="btn btn-success btn-lg btn-block col-6"  
+              type="submit" [disabled]="!registerGroup.valid" (click)="register()">Sign up</button>
+            </form>
+        </div>
+  
+        <div class="login">
+          <form>
+            <label for="chk" aria-hidden="true">Login</label>
+            <div class="form__group">
+              <input matInput class="form-control" type="email" id="email" class="form__input" placeholder="email address" [formControl]="email">
+              <div class="error">
+                <mat-error
+                  *ngIf="email.hasError('email') && !email.hasError('required')&& email.touched">
+                  *Please enter a valid email address
+                </mat-error>
+                <mat-error *ngIf="email.hasError('required') &&email.touched">
+                  *Email is required
+                </mat-error>
+              </div>
+            </div>         
+             <div class="form__group">
+              <input matInput  type="password" autocomplete="false" id="password" class="form__input" placeholder="password"
+              [formControl]="password">
+              <div class="error">
+                <mat-error
+                  *ngIf="password.hasError('minlength') && !password.hasError('required') && password.touched">
+                  *Please enter strong password
+                </mat-error>
+                <mat-error
+                  *ngIf="password.hasError('required') && password.touched">
+                  *Password is required
+                </mat-error>
+              </div>
+            </div>   
+            <div class="rem_ch"> 
+              <input type="checkbox" (click)="remember()">
+              <label for="checkbox">Remember Me</label>
+          </div> 
+            <button class="btn btn--large btn--green" type="submit"
+            [disabled]="!email.valid || !password.valid" (click)="submit()">
+              Login
+            </button> 
+            <div class="link">
+              <a [routerLink]="['/security/forgetPassword']">Forgot your password?</a>
+            </div>  
+            
+        
+          </form>
+        </div>
+    </div>
+  </body>
+  
